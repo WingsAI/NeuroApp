@@ -1,14 +1,19 @@
 Preciso que voce analise o site a seguir para inspiração de design e use o claude skills frontend-design para melhoria de estilo: https://protocolomedicina.vercel.app/
+Monte a proposta comercial e o webapp.
 
 <contexto>
 Meu cliente me encomendou um webapp para tema de neuroftalmologia.
 Nele precisaremos de 4 telas.
-Na primeira o tecnico em radiologia inserirá os dados de um paciente que estará presencialmente na UPA. E fará o upload de 3 imagens deste paciente. Essas imagens devem ser enviadas para um bucket S3. Por enquanto para demonstracao elas serao salvas no storage do navegador.
+Na primeira o tecnico em radiologia inserirá os dados de um paciente que estará presencialmente na UPA. E fará o upload de 3 imagens deste paciente. Essas imagens devem ser enviadas para um bucket S3. Por enquanto para demonstracao elas serao salvas no storage do navegador. Se o tecnico nao fizer o uplaod de exatamente 3 imagens uma mensagem deve aparecer na tela e ele precisa clicar em um checkbox para confirmar.
+Na segunda tela é um analytics com a quantidade de imagens enviadas pro local e outras metricas.
+Na terceira um medico poderá escolher pacientes que foram enviados pelos tecnicos, dentre uma lista, para fazer o laudo.
+Na quarta tela existe o retorno do resultado daquele paciente ao medico que o laudou. com data e local onde ele fez o exame.
 
 </contexto>
 
 <objetivo1>
 Montar uma proposta comercial para apresentar ao meu cliente conforme o exemplo de proposta comercial que lhe forneci. Use markdown.
+Pretendo cobrar 60 mil reais para o desenvolvimento em 3 pagamentos de 20 mil. A manutençao anual custará 5 mil reais anuais. O servidor será do proprio cliente e o storage tambem.
 </objetivo1>
 
 <objetivo2>
