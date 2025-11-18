@@ -5,6 +5,7 @@ import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, AlertCirc
 import Navbar from '@/components/Navbar';
 import { getPatients, updatePatient, generateId } from '@/lib/storage';
 import { Patient, MedicalReport } from '@/types';
+import { mockPatients } from '@/lib/mockData';
 
 export default function Medical() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -17,6 +18,12 @@ export default function Medical() {
     findings: '',
     diagnosis: '',
     recommendations: '',
+  });
+  const [diagnosticConditions, setDiagnosticConditions] = useState({
+    diabeticRetinopathy: false,
+    glaucoma: false,
+    macularDegeneration: false,
+    cataract: false,
   });
   const [success, setSuccess] = useState(false);
 
@@ -34,7 +41,11 @@ export default function Medical() {
     const pendingPatients = allPatients.filter(
       p => p.status === 'pending' || p.status === 'in_analysis'
     );
-    setPatients(pendingPatients);
+
+    // Combinar pacientes reais com pacientes de exemplo (mockPatients)
+    // Os pacientes de exemplo aparecem sempre para demonstração
+    const combinedPatients = [...mockPatients, ...pendingPatients];
+    setPatients(combinedPatients);
   };
 
   const filterPatients = () => {
@@ -57,8 +68,8 @@ export default function Medical() {
     setSelectedPatient(patient);
     setShowModal(true);
 
-    // Atualizar status para "em análise"
-    if (patient.status === 'pending') {
+    // Atualizar status para "em análise" apenas se não for paciente de exemplo
+    if (patient.status === 'pending' && !patient.id.startsWith('mock-')) {
       updatePatient(patient.id, { status: 'in_analysis' });
     }
   };
@@ -70,10 +81,41 @@ export default function Medical() {
     });
   };
 
+  const handleConditionChange = (condition: keyof typeof diagnosticConditions) => {
+    setDiagnosticConditions({
+      ...diagnosticConditions,
+      [condition]: !diagnosticConditions[condition],
+    });
+  };
+
   const handleSubmitReport = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedPatient) return;
+
+    // Não permitir salvar laudo em pacientes de exemplo
+    if (selectedPatient.id.startsWith('mock-')) {
+      alert('Este é um paciente de exemplo. O laudo não será salvo permanentemente.');
+      setSuccess(true);
+      setTimeout(() => {
+        setShowModal(false);
+        setSelectedPatient(null);
+        setReportForm({
+          doctorName: '',
+          findings: '',
+          diagnosis: '',
+          recommendations: '',
+        });
+        setDiagnosticConditions({
+          diabeticRetinopathy: false,
+          glaucoma: false,
+          macularDegeneration: false,
+          cataract: false,
+        });
+        setSuccess(false);
+      }, 1500);
+      return;
+    }
 
     const report: MedicalReport = {
       id: generateId(),
@@ -82,6 +124,7 @@ export default function Medical() {
       findings: reportForm.findings,
       diagnosis: reportForm.diagnosis,
       recommendations: reportForm.recommendations,
+      diagnosticConditions: diagnosticConditions,
       completedAt: new Date().toISOString(),
     };
 
@@ -101,6 +144,12 @@ export default function Medical() {
         diagnosis: '',
         recommendations: '',
       });
+      setDiagnosticConditions({
+        diabeticRetinopathy: false,
+        glaucoma: false,
+        macularDegeneration: false,
+        cataract: false,
+      });
       setSuccess(false);
       loadPatients();
     }, 1500);
@@ -114,6 +163,12 @@ export default function Medical() {
       findings: '',
       diagnosis: '',
       recommendations: '',
+    });
+    setDiagnosticConditions({
+      diabeticRetinopathy: false,
+      glaucoma: false,
+      macularDegeneration: false,
+      cataract: false,
     });
   };
 
@@ -345,6 +400,69 @@ export default function Medical() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="Recomendações e encaminhamentos..."
                   />
+                </div>
+
+                {/* Condições Diagnósticas */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <label className="block text-sm font-medium text-gray-900 mb-3">
+                    Condições Diagnósticas Identificadas
+                  </label>
+                  <p className="text-xs text-gray-600 mb-3">
+                    Marque as condições oftalmológicas identificadas no exame:
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex items-center p-3 bg-white rounded-md border border-gray-200">
+                      <input
+                        type="checkbox"
+                        id="diabeticRetinopathy"
+                        checked={diagnosticConditions.diabeticRetinopathy}
+                        onChange={() => handleConditionChange('diabeticRetinopathy')}
+                        className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                      />
+                      <label htmlFor="diabeticRetinopathy" className="ml-3 text-sm font-medium text-gray-900 cursor-pointer">
+                        Retinopatia Diabética
+                      </label>
+                    </div>
+
+                    <div className="flex items-center p-3 bg-white rounded-md border border-gray-200">
+                      <input
+                        type="checkbox"
+                        id="glaucoma"
+                        checked={diagnosticConditions.glaucoma}
+                        onChange={() => handleConditionChange('glaucoma')}
+                        className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                      />
+                      <label htmlFor="glaucoma" className="ml-3 text-sm font-medium text-gray-900 cursor-pointer">
+                        Glaucoma
+                      </label>
+                    </div>
+
+                    <div className="flex items-center p-3 bg-white rounded-md border border-gray-200">
+                      <input
+                        type="checkbox"
+                        id="macularDegeneration"
+                        checked={diagnosticConditions.macularDegeneration}
+                        onChange={() => handleConditionChange('macularDegeneration')}
+                        className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                      />
+                      <label htmlFor="macularDegeneration" className="ml-3 text-sm font-medium text-gray-900 cursor-pointer">
+                        Degeneração Macular
+                      </label>
+                    </div>
+
+                    <div className="flex items-center p-3 bg-white rounded-md border border-gray-200">
+                      <input
+                        type="checkbox"
+                        id="cataract"
+                        checked={diagnosticConditions.cataract}
+                        onChange={() => handleConditionChange('cataract')}
+                        className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                      />
+                      <label htmlFor="cataract" className="ml-3 text-sm font-medium text-gray-900 cursor-pointer">
+                        Catarata
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
                 {success && (

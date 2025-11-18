@@ -282,6 +282,51 @@ export default function Results() {
                 </div>
               </div>
 
+              {/* Informações de Encaminhamento */}
+              {selectedPatient.referral && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                    <svg className="h-5 w-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Informações de Encaminhamento
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600">Encaminhado por</p>
+                      <p className="font-medium text-gray-900">{selectedPatient.referral.referredBy}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Especialidade</p>
+                      <p className="font-medium text-gray-900">{selectedPatient.referral.specialty}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Data do Encaminhamento</p>
+                      <p className="font-medium text-gray-900">{formatDateTime(selectedPatient.referral.referralDate)}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Urgência</p>
+                      <p className="font-medium text-gray-900">
+                        <span className={`px-2 py-1 rounded text-xs ${
+                          selectedPatient.referral.urgency === 'emergency' ? 'bg-red-100 text-red-800' :
+                          selectedPatient.referral.urgency === 'urgent' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {selectedPatient.referral.urgency === 'emergency' ? 'Emergência' :
+                           selectedPatient.referral.urgency === 'urgent' ? 'Urgente' : 'Rotina'}
+                        </span>
+                      </p>
+                    </div>
+                    {selectedPatient.referral.notes && (
+                      <div className="md:col-span-2">
+                        <p className="text-sm text-gray-600">Observações</p>
+                        <p className="font-medium text-gray-900">{selectedPatient.referral.notes}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Imagens do Exame */}
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
@@ -317,6 +362,41 @@ export default function Results() {
                     <h5 className="font-medium text-gray-900 mb-2">Médico Responsável</h5>
                     <p className="text-gray-700">{selectedPatient.report.doctorName}</p>
                   </div>
+
+                  {/* Condições Diagnósticas */}
+                  {selectedPatient.report.diagnosticConditions && (
+                    <div>
+                      <h5 className="font-medium text-gray-900 mb-2">Condições Oftalmológicas Identificadas</h5>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedPatient.report.diagnosticConditions.diabeticRetinopathy && (
+                          <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Retinopatia Diabética
+                          </span>
+                        )}
+                        {selectedPatient.report.diagnosticConditions.glaucoma && (
+                          <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Glaucoma
+                          </span>
+                        )}
+                        {selectedPatient.report.diagnosticConditions.macularDegeneration && (
+                          <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Degeneração Macular
+                          </span>
+                        )}
+                        {selectedPatient.report.diagnosticConditions.cataract && (
+                          <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Catarata
+                          </span>
+                        )}
+                        {!selectedPatient.report.diagnosticConditions.diabeticRetinopathy &&
+                         !selectedPatient.report.diagnosticConditions.glaucoma &&
+                         !selectedPatient.report.diagnosticConditions.macularDegeneration &&
+                         !selectedPatient.report.diagnosticConditions.cataract && (
+                          <span className="text-gray-600 italic">Nenhuma condição específica identificada</span>
+                        )}
+                      </div>
+                    </div>
+                  )}
 
                   <div>
                     <h5 className="font-medium text-gray-900 mb-2">Achados Clínicos</h5>

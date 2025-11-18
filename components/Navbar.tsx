@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, BarChart3, ClipboardList, FileText } from 'lucide-react';
+import { Activity, BarChart3, ClipboardList, FileText, Send } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -15,6 +15,7 @@ export default function Navbar() {
     { href: '/', label: 'Registro de Paciente', icon: ClipboardList },
     { href: '/analytics', label: 'Analytics', icon: BarChart3 },
     { href: '/medical', label: 'Fila de Laudos', icon: Activity },
+    { href: '/referrals', label: 'Encaminhamentos', icon: Send },
     { href: '/results', label: 'Resultados', icon: FileText },
   ];
 

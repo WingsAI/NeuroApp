@@ -9,6 +9,7 @@ export interface Patient {
   images: PatientImage[];
   status: 'pending' | 'in_analysis' | 'completed';
   report?: MedicalReport;
+  referral?: PatientReferral;
   createdAt: string;
 }
 
@@ -26,7 +27,26 @@ export interface MedicalReport {
   findings: string;
   diagnosis: string;
   recommendations: string;
+  diagnosticConditions: DiagnosticConditions;
   completedAt: string;
+}
+
+export interface DiagnosticConditions {
+  diabeticRetinopathy: boolean;
+  glaucoma: boolean;
+  macularDegeneration: boolean;
+  cataract: boolean;
+}
+
+export interface PatientReferral {
+  id: string;
+  patientId: string;
+  referredBy: string;
+  referralDate: string;
+  specialty: string;
+  urgency: 'routine' | 'urgent' | 'emergency';
+  notes: string;
+  status: 'pending' | 'scheduled' | 'completed';
 }
 
 export interface AnalyticsData {
