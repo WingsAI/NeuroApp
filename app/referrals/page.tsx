@@ -5,6 +5,7 @@ import { Search, User, Calendar, FileCheck, AlertCircle, CheckCircle2, Send } fr
 import Navbar from '@/components/Navbar';
 import { getPatients, updatePatient, generateId } from '@/lib/storage';
 import { Patient, PatientReferral } from '@/types';
+import { mockPatientsForReferrals } from '@/lib/mockData';
 
 export default function Referrals() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -34,7 +35,10 @@ export default function Referrals() {
     const completedPatients = allPatients.filter(
       p => p.status === 'completed' && p.report && !p.referral
     );
-    setPatients(completedPatients);
+
+    // Combinar com pacientes de exemplo (mockPatientsForReferrals)
+    const combinedPatients = [...mockPatientsForReferrals, ...completedPatients];
+    setPatients(combinedPatients);
   };
 
   const filterPatients = () => {
@@ -69,6 +73,24 @@ export default function Referrals() {
     e.preventDefault();
 
     if (!selectedPatient) return;
+
+    // Não permitir salvar encaminhamento em pacientes de exemplo
+    if (selectedPatient.id.startsWith('mock-')) {
+      alert('Este é um paciente de exemplo. O encaminhamento não será salvo permanentemente.');
+      setSuccess(true);
+      setTimeout(() => {
+        setShowModal(false);
+        setSelectedPatient(null);
+        setReferralForm({
+          referredBy: '',
+          specialty: '',
+          urgency: 'routine',
+          notes: '',
+        });
+        setSuccess(false);
+      }, 1500);
+      return;
+    }
 
     const referral: PatientReferral = {
       id: generateId(),

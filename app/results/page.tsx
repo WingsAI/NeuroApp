@@ -5,6 +5,7 @@ import { Search, FileText, User, Calendar, MapPin, Download, Printer, Eye, Image
 import Navbar from '@/components/Navbar';
 import { getPatients } from '@/lib/storage';
 import { Patient } from '@/types';
+import { mockPatientsWithReferrals } from '@/lib/mockData';
 
 export default function Results() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -25,7 +26,10 @@ export default function Results() {
     const allPatients = getPatients();
     // Filtrar apenas pacientes com laudos concluídos
     const completedPatients = allPatients.filter(p => p.status === 'completed' && p.report);
-    setPatients(completedPatients);
+
+    // Combinar com pacientes de exemplo (mockPatientsWithReferrals)
+    const combinedPatients = [...mockPatientsWithReferrals, ...completedPatients];
+    setPatients(combinedPatients);
   };
 
   const filterPatients = () => {
@@ -117,6 +121,9 @@ export default function Results() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Ações
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Paciente
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -134,14 +141,20 @@ export default function Results() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Laudo Concluído
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Ações
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredPatients.map((patient) => (
                     <tr key={patient.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <button
+                          onClick={() => handleViewReport(patient)}
+                          className="inline-flex items-center px-3 py-1 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                        >
+                          <Eye className="h-4 w-4 mr-1" />
+                          Ver Laudo
+                        </button>
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10 bg-primary-100 rounded-full flex items-center justify-center">
@@ -169,15 +182,6 @@ export default function Results() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                         {formatDateTime(patient.report?.completedAt || '')}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <button
-                          onClick={() => handleViewReport(patient)}
-                          className="inline-flex items-center px-3 py-1 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
-                        >
-                          <Eye className="h-4 w-4 mr-1" />
-                          Ver Laudo
-                        </button>
                       </td>
                     </tr>
                   ))}
