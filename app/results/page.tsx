@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatients } from '@/lib/storage';
+import { getPatientsAction } from '@/app/actions/patients';
 import { Patient } from '@/types';
-import { mockPatientsWithReferrals } from '@/lib/mockData';
 
 export default function Results() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -22,11 +21,9 @@ export default function Results() {
     filterPatients();
   }, [searchTerm, patients]);
 
-  const loadPatients = () => {
-    const allPatients = getPatients();
-    const completedPatients = allPatients.filter((p: Patient) => p.status === 'completed' && p.report);
-    const combinedPatients = [...mockPatientsWithReferrals, ...completedPatients];
-    setPatients(combinedPatients);
+  const loadPatients = async () => {
+    const allPatients = await getPatientsAction();
+    setPatients(allPatients as any);
   };
 
   const filterPatients = () => {

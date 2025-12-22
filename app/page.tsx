@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Upload, AlertCircle, CheckCircle2, Loader2, Sparkles, User, Calendar, MapPin, Clipboard } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { savePatient, generateId, fileToBase64 } from '@/lib/storage';
+import { createPatient } from '@/app/actions/patients';
 import { Patient, PatientImage } from '@/types';
 
 export default function Home() {
@@ -146,40 +146,25 @@ export default function Home() {
     setLoading(true);
 
     try {
-      let patientImages: PatientImage[];
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('cpf', formData.cpf);
+      formDataToSend.append('birthDate', formData.birthDate);
+      formDataToSend.append('examDate', formData.examDate);
+      formDataToSend.append('location', formData.location);
+      formDataToSend.append('technicianName', formData.technicianName);
 
       if (integrationMode === 'eyer') {
-        patientImages = previewUrls.map((url, index) => ({
-          id: generateId(),
-          data: url,
-          fileName: `eyer-image-${index + 1}.jpg`,
-          uploadedAt: new Date().toISOString(),
-        }));
+        previewUrls.forEach(url => {
+          formDataToSend.append('eyerUrls', url);
+        });
       } else {
-        patientImages = await Promise.all(
-          images.map(async (file, index) => ({
-            id: generateId(),
-            data: await fileToBase64(file),
-            fileName: file.name,
-            uploadedAt: new Date().toISOString(),
-          }))
-        );
+        images.forEach(file => {
+          formDataToSend.append('images', file);
+        });
       }
 
-      const patient: Patient = {
-        id: generateId(),
-        name: formData.name,
-        cpf: formData.cpf,
-        birthDate: formData.birthDate,
-        examDate: formData.examDate,
-        location: formData.location,
-        technicianName: formData.technicianName,
-        images: patientImages,
-        status: 'pending',
-        createdAt: new Date().toISOString(),
-      };
-
-      savePatient(patient);
+      await createPatient(formDataToSend);
       setSuccess(true);
 
       setTimeout(() => {
@@ -229,8 +214,8 @@ export default function Home() {
               <div
                 onClick={() => setIntegrationMode('manual')}
                 className={`premium-card p-6 cursor-pointer border-2 transition-all ${integrationMode === 'manual'
-                    ? 'border-cardinal-700 shadow-premium-hover'
-                    : 'border-transparent'
+                  ? 'border-cardinal-700 shadow-premium-hover'
+                  : 'border-transparent'
                   }`}
               >
                 <div className="flex items-center space-x-4">
@@ -247,8 +232,8 @@ export default function Home() {
               <div
                 onClick={() => setIntegrationMode('eyer')}
                 className={`premium-card p-6 cursor-pointer border-2 transition-all ${integrationMode === 'eyer'
-                    ? 'border-cardinal-700 shadow-premium-hover'
-                    : 'border-transparent'
+                  ? 'border-cardinal-700 shadow-premium-hover'
+                  : 'border-transparent'
                   }`}
               >
                 <div className="flex items-center space-x-4">

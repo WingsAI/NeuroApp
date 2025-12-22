@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, User, Calendar, FileCheck, CheckCircle2, Send, ArrowRight, ShieldCheck, X, AlertTriangle, Clock } from 'lucide-react';
+import { Search, User, Calendar, FileCheck, CheckCircle2, Send, ArrowRight, ShieldCheck, X, AlertTriangle, Clock, Activity } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatients, updatePatient, generateId } from '@/lib/storage';
-import { Patient, PatientReferral } from '@/types';
-import { mockPatientsForReferrals } from '@/lib/mockData';
+import { getPatientsAction, updatePatientAction } from '@/app/actions/patients';
+import { Patient } from '@/types';
 
 export default function Referrals() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -20,6 +19,7 @@ export default function Referrals() {
     notes: '',
   });
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadPatients();
@@ -29,14 +29,12 @@ export default function Referrals() {
     filterPatients();
   }, [searchTerm, patients]);
 
-  const loadPatients = () => {
-    const allPatients = getPatients();
-    const completedPatients = allPatients.filter(
+  const loadPatients = async () => {
+    const allPatients = await getPatientsAction();
+    const completedPatients = (allPatients as any).filter(
       (p: Patient) => p.status === 'completed' && p.report && !p.referral
     );
-
-    const combinedPatients = [...mockPatientsForReferrals, ...completedPatients];
-    setPatients(combinedPatients);
+    setPatients(completedPatients);
   };
 
   const filterPatients = () => {
@@ -50,51 +48,36 @@ export default function Referrals() {
       (p: Patient) =>
         p.name.toLowerCase().includes(term) ||
         p.cpf.includes(term) ||
-        p.report?.doctorName.toLowerCase().includes(term)
+        p.location.toLowerCase().includes(term)
     );
     setFilteredPatients(filtered);
   };
 
-  const handleSelectPatient = (patient: Patient) => {
-    setSelectedPatient(patient);
-    setShowModal(true);
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setReferralForm({
-      ...referralForm,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setReferralForm(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmitReferral = (e: React.FormEvent) => {
+  const handleSubmitReferral = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedPatient) return;
 
-    if (selectedPatient.id.startsWith('mock-')) {
-      setSuccess(true);
-      setTimeout(() => {
-        setShowModal(false);
-        setSelectedPatient(null);
-        resetForm();
-        setSuccess(false);
-      }, 1500);
-      return;
-    }
+    setLoading(true);
 
-    const referral: PatientReferral = {
-      id: generateId(),
-      patientId: selectedPatient.id,
+    const referral = {
       referredBy: referralForm.referredBy,
-      referralDate: new Date().toISOString(),
       specialty: referralForm.specialty,
       urgency: referralForm.urgency,
       notes: referralForm.notes,
-      status: 'pending',
+      status: 'pending' as const,
+      referralDate: new Date().toISOString(),
     };
 
-    updatePatient(selectedPatient.id, {
+    await updatePatientAction(selectedPatient.id, {
       referral: referral,
     });
 
@@ -103,13 +86,35 @@ export default function Referrals() {
     setTimeout(() => {
       setShowModal(false);
       setSelectedPatient(null);
-      resetForm();
+      setReferralForm({
+        referredBy: '',
+        specialty: '',
+        urgency: 'routine',
+        notes: '',
+      });
       setSuccess(false);
+      setLoading(false);
       loadPatients();
     }, 1500);
   };
 
-  const resetForm = () => {
+  const getConditionsList = (conditions: any) => {
+    if (!conditions) return [];
+    const labels: Record<string, string> = {
+      diabeticRetinopathy: 'Retinopatia Diabética',
+      glaucoma: 'Glaucoma',
+      macularDegeneration: 'Degeneração Macular',
+      cataract: 'Catarata',
+    };
+
+    return Object.entries(conditions)
+      .filter(([_, value]) => value === true)
+      .map(([key, _]) => labels[key] || key);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedPatient(null);
     setReferralForm({
       referredBy: '',
       specialty: '',
@@ -118,24 +123,13 @@ export default function Referrals() {
     });
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedPatient(null);
-    resetForm();
+  const handleViewPatient = (patient: Patient) => {
+    setSelectedPatient(patient);
+    setShowModal(true);
   };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
-  };
-
-  const getConditionsList = (conditions: Patient['report'] extends { diagnosticConditions: infer C } ? C : any) => {
-    if (!conditions) return [];
-    const list = [];
-    if (conditions.diabeticRetinopathy) list.push('Retinopatia Diabética');
-    if (conditions.glaucoma) list.push('Glaucoma');
-    if (conditions.macularDegeneration) list.push('Degeneração Macular');
-    if (conditions.cataract) list.push('Catarata');
-    return list;
   };
 
   return (
@@ -149,10 +143,10 @@ export default function Referrals() {
           <div className="max-w-2xl">
             <div className="accent-line" />
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
-              Encaminhamento de <span className="text-cardinal-700 italic">Pacientes</span>
+              Fila de <span className="text-cardinal-700 italic">Encaminhamentos</span>
             </h1>
             <p className="text-lg text-sandstone-600 font-medium">
-              Gestão protocolar de encaminhamentos para especialistas e serviços terciários.
+              Gestão estratégica de pacientes analisados aguardando conduta especializada.
             </p>
           </div>
 
@@ -161,107 +155,82 @@ export default function Referrals() {
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
             <input
               type="text"
-              placeholder="Buscar por nome, documento ou médico responsável..."
+              placeholder="Buscar por paciente, CPF ou unidade..."
               value={searchTerm}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
               className="input-premium pl-12 h-14 text-lg shadow-sm"
             />
           </div>
 
-          {/* Results List */}
+          {/* Patient Grid */}
           {filteredPatients.length === 0 ? (
             <div className="premium-card p-20 text-center bg-sandstone-50/30">
               <div className="relative inline-block mb-6">
-                <FileCheck className="h-16 w-16 text-sandstone-200" />
-                <div className="absolute -bottom-1 -right-1 p-1 bg-white rounded-full">
-                  <CheckCircle2 className="h-6 w-6 text-green-600" />
-                </div>
+                <Send className="h-16 w-16 text-sandstone-200" />
+                <div className="absolute -top-1 -right-1 h-6 w-6 bg-cardinal-700 rounded-full flex items-center justify-center text-white text-[10px] font-bold">0</div>
               </div>
               <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">Fila de encaminhamento vazia</h3>
-              <p className="text-sandstone-600 font-medium max-w-md mx-auto">
-                {searchTerm ? 'Nenhum registro coincide com a busca.' : 'Todos os laudos concluídos foram devidamente encaminhados ou arquivados.'}
+              <p className="text-sandstone-600 font-medium">
+                {searchTerm ? 'Nenhum registro corresponde aos critérios de busca.' : 'Todos os laudos assinados já foram encaminhados.'}
               </p>
             </div>
           ) : (
-            <div className="premium-card overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="min-w-full">
-                  <thead>
-                    <tr className="bg-sandstone-50/50">
-                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
-                        Paciente
-                      </th>
-                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
-                        Documento
-                      </th>
-                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
-                        Responsável Laudo
-                      </th>
-                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
-                        Protocolo Clínico
-                      </th>
-                      <th className="px-8 py-5 text-right text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
-                        Ação
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-sandstone-100">
-                    {filteredPatients.map((patient) => {
-                      const conditions = getConditionsList(patient.report?.diagnosticConditions);
-                      return (
-                        <tr key={patient.id} className="group hover:bg-cardinal-50/20 transition-all duration-300">
-                          <td className="px-8 py-6">
-                            <div className="flex items-center space-x-4">
-                              <div className="w-10 h-10 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-colors duration-500">
-                                <User className="h-5 w-5" />
-                              </div>
-                              <div>
-                                <div className="text-sm font-bold text-charcoal">{patient.name}</div>
-                                <div className="text-[10px] text-sandstone-400 font-bold uppercase tracking-wider">{patient.location}</div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-8 py-6 text-sm font-medium text-sandstone-600">
-                            {patient.cpf}
-                          </td>
-                          <td className="px-8 py-6">
-                            <div className="text-sm font-serif font-bold text-charcoal italic">{patient.report?.doctorName}</div>
-                            <div className="text-[10px] text-sandstone-400 flex items-center mt-1">
-                              <Calendar className="w-3 h-3 mr-1" />
-                              {formatDate(patient.report?.completedAt || '')}
-                            </div>
-                          </td>
-                          <td className="px-8 py-6">
-                            {conditions.length > 0 ? (
-                              <div className="flex flex-wrap gap-2">
-                                {conditions.map((condition, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="px-2 py-1 text-[9px] font-bold uppercase tracking-wider bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded"
-                                  >
-                                    {condition}
-                                  </span>
-                                ))}
-                              </div>
-                            ) : (
-                              <span className="text-xs font-medium text-sandstone-400 italic">Escrutínio Normal</span>
-                            )}
-                          </td>
-                          <td className="px-8 py-6 text-right">
-                            <button
-                              onClick={() => handleSelectPatient(patient)}
-                              className="inline-flex items-center px-5 py-2.5 bg-cardinal-700 text-white text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-cardinal-800 shadow-sm hover:shadow-lg transition-all group-hover:-translate-y-0.5 active:scale-95"
-                            >
-                              <Send className="h-3.5 w-3.5 mr-2" />
-                              Encaminhar
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPatients.map((patient) => (
+                <div
+                  key={patient.id}
+                  className="premium-card group cursor-pointer"
+                  onClick={() => handleViewPatient(patient)}
+                >
+                  <div className="p-8">
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-all duration-500">
+                          <User className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors">
+                            {patient.name}
+                          </h3>
+                          <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest">{patient.cpf}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center text-sm font-medium text-sandstone-600">
+                        <Calendar className="h-4 w-4 mr-3 text-sandstone-400" />
+                        Exame: {formatDate(patient.examDate)}
+                      </div>
+                      <div className="p-4 bg-sandstone-50 rounded-xl border border-sandstone-100">
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider mb-2">Conclusão do Laudo</p>
+                        <p className="text-sm font-serif italic text-charcoal line-clamp-2 leading-relaxed">
+                          "{patient.report?.diagnosis}"
+                        </p>
+                      </div>
+                      {patient.report && getConditionsList(patient.report.diagnosticConditions).length > 0 && (
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {getConditionsList(patient.report.diagnosticConditions).slice(0, 2).map((condition, idx) => (
+                            <span key={idx} className="px-2 py-0.5 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded text-[9px] font-bold uppercase tracking-wider">
+                              {condition}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="pt-6 border-t border-sandstone-100 flex items-center justify-between">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Responsável</span>
+                        <span className="text-xs font-serif text-charcoal italic">{patient.report?.doctorName}</span>
+                      </div>
+                      <button className="flex items-center text-cardinal-700 font-bold text-sm group-hover:translate-x-1 transition-transform">
+                        Encaminhar <ArrowRight className="ml-2 w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -421,7 +390,7 @@ export default function Referrals() {
                 </div>
 
                 {success && (
-                  <div className="flex items-center p-5 bg-green-50 border border-green-200 rounded-2xl animate-stagger-1">
+                  <div className="flex items-center p-5 bg-green-50 border border-green-200 rounded-2xl">
                     <CheckCircle2 className="h-5 w-5 text-green-600 mr-3" />
                     <p className="text-sm font-bold text-green-800 uppercase tracking-widest">Encaminhamento finalizado com sucesso</p>
                   </div>
@@ -437,10 +406,12 @@ export default function Referrals() {
                   </button>
                   <button
                     type="submit"
-                    disabled={success}
+                    disabled={success || loading}
                     className="flex-2 btn-cardinal text-sm uppercase tracking-widest font-bold flex items-center justify-center space-x-3"
                   >
-                    {success ? (
+                    {loading ? (
+                      <Loader2 className="animate-spin w-5 h-5" />
+                    ) : success ? (
                       <>
                         <CheckCircle2 className="w-5 h-5" />
                         <span>Referral Concluído</span>
@@ -461,3 +432,7 @@ export default function Referrals() {
     </div>
   );
 }
+
+const Loader2 = ({ className }: { className?: string }) => (
+  <Activity className={className} />
+);

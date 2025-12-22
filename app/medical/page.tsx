@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatients, updatePatient, generateId } from '@/lib/storage';
+import { getPatientsAction, updatePatientAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
-import { mockPatients } from '@/lib/mockData';
 
 export default function Medical() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -26,6 +25,7 @@ export default function Medical() {
     cataract: false,
   });
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadPatients();
@@ -35,14 +35,12 @@ export default function Medical() {
     filterPatients();
   }, [searchTerm, patients]);
 
-  const loadPatients = () => {
-    const allPatients = getPatients();
-    const pendingPatients = allPatients.filter(
+  const loadPatients = async () => {
+    const allPatients = await getPatientsAction();
+    const pendingPatients = (allPatients as any).filter(
       (p: Patient) => p.status === 'pending' || p.status === 'in_analysis'
     );
-
-    const combinedPatients = [...mockPatients, ...pendingPatients];
-    setPatients(combinedPatients);
+    setPatients(pendingPatients);
   };
 
   const filterPatients = () => {
@@ -61,12 +59,13 @@ export default function Medical() {
     setFilteredPatients(filtered);
   };
 
-  const handleSelectPatient = (patient: Patient) => {
+  const handleSelectPatient = async (patient: Patient) => {
     setSelectedPatient(patient);
     setShowModal(true);
 
-    if (patient.status === 'pending' && !patient.id.startsWith('mock-')) {
-      updatePatient(patient.id, { status: 'in_analysis' });
+    if (patient.status === 'pending') {
+      await updatePatientAction(patient.id, { status: 'in_analysis' });
+      loadPatients();
     }
   };
 
@@ -85,25 +84,14 @@ export default function Medical() {
     }));
   };
 
-  const handleSubmitReport = (e: React.FormEvent) => {
+  const handleSubmitReport = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedPatient) return;
 
-    if (selectedPatient.id.startsWith('mock-')) {
-      setSuccess(true);
-      setTimeout(() => {
-        setShowModal(false);
-        setSelectedPatient(null);
-        resetForm();
-        setSuccess(false);
-      }, 1500);
-      return;
-    }
+    setLoading(true);
 
-    const report: MedicalReport = {
-      id: generateId(),
-      patientId: selectedPatient.id,
+    const report = {
       doctorName: reportForm.doctorName,
       findings: reportForm.findings,
       diagnosis: reportForm.diagnosis,
@@ -112,7 +100,7 @@ export default function Medical() {
       completedAt: new Date().toISOString(),
     };
 
-    updatePatient(selectedPatient.id, {
+    await updatePatientAction(selectedPatient.id, {
       status: 'completed',
       report: report,
     });

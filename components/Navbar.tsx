@@ -2,10 +2,18 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, BarChart3, ClipboardList, FileText, Send } from 'lucide-react';
+import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -24,7 +32,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex w-full justify-between items-center">
-            <div className="flex-shrink-0 flex items-center group cursor-pointer">
+            <div className="flex-shrink-0 flex items-center group cursor-pointer" onClick={() => router.push('/')}>
               <div className="bg-cardinal-700 p-2 rounded-lg transition-transform duration-300 group-hover:rotate-12">
                 <Activity className="h-6 w-6 text-white" />
               </div>
@@ -33,14 +41,14 @@ export default function Navbar() {
               </span>
             </div>
 
-            <div className="hidden lg:flex lg:space-x-1">
+            <div className="hidden lg:flex lg:items-center lg:space-x-1">
               {navItems.map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}
                   href={href}
                   className={`relative flex items-center px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive(href)
-                      ? 'text-cardinal-700 bg-cardinal-50'
-                      : 'text-gray-500 hover:text-charcoal hover:bg-sandstone-50'
+                    ? 'text-cardinal-700 bg-cardinal-50'
+                    : 'text-gray-500 hover:text-charcoal hover:bg-sandstone-50'
                     }`}
                 >
                   <Icon className={`h-4 w-4 mr-2 ${isActive(href) ? 'text-cardinal-700' : 'text-gray-400'}`} />
@@ -50,6 +58,14 @@ export default function Navbar() {
                   )}
                 </Link>
               ))}
+
+              <button
+                onClick={handleLogout}
+                className="ml-4 p-2 text-sandstone-400 hover:text-cardinal-700 transition-colors"
+                title="Sair"
+              >
+                <LogOut className="h-5 w-5" />
+              </button>
             </div>
 
             <div className="lg:hidden">
@@ -67,8 +83,8 @@ export default function Navbar() {
               key={href}
               href={href}
               className={`flex-shrink-0 flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive(href)
-                  ? 'bg-cardinal-50 text-cardinal-700 shadow-sm'
-                  : 'text-gray-500 hover:bg-white/50'
+                ? 'bg-cardinal-50 text-cardinal-700 shadow-sm'
+                : 'text-gray-500 hover:bg-white/50'
                 }`}
             >
               <Icon className="h-4 w-4 mr-2" />
