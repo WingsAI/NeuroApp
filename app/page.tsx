@@ -1,12 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 import { Upload, AlertCircle, CheckCircle2, Loader2, Sparkles, User, Calendar, MapPin, Clipboard } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { createPatient } from '@/app/actions/patients';
 import { Patient, PatientImage } from '@/types';
 
 export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
   const [integrationMode, setIntegrationMode] = useState<'manual' | 'eyer'>('manual');
   const [eyerPatientId, setEyerPatientId] = useState('');
   const [formData, setFormData] = useState({
@@ -17,6 +21,14 @@ export default function Home() {
     location: '',
     technicianName: '',
   });
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+    };
+    checkUser();
+  }, []);
 
   const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
@@ -140,6 +152,10 @@ export default function Home() {
 
     if (!confirmed) {
       setError('Você deve confirmar o envio marcando o checkbox.');
+      return;
+    }
+    if (!user) {
+      router.push('/login');
       return;
     }
 
@@ -466,7 +482,7 @@ export default function Home() {
                       <Sparkles className="w-5 h-5" />
                     )}
                     <span className="text-lg uppercase tracking-widest font-bold">
-                      {loading ? 'Processando...' : success ? 'Sucesso' : 'Finalizar Registro'}
+                      {loading ? 'Processando...' : success ? 'Sucesso' : user ? 'Finalizar Registro' : 'Entrar para Registrar'}
                     </span>
                   </button>
                 </div>
