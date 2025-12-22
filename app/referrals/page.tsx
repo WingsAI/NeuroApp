@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Search, User, Calendar, FileCheck, AlertCircle, CheckCircle2, Send } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Search, User, Calendar, FileCheck, CheckCircle2, Send, ArrowRight, ShieldCheck, X, AlertTriangle, Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatients, updatePatient, generateId } from '@/lib/storage';
 import { Patient, PatientReferral } from '@/types';
@@ -31,12 +31,10 @@ export default function Referrals() {
 
   const loadPatients = () => {
     const allPatients = getPatients();
-    // Filtrar apenas pacientes com laudos concluídos que ainda não foram encaminhados
     const completedPatients = allPatients.filter(
-      p => p.status === 'completed' && p.report && !p.referral
+      (p: Patient) => p.status === 'completed' && p.report && !p.referral
     );
 
-    // Combinar com pacientes de exemplo (mockPatientsForReferrals)
     const combinedPatients = [...mockPatientsForReferrals, ...completedPatients];
     setPatients(combinedPatients);
   };
@@ -49,7 +47,7 @@ export default function Referrals() {
 
     const term = searchTerm.toLowerCase();
     const filtered = patients.filter(
-      p =>
+      (p: Patient) =>
         p.name.toLowerCase().includes(term) ||
         p.cpf.includes(term) ||
         p.report?.doctorName.toLowerCase().includes(term)
@@ -74,19 +72,12 @@ export default function Referrals() {
 
     if (!selectedPatient) return;
 
-    // Não permitir salvar encaminhamento em pacientes de exemplo
     if (selectedPatient.id.startsWith('mock-')) {
-      alert('Este é um paciente de exemplo. O encaminhamento não será salvo permanentemente.');
       setSuccess(true);
       setTimeout(() => {
         setShowModal(false);
         setSelectedPatient(null);
-        setReferralForm({
-          referredBy: '',
-          specialty: '',
-          urgency: 'routine',
-          notes: '',
-        });
+        resetForm();
         setSuccess(false);
       }, 1500);
       return;
@@ -112,20 +103,13 @@ export default function Referrals() {
     setTimeout(() => {
       setShowModal(false);
       setSelectedPatient(null);
-      setReferralForm({
-        referredBy: '',
-        specialty: '',
-        urgency: 'routine',
-        notes: '',
-      });
+      resetForm();
       setSuccess(false);
       loadPatients();
     }, 1500);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedPatient(null);
+  const resetForm = () => {
     setReferralForm({
       referredBy: '',
       specialty: '',
@@ -134,11 +118,17 @@ export default function Referrals() {
     });
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedPatient(null);
+    resetForm();
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
   };
 
-  const getConditionsList = (conditions: any) => {
+  const getConditionsList = (conditions: Patient['report'] extends { diagnosticConditions: infer C } ? C : any) => {
     if (!conditions) return [];
     const list = [];
     if (conditions.diabeticRetinopathy) list.push('Retinopatia Diabética');
@@ -149,263 +139,318 @@ export default function Referrals() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="noise-overlay" />
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Encaminhamento de Pacientes</h1>
-          <p className="text-gray-600">Gerencie os encaminhamentos dos pacientes com laudos concluídos</p>
-        </div>
-
-        {/* Barra de Busca */}
-        <div className="mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Buscar por paciente, CPF ou médico..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            />
-          </div>
-        </div>
-
-        {/* Lista de Pacientes */}
-        {filteredPatients.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <FileCheck className="mx-auto h-16 w-16 text-gray-400" />
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Nenhum paciente aguardando encaminhamento</h3>
-            <p className="mt-2 text-gray-600">
-              {searchTerm ? 'Tente ajustar sua busca' : 'Todos os pacientes com laudos já foram encaminhados ou não há laudos concluídos'}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="stagger-load space-y-12">
+          {/* Header Section */}
+          <div className="max-w-2xl">
+            <div className="accent-line" />
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
+              Encaminhamento de <span className="text-cardinal-700 italic">Pacientes</span>
+            </h1>
+            <p className="text-lg text-sandstone-600 font-medium">
+              Gestão protocolar de encaminhamentos para especialistas e serviços terciários.
             </p>
           </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Paciente
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      CPF
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Médico Laudador
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Data do Laudo
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Condições Identificadas
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Ações
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredPatients.map((patient) => {
-                    const conditions = getConditionsList(patient.report?.diagnosticConditions);
-                    return (
-                      <tr key={patient.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10 bg-primary-100 rounded-full flex items-center justify-center">
-                              <User className="h-5 w-5 text-primary-600" />
-                            </div>
-                            <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">{patient.name}</div>
-                              <div className="text-sm text-gray-500">{patient.location}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                          {patient.cpf}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                          {patient.report?.doctorName}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                          {formatDate(patient.report?.completedAt || '')}
-                        </td>
-                        <td className="px-6 py-4">
-                          {conditions.length > 0 ? (
-                            <div className="flex flex-wrap gap-1">
-                              {conditions.map((condition, idx) => (
-                                <span
-                                  key={idx}
-                                  className="inline-block px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded"
-                                >
-                                  {condition}
-                                </span>
-                              ))}
-                            </div>
-                          ) : (
-                            <span className="text-sm text-gray-500">Nenhuma condição identificada</span>
-                          )}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <button
-                            onClick={() => handleSelectPatient(patient)}
-                            className="inline-flex items-center px-3 py-1 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
-                          >
-                            <Send className="h-4 w-4 mr-1" />
-                            Encaminhar
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+
+          {/* Search Bar */}
+          <div className="relative max-w-2xl group">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
+            <input
+              type="text"
+              placeholder="Buscar por nome, documento ou médico responsável..."
+              value={searchTerm}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+              className="input-premium pl-12 h-14 text-lg shadow-sm"
+            />
           </div>
-        )}
+
+          {/* Results List */}
+          {filteredPatients.length === 0 ? (
+            <div className="premium-card p-20 text-center bg-sandstone-50/30">
+              <div className="relative inline-block mb-6">
+                <FileCheck className="h-16 w-16 text-sandstone-200" />
+                <div className="absolute -bottom-1 -right-1 p-1 bg-white rounded-full">
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">Fila de encaminhamento vazia</h3>
+              <p className="text-sandstone-600 font-medium max-w-md mx-auto">
+                {searchTerm ? 'Nenhum registro coincide com a busca.' : 'Todos os laudos concluídos foram devidamente encaminhados ou arquivados.'}
+              </p>
+            </div>
+          ) : (
+            <div className="premium-card overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="min-w-full">
+                  <thead>
+                    <tr className="bg-sandstone-50/50">
+                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
+                        Paciente
+                      </th>
+                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
+                        Documento
+                      </th>
+                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
+                        Responsável Laudo
+                      </th>
+                      <th className="px-8 py-5 text-left text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
+                        Protocolo Clínico
+                      </th>
+                      <th className="px-8 py-5 text-right text-xs font-bold text-sandstone-500 uppercase tracking-widest border-b border-sandstone-100">
+                        Ação
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-sandstone-100">
+                    {filteredPatients.map((patient) => {
+                      const conditions = getConditionsList(patient.report?.diagnosticConditions);
+                      return (
+                        <tr key={patient.id} className="group hover:bg-cardinal-50/20 transition-all duration-300">
+                          <td className="px-8 py-6">
+                            <div className="flex items-center space-x-4">
+                              <div className="w-10 h-10 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-colors duration-500">
+                                <User className="h-5 w-5" />
+                              </div>
+                              <div>
+                                <div className="text-sm font-bold text-charcoal">{patient.name}</div>
+                                <div className="text-[10px] text-sandstone-400 font-bold uppercase tracking-wider">{patient.location}</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-8 py-6 text-sm font-medium text-sandstone-600">
+                            {patient.cpf}
+                          </td>
+                          <td className="px-8 py-6">
+                            <div className="text-sm font-serif font-bold text-charcoal italic">{patient.report?.doctorName}</div>
+                            <div className="text-[10px] text-sandstone-400 flex items-center mt-1">
+                              <Calendar className="w-3 h-3 mr-1" />
+                              {formatDate(patient.report?.completedAt || '')}
+                            </div>
+                          </td>
+                          <td className="px-8 py-6">
+                            {conditions.length > 0 ? (
+                              <div className="flex flex-wrap gap-2">
+                                {conditions.map((condition, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-2 py-1 text-[9px] font-bold uppercase tracking-wider bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded"
+                                  >
+                                    {condition}
+                                  </span>
+                                ))}
+                              </div>
+                            ) : (
+                              <span className="text-xs font-medium text-sandstone-400 italic">Escrutínio Normal</span>
+                            )}
+                          </td>
+                          <td className="px-8 py-6 text-right">
+                            <button
+                              onClick={() => handleSelectPatient(patient)}
+                              className="inline-flex items-center px-5 py-2.5 bg-cardinal-700 text-white text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-cardinal-800 shadow-sm hover:shadow-lg transition-all group-hover:-translate-y-0.5 active:scale-95"
+                            >
+                              <Send className="h-3.5 w-3.5 mr-2" />
+                              Encaminhar
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
       </main>
 
-      {/* Modal de Encaminhamento */}
+      {/* Referral Modal */}
       {showModal && selectedPatient && selectedPatient.report && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4">
-              <h2 className="text-2xl font-bold text-gray-900">Encaminhamento de Paciente</h2>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+          <div className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity" onClick={closeModal} />
+
+          <div className="relative bg-white w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col stagger-load">
+            {/* Modal Header */}
+            <div className="px-8 py-6 bg-sandstone-50 border-b border-sandstone-100 flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="p-3 bg-cardinal-700 rounded-xl text-white shadow-lg">
+                  <Send className="h-6 w-6" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-serif font-bold text-charcoal">Gestão de Encaminhamento</h2>
+                  <p className="text-sm font-medium text-sandstone-500">Protocolo de Referência Terciária</p>
+                </div>
+              </div>
+              <button onClick={closeModal} className="p-2 hover:bg-white rounded-full transition-colors text-sandstone-400 hover:text-charcoal border border-transparent hover:border-sandstone-100">
+                <X className="h-6 w-6" />
+              </button>
             </div>
 
-            <div className="p-6 space-y-6">
-              {/* Resumo do Laudo */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Resumo do Laudo</h3>
-                <div className="space-y-2">
-                  <div>
-                    <p className="text-sm text-gray-600">Paciente</p>
-                    <p className="font-medium text-gray-900">{selectedPatient.name}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Médico Laudador</p>
-                    <p className="font-medium text-gray-900">{selectedPatient.report.doctorName}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Diagnóstico</p>
-                    <p className="font-medium text-gray-900">{selectedPatient.report.diagnosis}</p>
-                  </div>
-                  {getConditionsList(selectedPatient.report.diagnosticConditions).length > 0 && (
+            <div className="flex-1 overflow-y-auto p-8 space-y-8">
+              {/* Report Summary Card */}
+              <div className="premium-card p-8 bg-cardinal-950/5 relative">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <FileCheck className="w-12 h-12 text-cardinal-700" />
+                </div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
+                  <ShieldCheck className="w-4 h-4 mr-2" /> Síntese do Laudo Clínico
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
                     <div>
-                      <p className="text-sm text-gray-600 mb-1">Condições Identificadas</p>
-                      <div className="flex flex-wrap gap-2">
-                        {getConditionsList(selectedPatient.report.diagnosticConditions).map((condition, idx) => (
-                          <span
-                            key={idx}
-                            className="inline-block px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded"
-                          >
-                            {condition}
-                          </span>
-                        ))}
-                      </div>
+                      <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Paciente</p>
+                      <p className="text-base font-serif font-bold text-charcoal leading-tight">{selectedPatient.name}</p>
                     </div>
-                  )}
+                    <div>
+                      <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Responsável Laudo</p>
+                      <p className="text-sm font-serif font-medium text-charcoal italic">{selectedPatient.report.doctorName}</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Conclusão Diagnóstica</p>
+                      <p className="text-sm font-medium text-sandstone-600 line-clamp-2 italic">"{selectedPatient.report.diagnosis}"</p>
+                    </div>
+                    {getConditionsList(selectedPatient.report.diagnosticConditions).length > 0 && (
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider mb-2">Marcadores de Alerta</p>
+                        <div className="flex flex-wrap gap-2">
+                          {getConditionsList(selectedPatient.report.diagnosticConditions).map((condition, idx) => (
+                            <span key={idx} className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-white text-cardinal-700 border border-cardinal-100 rounded shadow-sm">
+                              {condition}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Formulário de Encaminhamento */}
-              <form onSubmit={handleSubmitReferral} className="space-y-4">
-                <div>
-                  <label htmlFor="referredBy" className="block text-sm font-medium text-gray-700 mb-1">
-                    Nome do Técnico Responsável *
-                  </label>
-                  <input
-                    type="text"
-                    id="referredBy"
-                    name="referredBy"
-                    value={referralForm.referredBy}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Seu nome completo"
-                  />
+              {/* Referral Form */}
+              <form onSubmit={handleSubmitReferral} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <User className="w-3.5 h-3.5 mr-2" /> Responsável Referral
+                    </label>
+                    <input
+                      type="text"
+                      name="referredBy"
+                      value={referralForm.referredBy}
+                      onChange={handleInputChange}
+                      required
+                      className="input-premium"
+                      placeholder="Nome do Técnico/Médico"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Send className="w-3.5 h-3.5 mr-2" /> Especialidade Destino
+                    </label>
+                    <select
+                      name="specialty"
+                      value={referralForm.specialty}
+                      onChange={handleInputChange}
+                      required
+                      className="input-premium"
+                    >
+                      <option value="">Selecione a especialidade</option>
+                      <option value="Oftalmologia Geral">Oftalmologia Geral</option>
+                      <option value="Retina">Retina & Vítreo</option>
+                      <option value="Glaucoma">Glaucoma</option>
+                      <option value="Catarata">Catarata</option>
+                      <option value="Córnea">Córnea & Doenças Externas</option>
+                      <option value="Neuroftalmologia">Neuroftalmologia</option>
+                      <option value="Uveíte">Uveíte & Inflamação</option>
+                      <option value="Emergência">Pronto Atendimento</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-1">
-                    Especialidade para Encaminhamento *
+                <div className="space-y-6">
+                  <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <AlertTriangle className="w-3.5 h-3.5 mr-2 text-cardinal-700" /> Priorização de Urgência
                   </label>
-                  <select
-                    id="specialty"
-                    name="specialty"
-                    value={referralForm.specialty}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Selecione a especialidade</option>
-                    <option value="Oftalmologia Geral">Oftalmologia Geral</option>
-                    <option value="Retina">Retina</option>
-                    <option value="Glaucoma">Glaucoma</option>
-                    <option value="Catarata">Catarata</option>
-                    <option value="Córnea">Córnea</option>
-                    <option value="Neuroftalmologia">Neuroftalmologia</option>
-                    <option value="Uveíte">Uveíte</option>
-                    <option value="Emergência">Emergência</option>
-                  </select>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {[
+                      { id: 'routine', label: 'Rotina', icon: CheckCircle2, color: 'text-green-600', bg: 'bg-green-50/50' },
+                      { id: 'urgent', label: 'Urgente', icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-50/50' },
+                      { id: 'emergency', label: 'Emergência', icon: AlertTriangle, color: 'text-cardinal-700', bg: 'bg-cardinal-50/50' },
+                    ].map((level) => (
+                      <div
+                        key={level.id}
+                        onClick={() => setReferralForm({ ...referralForm, urgency: level.id as any })}
+                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 flex items-center justify-between ${referralForm.urgency === level.id
+                          ? 'border-cardinal-700 bg-white shadow-lg -translate-y-1'
+                          : 'border-sandstone-100 bg-sandstone-50/30 hover:border-cardinal-200'
+                          }`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <level.icon className={`w-5 h-5 ${level.color}`} />
+                          <span className={`text-sm font-bold uppercase tracking-widest ${referralForm.urgency === level.id ? 'text-charcoal' : 'text-sandstone-400'}`}>
+                            {level.label}
+                          </span>
+                        </div>
+                        {referralForm.urgency === level.id && (
+                          <div className="h-4 w-4 rounded-full bg-cardinal-700 flex items-center justify-center">
+                            <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="urgency" className="block text-sm font-medium text-gray-700 mb-1">
-                    Nível de Urgência *
-                  </label>
-                  <select
-                    id="urgency"
-                    name="urgency"
-                    value={referralForm.urgency}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="routine">Rotina</option>
-                    <option value="urgent">Urgente</option>
-                    <option value="emergency">Emergência</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
-                    Observações Adicionais
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2" /> Notas Complementares
                   </label>
                   <textarea
-                    id="notes"
                     name="notes"
                     value={referralForm.notes}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Informações adicionais sobre o encaminhamento..."
+                    className="input-premium py-4"
+                    placeholder="Observações pertinentes ao encaminhamento..."
                   />
                 </div>
 
                 {success && (
-                  <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-md">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                    <p className="text-sm text-green-800">Encaminhamento registrado com sucesso!</p>
+                  <div className="flex items-center p-5 bg-green-50 border border-green-200 rounded-2xl animate-stagger-1">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mr-3" />
+                    <p className="text-sm font-bold text-green-800 uppercase tracking-widest">Encaminhamento finalizado com sucesso</p>
                   </div>
                 )}
 
-                <div className="flex gap-4">
+                <div className="pt-8 border-t border-sandstone-100 flex gap-4">
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="flex-1 bg-gray-200 text-gray-700 py-3 px-6 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 font-medium"
+                    className="flex-1 px-8 py-4 text-sandstone-400 font-bold uppercase tracking-widest text-[10px] hover:bg-sandstone-50 rounded-xl transition-colors"
                   >
-                    Cancelar
+                    Descartar Rascunho
                   </button>
                   <button
                     type="submit"
                     disabled={success}
-                    className="flex-1 bg-primary-600 text-white py-3 px-6 rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 font-medium"
+                    className="flex-2 btn-cardinal text-sm uppercase tracking-widest font-bold flex items-center justify-center space-x-3"
                   >
-                    {success ? 'Encaminhamento Registrado!' : 'Registrar Encaminhamento'}
+                    {success ? (
+                      <>
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Referral Concluído</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        <span>Validar & Enviar Encaminhamento</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

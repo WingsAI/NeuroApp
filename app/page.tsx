@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Upload, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { Upload, AlertCircle, CheckCircle2, Loader2, Sparkles, User, Calendar, MapPin, Clipboard } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { savePatient, generateId, fileToBase64 } from '@/lib/storage';
 import { Patient, PatientImage } from '@/types';
@@ -86,11 +86,9 @@ export default function Home() {
     setLoading(true);
     setError('');
 
-    // Simular chamada de API (substituir com API real do EyeR)
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Dados simulados de retorno da API
       setFormData({
         name: 'Paciente Importado do EyeR',
         cpf: '123.456.789-00',
@@ -100,15 +98,14 @@ export default function Home() {
         technicianName: 'Sistema EyeR',
       });
 
-      // Simular imagens importadas
       const mockImages = [
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzBhNWVhNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2VtIDEgLSBFeWVSPC90ZXh0Pjwvc3ZnPg==',
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzA2OWE4MSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2VtIDIgLSBFeWVSPC90ZXh0Pjwvc3ZnPg==',
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzAzNjlhMSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2VtIDMgLSBFeWVSPC90ZXh0Pjwvc3ZnPg==',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDE8L3RleHQ+PC9zdmc+',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDI8L3RleHQ+PC9zdmc+',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDM8L3RleHQ+PC9zdmc+',
       ];
 
       setPreviewUrls(mockImages);
-      setImages([] as any); // Mock files
+      setImages([] as any);
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
@@ -125,9 +122,8 @@ export default function Home() {
     setError('');
     setSuccess(false);
 
-    // Validações
     if (!formData.name || !formData.cpf || !formData.birthDate ||
-        !formData.examDate || !formData.location || !formData.technicianName) {
+      !formData.examDate || !formData.location || !formData.technicianName) {
       setError('Todos os campos são obrigatórios.');
       return;
     }
@@ -150,11 +146,9 @@ export default function Home() {
     setLoading(true);
 
     try {
-      // Converter imagens para base64
       let patientImages: PatientImage[];
 
       if (integrationMode === 'eyer') {
-        // Imagens já estão em base64 do EyeR
         patientImages = previewUrls.map((url, index) => ({
           id: generateId(),
           data: url,
@@ -162,7 +156,6 @@ export default function Home() {
           uploadedAt: new Date().toISOString(),
         }));
       } else {
-        // Upload manual - converter para base64
         patientImages = await Promise.all(
           images.map(async (file, index) => ({
             id: generateId(),
@@ -173,7 +166,6 @@ export default function Home() {
         );
       }
 
-      // Criar objeto paciente
       const patient: Patient = {
         id: generateId(),
         name: formData.name,
@@ -187,12 +179,9 @@ export default function Home() {
         createdAt: new Date().toISOString(),
       };
 
-      // Salvar no localStorage
       savePatient(patient);
-
       setSuccess(true);
 
-      // Limpar formulário após 2 segundos
       setTimeout(() => {
         setFormData({
           name: '',
@@ -216,356 +205,321 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="noise-overlay" />
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-          <div className="mb-6">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-              Registro de Paciente
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="stagger-load space-y-12">
+          {/* Header Section */}
+          <div className="max-w-2xl">
+            <div className="accent-line" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
+              Registro de <span className="text-cardinal-700 italic">Paciente</span>
             </h1>
-            <p className="text-gray-600">
-              Preencha os dados do paciente e faça o upload de 3 imagens neuroftalmológicas
+            <p className="text-lg text-sandstone-600 font-medium max-w-lg leading-relaxed">
+              Sistema inteligente para gestão neuroftalmológica.
+              Integração direta com equipamentos Phelcom EyeR.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Modo de Integração */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <label className="block text-sm font-medium text-gray-900 mb-3">
-                Modo de Integração *
-              </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div
-                  onClick={() => setIntegrationMode('manual')}
-                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                    integrationMode === 'manual'
-                      ? 'border-primary-600 bg-primary-50'
-                      : 'border-gray-300 bg-white hover:border-primary-300'
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Integration Selection */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                onClick={() => setIntegrationMode('manual')}
+                className={`premium-card p-6 cursor-pointer border-2 transition-all ${integrationMode === 'manual'
+                    ? 'border-cardinal-700 shadow-premium-hover'
+                    : 'border-transparent'
                   }`}
-                >
-                  <div className="flex items-center mb-2">
-                    <input
-                      type="radio"
-                      id="manual"
-                      name="integrationMode"
-                      checked={integrationMode === 'manual'}
-                      onChange={() => setIntegrationMode('manual')}
-                      className="mr-3 h-4 w-4 text-primary-600"
-                    />
-                    <label htmlFor="manual" className="font-semibold text-gray-900 cursor-pointer">
-                      Inserção Manual
-                    </label>
+              >
+                <div className="flex items-center space-x-4">
+                  <div className={`p-3 rounded-xl ${integrationMode === 'manual' ? 'bg-cardinal-700 text-white' : 'bg-sandstone-100 text-sandstone-400'}`}>
+                    <Clipboard className="w-6 h-6" />
                   </div>
-                  <p className="text-sm text-gray-600 ml-7">
-                    Preencher formulário e fazer upload das imagens manualmente
-                  </p>
+                  <div>
+                    <h3 className="font-serif font-bold text-xl text-charcoal">Ficha Manual</h3>
+                    <p className="text-sm text-sandstone-500">Upload direto de arquivos locais</p>
+                  </div>
                 </div>
+              </div>
 
-                <div
-                  onClick={() => setIntegrationMode('eyer')}
-                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                    integrationMode === 'eyer'
-                      ? 'border-primary-600 bg-primary-50'
-                      : 'border-gray-300 bg-white hover:border-primary-300'
+              <div
+                onClick={() => setIntegrationMode('eyer')}
+                className={`premium-card p-6 cursor-pointer border-2 transition-all ${integrationMode === 'eyer'
+                    ? 'border-cardinal-700 shadow-premium-hover'
+                    : 'border-transparent'
                   }`}
-                >
-                  <div className="flex items-center mb-2">
-                    <input
-                      type="radio"
-                      id="eyer"
-                      name="integrationMode"
-                      checked={integrationMode === 'eyer'}
-                      onChange={() => setIntegrationMode('eyer')}
-                      className="mr-3 h-4 w-4 text-primary-600"
-                    />
-                    <label htmlFor="eyer" className="font-semibold text-gray-900 cursor-pointer">
-                      API EyeR Phelcom
-                    </label>
+              >
+                <div className="flex items-center space-x-4">
+                  <div className={`p-3 rounded-xl ${integrationMode === 'eyer' ? 'bg-cardinal-700 text-white' : 'bg-sandstone-100 text-sandstone-400'}`}>
+                    <Sparkles className="w-6 h-6" />
                   </div>
-                  <p className="text-sm text-gray-600 ml-7">
-                    Importar dados automaticamente do sistema EyeR da Phelcom
-                  </p>
+                  <div>
+                    <h3 className="font-serif font-bold text-xl text-charcoal">EyeR Phelcom</h3>
+                    <p className="text-sm text-sandstone-500">Importação automática via API</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Integração EyeR */}
+            {/* EyeR Search */}
             {integrationMode === 'eyer' && (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Importação via API EyeR
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="eyerPatientId" className="block text-sm font-medium text-gray-700 mb-2">
-                      ID do Paciente no EyeR
-                    </label>
-                    <div className="flex gap-3">
+              <div className="premium-card p-8 bg-cardinal-950/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Sparkles className="w-24 h-24 text-cardinal-700" />
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-xl font-serif font-bold text-charcoal mb-4">Sincronização EyeR</h3>
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex-1 relative">
                       <input
                         type="text"
-                        id="eyerPatientId"
                         value={eyerPatientId}
                         onChange={(e) => setEyerPatientId(e.target.value)}
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="input-premium pl-12"
                         placeholder="Ex: EYER-2024-001234"
                       />
-                      <button
-                        type="button"
-                        onClick={handleEyerSearch}
-                        disabled={loading}
-                        className="px-6 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-                      >
-                        {loading ? 'Buscando...' : 'Importar'}
-                      </button>
+                      <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sandstone-300" />
                     </div>
-                    <p className="mt-2 text-xs text-gray-600">
-                      Os dados do paciente e as imagens serão importados automaticamente do sistema EyeR
-                    </p>
+                    <button
+                      type="button"
+                      onClick={handleEyerSearch}
+                      disabled={loading}
+                      className="btn-cardinal whitespace-nowrap"
+                    >
+                      {loading ? <Loader2 className="animate-spin w-5 h-5" /> : 'Sincronizar Dados'}
+                    </button>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Dados do Paciente */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Nome Completo *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Nome do paciente"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="cpf" className="block text-sm font-medium text-gray-700 mb-1">
-                  CPF *
-                </label>
-                <input
-                  type="text"
-                  id="cpf"
-                  name="cpf"
-                  value={formData.cpf}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="000.000.000-00"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="birthDate" className="block text-sm font-medium text-gray-700 mb-1">
-                  Data de Nascimento *
-                </label>
-                <input
-                  type="date"
-                  id="birthDate"
-                  name="birthDate"
-                  value={formData.birthDate}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="examDate" className="block text-sm font-medium text-gray-700 mb-1">
-                  Data do Exame *
-                </label>
-                <input
-                  type="date"
-                  id="examDate"
-                  name="examDate"
-                  value={formData.examDate}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
-                  Local do Exame *
-                </label>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="UPA ou Hospital"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="technicianName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Nome do Técnico *
-                </label>
-                <input
-                  type="text"
-                  id="technicianName"
-                  name="technicianName"
-                  value={formData.technicianName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Seu nome"
-                />
-              </div>
-            </div>
-
-            {/* Upload de Imagens - apenas no modo manual */}
-            {integrationMode === 'manual' && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload de Imagens * (exatamente 3 imagens)
-                </label>
-
-                <div
-                  onDrop={handleDrop}
-                  onDragOver={handleDragOver}
-                  className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-500 transition-colors cursor-pointer"
-                >
+            {/* Main Form Fields */}
+            <div className="premium-card p-8 space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <User className="w-4 h-4 mr-2" /> Nome do Paciente
+                  </label>
                   <input
-                    type="file"
-                    id="images"
-                    accept="image/*"
-                    multiple
-                    onChange={handleImageUpload}
-                    className="hidden"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                    placeholder="Nome completo"
                   />
-                  <label htmlFor="images" className="cursor-pointer">
-                    <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                    <p className="mt-2 text-sm text-gray-600">
-                      Arraste e solte imagens aqui ou clique para selecionar
-                    </p>
-                    <p className="mt-1 text-xs text-gray-500">
-                      Formatos: JPEG, PNG (máximo 3 imagens)
-                    </p>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <Clipboard className="w-4 h-4 mr-2" /> CPF
+                  </label>
+                  <input
+                    type="text"
+                    name="cpf"
+                    value={formData.cpf}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                    placeholder="000.000.000-00"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <Calendar className="w-4 h-4 mr-2" /> Data de Nascimento
+                  </label>
+                  <input
+                    type="date"
+                    name="birthDate"
+                    value={formData.birthDate}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <Calendar className="w-4 h-4 mr-2" /> Data do Exame
+                  </label>
+                  <input
+                    type="date"
+                    name="examDate"
+                    value={formData.examDate}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <MapPin className="w-4 h-4 mr-2" /> Local do Exame
+                  </label>
+                  <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                    placeholder="Clínica ou Hospital"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <User className="w-4 h-4 mr-2" /> Técnico Responsável
+                  </label>
+                  <input
+                    type="text"
+                    name="technicianName"
+                    value={formData.technicianName}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                    placeholder="Nome completo do técnico"
+                  />
+                </div>
+              </div>
+
+              {/* Image Section */}
+              <div className="pt-8 border-t border-sandstone-100">
+                {integrationMode === 'manual' ? (
+                  <div className="space-y-4">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
+                      Documentação Visual (3 Imagens)
+                    </label>
+                    <div
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}
+                      className="group border-2 border-dashed border-sandstone-200 rounded-2xl p-12 text-center hover:border-cardinal-700 transition-all cursor-pointer bg-sandstone-50 hover:bg-white"
+                    >
+                      <input
+                        type="file"
+                        id="images"
+                        accept="image/*"
+                        multiple
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                      <label htmlFor="images" className="cursor-pointer">
+                        <div className="bg-white p-4 rounded-full w-20 h-20 mx-auto shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center">
+                          <Upload className="h-8 w-8 text-cardinal-700" />
+                        </div>
+                        <p className="mt-6 text-xl font-serif font-bold text-charcoal">Arraste as imagens aqui</p>
+                        <p className="mt-2 text-sandstone-500">ou clique para explorar arquivos locais</p>
+                      </label>
+                    </div>
+
+                    {images.length > 0 && (
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+                        {previewUrls.map((url, index) => (
+                          <div key={index} className="relative group rounded-xl overflow-hidden shadow-premium">
+                            <img src={url} alt="Preview" className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <button
+                                type="button"
+                                onClick={() => removeImage(index)}
+                                className="bg-white/90 text-cardinal-700 p-3 rounded-full hover:bg-white"
+                              >
+                                <AlertCircle className="w-6 h-6" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  previewUrls.length > 0 && (
+                    <div className="space-y-4">
+                      <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
+                        Imagens Sincronizadas (Phelcom EyeR)
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        {previewUrls.map((url, index) => (
+                          <div key={index} className="relative rounded-xl overflow-hidden shadow-premium border-2 border-cardinal-700">
+                            <img src={url} alt="EyeR" className="w-full h-48 object-cover" />
+                            <div className="absolute top-3 left-3 bg-cardinal-700 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">
+                              Equipment Sync
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+
+              {/* Footer & Submit */}
+              <div className="pt-8 border-t border-sandstone-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-start max-w-md">
+                  <div className="flex items-center h-6">
+                    <input
+                      id="confirm"
+                      type="checkbox"
+                      checked={confirmed}
+                      onChange={(e) => setConfirmed(e.target.checked)}
+                      className="w-5 h-5 text-cardinal-700 border-sandstone-300 rounded focus:ring-cardinal-500"
+                    />
+                  </div>
+                  <label htmlFor="confirm" className="ml-3 text-sm text-sandstone-600 font-medium">
+                    Declaro que validei a autenticidade das imagens e a precisão dos dados clínicos do paciente.
                   </label>
                 </div>
 
-                {/* Preview das Imagens */}
-                {images.length > 0 && (
-                  <div className="mt-4 grid grid-cols-3 gap-4">
-                    {previewUrls.map((url, index) => (
-                      <div key={index} className="relative">
-                        <img
-                          src={url}
-                          alt={`Preview ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg border border-gray-300"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(index)}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                        <p className="mt-1 text-xs text-gray-600 truncate">{images[index].name}</p>
-                      </div>
-                    ))}
+                <div className="w-full md:w-auto min-w-[240px]">
+                  <button
+                    type="submit"
+                    disabled={loading || success}
+                    className="w-full btn-cardinal flex items-center justify-center space-x-3"
+                  >
+                    {loading ? (
+                      <Loader2 className="animate-spin w-5 h-5" />
+                    ) : success ? (
+                      <CheckCircle2 className="w-5 h-5" />
+                    ) : (
+                      <Sparkles className="w-5 h-5" />
+                    )}
+                    <span className="text-lg uppercase tracking-widest font-bold">
+                      {loading ? 'Processando...' : success ? 'Sucesso' : 'Finalizar Registro'}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Notifications */}
+            <div className="fixed bottom-8 right-8 z-50 pointer-events-none">
+              <div className="space-y-4">
+                {error && (
+                  <div className="bg-white border-l-4 border-cardinal-700 shadow-2xl p-6 rounded-lg flex items-center space-x-4 animate-in slide-in-from-right pointer-events-auto">
+                    <div className="p-2 bg-cardinal-50 rounded-full">
+                      <AlertCircle className="w-6 h-6 text-cardinal-700" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif font-bold text-charcoal">Erro no Sistema</h4>
+                      <p className="text-sm text-sandstone-500">{error}</p>
+                    </div>
                   </div>
                 )}
 
-                <p className="mt-2 text-sm text-gray-600">
-                  Imagens selecionadas: <span className="font-semibold">{images.length}/3</span>
-                </p>
-              </div>
-            )}
-
-            {/* Preview das Imagens do EyeR */}
-            {integrationMode === 'eyer' && previewUrls.length > 0 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Imagens Importadas do EyeR
-                </label>
-                <div className="grid grid-cols-3 gap-4">
-                  {previewUrls.map((url, index) => (
-                    <div key={index} className="relative">
-                      <img
-                        src={url}
-                        alt={`EyeR Image ${index + 1}`}
-                        className="w-full h-32 object-cover rounded-lg border border-green-300"
-                      />
-                      <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
-                        EyeR
-                      </div>
+                {success && (
+                  <div className="bg-white border-l-4 border-green-600 shadow-2xl p-6 rounded-lg flex items-center space-x-4 animate-in slide-in-from-right pointer-events-auto">
+                    <div className="p-2 bg-green-50 rounded-full">
+                      <CheckCircle2 className="w-6 h-6 text-green-600" />
                     </div>
-                  ))}
-                </div>
-                <p className="mt-2 text-sm text-green-700 font-medium">
-                  ✓ {previewUrls.length} imagens importadas com sucesso do EyeR
-                </p>
+                    <div>
+                      <h4 className="font-serif font-bold text-charcoal">Registro Efetuado</h4>
+                      <p className="text-sm text-sandstone-500">Paciente salvo com sucesso no banco de dados.</p>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-
-            {/* Confirmação */}
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="confirm"
-                  type="checkbox"
-                  checked={confirmed}
-                  onChange={(e) => setConfirmed(e.target.checked)}
-                  className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
-                />
-              </div>
-              <label htmlFor="confirm" className="ml-3 text-sm text-gray-700">
-                Confirmo que todos os dados estão corretos e as 3 imagens foram anexadas
-              </label>
             </div>
-
-            {/* Mensagens de Erro e Sucesso */}
-            {error && (
-              <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-md">
-                <AlertCircle className="h-5 w-5 text-red-600 mr-2" />
-                <p className="text-sm text-red-800">{error}</p>
-              </div>
-            )}
-
-            {success && (
-              <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-md">
-                <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                <p className="text-sm text-green-800">
-                  Paciente registrado com sucesso! Redirecionando...
-                </p>
-              </div>
-            )}
-
-            {/* Botão de Envio */}
-            <button
-              type="submit"
-              disabled={loading || success}
-              className="w-full bg-primary-600 text-white py-3 px-6 rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-medium"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="animate-spin h-5 w-5 mr-2" />
-                  Salvando...
-                </>
-              ) : success ? (
-                <>
-                  <CheckCircle2 className="h-5 w-5 mr-2" />
-                  Salvo com Sucesso!
-                </>
-              ) : (
-                'Registrar Paciente'
-              )}
-            </button>
           </form>
         </div>
       </main>
     </div>
   );
 }
+

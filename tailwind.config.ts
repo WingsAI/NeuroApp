@@ -9,18 +9,53 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+        cardinal: {
+          50: '#fdf2f2',
+          100: '#fde4e4',
+          200: '#fbcfcf',
+          300: '#f7abab',
+          400: '#ef7a7a',
+          500: '#e14d4d',
+          600: '#ca3535',
+          700: '#8C1515', // Original Stanford Cardinal
+          800: '#8e2727',
+          900: '#762525',
+          950: '#400f0f',
         },
+        sandstone: {
+          50: '#faf9f7',
+          100: '#f4f2ee',
+          200: '#e1ddd4',
+          300: '#cdc6b6',
+          400: '#b1a792',
+          500: '#9b8d76',
+          600: '#8b7a67',
+          700: '#746456',
+          800: '#5e5248',
+          900: '#4e453e',
+          950: '#292421',
+        },
+        charcoal: '#2E2D29',
+        primary: {
+          50: '#fdf2f2',
+          100: '#fde4e4',
+          200: '#fbcfcf',
+          300: '#f7abab',
+          400: '#ef7a7a',
+          500: '#e14d4d',
+          600: '#ca3535',
+          700: '#8C1515', // Mapping primary to Cardinal
+          800: '#8e2727',
+          900: '#762525',
+        },
+      },
+      fontFamily: {
+        serif: ['var(--font-playfair)', 'serif'],
+        sans: ['var(--font-outfit)', 'sans-serif'],
+      },
+      boxShadow: {
+        'premium': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
+        'premium-hover': '0 20px 60px -15px rgba(140, 21, 21, 0.1)',
       },
     },
   },
@@ -28,3 +63,4 @@ const config: Config = {
 };
 
 export default config;
+

@@ -20,48 +20,58 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
+    <nav className="glass-header">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Activity className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">NeuroApp</span>
+        <div className="flex justify-between h-20">
+          <div className="flex w-full justify-between items-center">
+            <div className="flex-shrink-0 flex items-center group cursor-pointer">
+              <div className="bg-cardinal-700 p-2 rounded-lg transition-transform duration-300 group-hover:rotate-12">
+                <Activity className="h-6 w-6 text-white" />
+              </div>
+              <span className="ml-3 text-2xl font-serif font-bold tracking-tight text-charcoal">
+                Neuro<span className="text-cardinal-700">App</span>
+              </span>
             </div>
-            <div className="hidden sm:ml-8 sm:flex sm:space-x-4">
+
+            <div className="hidden lg:flex lg:space-x-1">
               {navItems.map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}
                   href={href}
-                  className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                    isActive(href)
-                      ? 'bg-primary-100 text-primary-700 border-b-2 border-primary-600'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                  }`}
+                  className={`relative flex items-center px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive(href)
+                      ? 'text-cardinal-700 bg-cardinal-50'
+                      : 'text-gray-500 hover:text-charcoal hover:bg-sandstone-50'
+                    }`}
                 >
-                  <Icon className="h-4 w-4 mr-2" />
+                  <Icon className={`h-4 w-4 mr-2 ${isActive(href) ? 'text-cardinal-700' : 'text-gray-400'}`} />
                   {label}
+                  {isActive(href) && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-cardinal-700 rounded-full" />
+                  )}
                 </Link>
               ))}
+            </div>
+
+            <div className="lg:hidden">
+              {/* Mobile menu button could go here */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className="sm:hidden border-t border-gray-200">
-        <div className="px-2 pt-2 pb-3 space-y-1">
+      {/* Mobile menu - simplified for this view */}
+      <div className="lg:hidden border-t border-sandstone-100 bg-white/50 backdrop-blur-md">
+        <div className="px-2 pt-2 pb-3 flex overflow-x-auto no-scrollbar">
           {navItems.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className={`flex items-center px-3 py-2 rounded-md text-base font-medium ${
-                isActive(href)
-                  ? 'bg-primary-100 text-primary-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-              }`}
+              className={`flex-shrink-0 flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive(href)
+                  ? 'bg-cardinal-50 text-cardinal-700 shadow-sm'
+                  : 'text-gray-500 hover:bg-white/50'
+                }`}
             >
-              <Icon className="h-5 w-5 mr-3" />
+              <Icon className="h-4 w-4 mr-2" />
               {label}
             </Link>
           ))}
@@ -70,3 +80,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

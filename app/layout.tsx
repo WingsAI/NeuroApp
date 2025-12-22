@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Playfair_Display, Outfit } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: '--font-playfair',
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: '--font-outfit',
+});
 
 export const metadata: Metadata = {
   title: "NeuroApp - Sistema de Neuroftalmologia",
@@ -15,8 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR" className={`${playfair.variable} ${outfit.variable}`}>
+      <body className="font-sans antialiased text-charcoal bg-sandstone-100">
+        {children}
+      </body>
     </html>
   );
 }
+
