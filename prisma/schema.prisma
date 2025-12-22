@@ -18,6 +18,10 @@ model Patient {
   examDate       DateTime
   location       String
   technicianName String
+  gender         String?
+  ethnicity      String?
+  education      String?
+  occupation     String?
   status         String           @default("pending") // pending, in_analysis, completed
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
@@ -54,10 +58,13 @@ model PatientReferral {
   id           String   @id @default(cuid())
   referredBy   String
   referralDate DateTime @default(now())
-  specialty    String
-  urgency      String   // routine, urgent, emergency
-  notes        String
-  status       String   @default("pending") // pending, scheduled, completed
+  specialty          String
+  urgency            String   // routine, urgent, emergency
+  notes              String
+  specializedService String?  // Service in Atenção Especializada
+  outcome            String?  // Outcome/Desfecho
+  outcomeDate        DateTime?
+  status             String   @default("pending") // pending, scheduled, completed, outcome_defined
   
   patientId    String   @unique
   patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)

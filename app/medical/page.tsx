@@ -289,6 +289,10 @@ export default function Medical() {
                         { label: 'Documento', value: selectedPatient.cpf },
                         { label: 'Nascimento', value: formatDate(selectedPatient.birthDate) },
                         { label: 'Data Exame', value: formatDate(selectedPatient.examDate) },
+                        { label: 'Gênero', value: selectedPatient.gender || 'Não informado' },
+                        { label: 'Raça/Cor', value: selectedPatient.ethnicity || 'Não informado' },
+                        { label: 'Escolaridade', value: selectedPatient.education || 'Não informado' },
+                        { label: 'Ocupação', value: selectedPatient.occupation || 'Não informado' },
                         { label: 'Unidade', value: selectedPatient.location },
                         { label: 'Técnico', value: selectedPatient.technicianName },
                       ].map((item, i) => (

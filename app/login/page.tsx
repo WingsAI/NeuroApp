@@ -28,7 +28,7 @@ export default function Login() {
                     },
                 });
                 if (signUpError) throw signUpError;
-                setError('Cadastro realizado! Se o auto-cadastro estiver habilitado no Supabase, verifique seu email.');
+                setError('Cadastro realizado com sucesso! Verifique seu e-mail para confirmar a ativação da sua conta.');
             } else {
                 const { error: signInError } = await supabase.auth.signInWithPassword({
                     email,

@@ -6,6 +6,10 @@ export interface Patient {
   examDate: string;
   location: string;
   technicianName: string;
+  gender?: string;
+  ethnicity?: string;
+  education?: string;
+  occupation?: string;
   images: PatientImage[];
   status: 'pending' | 'in_analysis' | 'completed';
   report?: MedicalReport;
@@ -46,7 +50,10 @@ export interface PatientReferral {
   specialty: string;
   urgency: 'routine' | 'urgent' | 'emergency';
   notes: string;
-  status: 'pending' | 'scheduled' | 'completed';
+  specializedService?: string;
+  outcome?: string;
+  outcomeDate?: string;
+  status: 'pending' | 'scheduled' | 'completed' | 'outcome_defined';
 }
 
 export interface AnalyticsData {
@@ -57,4 +64,6 @@ export interface AnalyticsData {
   patientsToday: number;
   imagesToday: number;
   averageProcessingTime: number;
+  productivityByRegion?: Record<string, number>;
+  productivityByProfessional?: Record<string, number>;
 }

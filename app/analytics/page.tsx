@@ -209,23 +209,55 @@ export default function Analytics() {
               </div>
 
               <div className="premium-card p-6 bg-sandstone-100/50 border-dashed">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-charcoal mb-3">Resumo da Rede</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-charcoal mb-4">Produtividade por Região</h4>
                 <div className="space-y-4">
-                  {[
-                    { label: 'Unidade Centro', val: '85%' },
-                    { label: 'Unidade Sul', val: '92%' },
-                    { label: 'EyeR Móvel A', val: '45%' },
-                  ].map((unit, i) => (
-                    <div key={i} className="space-y-1">
-                      <div className="flex justify-between text-[10px] font-bold uppercase text-sandstone-500">
-                        <span>{unit.label}</span>
-                        <span>{unit.val}</span>
+                  {stats.productivityByRegion && Object.keys(stats.productivityByRegion).length > 0 ? (
+                    Object.entries(stats.productivityByRegion).map(([region, count], i) => (
+                      <div key={i} className="space-y-1">
+                        <div className="flex justify-between text-[10px] font-bold uppercase text-sandstone-500">
+                          <span>{region}</span>
+                          <span>{count} exames</span>
+                        </div>
+                        <div className="h-1 bg-sandstone-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-cardinal-700"
+                            style={{ width: `${Math.min((count as number / (stats.totalPatients || 1)) * 100, 100)}%` }}
+                          />
+                        </div>
                       </div>
-                      <div className="h-1 bg-sandstone-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-cardinal-700" style={{ width: unit.val }} />
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p className="text-[10px] text-sandstone-400 italic">Sem dados de região.</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="premium-card p-6 bg-white shadow-sm">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-charcoal mb-4">Top Profissionais</h4>
+                <div className="space-y-4">
+                  {stats.productivityByProfessional && Object.keys(stats.productivityByProfessional).length > 0 ? (
+                    Object.entries(stats.productivityByProfessional)
+                      .sort(([, a], [, b]) => (b as number) - (a as number))
+                      .slice(0, 5)
+                      .map(([doctor, count], i) => (
+                        <div key={i} className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-cardinal-50 flex items-center justify-center text-[10px] font-bold text-cardinal-700">
+                              {doctor.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                            </div>
+                            <div>
+                              <p className="text-[10px] font-bold text-charcoal uppercase">{doctor}</p>
+                              <p className="text-[9px] text-sandstone-400 uppercase tracking-tighter">Médico Analista</p>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded-full">
+                            {count} laudos
+                          </span>
+                        </div>
+                      ))
+                  ) : (
+                    <p className="text-[10px] text-sandstone-400 italic">Sem dados de produtividade.</p>
+                  )}
                 </div>
               </div>
             </div>

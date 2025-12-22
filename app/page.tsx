@@ -20,6 +20,10 @@ export default function Home() {
     examDate: '',
     location: '',
     technicianName: '',
+    gender: '',
+    ethnicity: '',
+    education: '',
+    occupation: '',
   });
 
   useEffect(() => {
@@ -108,12 +112,19 @@ export default function Home() {
         examDate: new Date().toISOString().split('T')[0],
         location: 'EyeR Phelcom',
         technicianName: 'Sistema EyeR',
+        gender: 'Masculino',
+        ethnicity: 'Parda',
+        education: 'Superior Completo',
+        occupation: 'Software Engineer',
       });
 
       const mockImages = [
         'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDE8L3RleHQ+PC9zdmc+',
         'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDI8L3RleHQ+PC9zdmc+',
         'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDM8L3RleHQ+PC9zdmc+',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDQ8L3RleHQ+PC9zdmc+',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDU8L3RleHQ+PC9zdmc+',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOGMxNTE1IiBmYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FeWVSIC0gSW1hZ2VtIDY8L3RleHQ+PC9zdmc+',
       ];
 
       setPreviewUrls(mockImages);
@@ -140,13 +151,13 @@ export default function Home() {
       return;
     }
 
-    if (integrationMode === 'manual' && images.length !== 3) {
-      setError('É necessário fazer upload de exatamente 3 imagens.');
+    if (integrationMode === 'manual' && images.length !== 6) {
+      setError('É necessário fazer upload de exatamente 6 imagens.');
       return;
     }
 
-    if (integrationMode === 'eyer' && previewUrls.length !== 3) {
-      setError('É necessário importar os dados do EyeR primeiro.');
+    if (integrationMode === 'eyer' && previewUrls.length !== 6) {
+      setError('É necessário importar os dados do EyeR primeiro (6 imagens).');
       return;
     }
 
@@ -169,6 +180,10 @@ export default function Home() {
       formDataToSend.append('examDate', formData.examDate);
       formDataToSend.append('location', formData.location);
       formDataToSend.append('technicianName', formData.technicianName);
+      formDataToSend.append('gender', formData.gender);
+      formDataToSend.append('ethnicity', formData.ethnicity);
+      formDataToSend.append('education', formData.education);
+      formDataToSend.append('occupation', formData.occupation);
 
       if (integrationMode === 'eyer') {
         previewUrls.forEach(url => {
@@ -191,6 +206,10 @@ export default function Home() {
           examDate: '',
           location: '',
           technicianName: '',
+          gender: '',
+          ethnicity: '',
+          education: '',
+          occupation: '',
         });
         setImages([]);
         setPreviewUrls([]);
@@ -380,6 +399,79 @@ export default function Home() {
                     placeholder="Nome completo do técnico"
                   />
                 </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <User className="w-4 h-4 mr-2" /> Gênero
+                  </label>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={(e: any) => handleInputChange(e)}
+                    className="input-premium"
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Outro">Outro</option>
+                    <option value="Não informado">Não informado</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <User className="w-4 h-4 mr-2" /> Raça/Cor
+                  </label>
+                  <select
+                    name="ethnicity"
+                    value={formData.ethnicity}
+                    onChange={(e: any) => handleInputChange(e)}
+                    className="input-premium"
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Branca">Branca</option>
+                    <option value="Preta">Preta</option>
+                    <option value="Parda">Parda</option>
+                    <option value="Amarela">Amarela</option>
+                    <option value="Indígena">Indígena</option>
+                    <option value="Não informado">Não informado</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <Clipboard className="w-4 h-4 mr-2" /> Escolaridade
+                  </label>
+                  <select
+                    name="education"
+                    value={formData.education}
+                    onChange={(e: any) => handleInputChange(e)}
+                    className="input-premium"
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                    <option value="Fundamental Completo">Fundamental Completo</option>
+                    <option value="Médio Incompleto">Médio Incompleto</option>
+                    <option value="Médio Completo">Médio Completo</option>
+                    <option value="Superior Incompleto">Superior Incompleto</option>
+                    <option value="Superior Completo">Superior Completo</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                    <Clipboard className="w-4 h-4 mr-2" /> Ocupação
+                  </label>
+                  <input
+                    type="text"
+                    name="occupation"
+                    value={formData.occupation}
+                    onChange={handleInputChange}
+                    className="input-premium"
+                    placeholder="Profissão / Ocupação"
+                  />
+                </div>
               </div>
 
               {/* Image Section */}
@@ -387,7 +479,7 @@ export default function Home() {
                 {integrationMode === 'manual' ? (
                   <div className="space-y-4">
                     <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
-                      Documentação Visual (3 Imagens)
+                      Documentação Visual (6 Imagens)
                     </label>
                     <div
                       onDrop={handleDrop}
@@ -434,7 +526,7 @@ export default function Home() {
                   previewUrls.length > 0 && (
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
-                        Imagens Sincronizadas (Phelcom EyeR)
+                        Imagens Sincronizadas (Phelcom EyeR - 6 Imagens)
                       </label>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         {previewUrls.map((url, index) => (

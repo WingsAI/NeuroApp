@@ -12,6 +12,10 @@ export async function createPatient(formData: FormData) {
     const examDate = new Date(formData.get('examDate') as string);
     const location = formData.get('location') as string;
     const technicianName = formData.get('technicianName') as string;
+    const gender = formData.get('gender') as string;
+    const ethnicity = formData.get('ethnicity') as string;
+    const education = formData.get('education') as string;
+    const occupation = formData.get('occupation') as string;
 
     const files = formData.getAll('images') as File[];
     const eyerUrls = formData.getAll('eyerUrls') as string[];
@@ -25,6 +29,10 @@ export async function createPatient(formData: FormData) {
             examDate,
             location,
             technicianName,
+            gender,
+            ethnicity,
+            education,
+            occupation,
             status: 'pending',
         },
     });
@@ -148,6 +156,9 @@ export async function updatePatientAction(id: string, updates: any) {
                 specialty: updates.referral.specialty,
                 urgency: updates.referral.urgency,
                 notes: updates.referral.notes,
+                specializedService: updates.referral.specializedService,
+                outcome: updates.referral.outcome,
+                outcomeDate: updates.referral.outcomeDate ? new Date(updates.referral.outcomeDate) : undefined,
                 status: updates.referral.status,
             },
             create: {
@@ -155,6 +166,9 @@ export async function updatePatientAction(id: string, updates: any) {
                 specialty: updates.referral.specialty,
                 urgency: updates.referral.urgency,
                 notes: updates.referral.notes,
+                specializedService: updates.referral.specializedService,
+                outcome: updates.referral.outcome,
+                outcomeDate: updates.referral.outcomeDate ? new Date(updates.referral.outcomeDate) : undefined,
                 status: updates.referral.status,
                 patientId: id,
             }
@@ -204,6 +218,22 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         }, 0) / completedPatients.length
         : 0;
 
+    // Productivity by region (location)
+    const productivityByRegion = patients.reduce((acc: any, p: any) => {
+        const region = p.location || 'Não Informado';
+        acc[region] = (acc[region] || 0) + 1;
+        return acc;
+    }, {});
+
+    // Productivity by professional (doctor who completed the report)
+    const productivityByProfessional = patients.reduce((acc: any, p: any) => {
+        if (p.status === 'completed' && p.report) {
+            const doctor = p.report.doctorName;
+            acc[doctor] = (acc[doctor] || 0) + 1;
+        }
+        return acc;
+    }, {});
+
     return {
         totalPatients,
         totalImages,
@@ -212,5 +242,7 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         patientsToday,
         imagesToday,
         averageProcessingTime: Math.round(averageProcessingTime * 10) / 10,
-    };
+        productivityByRegion,
+        productivityByProfessional,
+    } as any;
 }
