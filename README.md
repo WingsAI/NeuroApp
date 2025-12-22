@@ -9,15 +9,18 @@ NeuroApp é uma solução completa para conectar técnicos em radiologia e médi
 - **Registro de Pacientes**: Técnicos podem registrar pacientes e fazer upload de imagens
 - **Analytics**: Dashboard com métricas e indicadores em tempo real
 - **Fila de Laudos**: Médicos podem selecionar pacientes e elaborar laudos
-- **Visualização de Resultados**: Acesso completo aos laudos finalizados
+- **Rastreabilidade**: Fluxo completo desde a triagem até o desfecho na Atenção Especializada
+- **Documentação de Dados**: [Guia de Banco de Dados e Variáveis](./DATABASE_GUIDE.md)
 
 ## Tecnologias Utilizadas
 
 - **Next.js 14**: Framework React com App Router
 - **TypeScript**: Tipagem estática para maior segurança
 - **Tailwind CSS**: Estilização moderna e responsiva
+- **Prisma ORM**: Gerenciamento de banco de dados
+- **PostgreSQL**: Armazenamento persistente de dados
+- **AWS S3**: Armazenamento de imagens médicas
 - **Lucide React**: Ícones otimizados
-- **LocalStorage**: Armazenamento local para demonstração
 
 ## Estrutura do Projeto
 

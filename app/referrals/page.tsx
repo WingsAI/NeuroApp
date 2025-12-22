@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, User, Calendar, FileCheck, CheckCircle2, Send, ArrowRight, ShieldCheck, X, AlertTriangle, Clock, Activity } from 'lucide-react';
+import { Search, User, Calendar, FileCheck, CheckCircle2, Send, ArrowRight, ShieldCheck, X, AlertTriangle, Clock, Activity, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatientsAction, updatePatientAction } from '@/app/actions/patients';
 import { Patient } from '@/types';
@@ -17,6 +17,8 @@ export default function Referrals() {
     specialty: '',
     urgency: 'routine' as 'routine' | 'urgent' | 'emergency',
     notes: '',
+    specializedService: '',
+    outcome: '',
   });
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -69,12 +71,15 @@ export default function Referrals() {
     setLoading(true);
 
     const referral = {
-      referredBy: referralForm.referredBy,
       specialty: referralForm.specialty,
       urgency: referralForm.urgency,
       notes: referralForm.notes,
-      status: 'pending' as const,
+      specializedService: referralForm.specializedService,
+      outcome: referralForm.outcome,
+      status: referralForm.outcome ? 'outcome_defined' : 'pending',
       referralDate: new Date().toISOString(),
+      outcomeDate: referralForm.outcome ? new Date().toISOString() : undefined,
+      referredBy: referralForm.referredBy || 'Sistema', // Add referredBy here
     };
 
     await updatePatientAction(selectedPatient.id, {
@@ -91,6 +96,8 @@ export default function Referrals() {
         specialty: '',
         urgency: 'routine',
         notes: '',
+        specializedService: '',
+        outcome: '',
       });
       setSuccess(false);
       setLoading(false);
@@ -120,6 +127,8 @@ export default function Referrals() {
       specialty: '',
       urgency: 'routine',
       notes: '',
+      specializedService: '',
+      outcome: '',
     });
   };
 
@@ -339,6 +348,38 @@ export default function Referrals() {
                       <option value="Emergência">Pronto Atendimento</option>
                     </select>
                   </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <MapPin className="w-3.5 h-3.5 mr-2" /> Serviço de Atenção Especializada
+                    </label>
+                    <select
+                      name="specializedService"
+                      value={referralForm.specializedService}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                    >
+                      <option value="">Selecione o serviço</option>
+                      <option value="AME - Ambulatório Médico de Especialidades">AME - Ambulatório Médico de Especialidades</option>
+                      <option value="Hospital das Clínicas">Hospital das Clínicas</option>
+                      <option value="Santa Casa">Santa Casa de Misericórdia</option>
+                      <option value="Centro de Referência Estadual">Centro de Referência Estadual</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <FileCheck className="w-3.5 h-3.5 mr-2" /> Desfecho / Resultado do Seguimento
+                    </label>
+                    <input
+                      type="text"
+                      name="outcome"
+                      value={referralForm.outcome}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="Ex: Em tratamento medicamentoso / Cirurgia agendada"
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-6">
@@ -429,6 +470,22 @@ export default function Referrals() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function TimelineItem({ title, date, status, detail }: any) {
+  return (
+    <div className="relative group">
+      <div className="absolute -left-[27px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-cardinal-700 shadow-sm z-10 group-hover:scale-125 transition-transform" />
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-sm font-bold text-charcoal uppercase tracking-tight">{title}</p>
+          <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100 uppercase tracking-widest">{status}</span>
+        </div>
+        <p className="text-[10px] font-bold text-sandstone-300 uppercase tracking-[0.2em] mb-2">{date}</p>
+        <p className="text-xs font-medium text-sandstone-500 italic leading-relaxed">{detail}</p>
+      </div>
     </div>
   );
 }

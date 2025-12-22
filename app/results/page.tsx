@@ -292,25 +292,47 @@ export default function Results() {
 
                 {/* Referral Info (if exists) */}
                 {selectedPatient.referral && (
-                  <div className="premium-card p-8 bg-cardinal-50/30 border-cardinal-100">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                      <ArrowUpRight className="w-4 h-4 mr-2" /> Encaminhamento & Referência
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-sandstone-400 mb-1">Destinação</p>
-                        <p className="text-sm font-bold text-charcoal">{selectedPatient.referral.specialty}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="premium-card p-8 bg-cardinal-50/30 border-cardinal-100">
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
+                        <ArrowUpRight className="w-4 h-4 mr-2" /> Encaminhamento & Referência
+                      </h3>
+                      <div className="grid grid-cols-1 gap-6">
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Especialidade</span>
+                          <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specialty}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Priorização</span>
+                          <span className="text-sm font-bold text-cardinal-700">
+                            {selectedPatient.referral.urgency === 'emergency' ? '🔴 Emergência' :
+                              selectedPatient.referral.urgency === 'urgent' ? '🟠 Urgente' : '🟢 Rotina'}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Data</span>
+                          <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.referral.referralDate)}</span>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-sandstone-400 mb-1">Priorização</p>
-                        <p className="text-sm font-bold text-cardinal-700 uppercase tracking-widest">
-                          {selectedPatient.referral.urgency === 'emergency' ? '🔴 Emergência' :
-                            selectedPatient.referral.urgency === 'urgent' ? '🟠 Urgente' : '🟢 Rotina'}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-sandstone-400 mb-1">Data Referral</p>
-                        <p className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.referral.referralDate)}</p>
+                    </div>
+
+                    <div className="premium-card p-8 bg-blue-50/30 border-blue-100">
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-blue-800 mb-6 flex items-center">
+                        <ShieldCheck className="w-4 h-4 mr-2" /> Seguimento & Desfecho
+                      </h3>
+                      <div className="grid grid-cols-1 gap-6">
+                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-blue-400">Serviço de Atenção</span>
+                          <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specializedService || 'Aguardando definição'}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-blue-400">Desfecho Final</span>
+                          <span className="text-sm font-bold text-blue-700">{selectedPatient.referral.outcome || 'Em acompanhamento'}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-blue-400">Data Desfecho</span>
+                          <span className="text-sm font-medium text-charcoal">{selectedPatient.referral.outcomeDate ? formatDate(selectedPatient.referral.outcomeDate) : '--/--/----'}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -420,6 +442,43 @@ export default function Results() {
                     Documento assinado digitalmente | {formatDateTime(selectedPatient.report.completedAt)}
                   </div>
                 </div>
+
+                {/* Traceability Timeline */}
+                <div className="space-y-8 no-print pt-12 border-t border-sandstone-100">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-sandstone-400 flex items-center">
+                    <Clock className="w-4 h-4 mr-2" /> Rastreabilidade do Fluxo Operacional
+                  </h3>
+                  <div className="relative pl-8 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-sandstone-100">
+                    <TimelineItem
+                      title="Registro & Triagem Inicial"
+                      date={formatDateTime(selectedPatient.createdAt)}
+                      status="Concluído"
+                      detail={`Iniciado na Unidade: ${selectedPatient.location}`}
+                    />
+                    <TimelineItem
+                      title="Análise Neuroftalmológica"
+                      date={formatDateTime(selectedPatient.report.completedAt)}
+                      status="Concluído"
+                      detail={`Validado por: ${selectedPatient.report.doctorName}`}
+                    />
+                    {selectedPatient.referral && (
+                      <TimelineItem
+                        title="Encaminhamento para Especialista"
+                        date={formatDateTime(selectedPatient.referral.referralDate)}
+                        status="Concluído"
+                        detail={`Destino: ${selectedPatient.referral.specialty}`}
+                      />
+                    )}
+                    {selectedPatient.referral?.outcome && (
+                      <TimelineItem
+                        title="Desfecho & Seguimento Final"
+                        date={selectedPatient.referral.outcomeDate ? formatDateTime(selectedPatient.referral.outcomeDate) : 'Em processamento'}
+                        status="Definido"
+                        detail={`Status: ${selectedPatient.referral.outcome}`}
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -464,6 +523,22 @@ export default function Results() {
           margin-left: 1rem;
         }
       `}</style>
+    </div>
+  );
+}
+
+function TimelineItem({ title, date, status, detail }: any) {
+  return (
+    <div className="relative group">
+      <div className="absolute -left-[27px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-cardinal-700 shadow-sm z-10 group-hover:scale-125 transition-transform" />
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-sm font-bold text-charcoal uppercase tracking-tight">{title}</p>
+          <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100 uppercase tracking-widest">{status}</span>
+        </div>
+        <p className="text-[10px] font-bold text-sandstone-300 uppercase tracking-[0.2em] mb-2">{date}</p>
+        <p className="text-xs font-medium text-sandstone-500 italic leading-relaxed">{detail}</p>
+      </div>
     </div>
   );
 }
