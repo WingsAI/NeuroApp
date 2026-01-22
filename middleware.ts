@@ -56,8 +56,8 @@ export async function middleware(request: NextRequest) {
 
     const { data: { user } } = await supabase.auth.getUser()
 
-    // List of public routes - Added newly created routes to prevent unwanted redirects while debugging
-    const publicRoutes = ['/login', '/', '/patients', '/analytics', '/medical', '/referrals', '/results'];
+    // List of public routes - Added newly created routes and the mapping file
+    const publicRoutes = ['/login', '/', '/patients', '/analytics', '/medical', '/referrals', '/results', '/bytescale_mapping.json', '/favicon.png'];
     const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/'));
 
     // Redirect to login if route is not public and no user is found
@@ -77,5 +77,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+    matcher: [
+        /*
+         * Match all request paths except for the ones starting with:
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico (favicon file)
+         * - public assets (png, jpg, jpeg, gif, svg, json)
+         */
+        '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|json|webp)$).*)',
+    ],
 }
