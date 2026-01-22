@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction, updatePatientAction } from '@/app/actions/patients';
+import { getPatientsAction, updatePatientAction, createPatient } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
 
 export default function Medical() {
