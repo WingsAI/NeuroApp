@@ -37,4 +37,9 @@ next-env.d.ts
 
 /lib/generated/prisma
 
-.env
+# EyerCloud Downloader - Arquivos pesados
+scripts/eyercloud_downloader/downloads/
+scripts/eyercloud_downloader/auth_state.json
+scripts/eyercloud_downloader/download_state.json
+scripts/eyercloud_downloader/*.xlsx
+scripts/eyercloud_downloader/*.csv
