@@ -10,6 +10,7 @@ export interface Patient {
   ethnicity?: string;
   education?: string;
   occupation?: string;
+  phone?: string;
   images: PatientImage[];
   status: 'pending' | 'in_analysis' | 'completed';
   report?: MedicalReport;

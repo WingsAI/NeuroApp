@@ -24,6 +24,10 @@ export default function Medical() {
     macularDegeneration: false,
     cataract: false,
   });
+  const [patientEditableData, setPatientEditableData] = useState({
+    cpf: '',
+    phone: '',
+  });
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -112,6 +116,10 @@ export default function Medical() {
 
   const handleSelectPatient = async (patient: any) => {
     setSelectedPatient(patient);
+    setPatientEditableData({
+      cpf: patient.cpf || '',
+      phone: patient.phone || '',
+    });
     setShowModal(true);
 
     // Se o CPF for 'PENDENTE', significa que é um paciente da nuvem que ainda não está no banco
@@ -137,6 +145,10 @@ export default function Medical() {
           // Atualizar o ID local para o novo ID do DB
           const newPatient = { ...patient, id: result.id, cpf: `AUTO-${patient.id.slice(0, 8)}`, status: 'in_analysis' };
           setSelectedPatient(newPatient);
+          setPatientEditableData({
+            cpf: newPatient.cpf,
+            phone: newPatient.phone || '',
+          });
           await updatePatientAction(result.id, { status: 'in_analysis' });
           loadPatients();
         }
@@ -154,6 +166,14 @@ export default function Medical() {
   const handleReportInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setReportForm(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handlePatientDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPatientEditableData(prev => ({
       ...prev,
       [name]: value,
     }));
@@ -185,6 +205,8 @@ export default function Medical() {
 
       await updatePatientAction(selectedPatient.id, {
         status: 'completed',
+        cpf: patientEditableData.cpf,
+        phone: patientEditableData.phone,
         report: report,
       });
 
@@ -316,6 +338,12 @@ export default function Medical() {
                           <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
                           {patient.images.length} capturas integradas
                         </div>
+                        {patient.phone && (
+                          <div className="flex items-center text-sm font-medium text-cardinal-700">
+                            <Activity className="h-4 w-4 mr-3 text-cardinal-400" />
+                            Contato: {patient.phone}
+                          </div>
+                        )}
                       </div>
 
                       <div className="pt-6 border-t border-sandstone-100 flex items-center justify-between">
@@ -386,24 +414,41 @@ export default function Medical() {
                     <h3 className="text-sm font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
                       <User className="w-4 h-4 mr-2" /> Dados Biométricos & Clínicos
                     </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-                      {[
-                        { label: 'Paciente', value: selectedPatient.name },
-                        { label: 'Documento', value: selectedPatient.cpf },
-                        { label: 'Nascimento', value: formatDate(selectedPatient.birthDate) },
-                        { label: 'Data Exame', value: formatDate(selectedPatient.examDate) },
-                        { label: 'Gênero', value: selectedPatient.gender || 'Não informado' },
-                        { label: 'Raça/Cor', value: selectedPatient.ethnicity || 'Não informado' },
-                        { label: 'Escolaridade', value: selectedPatient.education || 'Não informado' },
-                        { label: 'Ocupação', value: selectedPatient.occupation || 'Não informado' },
-                        { label: 'Unidade', value: selectedPatient.location },
-                        { label: 'Técnico', value: selectedPatient.technicianName },
-                      ].map((item, i) => (
-                        <div key={i} className="space-y-1">
-                          <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider font-sans">{item.label}</p>
-                          <p className="text-sm font-serif font-bold text-charcoal leading-tight">{item.value}</p>
-                        </div>
-                      ))}
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                      <div className="space-y-1">
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Paciente</p>
+                        <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.name}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[10px] font-bold uppercase text-cardinal-700 tracking-wider">Documento (CPF)</p>
+                        <input
+                          type="text"
+                          name="cpf"
+                          value={patientEditableData.cpf}
+                          onChange={handlePatientDataChange}
+                          className="w-full bg-transparent border-b border-sandstone-200 text-sm font-serif font-bold text-charcoal focus:border-cardinal-500 transition-colors outline-none"
+                          placeholder="000.000.000-00"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[10px] font-bold uppercase text-cardinal-700 tracking-wider">Contato (Telefone)</p>
+                        <input
+                          type="text"
+                          name="phone"
+                          value={patientEditableData.phone}
+                          onChange={handlePatientDataChange}
+                          className="w-full bg-transparent border-b border-sandstone-200 text-sm font-serif font-bold text-charcoal focus:border-cardinal-500 transition-colors outline-none"
+                          placeholder="(00) 00000-0000"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Exame</p>
+                        <p className="text-sm font-serif font-bold text-charcoal leading-tight">{formatDate(selectedPatient.examDate)}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Unidade</p>
+                        <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.location}</p>
+                      </div>
                     </div>
                   </div>
 
