@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send } from 'lucide-react';
+import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send, Users } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
@@ -21,6 +21,7 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: 'Registro de Paciente', icon: ClipboardList },
+    { href: '/patients', label: 'Galeria', icon: Users },
     { href: '/analytics', label: 'Analytics', icon: BarChart3 },
     { href: '/medical', label: 'Fila de Laudos', icon: Activity },
     { href: '/referrals', label: 'Encaminhamentos', icon: Send },
