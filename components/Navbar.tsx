@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send, Users } from 'lucide-react';
+import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send, Users, MapPin } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
