@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck, Download, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatientsAction, updatePatientAction, createPatient } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
+import * as XLSX from 'xlsx';
 
 export default function Medical() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -31,7 +32,7 @@ export default function Medical() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   useEffect(() => {
     loadPatients();
@@ -43,6 +44,7 @@ export default function Medical() {
 
   const loadPatients = async () => {
     try {
+      setIsSyncing(true);
       // 1. Carregar pacientes do Banco de Dados (Supabase)
       const dbPatients = await getPatientsAction();
 
@@ -53,30 +55,61 @@ export default function Medical() {
         const response = await fetch('/bytescale_mapping.json');
         if (response.ok) {
           const mappingData = await response.json();
-
-          // Converter mapping para formato Patient
-          const cloudPatients: Patient[] = Object.entries(mappingData).map(([key, data]: [string, any]) => ({
-            id: data.exam_id || key,
-            name: data.patient_name,
-            cpf: 'PENDENTE',
-            birthDate: new Date().toISOString(),
-            examDate: data.images[0]?.upload_date || new Date().toISOString(),
-            location: 'Phelcom EyeR Cloud',
-            technicianName: 'Sincronização Cloud',
-            status: 'pending',
-            createdAt: data.images[0]?.upload_date || new Date().toISOString(),
-            images: data.images.map((img: any, idx: number) => ({
-              id: `${key}-${idx}`,
-              data: img.bytescale_url, // Usando a URL do Bytescale
-              fileName: img.filename,
-              uploadedAt: img.upload_date
-            }))
-          }));
-
-          // Filtrar nuvem para não duplicar se já estiver no DB
           const dbIds = new Set(dbPatients.map(p => p.id));
-          const uniqueCloudPatients = cloudPatients.filter(p => !dbIds.has(p.id));
 
+          const cloudEntries = Object.entries(mappingData);
+          const patientsToSync: any[] = [];
+
+          const cloudPatients: Patient[] = cloudEntries.map(([key, data]: [string, any]) => {
+            const patientId = data.exam_id || key;
+            const existingDbPatient = dbPatients.find(p => p.id === patientId);
+            const isAlreadyInDb = !!existingDbPatient;
+
+            if (!isAlreadyInDb) {
+              patientsToSync.push({ id: patientId, data });
+            }
+
+            return {
+              id: patientId,
+              name: data.patient_name,
+              cpf: isAlreadyInDb ? existingDbPatient.cpf : 'PENDENTE',
+              phone: isAlreadyInDb ? existingDbPatient.phone || '' : '',
+              birthDate: new Date().toISOString(),
+              examDate: data.images[0]?.upload_date || new Date().toISOString(),
+              location: 'Phelcom EyeR Cloud',
+              technicianName: 'Sincronização Cloud',
+              status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
+              createdAt: data.images[0]?.upload_date || new Date().toISOString(),
+              images: data.images.map((img: any, idx: number) => ({
+                id: `${key}-${idx}`,
+                data: img.bytescale_url,
+                fileName: img.filename,
+                uploadedAt: img.upload_date
+              }))
+            };
+          });
+
+          // Sincronização automática silenciosa (lote inicial de 10)
+          if (patientsToSync.length > 0) {
+            console.log(`Sincronizando ${patientsToSync.length} pacientes...`);
+            for (const item of patientsToSync.slice(0, 10)) {
+              try {
+                const formData = new FormData();
+                formData.append('name', item.data.patient_name);
+                formData.append('cpf', `AUTO-${item.id.slice(0, 8)}`);
+                formData.append('birthDate', new Date().toISOString());
+                formData.append('examDate', item.data.images[0]?.upload_date || new Date().toISOString());
+                formData.append('location', 'Phelcom EyeR Cloud');
+                formData.append('technicianName', 'Auto Sync');
+                item.data.images.forEach((img: any) => formData.append('eyerUrls', img.bytescale_url));
+                await createPatient(formData);
+              } catch (syncErr) {
+                console.error(`Falha ao sincronizar ${item.id}:`, syncErr);
+              }
+            }
+          }
+
+          const uniqueCloudPatients = cloudPatients.filter(p => !dbIds.has(p.id));
           combinedPatients = [...combinedPatients, ...uniqueCloudPatients];
         }
       } catch (jsonErr) {
@@ -90,8 +123,12 @@ export default function Medical() {
       setPatients(pendingPatients);
     } catch (err) {
       console.error('Erro ao carregar pacientes:', err);
+    } finally {
+      setIsSyncing(false);
     }
   };
+
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const filterPatients = () => {
     if (!searchTerm.trim()) {
@@ -247,6 +284,24 @@ export default function Medical() {
     resetForm();
   };
 
+  const handleExportExcel = () => {
+    const dataToExport = filteredPatients.map(p => ({
+      'Nome do Paciente': p.name,
+      'CPF': p.cpf,
+      'Telefone': p.phone || 'N/A',
+      'Data do Exame': formatDate(p.examDate),
+      'Localização': p.location,
+      'Status': p.status === 'pending' ? 'Pendente' : p.status === 'in_analysis' ? 'Em Análise' : 'Concluído',
+      'Médico': p.report?.doctorName || 'N/A',
+      'Data do Laudo': p.report?.completedAt ? formatDate(p.report.completedAt) : 'N/A'
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(dataToExport);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Fila de Laudos");
+    XLSX.writeFile(wb, `NeuroApp_Fila_Laudos_${new Date().toISOString().split('T')[0]}.xlsx`);
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
   };
@@ -259,26 +314,52 @@ export default function Medical() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="stagger-load space-y-12">
           {/* Header Section */}
-          <div className="max-w-2xl">
-            <div className="accent-line" />
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
-              Fila de <span className="text-cardinal-700 italic">Laudos</span>
-            </h1>
-            <p className="text-lg text-sandstone-600 font-medium">
-              Gestão clínica centralizada para análise neuroftalmológica em tempo real.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <div className="accent-line" />
+              <h1 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
+                Fila de <span className="text-cardinal-700 italic">Laudos</span>
+              </h1>
+              <p className="text-lg text-sandstone-600 font-medium">
+                Gestão clínica centralizada para análise neuroftalmológica em tempo real.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              {isSyncing && (
+                <div className="flex items-center space-x-2 text-cardinal-700 animate-pulse bg-cardinal-50 px-4 py-2 rounded-lg border border-cardinal-100">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Sincronizando Nuvem...</span>
+                </div>
+              )}
+
+              <button
+                onClick={handleExportExcel}
+                className="flex items-center space-x-2 bg-white border border-sandstone-200 px-6 py-3 rounded-xl text-sandstone-600 font-bold uppercase tracking-widest text-xs hover:bg-sandstone-50 hover:border-cardinal-200 hover:text-cardinal-700 transition-all shadow-sm"
+              >
+                <Download className="w-4 h-4" />
+                <span>Exportar Excel</span>
+              </button>
+            </div>
           </div>
 
           {/* Search Bar */}
-          <div className="relative max-w-2xl group">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
-            <input
-              type="text"
-              placeholder="Buscar por paciente, documento ou unidade..."
-              value={searchTerm}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-              className="input-premium pl-12 h-14 text-lg shadow-sm"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="md:col-span-3 relative group">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
+              <input
+                type="text"
+                placeholder="Buscar por paciente, documento ou unidade..."
+                value={searchTerm}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                className="input-premium pl-12 h-14 text-lg shadow-sm"
+              />
+            </div>
+            <div className="flex items-center justify-center p-4 bg-white rounded-xl border border-sandstone-100 shadow-sm">
+              <p className="text-xs font-bold text-sandstone-500 uppercase tracking-widest">
+                {patients.length} Pacientes na Fila
+              </p>
+            </div>
           </div>
 
           {/* Patient Grid */}
