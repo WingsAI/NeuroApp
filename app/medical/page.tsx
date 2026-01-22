@@ -31,8 +31,9 @@ export default function Medical() {
   });
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [visibleCount, setVisibleCount] = useState(10);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     loadPatients();
@@ -127,8 +128,6 @@ export default function Medical() {
       setIsSyncing(false);
     }
   };
-
-  const [visibleCount, setVisibleCount] = useState(10);
 
   const filterPatients = () => {
     if (!searchTerm.trim()) {
@@ -549,7 +548,8 @@ export default function Medical() {
                             />
                             <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                               <button
-                                onClick={() => window.open(image.data, '_blank')}
+                                type="button"
+                                onClick={() => setSelectedImage(image.data)}
                                 className="p-3 bg-white text-charcoal rounded-full shadow-xl hover:scale-110 transition-transform"
                               >
                                 <Search className="w-5 h-5" />
@@ -707,6 +707,30 @@ export default function Medical() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Internal Lightbox for Images */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 animate-in fade-in zoom-in duration-300">
+          <div className="absolute inset-0 bg-charcoal/95 backdrop-blur-md" onClick={() => setSelectedImage(null)} />
+
+          <div className="relative max-w-5xl w-full max-h-full flex flex-col items-center">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-12 right-0 p-3 text-white hover:text-cardinal-400 transition-colors"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Visualização Ampliada"
+              className="w-full h-auto object-contain rounded-lg shadow-2xl border border-white/10"
+            />
+            <div className="mt-4 px-6 py-2 bg-white/10 backdrop-blur rounded-full border border-white/20">
+              <p className="text-white text-xs font-bold uppercase tracking-widest">Visualização em Alta Definição</p>
             </div>
           </div>
         </div>
