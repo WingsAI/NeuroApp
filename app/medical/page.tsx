@@ -396,21 +396,62 @@ export default function Medical() {
   };
 
   const handleExportExcel = () => {
-    const dataToExport = filteredPatients.map(p => ({
-      'Nome do Paciente': p.name,
-      'CPF': p.cpf,
-      'Telefone': p.phone || 'N/A',
-      'Data do Exame': formatDate(p.examDate),
-      'Localização': p.location,
-      'Status': p.status === 'pending' ? 'Pendente' : p.status === 'in_analysis' ? 'Em Análise' : 'Concluído',
-      'Médico': p.report?.doctorName || 'N/A',
-      'Data do Laudo': p.report?.completedAt ? formatDate(p.report.completedAt) : 'N/A'
-    }));
+    const dataToExport = filteredPatients.map(p => {
+      let findings: any = {};
+      try {
+        if (p.report?.findings) {
+          findings = JSON.parse(p.report.findings);
+        }
+      } catch (e) {
+        console.error("Erro ao parsear achados para exportação", e);
+      }
+
+      const conditions = p.report?.diagnosticConditions || {};
+
+      return {
+        // Dados do Paciente
+        'Nome do Paciente': p.name,
+        'CPF': p.cpf,
+        'Telefone': p.phone || 'N/A',
+        'Data do Exame': formatDate(p.examDate),
+        'Unidade/Localização': p.location,
+        'Status': p.status === 'pending' ? 'Pendente' : p.status === 'in_analysis' ? 'Em Análise' : 'Concluído',
+
+        // Dados do Médico e Laudo
+        'Médico Laudador': p.report?.doctorName || 'N/A',
+        'Data do Laudo': p.report?.completedAt ? formatDate(p.report.completedAt) : 'N/A',
+
+        // Achados Olho Direito (OD)
+        'OD Qualidade': findings.od?.quality === 'satisfactory' ? 'Satisfatória' : findings.od?.quality === 'unsatisfactory' ? 'Insatisfatória' : 'N/A',
+        'OD Nervo Óptico': findings.od?.opticNerve || 'N/A',
+        'OD Retina': findings.od?.retina || 'N/A',
+        'OD Vasos': findings.od?.vessels || 'N/A',
+
+        // Achados Olho Esquerdo (OE)
+        'OE Qualidade': findings.oe?.quality === 'satisfactory' ? 'Satisfatória' : findings.oe?.quality === 'unsatisfactory' ? 'Insatisfatória' : 'N/A',
+        'OE Nervo Óptico': findings.oe?.opticNerve || 'N/A',
+        'OE Retina': findings.oe?.retina || 'N/A',
+        'OE Vasos': findings.oe?.vessels || 'N/A',
+
+        // Conclusões
+        'Diagnóstico Conclusivo': p.report?.diagnosis || 'N/A',
+        'Recomendações': p.report?.recommendations || 'N/A',
+
+        // Sinalizadores Diagnósticos
+        'Condição: Normal': (conditions as any).normal ? 'Sim' : 'Não',
+        'Condição: RD Leve': (conditions as any).drMild ? 'Sim' : 'Não',
+        'Condição: RD Moderada': (conditions as any).drModerate ? 'Sim' : 'Não',
+        'Condição: RD Grave': (conditions as any).drSevere ? 'Sim' : 'Não',
+        'Condição: RD Proliferativa': (conditions as any).drProliferative ? 'Sim' : 'Não',
+        'Condição: Suspeita Glaucoma': (conditions as any).glaucomaSuspect ? 'Sim' : 'Não',
+        'Condição: Outros': (conditions as any).others ? 'Sim' : 'Não',
+      };
+    });
 
     const ws = XLSX.utils.json_to_sheet(dataToExport);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Fila de Laudos");
-    XLSX.writeFile(wb, `NeuroApp_Fila_Laudos_${new Date().toISOString().split('T')[0]}.xlsx`);
+    XLSX.utils.book_append_sheet(wb, ws, "Fila de Laudos Detalhada");
+    XLSX.writeFile(wb, `NeuroApp_Laudos_Completo_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const formatDate = (dateString: string) => {
