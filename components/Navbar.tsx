@@ -26,6 +26,7 @@ export default function Navbar() {
     { href: '/medical', label: 'Fila de Laudos', icon: Activity },
     { href: '/referrals', label: 'Encaminhamentos', icon: Send },
     { href: '/results', label: 'Resultados', icon: FileText },
+    { href: '/units', label: 'Unidades', icon: MapPin },
   ];
 
   return (

@@ -71,3 +71,13 @@ export interface AnalyticsData {
   productivityByRegion?: Record<string, number>;
   productivityByProfessional?: Record<string, number>;
 }
+export interface HealthUnit {
+  id: string;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  responsible: string;
+  createdAt: string;
+  updatedAt: string;
+}

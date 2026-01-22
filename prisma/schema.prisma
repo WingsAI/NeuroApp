@@ -70,3 +70,14 @@ model PatientReferral {
   patientId    String   @unique
   patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
 }
+
+model HealthUnit {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  email       String
+  phone       String
+  responsible String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
