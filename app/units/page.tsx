@@ -5,6 +5,8 @@ import { Plus, Search, MapPin, Phone, Mail, User, MoreVertical, Edit2, Trash2, X
 import Navbar from '@/components/Navbar';
 import { getHealthUnitsAction, createHealthUnitAction, updateHealthUnitAction, deleteHealthUnitAction } from '@/app/actions/units';
 import { HealthUnit } from '@/types';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 
 export default function Units() {
     const [units, setUnits] = useState<HealthUnit[]>([]);
@@ -14,6 +16,7 @@ export default function Units() {
     const [showModal, setShowModal] = useState(false);
     const [editingUnit, setEditingUnit] = useState<HealthUnit | null>(null);
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -24,8 +27,16 @@ export default function Units() {
     });
 
     useEffect(() => {
-        loadUnits();
-    }, []);
+        const checkUser = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                router.push('/login');
+            } else {
+                loadUnits();
+            }
+        };
+        checkUser();
+    }, [router]);
 
     useEffect(() => {
         const term = searchTerm.toLowerCase();

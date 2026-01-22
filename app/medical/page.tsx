@@ -5,6 +5,7 @@ import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCirc
 import Navbar from '@/components/Navbar';
 import { getPatientsAction, updatePatientAction, createPatient } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
+import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 
 export default function Medical() {
@@ -12,9 +13,10 @@ export default function Medical() {
   const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [reportForm, setReportForm] = useState({
-    doctorName: 'Gustavo Sakuno',
+    doctorName: 'Dr. Gustavo Sakuno',
     od: {
       quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
       opticNerve: '',
@@ -338,6 +340,7 @@ export default function Medical() {
         resetForm();
         setSuccess(false);
         loadPatients();
+        router.push('/referrals');
       }, 1500);
     } catch (err) {
       console.error('Erro ao salvar laudo:', err);
@@ -348,7 +351,7 @@ export default function Medical() {
 
   const resetForm = () => {
     setReportForm({
-      doctorName: 'Gustavo Sakuno',
+      doctorName: 'Dr. Gustavo Sakuno',
       od: {
         quality: 'satisfactory',
         opticNerve: '',
@@ -910,7 +913,12 @@ export default function Medical() {
 
                       <div className="space-y-6">
                         <div className="space-y-2">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-sandstone-500">Médico Responsável</label>
+                          <div className="flex justify-between items-center">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-sandstone-500">Médico Responsável</label>
+                            {reportForm.doctorName === 'Dr. Gustavo Sakuno' && (
+                              <span className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded border border-cardinal-100 italic transition-all animate-in fade-in slide-in-from-right-2">CRM-SP 177.943</span>
+                            )}
+                          </div>
                           <input
                             type="text"
                             name="doctorName"
