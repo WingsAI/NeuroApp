@@ -52,11 +52,12 @@ export async function createPatient(formData: FormData) {
             });
         }
     } else if (eyerUrls.length > 0) {
-        // For EyeR mock urls (usually we would fetch and re-upload, but here we just store as is or download/upload)
+        // For EyeR cloud/mock urls
         for (let i = 0; i < eyerUrls.length; i++) {
-            // Since these are data URLs in the mock, we can decode and upload to S3
             const dataUrl = eyerUrls[i];
+
             if (dataUrl.startsWith('data:')) {
+                // Handle Base64
                 const base64 = dataUrl.split(',')[1];
                 const buffer = Buffer.from(base64, 'base64');
                 const mimeMatch = dataUrl.match(/data:([^;]+);/);
@@ -70,6 +71,27 @@ export async function createPatient(formData: FormData) {
                         patientId: patient.id,
                     },
                 });
+            } else if (dataUrl.startsWith('http')) {
+                // Handle Cloud URL (fetch from Bytescale)
+                try {
+                    const response = await fetch(dataUrl);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const buffer = Buffer.from(arrayBuffer);
+                    const contentType = response.headers.get('content-type') || 'image/jpeg';
+                    const fileName = dataUrl.split('/').pop() || `cloud-image-${i}.jpg`;
+
+                    const s3Key = await uploadFileToS3(buffer, fileName, contentType);
+
+                    await prisma.patientImage.create({
+                        data: {
+                            url: s3Key,
+                            fileName: fileName,
+                            patientId: patient.id,
+                        },
+                    });
+                } catch (fetchErr) {
+                    console.error(`Failed to fetch cloud image: ${dataUrl}`, fetchErr);
+                }
             }
         }
     }

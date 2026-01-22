@@ -27,6 +27,8 @@ export default function Medical() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [visibleCount, setVisibleCount] = useState(10);
+
   useEffect(() => {
     loadPatients();
   }, []);
@@ -36,11 +38,55 @@ export default function Medical() {
   }, [searchTerm, patients]);
 
   const loadPatients = async () => {
-    const allPatients = await getPatientsAction();
-    const pendingPatients = (allPatients as any).filter(
-      (p: Patient) => p.status === 'pending' || p.status === 'in_analysis'
-    );
-    setPatients(pendingPatients);
+    try {
+      // 1. Carregar pacientes do Banco de Dados (Supabase)
+      const dbPatients = await getPatientsAction();
+
+      // 2. Carregar pacientes do Arquivo de Mapeamento (Bytescale)
+      let combinedPatients: Patient[] = [...(dbPatients as any)];
+
+      try {
+        const response = await fetch('/bytescale_mapping.json');
+        if (response.ok) {
+          const mappingData = await response.json();
+
+          // Converter mapping para formato Patient
+          const cloudPatients: Patient[] = Object.entries(mappingData).map(([key, data]: [string, any]) => ({
+            id: data.exam_id || key,
+            name: data.patient_name,
+            cpf: 'PENDENTE',
+            birthDate: new Date().toISOString(),
+            examDate: data.images[0]?.upload_date || new Date().toISOString(),
+            location: 'Phelcom EyeR Cloud',
+            technicianName: 'Sincronização Cloud',
+            status: 'pending',
+            createdAt: data.images[0]?.upload_date || new Date().toISOString(),
+            images: data.images.map((img: any, idx: number) => ({
+              id: `${key}-${idx}`,
+              data: img.bytescale_url, // Usando a URL do Bytescale
+              fileName: img.filename,
+              uploadedAt: img.upload_date
+            }))
+          }));
+
+          // Filtrar nuvem para não duplicar se já estiver no DB
+          const dbIds = new Set(dbPatients.map(p => p.id));
+          const uniqueCloudPatients = cloudPatients.filter(p => !dbIds.has(p.id));
+
+          combinedPatients = [...combinedPatients, ...uniqueCloudPatients];
+        }
+      } catch (jsonErr) {
+        console.error('Erro ao carregar mapping cloud:', jsonErr);
+      }
+
+      const pendingPatients = combinedPatients.filter(
+        (p: Patient) => p.status === 'pending' || p.status === 'in_analysis'
+      );
+
+      setPatients(pendingPatients);
+    } catch (err) {
+      console.error('Erro ao carregar pacientes:', err);
+    }
   };
 
   const filterPatients = () => {
@@ -56,14 +102,50 @@ export default function Medical() {
         p.cpf.includes(term) ||
         p.location.toLowerCase().includes(term)
     );
+    setVisibleCount(10); // Reset pagination on search
     setFilteredPatients(filtered);
   };
 
-  const handleSelectPatient = async (patient: Patient) => {
+  const displayedPatients = React.useMemo(() => {
+    return filteredPatients.slice(0, visibleCount);
+  }, [filteredPatients, visibleCount]);
+
+  const handleSelectPatient = async (patient: any) => {
     setSelectedPatient(patient);
     setShowModal(true);
 
-    if (patient.status === 'pending') {
+    // Se o CPF for 'PENDENTE', significa que é um paciente da nuvem que ainda não está no banco
+    if (patient.cpf === 'PENDENTE') {
+      try {
+        setLoading(true);
+        // Criar o paciente no banco de dados para poder gerar o laudo
+        const formData = new FormData();
+        formData.append('name', patient.name);
+        formData.append('cpf', `AUTO-${patient.id.slice(0, 8)}`);
+        formData.append('birthDate', patient.birthDate);
+        formData.append('examDate', patient.examDate);
+        formData.append('location', patient.location);
+        formData.append('technicianName', patient.technicianName);
+
+        // Adicionar URLs das imagens para o action processar
+        patient.images.forEach((img: any) => {
+          formData.append('eyerUrls', img.data);
+        });
+
+        const result = await createPatient(formData);
+        if (result.success) {
+          // Atualizar o ID local para o novo ID do DB
+          const newPatient = { ...patient, id: result.id, cpf: `AUTO-${patient.id.slice(0, 8)}`, status: 'in_analysis' };
+          setSelectedPatient(newPatient);
+          await updatePatientAction(result.id, { status: 'in_analysis' });
+          loadPatients();
+        }
+      } catch (err) {
+        console.error('Erro ao registrar paciente da nuvem:', err);
+      } finally {
+        setLoading(false);
+      }
+    } else if (patient.status === 'pending') {
       await updatePatientAction(patient.id, { status: 'in_analysis' });
       loadPatients();
     }
@@ -91,29 +173,35 @@ export default function Medical() {
 
     setLoading(true);
 
-    const report = {
-      doctorName: reportForm.doctorName,
-      findings: reportForm.findings,
-      diagnosis: reportForm.diagnosis,
-      recommendations: reportForm.recommendations,
-      diagnosticConditions: diagnosticConditions,
-      completedAt: new Date().toISOString(),
-    };
+    try {
+      const report = {
+        doctorName: reportForm.doctorName,
+        findings: reportForm.findings,
+        diagnosis: reportForm.diagnosis,
+        recommendations: reportForm.recommendations,
+        diagnosticConditions: diagnosticConditions,
+        completedAt: new Date().toISOString(),
+      };
 
-    await updatePatientAction(selectedPatient.id, {
-      status: 'completed',
-      report: report,
-    });
+      await updatePatientAction(selectedPatient.id, {
+        status: 'completed',
+        report: report,
+      });
 
-    setSuccess(true);
+      setSuccess(true);
 
-    setTimeout(() => {
-      setShowModal(false);
-      setSelectedPatient(null);
-      resetForm();
-      setSuccess(false);
-      loadPatients();
-    }, 1500);
+      setTimeout(() => {
+        setShowModal(false);
+        setSelectedPatient(null);
+        resetForm();
+        setSuccess(false);
+        loadPatients();
+      }, 1500);
+    } catch (err) {
+      console.error('Erro ao salvar laudo:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const resetForm = () => {
@@ -184,63 +272,78 @@ export default function Medical() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPatients.map((patient) => (
-                <div
-                  key={patient.id}
-                  className="premium-card group cursor-pointer"
-                  onClick={() => handleSelectPatient(patient)}
-                >
-                  <div className="p-8">
-                    <div className="flex items-start justify-between mb-8">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-all duration-500">
-                          <User className="h-6 w-6" />
+            <div className="space-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {displayedPatients.map((patient) => (
+                  <div
+                    key={patient.id}
+                    className="premium-card group cursor-pointer"
+                    onClick={() => handleSelectPatient(patient)}
+                  >
+                    <div className="p-8">
+                      <div className="flex items-start justify-between mb-8">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-12 h-12 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-all duration-500">
+                            <User className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors">
+                              {patient.name}
+                            </h3>
+                            <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest">{patient.cpf}</p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors">
-                            {patient.name}
-                          </h3>
-                          <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest">{patient.cpf}</p>
+                        <span
+                          className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${patient.status === 'pending'
+                            ? 'bg-cardinal-50 text-cardinal-700 border border-cardinal-100'
+                            : 'bg-blue-50 text-blue-700 border border-blue-100'
+                            }`}
+                        >
+                          {patient.status === 'pending' ? 'Pendente' : 'Em Análise'}
+                        </span>
+                      </div>
+
+                      <div className="space-y-4 mb-8">
+                        <div className="flex items-center text-sm font-medium text-sandstone-600">
+                          <Calendar className="h-4 w-4 mr-3 text-sandstone-400" />
+                          Exame: {formatDate(patient.examDate)}
+                        </div>
+                        <div className="flex items-center text-sm font-medium text-sandstone-600">
+                          <MapPin className="h-4 w-4 mr-3 text-sandstone-400" />
+                          {patient.location}
+                        </div>
+                        <div className="flex items-center text-sm font-medium text-sandstone-600">
+                          <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
+                          {patient.images.length} capturas integradas
                         </div>
                       </div>
-                      <span
-                        className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${patient.status === 'pending'
-                          ? 'bg-cardinal-50 text-cardinal-700 border border-cardinal-100'
-                          : 'bg-blue-50 text-blue-700 border border-blue-100'
-                          }`}
-                      >
-                        {patient.status === 'pending' ? 'Pendente' : 'Em Análise'}
-                      </span>
-                    </div>
 
-                    <div className="space-y-4 mb-8">
-                      <div className="flex items-center text-sm font-medium text-sandstone-600">
-                        <Calendar className="h-4 w-4 mr-3 text-sandstone-400" />
-                        Exame: {formatDate(patient.examDate)}
+                      <div className="pt-6 border-t border-sandstone-100 flex items-center justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Unidade</span>
+                          <span className="text-xs font-serif text-charcoal italic">{patient.location}</span>
+                        </div>
+                        <button className="flex items-center text-cardinal-700 font-bold text-sm group-hover:translate-x-1 transition-transform">
+                          Analisar <ArrowRight className="ml-2 w-4 h-4" />
+                        </button>
                       </div>
-                      <div className="flex items-center text-sm font-medium text-sandstone-600">
-                        <MapPin className="h-4 w-4 mr-3 text-sandstone-400" />
-                        {patient.location}
-                      </div>
-                      <div className="flex items-center text-sm font-medium text-sandstone-600">
-                        <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
-                        {patient.images.length} capturas integradas
-                      </div>
-                    </div>
-
-                    <div className="pt-6 border-t border-sandstone-100 flex items-center justify-between">
-                      <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Unidade</span>
-                        <span className="text-xs font-serif text-charcoal italic">{patient.location}</span>
-                      </div>
-                      <button className="flex items-center text-cardinal-700 font-bold text-sm group-hover:translate-x-1 transition-transform">
-                        Analisar <ArrowRight className="ml-2 w-4 h-4" />
-                      </button>
                     </div>
                   </div>
+                ))}
+              </div>
+
+              {/* Load More Button */}
+              {visibleCount < filteredPatients.length && (
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => setVisibleCount(prev => prev + 12)}
+                    className="btn-cardinal flex items-center space-x-2 px-12 py-4"
+                  >
+                    <ArrowRight className="h-5 w-5 rotate-90" />
+                    <span className="uppercase tracking-widest text-sm font-bold">Carregar Mais Pacientes</span>
+                  </button>
                 </div>
-              ))}
+              )}
             </div>
           )}
         </div>
