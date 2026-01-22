@@ -1,0 +1,17 @@
+# EyerCloud Downloader - Arquivos a ignorar
+
+# Imagens baixadas (muito pesado para o Git)
+downloads/
+
+# Arquivos de estado (contém dados da sessão)
+auth_state.json
+download_state.json
+
+# Relatórios (são regeneráveis)
+relatorio_downloads.xlsx
+relatorio_downloads.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
