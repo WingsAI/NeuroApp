@@ -30,6 +30,8 @@ export default function PatientsGallery() {
     const [error, setError] = useState('');
     const [lightboxOpen, setLightboxOpen] = useState(false);
 
+    const [visibleCount, setVisibleCount] = useState(10);
+
     // Carrega os dados do mapeamento
     useEffect(() => {
         const loadPatients = async () => {
@@ -60,6 +62,16 @@ export default function PatientsGallery() {
             data.patient_name.toLowerCase().includes(term)
         );
     }, [patients, searchTerm]);
+
+    // Reseta a contagem visível ao buscar
+    useEffect(() => {
+        setVisibleCount(10);
+    }, [searchTerm]);
+
+    // Pacientes visíveis na página atual
+    const displayedPatients = useMemo(() => {
+        return filteredPatients.slice(0, visibleCount);
+    }, [filteredPatients, visibleCount]);
 
     // Estatísticas
     const stats = useMemo(() => {
@@ -208,7 +220,7 @@ export default function PatientsGallery() {
 
                     {/* Patient List */}
                     <div className="space-y-6">
-                        {filteredPatients.map(([key, patient]) => (
+                        {displayedPatients.map(([key, patient]) => (
                             <div key={key} className="premium-card p-6 space-y-4">
                                 {/* Patient Header */}
                                 <div className="flex items-center justify-between">
@@ -237,7 +249,7 @@ export default function PatientsGallery() {
 
                                 {/* Image Grid */}
                                 <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-                                    {patient.images?.slice(0, 16).map((image, index) => (
+                                    {patient.images?.slice(0, 8).map((image, index) => (
                                         <div
                                             key={image.filename}
                                             onClick={() => openLightbox(key, index)}
@@ -254,19 +266,32 @@ export default function PatientsGallery() {
                                             </div>
                                         </div>
                                     ))}
-                                    {patient.images?.length > 16 && (
+                                    {patient.images?.length > 8 && (
                                         <div
-                                            onClick={() => openLightbox(key, 16)}
-                                            className="relative cursor-pointer rounded-lg overflow-hidden aspect-square bg-cardinal-50 flex items-center justify-center"
+                                            onClick={() => openLightbox(key, 8)}
+                                            className="relative cursor-pointer rounded-lg overflow-hidden aspect-square bg-cardinal-50 flex items-center justify-center group hover:bg-cardinal-100 transition-colors"
                                         >
                                             <span className="text-cardinal-700 font-bold text-lg">
-                                                +{patient.images.length - 16}
+                                                +{patient.images.length - 8}
                                             </span>
                                         </div>
                                     )}
                                 </div>
                             </div>
                         ))}
+
+                        {/* Load More Button */}
+                        {visibleCount < filteredPatients.length && (
+                            <div className="flex justify-center pt-8">
+                                <button
+                                    onClick={() => setVisibleCount(prev => prev + 10)}
+                                    className="btn-cardinal flex items-center space-x-2 px-8"
+                                >
+                                    <ChevronRight className="w-5 h-5 rotate-90" />
+                                    <span>Ver Mais Pacientes</span>
+                                </button>
+                            </div>
+                        )}
 
                         {filteredPatients.length === 0 && !loading && (
                             <div className="premium-card p-12 text-center">
