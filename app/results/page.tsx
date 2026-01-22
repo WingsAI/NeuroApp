@@ -370,44 +370,104 @@ export default function Results() {
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     <div className="lg:col-span-1">
                       <h3 className="text-sm font-serif font-bold text-charcoal mb-4 italic">Condições Clínicas</h3>
-                      <div className="flex flex-col gap-3">
-                        {selectedPatient.report.diagnosticConditions && (
-                          Object.entries(selectedPatient.report.diagnosticConditions || {}).some(([k, v]) => v) ? (
-                            <>
-                              {selectedPatient.report.diagnosticConditions.diabeticRetinopathy && (
-                                <span className="px-4 py-2 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-xl text-xs font-bold uppercase tracking-widest shadow-sm">
-                                  Retinopatia Diabética
-                                </span>
-                              )}
-                              {selectedPatient.report.diagnosticConditions.glaucoma && (
-                                <span className="px-4 py-2 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-xl text-xs font-bold uppercase tracking-widest shadow-sm">
-                                  Glaucoma
-                                </span>
-                              )}
-                              {selectedPatient.report.diagnosticConditions.macularDegeneration && (
-                                <span className="px-4 py-2 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-xl text-xs font-bold uppercase tracking-widest shadow-sm">
-                                  Degeneração Macular
-                                </span>
-                              )}
-                              {selectedPatient.report.diagnosticConditions.cataract && (
-                                <span className="px-4 py-2 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-xl text-xs font-bold uppercase tracking-widest shadow-sm">
-                                  Catarata
-                                </span>
-                              )}
-                            </>
-                          ) : (
-                            <span className="text-sm font-serif italic text-sandstone-400">Escrutínio oftalmológico sem evidências de neuropatias principais.</span>
-                          )
-                        )}
-                      </div>
+                      {selectedPatient.report.diagnosticConditions && (
+                        Object.entries(selectedPatient.report.diagnosticConditions || {}).some(([k, v]) => v) ? (
+                          <div className="flex flex-wrap gap-2">
+                            {selectedPatient.report.diagnosticConditions.normal && (
+                              <span className="px-3 py-1 bg-green-50 text-green-700 border border-green-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                Exame Normal
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.drMild && (
+                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RD Leve
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.drModerate && (
+                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RD Moderada
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.drSevere && (
+                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RD Grave
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.drProliferative && (
+                              <span className="px-3 py-1 bg-cardinal-700 text-white border border-cardinal-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RD Proliferativa
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.glaucomaSuspect && (
+                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                Suspeita de Glaucoma
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.others && (
+                              <span className="px-3 py-1 bg-sandstone-100 text-sandstone-700 border border-sandstone-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                Outros
+                              </span>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-sm font-serif italic text-sandstone-400">Escrutínio oftalmológico sem evidências de neuropatias principais.</span>
+                        )
+                      )}
                     </div>
 
                     <div className="lg:col-span-2 space-y-10">
                       <section>
                         <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Achados Clínicos</h4>
-                        <p className="text-base text-charcoal font-serif leading-relaxed text-justify">
-                          {selectedPatient.report.findings}
-                        </p>
+                        <div className="space-y-6">
+                          {(() => {
+                            try {
+                              const f = JSON.parse(selectedPatient.report.findings);
+                              if (f.od && f.oe) {
+                                return (
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div className="space-y-4">
+                                      <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Direito (OD)</h5>
+                                      <div className="space-y-3">
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.od.opticNerve || 'Sem notas'}</p>
+                                        </div>
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.od.retina || 'Sem notas'}</p>
+                                        </div>
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.od.vessels || 'Sem notas'}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="space-y-4">
+                                      <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Esquerdo (OE)</h5>
+                                      <div className="space-y-3">
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.oe.opticNerve || 'Sem notas'}</p>
+                                        </div>
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.oe.retina || 'Sem notas'}</p>
+                                        </div>
+                                        <div className="p-3 bg-sandstone-50 rounded-lg">
+                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
+                                          <p className="text-sm font-serif text-charcoal">{f.oe.vessels || 'Sem notas'}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            } catch (e) {
+                              return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{selectedPatient.report.findings}</p>;
+                            }
+                            return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{selectedPatient.report.findings}</p>;
+                          })()}
+                        </div>
                       </section>
 
                       <section>
