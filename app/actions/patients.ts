@@ -6,6 +6,7 @@ import { Patient, AnalyticsData, PatientImage } from '@/types';
 import { revalidatePath } from 'next/cache';
 
 export async function createPatient(formData: FormData) {
+    const id = formData.get('id') as string;
     const name = formData.get('name') as string;
     const cpf = formData.get('cpf') as string;
     const birthDate = new Date(formData.get('birthDate') as string);
@@ -16,13 +17,12 @@ export async function createPatient(formData: FormData) {
     const ethnicity = formData.get('ethnicity') as string;
     const education = formData.get('education') as string;
     const occupation = formData.get('occupation') as string;
-
-    const files = formData.getAll('images') as File[];
-    const eyerUrls = formData.getAll('eyerUrls') as string[];
+    const phone = formData.get('phone') as string;
 
     // Create patient in DB
     const patient = await prisma.patient.create({
         data: {
+            id: id || undefined,
             name,
             cpf,
             birthDate,
@@ -33,9 +33,13 @@ export async function createPatient(formData: FormData) {
             ethnicity,
             education,
             occupation,
+            phone,
             status: 'pending',
         },
     });
+
+    const files = formData.getAll('images') as File[];
+    const eyerUrls = formData.getAll('eyerUrls') as string[];
 
     // Handle images
     if (files.length > 0 && files[0].size > 0) {

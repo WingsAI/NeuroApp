@@ -14,16 +14,25 @@ export default function Medical() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [reportForm, setReportForm] = useState({
-    doctorName: '',
-    findings: '',
+    doctorName: 'Gustavo Sakuno',
+    imageQuality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
+    opticNerve: '',
+    retina: '',
+    vessels: '',
     diagnosis: '',
     recommendations: '',
+    isOpticNerveStandard: false,
+    isRetinaStandard: false,
+    isVesselsStandard: false,
   });
   const [diagnosticConditions, setDiagnosticConditions] = useState({
-    diabeticRetinopathy: false,
-    glaucoma: false,
-    macularDegeneration: false,
-    cataract: false,
+    normal: false,
+    drMild: false,
+    drModerate: false,
+    drSevere: false,
+    drProliferative: false,
+    glaucomaSuspect: false,
+    others: false,
   });
   const [patientEditableData, setPatientEditableData] = useState({
     cpf: '',
@@ -67,6 +76,16 @@ export default function Medical() {
             const existingDbPatient = dbPatients.find(p => p.id === patientId);
             const isAlreadyInDb = !!existingDbPatient;
 
+            // Se o paciente está no DB mas não tem imagens, vamos usar as da nuvem
+            const images = (isAlreadyInDb && existingDbPatient.images && existingDbPatient.images.length > 0)
+              ? existingDbPatient.images
+              : data.images.map((img: any, idx: number) => ({
+                id: `${key}-${idx}`,
+                data: img.bytescale_url,
+                fileName: img.filename,
+                uploadedAt: img.upload_date
+              }));
+
             if (!isAlreadyInDb) {
               patientsToSync.push({ id: patientId, data });
             }
@@ -82,12 +101,7 @@ export default function Medical() {
               technicianName: 'Sincronização Cloud',
               status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
               createdAt: data.images[0]?.upload_date || new Date().toISOString(),
-              images: data.images.map((img: any, idx: number) => ({
-                id: `${key}-${idx}`,
-                data: img.bytescale_url,
-                fileName: img.filename,
-                uploadedAt: img.upload_date
-              }))
+              images: images
             };
           });
 
@@ -97,6 +111,7 @@ export default function Medical() {
             for (const item of patientsToSync.slice(0, 10)) {
               try {
                 const formData = new FormData();
+                formData.append('id', item.id);
                 formData.append('name', item.data.patient_name);
                 formData.append('cpf', `AUTO-${item.id.slice(0, 8)}`);
                 formData.append('birthDate', new Date().toISOString());
@@ -111,14 +126,27 @@ export default function Medical() {
             }
           }
 
-          const uniqueCloudPatients = cloudPatients.filter(p => !dbIds.has(p.id));
-          combinedPatients = [...combinedPatients, ...uniqueCloudPatients];
+          // Mesclar: Usar cloudPatients como base para os que estão na nuvem, 
+          // e adicionar dbPatients que NÃO estão no mapeamento da nuvem
+          const cloudIds = new Set(cloudPatients.map(p => p.id));
+          const dbOnlyPatients = dbPatients.filter(p => !cloudIds.has(p.id)) as any;
+
+          combinedPatients = [...cloudPatients, ...dbOnlyPatients];
         }
       } catch (jsonErr) {
         console.error('Erro ao carregar mapping cloud:', jsonErr);
       }
 
-      const pendingPatients = combinedPatients.filter(
+      // Deduplicação final por Nome e Data do Exame
+      const seen = new Set();
+      const finalPatients = combinedPatients.filter(p => {
+        const key = `${p.name}-${p.examDate.slice(0, 10)}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      const pendingPatients = finalPatients.filter(
         (p: Patient) => p.status === 'pending' || p.status === 'in_analysis'
       );
 
@@ -165,6 +193,7 @@ export default function Medical() {
         setLoading(true);
         // Criar o paciente no banco de dados para poder gerar o laudo
         const formData = new FormData();
+        formData.append('id', patient.id);
         formData.append('name', patient.name);
         formData.append('cpf', `AUTO-${patient.id.slice(0, 8)}`);
         formData.append('birthDate', patient.birthDate);
@@ -201,10 +230,36 @@ export default function Medical() {
   };
 
   const handleReportInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+
+      // Auto-preenchimento baseado nos padrões solicitados
+      let autoValue = '';
+      if (name === 'isOpticNerveStandard' && checked) autoValue = "Corado, bordos nítidos, escavação fisiológica";
+      if (name === 'isRetinaStandard' && checked) autoValue = "Aplicada, mácula preservada, sem hemorragias ou exsudatos.";
+      if (name === 'isVesselsStandard' && checked) autoValue = "Calibre e trajeto habitual";
+
+      setReportForm(prev => ({
+        ...prev,
+        [name]: checked,
+        ...(autoValue ? { [name.replace('is', '').replace('Standard', '').charAt(0).toLowerCase() + name.replace('is', '').replace('Standard', '').slice(1)]: autoValue } : {})
+      }));
+    } else {
+      setReportForm(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleQualityChange = (quality: 'satisfactory' | 'unsatisfactory') => {
     setReportForm(prev => ({
       ...prev,
-      [name]: value,
+      imageQuality: quality,
+      // Se for insatisfatório, já podemos sugerir um diagnóstico de imagem insatisfatória
+      ...(quality === 'unsatisfactory' ? { diagnosis: 'Imagem Insatisfatória para Laudo' } : {})
     }));
   };
 
@@ -233,7 +288,12 @@ export default function Medical() {
     try {
       const report = {
         doctorName: reportForm.doctorName,
-        findings: reportForm.findings,
+        findings: JSON.stringify({
+          imageQuality: reportForm.imageQuality,
+          opticNerve: reportForm.opticNerve,
+          retina: reportForm.retina,
+          vessels: reportForm.vessels,
+        }),
         diagnosis: reportForm.diagnosis,
         recommendations: reportForm.recommendations,
         diagnosticConditions: diagnosticConditions,
@@ -265,16 +325,25 @@ export default function Medical() {
 
   const resetForm = () => {
     setReportForm({
-      doctorName: '',
-      findings: '',
+      doctorName: 'Gustavo Sakuno',
+      imageQuality: 'satisfactory',
+      opticNerve: '',
+      retina: '',
+      vessels: '',
       diagnosis: '',
       recommendations: '',
+      isOpticNerveStandard: false,
+      isRetinaStandard: false,
+      isVesselsStandard: false,
     });
     setDiagnosticConditions({
-      diabeticRetinopathy: false,
-      glaucoma: false,
-      macularDegeneration: false,
-      cataract: false,
+      normal: false,
+      drMild: false,
+      drModerate: false,
+      drSevere: false,
+      drProliferative: false,
+      glaucomaSuspect: false,
+      others: false,
     });
   };
 
@@ -644,7 +713,7 @@ export default function Medical() {
                               <h3 className="text-xl font-serif font-bold text-charcoal italic">Registro do Laudo</h3>
 
                               <div className="space-y-2">
-                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Responsável pela Análise</label>
+                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Médico Responsável</label>
                                 <input
                                   type="text"
                                   name="doctorName"
@@ -656,72 +725,163 @@ export default function Medical() {
                                 />
                               </div>
 
-                              <div className="space-y-2">
-                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Achados Clínicos Detalhados</label>
-                                <textarea
-                                  name="findings"
-                                  value={reportForm.findings}
-                                  onChange={handleReportInputChange}
-                                  required
-                                  rows={4}
-                                  className="input-premium py-4"
-                                  placeholder="Descreva morfologia, simetria e possíveis anomalias..."
-                                />
+                              {/* Qualidade da Imagem */}
+                              <div className="space-y-4 p-4 bg-sandstone-50 rounded-xl border border-sandstone-100">
+                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 block">Qualidade da Imagem</label>
+                                <div className="flex gap-4">
+                                  <button
+                                    type="button"
+                                    onClick={() => handleQualityChange('satisfactory')}
+                                    className={`flex-1 py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${reportForm.imageQuality === 'satisfactory' ? 'bg-green-600 text-white shadow-md' : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
+                                  >
+                                    Satisfatório
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleQualityChange('unsatisfactory')}
+                                    className={`flex-1 py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${reportForm.imageQuality === 'unsatisfactory' ? 'bg-cardinal-700 text-white shadow-md' : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
+                                  >
+                                    Insatisfatório
+                                  </button>
+                                </div>
                               </div>
 
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Diagnóstico Conclusivo</label>
+                              {/* Achados Anatômicos */}
+                              <div className="space-y-6">
+                                {/* Nervo Óptico */}
+                                <div className="space-y-3">
+                                  <div className="flex justify-between items-center">
+                                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Nervo Óptico</label>
+                                    <label className="flex items-center space-x-2 cursor-pointer group">
+                                      <input
+                                        type="checkbox"
+                                        name="isOpticNerveStandard"
+                                        checked={reportForm.isOpticNerveStandard}
+                                        onChange={handleReportInputChange}
+                                        className="rounded border-sandstone-300 text-cardinal-700 focus:ring-cardinal-500"
+                                      />
+                                      <span className="text-[10px] font-bold uppercase text-sandstone-400 group-hover:text-cardinal-700 transition-colors">Padrão Normativo</span>
+                                    </label>
+                                  </div>
                                   <textarea
-                                    name="diagnosis"
-                                    value={reportForm.diagnosis}
+                                    name="opticNerve"
+                                    value={reportForm.opticNerve}
                                     onChange={handleReportInputChange}
-                                    required
-                                    rows={3}
-                                    className="input-premium py-4"
-                                    placeholder="Conclusão clínica..."
+                                    required={reportForm.imageQuality === 'satisfactory'}
+                                    rows={2}
+                                    className="input-premium py-3 text-sm"
+                                    placeholder="Descreva o nervo óptico..."
                                   />
                                 </div>
-                                <div className="space-y-2">
-                                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Plano Terapêutico / Recomendações</label>
+
+                                {/* Retina */}
+                                <div className="space-y-3">
+                                  <div className="flex justify-between items-center">
+                                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Retina</label>
+                                    <label className="flex items-center space-x-2 cursor-pointer group">
+                                      <input
+                                        type="checkbox"
+                                        name="isRetinaStandard"
+                                        checked={reportForm.isRetinaStandard}
+                                        onChange={handleReportInputChange}
+                                        className="rounded border-sandstone-300 text-cardinal-700 focus:ring-cardinal-500"
+                                      />
+                                      <span className="text-[10px] font-bold uppercase text-sandstone-400 group-hover:text-cardinal-700 transition-colors">Padrão Normativo</span>
+                                    </label>
+                                  </div>
                                   <textarea
-                                    name="recommendations"
-                                    value={reportForm.recommendations}
+                                    name="retina"
+                                    value={reportForm.retina}
                                     onChange={handleReportInputChange}
-                                    required
-                                    rows={3}
-                                    className="input-premium py-4"
-                                    placeholder="Tratamentos ou exames complementares..."
+                                    required={reportForm.imageQuality === 'satisfactory'}
+                                    rows={2}
+                                    className="input-premium py-3 text-sm"
+                                    placeholder="Descreva a retina..."
                                   />
                                 </div>
+
+                                {/* Vasos */}
+                                <div className="space-y-3">
+                                  <div className="flex justify-between items-center">
+                                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Vasos</label>
+                                    <label className="flex items-center space-x-2 cursor-pointer group">
+                                      <input
+                                        type="checkbox"
+                                        name="isVesselsStandard"
+                                        checked={reportForm.isVesselsStandard}
+                                        onChange={handleReportInputChange}
+                                        className="rounded border-sandstone-300 text-cardinal-700 focus:ring-cardinal-500"
+                                      />
+                                      <span className="text-[10px] font-bold uppercase text-sandstone-400 group-hover:text-cardinal-700 transition-colors">Padrão Normativo</span>
+                                    </label>
+                                  </div>
+                                  <textarea
+                                    name="vessels"
+                                    value={reportForm.vessels}
+                                    onChange={handleReportInputChange}
+                                    required={reportForm.imageQuality === 'satisfactory'}
+                                    rows={2}
+                                    className="input-premium py-3 text-sm"
+                                    placeholder="Descreva os vasos..."
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="space-y-2 pt-4">
+                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Recomendações e Plano Terapêutico</label>
+                                <textarea
+                                  name="recommendations"
+                                  value={reportForm.recommendations}
+                                  onChange={handleReportInputChange}
+                                  rows={2}
+                                  className="input-premium py-3 text-sm"
+                                  placeholder="Recomendações adicionais..."
+                                />
                               </div>
                             </div>
 
                             <div className="space-y-8">
-                              <h3 className="text-lg font-serif font-bold text-charcoal border-b pb-4">Sinalizadores de Condição</h3>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <h3 className="text-lg font-serif font-bold text-charcoal border-b pb-4">Conclusão do Exame</h3>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {[
-                                  { id: 'diabeticRetinopathy', label: 'Retinopatia Diabética', desc: 'Alterações vasculares' },
-                                  { id: 'glaucoma', label: 'Glaucoma Suspeito', desc: 'Neuropatia óptica' },
-                                  { id: 'macularDegeneration', label: 'DMRI (Degeneração)', desc: 'Alteração pigmentar' },
-                                  { id: 'cataract', label: 'Catarata (Opacidade)', desc: 'Transparência' },
+                                  { id: 'normal', label: 'Exame Normal', desc: 'Sem alterações funcionais' },
+                                  { id: 'drMild', label: 'RD Leve', desc: 'Retinopatia Diabética' },
+                                  { id: 'drModerate', label: 'RD Moderada', desc: 'Retinopatia Diabética' },
+                                  { id: 'drSevere', label: 'RD Grave', desc: 'Retinopatia Diabética' },
+                                  { id: 'drProliferative', label: 'RD Proliferativa', desc: 'Retinopatia Diabética' },
+                                  { id: 'glaucomaSuspect', label: 'Suspeita de Glaucoma', desc: 'Neuropatia óptica' },
+                                  { id: 'others', label: 'Outros', desc: 'Descrever abaixo' },
                                 ].map((condition) => (
                                   <div
                                     key={condition.id}
                                     onClick={() => handleConditionChange(condition.id as keyof typeof diagnosticConditions)}
-                                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-start space-x-3 ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
+                                    className={`p-3 rounded-xl border-2 cursor-pointer transition-all flex items-start space-x-3 ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
                                       ? 'bg-cardinal-700 border-cardinal-700 text-white'
                                       : 'bg-sandstone-50 border-sandstone-100 hover:border-cardinal-200 text-charcoal'
                                       }`}
                                   >
-                                    <div className={`mt-1 h-4 w-4 rounded-full border-2 flex items-center justify-center ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions] ? 'border-white bg-white' : 'border-sandstone-300'}`}>
+                                    <div className={`mt-1 h-3.5 w-3.5 rounded-full border-2 flex items-center justify-center ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions] ? 'border-white bg-white' : 'border-sandstone-300'}`}>
                                       {diagnosticConditions[condition.id as keyof typeof diagnosticConditions] && <div className="h-1.5 w-1.5 rounded-full bg-cardinal-700" />}
                                     </div>
                                     <div>
-                                      <p className="text-xs font-extrabold uppercase tracking-widest">{condition.label}</p>
+                                      <p className="text-[10px] font-extrabold uppercase tracking-widest leading-tight">{condition.label}</p>
                                     </div>
                                   </div>
                                 ))}
+                              </div>
+
+                              {/* Campo livre para "Outros" ou Diagnóstico Detalhado */}
+                              <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-sandstone-500">Detalhamento do Diagnóstico / Conclusão Livre</label>
+                                <textarea
+                                  name="diagnosis"
+                                  value={reportForm.diagnosis}
+                                  onChange={handleReportInputChange}
+                                  required
+                                  rows={3}
+                                  className="input-premium py-4 text-sm"
+                                  placeholder="Escreva a conclusão clínica completa aqui..."
+                                />
                               </div>
                             </div>
 

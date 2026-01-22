@@ -37,10 +37,13 @@ export interface MedicalReport {
 }
 
 export interface DiagnosticConditions {
-  diabeticRetinopathy: boolean;
-  glaucoma: boolean;
-  macularDegeneration: boolean;
-  cataract: boolean;
+  normal: boolean;
+  drMild: boolean;
+  drModerate: boolean;
+  drSevere: boolean;
+  drProliferative: boolean;
+  glaucomaSuspect: boolean;
+  others: boolean;
 }
 
 export interface PatientReferral {
