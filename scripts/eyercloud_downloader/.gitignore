@@ -6,6 +6,8 @@ downloads/
 # Arquivos de estado (contém dados da sessão)
 auth_state.json
 download_state.json
+bytescale_upload_state.json
+bytescale_mapping.json
 
 # Relatórios (são regeneráveis)
 relatorio_downloads.xlsx
