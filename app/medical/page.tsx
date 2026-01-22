@@ -34,6 +34,7 @@ export default function Medical() {
   const [visibleCount, setVisibleCount] = useState(10);
   const [isSyncing, setIsSyncing] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedReportImages, setSelectedReportImages] = useState<string[]>([]);
 
   useEffect(() => {
     loadPatients();
@@ -277,9 +278,22 @@ export default function Medical() {
     });
   };
 
+  const handleToggleImageForReport = (imageId: string) => {
+    setSelectedReportImages(prev => {
+      if (prev.includes(imageId)) {
+        return prev.filter(id => id !== imageId);
+      }
+      if (prev.length >= 2) {
+        return [prev[1], imageId];
+      }
+      return [...prev, imageId];
+    });
+  };
+
   const closeModal = () => {
     setShowModal(false);
     setSelectedPatient(null);
+    setSelectedReportImages([]);
     resetForm();
   };
 
@@ -556,151 +570,195 @@ export default function Medical() {
                               </button>
                             </div>
                           </div>
-                          <div className="px-3 py-4 flex justify-between items-center">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-sandstone-400">Captura {index + 1}</span>
-                            <span className="text-[10px] font-serif italic text-sandstone-600">ID: {image.id.slice(0, 8)}</span>
+                          <div className="px-3 py-4 flex justify-between items-center bg-sandstone-50/50">
+                            <div>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-sandstone-400 block">Captura {index + 1}</span>
+                              <span className="text-[10px] font-serif italic text-sandstone-500">OD/OE Scanned</span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => handleToggleImageForReport(image.id)}
+                              className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-tighter transition-all ${selectedReportImages.includes(image.id)
+                                ? 'bg-cardinal-700 text-white shadow-inner'
+                                : 'bg-white border border-sandstone-200 text-sandstone-600 hover:border-cardinal-300'
+                                }`}
+                            >
+                              {selectedReportImages.includes(image.id) ? 'Selecionado' : 'Selecionar'}
+                            </button>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Diagnosis Form */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <form onSubmit={handleSubmitReport} className="space-y-8">
-                      <div className="space-y-6">
-                        <h3 className="text-xl font-serif font-bold text-charcoal italic">Registro do Laudo</h3>
-
-                        <div className="space-y-2">
-                          <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Responsável pela Análise</label>
-                          <input
-                            type="text"
-                            name="doctorName"
-                            value={reportForm.doctorName}
-                            onChange={handleReportInputChange}
-                            required
-                            className="input-premium"
-                            placeholder="Dr(a). Nome do Especialista"
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Achados Clínicos Detalhados</label>
-                          <textarea
-                            name="findings"
-                            value={reportForm.findings}
-                            onChange={handleReportInputChange}
-                            required
-                            rows={4}
-                            className="input-premium py-4"
-                            placeholder="Descreva morfologia, simetria e possíveis anomalias..."
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Diagnóstico Conclusivo</label>
-                            <textarea
-                              name="diagnosis"
-                              value={reportForm.diagnosis}
-                              onChange={handleReportInputChange}
-                              required
-                              rows={3}
-                              className="input-premium py-4"
-                              placeholder="Conclusão clínica..."
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Plano Terapêutico / Recomendações</label>
-                            <textarea
-                              name="recommendations"
-                              value={reportForm.recommendations}
-                              onChange={handleReportInputChange}
-                              required
-                              rows={3}
-                              className="input-premium py-4"
-                              placeholder="Tratamentos ou exames complementares..."
-                            />
-                          </div>
-                        </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    {/* Selected Images View (Sticky-ish) */}
+                    <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-0">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-serif font-bold text-charcoal italic flex items-center">
+                          <ImageIcon className="w-5 h-5 mr-3 text-cardinal-700" /> Comparativo Selecionado
+                        </h3>
+                        <span className="text-[10px] font-bold text-white bg-cardinal-700 px-3 py-1 rounded-full uppercase tracking-widest">
+                          {selectedReportImages.length}/2 selecionadas
+                        </span>
                       </div>
 
-                      <div className="pt-8 border-t border-sandstone-100 flex gap-4">
-                        <button
-                          type="button"
-                          onClick={closeModal}
-                          className="flex-1 px-8 py-4 text-sandstone-500 font-bold uppercase tracking-widest text-xs hover:bg-sandstone-100 rounded-xl transition-colors"
-                        >
-                          Arquivar Análise
-                        </button>
-                        <button
-                          type="submit"
-                          disabled={success}
-                          className="flex-3 btn-cardinal text-sm uppercase tracking-widest font-bold flex items-center justify-center space-x-3"
-                        >
-                          {success ? (
-                            <>
-                              <CheckCircle2 className="w-5 h-5" />
-                              <span>Laudo Validado</span>
-                            </>
-                          ) : (
-                            <>
-                              <ShieldCheck className="w-5 h-5" />
-                              <span>Concluir & Assinar Laudo</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </form>
+                      {selectedReportImages.length === 0 ? (
+                        <div className="p-12 border-2 border-dashed border-sandstone-200 rounded-3xl text-center bg-sandstone-50/50">
+                          <Eye className="w-12 h-12 text-sandstone-300 mx-auto mb-4" />
+                          <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest">Selecione 2 capturas acima para comparar</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {selectedReportImages.map((imageId, idx) => {
+                            const img = selectedPatient.images.find(i => i.id === imageId);
+                            if (!img) return null;
+                            return (
+                              <div key={img.id} className="premium-card p-2 bg-white relative group overflow-hidden">
+                                <img src={img.data} className="w-full h-auto rounded-xl shadow-inner aspect-[4/3] object-cover" />
+                                <div className="absolute top-4 left-4">
+                                  <span className="bg-cardinal-700 text-white text-[10px] font-extrabold px-3 py-1 rounded-lg uppercase shadow-lg">
+                                    {idx === 0 ? 'Olho Direito' : 'Olho Esquerdo'}
+                                  </span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => handleToggleImageForReport(img.id)}
+                                  className="absolute top-4 right-4 p-2 bg-white/90 text-cardinal-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
 
-                    {/* Checkboxes Area */}
-                    <div className="premium-card p-10 bg-sandstone-50/50 flex flex-col h-full border-none">
-                      <div className="mb-8">
-                        <h3 className="text-lg font-serif font-bold text-charcoal mb-2">Sinalizadores de Condição</h3>
-                        <p className="text-xs font-medium text-sandstone-500 italic">Selecione todas as patologias identificadas durante o escrutínio das imagens.</p>
-                      </div>
+                    {/* Diagnosis Form */}
+                    <div className="lg:col-span-8">
+                      <div className="premium-card p-0 overflow-hidden border-none shadow-xl">
+                        <div className="p-8 bg-white space-y-8">
+                          <form onSubmit={handleSubmitReport} className="space-y-8">
+                            <div className="space-y-6">
+                              <h3 className="text-xl font-serif font-bold text-charcoal italic">Registro do Laudo</h3>
 
-                      <div className="grid grid-cols-1 gap-4 flex-1">
-                        {[
-                          { id: 'diabeticRetinopathy', label: 'Retinopatia Diabética', desc: 'Alterações vasculares retinianas correlacionadas' },
-                          { id: 'glaucoma', label: 'Glaucoma Suspeito/Confirmado', desc: 'Aumento da escavação ou sinais de neuropatia óptica' },
-                          { id: 'macularDegeneration', label: 'Degeneração Macular (DMRI)', desc: 'Presença de drusas ou alterações pigmentares maculares' },
-                          { id: 'cataract', label: 'Opacidade Cristalina (Catarata)', desc: 'Diminuição da transparência do cristalino observada' },
-                        ].map((condition) => (
-                          <div
-                            key={condition.id}
-                            onClick={() => handleConditionChange(condition.id as keyof typeof diagnosticConditions)}
-                            className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 flex items-start space-x-4 ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
-                              ? 'bg-cardinal-700 border-cardinal-700 text-white shadow-lg'
-                              : 'bg-white border-sandstone-100 hover:border-cardinal-200 text-charcoal group'
-                              }`}
-                          >
-                            <div className={`mt-1 h-5 w-5 rounded-full border-2 flex items-center justify-center ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
-                              ? 'border-white bg-white'
-                              : 'border-sandstone-300'
-                              }`}>
-                              {diagnosticConditions[condition.id as keyof typeof diagnosticConditions] && (
-                                <div className="h-2 w-2 rounded-full bg-cardinal-700" />
-                              )}
+                              <div className="space-y-2">
+                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Responsável pela Análise</label>
+                                <input
+                                  type="text"
+                                  name="doctorName"
+                                  value={reportForm.doctorName}
+                                  onChange={handleReportInputChange}
+                                  required
+                                  className="input-premium"
+                                  placeholder="Dr(a). Nome do Especialista"
+                                />
+                              </div>
+
+                              <div className="space-y-2">
+                                <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Achados Clínicos Detalhados</label>
+                                <textarea
+                                  name="findings"
+                                  value={reportForm.findings}
+                                  onChange={handleReportInputChange}
+                                  required
+                                  rows={4}
+                                  className="input-premium py-4"
+                                  placeholder="Descreva morfologia, simetria e possíveis anomalias..."
+                                />
+                              </div>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Diagnóstico Conclusivo</label>
+                                  <textarea
+                                    name="diagnosis"
+                                    value={reportForm.diagnosis}
+                                    onChange={handleReportInputChange}
+                                    required
+                                    rows={3}
+                                    className="input-premium py-4"
+                                    placeholder="Conclusão clínica..."
+                                  />
+                                </div>
+                                <div className="space-y-2">
+                                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">Plano Terapêutico / Recomendações</label>
+                                  <textarea
+                                    name="recommendations"
+                                    value={reportForm.recommendations}
+                                    onChange={handleReportInputChange}
+                                    required
+                                    rows={3}
+                                    className="input-premium py-4"
+                                    placeholder="Tratamentos ou exames complementares..."
+                                  />
+                                </div>
+                              </div>
                             </div>
-                            <div>
-                              <p className="text-sm font-bold uppercase tracking-wider">{condition.label}</p>
-                              <p className={`text-[10px] ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
-                                ? 'text-white/70'
-                                : 'text-sandstone-400 font-medium italic'
-                                }`}>{condition.desc}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
 
-                      <div className="mt-8 p-6 bg-cardinal-50 rounded-2xl border border-cardinal-100 flex items-start space-x-4">
-                        <div className="p-2 bg-cardinal-700 rounded-lg text-white">
-                          <Activity className="w-5 h-5 translate-y-[2px]" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-bold text-cardinal-900 uppercase tracking-widest leading-normal">Monitoramento Crítico</p>
-                          <p className="text-[10px] text-cardinal-700 font-medium italic">O sistema registra automaticamente o tempo de resposta entre a entrada do paciente e a assinatura do laudo para fins de KPI organizacional.</p>
+                            <div className="space-y-8">
+                              <h3 className="text-lg font-serif font-bold text-charcoal border-b pb-4">Sinalizadores de Condição</h3>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {[
+                                  { id: 'diabeticRetinopathy', label: 'Retinopatia Diabética', desc: 'Alterações vasculares' },
+                                  { id: 'glaucoma', label: 'Glaucoma Suspeito', desc: 'Neuropatia óptica' },
+                                  { id: 'macularDegeneration', label: 'DMRI (Degeneração)', desc: 'Alteração pigmentar' },
+                                  { id: 'cataract', label: 'Catarata (Opacidade)', desc: 'Transparência' },
+                                ].map((condition) => (
+                                  <div
+                                    key={condition.id}
+                                    onClick={() => handleConditionChange(condition.id as keyof typeof diagnosticConditions)}
+                                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-start space-x-3 ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions]
+                                      ? 'bg-cardinal-700 border-cardinal-700 text-white'
+                                      : 'bg-sandstone-50 border-sandstone-100 hover:border-cardinal-200 text-charcoal'
+                                      }`}
+                                  >
+                                    <div className={`mt-1 h-4 w-4 rounded-full border-2 flex items-center justify-center ${diagnosticConditions[condition.id as keyof typeof diagnosticConditions] ? 'border-white bg-white' : 'border-sandstone-300'}`}>
+                                      {diagnosticConditions[condition.id as keyof typeof diagnosticConditions] && <div className="h-1.5 w-1.5 rounded-full bg-cardinal-700" />}
+                                    </div>
+                                    <div>
+                                      <p className="text-xs font-extrabold uppercase tracking-widest">{condition.label}</p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div className="pt-8 border-t border-sandstone-100 flex gap-4">
+                              <button
+                                type="button"
+                                onClick={closeModal}
+                                className="flex-1 px-8 py-4 text-sandstone-500 font-bold uppercase tracking-widest text-[10px] hover:bg-sandstone-100 rounded-xl transition-colors"
+                              >
+                                Arquivar
+                              </button>
+                              <button
+                                type="submit"
+                                disabled={success || selectedReportImages.length < 2}
+                                className={`flex-3 px-8 py-4 rounded-xl text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center space-x-3 transition-all ${selectedReportImages.length < 2
+                                  ? 'bg-sandstone-300 cursor-not-allowed'
+                                  : 'bg-cardinal-700 hover:bg-cardinal-800 shadow-lg shadow-cardinal-200'}`}
+                              >
+                                {success ? (
+                                  <>
+                                    <CheckCircle2 className="w-5 h-5" />
+                                    <span>Laudo Validado</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <ShieldCheck className="w-5 h-5" />
+                                    <span>Concluir & Assinar Laudo</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                            {selectedReportImages.length < 2 && (
+                              <p className="text-[10px] text-center text-cardinal-600 font-bold uppercase tracking-widest animate-pulse">
+                                * Selecione 2 imagens acima para habilitar a assinatura
+                              </p>
+                            )}
+                          </form>
                         </div>
                       </div>
                     </div>
