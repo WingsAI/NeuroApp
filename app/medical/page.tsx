@@ -103,26 +103,26 @@ export default function Medical() {
               }));
 
             if (!isAlreadyInDb) {
-              patientsToSync.push({ id: patientId, data: item });
+              patientsToSync.push({ id: patientId, data: data });
             }
 
             return {
               id: patientId,
-              name: item.patient_name,
-              cpf: isAlreadyInDb ? existingDbPatient.cpf : item.cpf || 'PENDENTE',
-              phone: isAlreadyInDb ? existingDbPatient.phone || '' : item.phone || '',
-              birthDate: item.birthday || new Date().toISOString(),
-              examDate: item.images[0]?.upload_date || new Date().toISOString(),
-              location: item.clinic_name || 'Phelcom EyeR Cloud',
-              gender: item.gender || '',
+              name: data.patient_name,
+              cpf: isAlreadyInDb ? existingDbPatient.cpf : data.cpf || 'PENDENTE',
+              phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
+              birthDate: data.birthday || new Date().toISOString(),
+              examDate: data.images[0]?.upload_date || new Date().toISOString(),
+              location: data.clinic_name || 'Phelcom EyeR Cloud',
+              gender: data.gender || '',
               technicianName: 'EyerCloud Sync',
-              underlyingDiseases: item.underlying_diseases,
-              ophthalmicDiseases: item.ophthalmic_diseases,
+              underlyingDiseases: data.underlying_diseases,
+              ophthalmicDiseases: data.ophthalmic_diseases,
               status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
-              createdAt: item.images[0]?.upload_date || new Date().toISOString(),
+              createdAt: data.images[0]?.upload_date || new Date().toISOString(),
               images: images
             };
-          }) : [];
+          });
 
           // Sincronização automática silenciosa (lote inicial de 10)
           if (patientsToSync.length > 0) {
