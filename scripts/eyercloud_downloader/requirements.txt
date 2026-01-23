@@ -1,0 +1,6 @@
+playwright
+python-dotenv
+pandas
+tqdm
+aiofiles
+requests

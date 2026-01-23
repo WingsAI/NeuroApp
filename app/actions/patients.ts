@@ -19,6 +19,9 @@ export async function createPatient(formData: FormData) {
     const occupation = formData.get('occupation') as string;
     const phone = formData.get('phone') as string;
 
+    const underlyingDiseases = formData.get('underlyingDiseases') ? JSON.parse(formData.get('underlyingDiseases') as string) : undefined;
+    const ophthalmicDiseases = formData.get('ophthalmicDiseases') ? JSON.parse(formData.get('ophthalmicDiseases') as string) : undefined;
+
     // Create patient in DB
     const patient = await prisma.patient.create({
         data: {
@@ -34,6 +37,8 @@ export async function createPatient(formData: FormData) {
             education,
             occupation,
             phone,
+            underlyingDiseases,
+            ophthalmicDiseases,
             status: 'pending',
         },
     });

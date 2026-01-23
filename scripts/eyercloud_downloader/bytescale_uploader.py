@@ -147,11 +147,38 @@ def main():
         
         print(f"👤 {clean_name} ({len(images)} imagens)")
         
+        # Tenta pegar os detalhes do paciente do estado do downloader
+        downloader_state_path = Path("download_state.json")
+        clinic_name = "Phelcom EyeR Cloud"
+        patient_metadata = {}
+        if downloader_state_path.exists():
+            try:
+                with open(downloader_state_path, 'r', encoding='utf-8') as f:
+                    d_state = json.load(f)
+                    exam_id_full = patient_folder.name.split('_')[-1]
+                    for eid, details in d_state.get('exam_details', {}).items():
+                        # Matching mais flexível: prefixo, sufixo ou contido
+                        if exam_id in eid or eid in exam_id:
+                            clinic_name = details.get('clinic_name', clinic_name)
+                            patient_metadata = {
+                                'birthday': details.get('birthday'),
+                                'gender': details.get('gender'),
+                                'cpf': details.get('cpf'),
+                                'underlying_diseases': details.get('underlying_diseases'),
+                                'ophthalmic_diseases': details.get('ophthalmic_diseases'),
+                                'otherDisease': details.get('otherDisease')
+                            }
+                            break
+            except Exception as e:
+                print(f"   ⚠️ Erro ao ler metadados do paciente: {e}")
+
         # Inicializa mapeamento do paciente
         if patient_name not in state['patient_mapping']:
             state['patient_mapping'][patient_name] = {
                 'patient_name': clean_name,
                 'exam_id': exam_id,
+                'clinic_name': clinic_name,
+                **patient_metadata,
                 'images': [],
                 'bytescale_folder': f'/neuroapp/patients/{sanitize_folder_name(patient_name)}'
             }

@@ -15,6 +15,8 @@ export interface Patient {
   status: 'pending' | 'in_analysis' | 'completed';
   report?: MedicalReport;
   referral?: PatientReferral;
+  underlyingDiseases?: any;
+  ophthalmicDiseases?: any;
   createdAt: string;
 }
 

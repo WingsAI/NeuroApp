@@ -27,6 +27,9 @@ model Patient {
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   
+  underlyingDiseases Json?
+  ophthalmicDiseases Json?
+  
   images         PatientImage[]
   report         MedicalReport?
   referral       PatientReferral?

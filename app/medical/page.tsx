@@ -103,23 +103,26 @@ export default function Medical() {
               }));
 
             if (!isAlreadyInDb) {
-              patientsToSync.push({ id: patientId, data });
+              patientsToSync.push({ id: patientId, data: item });
             }
 
             return {
               id: patientId,
-              name: data.patient_name,
-              cpf: isAlreadyInDb ? existingDbPatient.cpf : 'PENDENTE',
-              phone: isAlreadyInDb ? existingDbPatient.phone || '' : '',
-              birthDate: new Date().toISOString(),
-              examDate: data.images[0]?.upload_date || new Date().toISOString(),
-              location: 'Phelcom EyeR Cloud',
-              technicianName: 'Sincronização Cloud',
+              name: item.patient_name,
+              cpf: isAlreadyInDb ? existingDbPatient.cpf : item.cpf || 'PENDENTE',
+              phone: isAlreadyInDb ? existingDbPatient.phone || '' : item.phone || '',
+              birthDate: item.birthday || new Date().toISOString(),
+              examDate: item.images[0]?.upload_date || new Date().toISOString(),
+              location: item.clinic_name || 'Phelcom EyeR Cloud',
+              gender: item.gender || '',
+              technicianName: 'EyerCloud Sync',
+              underlyingDiseases: item.underlying_diseases,
+              ophthalmicDiseases: item.ophthalmic_diseases,
               status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
-              createdAt: data.images[0]?.upload_date || new Date().toISOString(),
+              createdAt: item.images[0]?.upload_date || new Date().toISOString(),
               images: images
             };
-          });
+          }) : [];
 
           // Sincronização automática silenciosa (lote inicial de 10)
           if (patientsToSync.length > 0) {
@@ -129,11 +132,20 @@ export default function Medical() {
                 const formData = new FormData();
                 formData.append('id', item.id);
                 formData.append('name', item.data.patient_name);
-                formData.append('cpf', `AUTO-${item.id.slice(0, 8)}`);
-                formData.append('birthDate', new Date().toISOString());
+                formData.append('cpf', item.data.cpf || `AUTO-${item.id.slice(0, 8)}`);
+                formData.append('birthDate', item.data.birthday || new Date().toISOString());
                 formData.append('examDate', item.data.images[0]?.upload_date || new Date().toISOString());
-                formData.append('location', 'Phelcom EyeR Cloud');
+                formData.append('location', item.data.clinic_name || 'Phelcom EyeR Cloud');
                 formData.append('technicianName', 'Auto Sync');
+                formData.append('gender', item.data.gender || '');
+
+                if (item.data.underlying_diseases) {
+                  formData.append('underlyingDiseases', JSON.stringify(item.data.underlying_diseases));
+                }
+                if (item.data.ophthalmic_diseases) {
+                  formData.append('ophthalmicDiseases', JSON.stringify(item.data.ophthalmic_diseases));
+                }
+
                 item.data.images.forEach((img: any) => formData.append('eyerUrls', img.bytescale_url));
                 await createPatient(formData);
               } catch (syncErr) {
@@ -648,32 +660,22 @@ export default function Medical() {
                   <h3 className="text-sm font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
                     <User className="w-4 h-4 mr-2" /> Dados Biométricos & Clínicos
                   </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Paciente</p>
                       <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.name}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-cardinal-700 tracking-wider">Documento (CPF)</p>
-                      <input
-                        type="text"
-                        name="cpf"
-                        value={patientEditableData.cpf}
-                        onChange={handlePatientDataChange}
-                        className="w-full bg-transparent border-b border-sandstone-200 text-sm font-serif font-bold text-charcoal focus:border-cardinal-500 transition-colors outline-none"
-                        placeholder="000.000.000-00"
-                      />
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.cpf || 'Não informado'}</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold uppercase text-cardinal-700 tracking-wider">Contato (Telefone)</p>
-                      <input
-                        type="text"
-                        name="phone"
-                        value={patientEditableData.phone}
-                        onChange={handlePatientDataChange}
-                        className="w-full bg-transparent border-b border-sandstone-200 text-sm font-serif font-bold text-charcoal focus:border-cardinal-500 transition-colors outline-none"
-                        placeholder="(00) 00000-0000"
-                      />
+                      <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Nasc.</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{formatDate(selectedPatient.birthDate)}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Sexo</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.gender === 'F' ? 'Feminino' : selectedPatient.gender === 'M' ? 'Masculino' : 'Outro'}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Exame</p>
@@ -684,6 +686,46 @@ export default function Medical() {
                       <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.location}</p>
                     </div>
                   </div>
+
+                  {/* Diseases Section */}
+                  {(selectedPatient.underlyingDiseases || selectedPatient.ophthalmicDiseases) && (
+                    <div className="mt-8 pt-8 border-t border-sandstone-100 grid grid-cols-1 md:grid-cols-2 gap-12">
+                      <div className="space-y-4">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-cardinal-800 flex items-center">
+                          <Activity className="w-3 h-3 mr-2" /> Doenças de Base
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedPatient.underlyingDiseases && Object.entries(selectedPatient.underlyingDiseases)
+                            .filter(([_, value]) => value === true)
+                            .map(([key, _]) => (
+                              <span key={key} className="px-3 py-1.5 bg-cardinal-50 border border-cardinal-100 text-cardinal-700 rounded-lg text-[10px] font-bold uppercase italic">
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                              </span>
+                            ))}
+                          {(!selectedPatient.underlyingDiseases || Object.values(selectedPatient.underlyingDiseases).every(v => v !== true)) && (
+                            <span className="text-[10px] text-sandstone-400 italic">Nenhuma informada</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-cardinal-800 flex items-center">
+                          <Eye className="w-3 h-3 mr-2" /> Doenças Oftalmológicas
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedPatient.ophthalmicDiseases && Object.entries(selectedPatient.ophthalmicDiseases)
+                            .filter(([_, value]) => value === true)
+                            .map(([key, _]) => (
+                              <span key={key} className="px-3 py-1.5 bg-sandstone-50 border border-sandstone-200 text-sandstone-500 rounded-lg text-[10px] font-bold uppercase italic">
+                                {key === 'diabeticRetinopathy' ? 'RD' : key.charAt(0).toUpperCase() + key.slice(1)}
+                              </span>
+                            ))}
+                          {(!selectedPatient.ophthalmicDiseases || Object.values(selectedPatient.ophthalmicDiseases).every(v => v !== true)) && (
+                            <span className="text-[10px] text-sandstone-400 italic">Nenhuma informada</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* 2. Image Gallery for Selection */}
