@@ -111,7 +111,7 @@ export default function Medical() {
               name: data.patient_name,
               cpf: isAlreadyInDb ? existingDbPatient.cpf : data.cpf || 'PENDENTE',
               phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
-              birthDate: data.birthday || new Date().toISOString(),
+              birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
               examDate: data.images[0]?.upload_date || new Date().toISOString(),
               location: data.clinic_name || 'Phelcom EyeR Cloud',
               gender: data.gender || '',
@@ -124,16 +124,16 @@ export default function Medical() {
             };
           });
 
-          // Sincronização automática silenciosa (lote inicial de 10)
+          // Sincronização automática silenciosa (lote maior para garantir dados)
           if (patientsToSync.length > 0) {
             console.log(`Sincronizando ${patientsToSync.length} pacientes...`);
-            for (const item of patientsToSync.slice(0, 10)) {
+            for (const item of patientsToSync.slice(0, 50)) {
               try {
                 const formData = new FormData();
                 formData.append('id', item.id);
                 formData.append('name', item.data.patient_name);
                 formData.append('cpf', item.data.cpf || `AUTO-${item.id.slice(0, 8)}`);
-                formData.append('birthDate', item.data.birthday || new Date().toISOString());
+                formData.append('birthDate', item.data.birthday ? new Date(item.data.birthday).toISOString() : new Date().toISOString());
                 formData.append('examDate', item.data.images[0]?.upload_date || new Date().toISOString());
                 formData.append('location', item.data.clinic_name || 'Phelcom EyeR Cloud');
                 formData.append('technicianName', 'Auto Sync');

@@ -175,13 +175,17 @@ def main():
         # Inicializa mapeamento do paciente
         if patient_name not in state['patient_mapping']:
             state['patient_mapping'][patient_name] = {
-                'patient_name': clean_name,
-                'exam_id': exam_id,
-                'clinic_name': clinic_name,
-                **patient_metadata,
                 'images': [],
                 'bytescale_folder': f'/neuroapp/patients/{sanitize_folder_name(patient_name)}'
             }
+        
+        # Always update metadata
+        state['patient_mapping'][patient_name].update({
+            'patient_name': clean_name,
+            'exam_id': exam_id,
+            'clinic_name': clinic_name,
+            **patient_metadata
+        })
         
         patient_data = state['patient_mapping'][patient_name]
         bytescale_folder = patient_data['bytescale_folder']
@@ -190,6 +194,59 @@ def main():
             total_images += 1
             image_path = str(image.absolute())
             
+            # Metadata cross-reference for filtering
+            image_uuid = image.stem
+            is_color = True # Default to COLOR if metadata is missing to avoid empty results
+            found_metadata = False
+            
+            if downloader_state_path.exists():
+                try:
+                    with open(downloader_state_path, 'r', encoding='utf-8') as f:
+                        d_state = json.load(f)
+                        
+                        # Find the correct exam and then the image type
+                        for details in d_state.get('exam_details', {}).values():
+                            # Folder name must be an EXACT match to avoid partial ID overlapping
+                            if details.get('folder_name') == patient_folder.name:
+                                img_list = details.get('image_list', [])
+                                if img_list:
+                                    found_metadata = True
+                                    is_color = False # Reset default
+                                    for img_data in img_list:
+                                        if img_data['uuid'] == image_uuid:
+                                            if img_data.get('type') == 'COLOR':
+                                                is_color = True
+                                            break
+                                break
+                except Exception:
+                    pass
+            
+            # Critical fallback: if we DID NOT find metadata by exact folder name,
+            # try finding by the exam_id suffix as a backup, but only if it's the 8-char hex
+            if not found_metadata and len(exam_id) == 8:
+                try:
+                    with open(downloader_state_path, 'r', encoding='utf-8') as f:
+                        d_state = json.load(f)
+                        for eid, details in d_state.get('exam_details', {}).items():
+                            if eid == exam_id or eid.endswith(exam_id):
+                                img_list = details.get('image_list', [])
+                                if img_list:
+                                    found_metadata = True
+                                    is_color = False
+                                    for img_data in img_list:
+                                        if img_data['uuid'] == image_uuid:
+                                            if img_data.get('type') == 'COLOR':
+                                                is_color = True
+                                            break
+                                break
+                except Exception:
+                    pass
+
+            # If we explicitly found metadata and it's NOT color, skip it
+            if not is_color:
+                total_skipped += 1
+                continue
+
             # Verifica se já foi uploaded
             if image_path in state['uploaded_files']:
                 total_skipped += 1
