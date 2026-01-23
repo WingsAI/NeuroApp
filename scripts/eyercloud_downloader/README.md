@@ -31,10 +31,18 @@ python downloader.py
 
 ## Funcionalidades
 - **Login Automático**: Faz login sozinho usando Playwright.
+- **Extração de Metadados**: Captura CPF, Data de Nascimento, Sexo e Histórico de Doenças (Diabetes, Glaucoma, etc.).
 - **Multiclínicas**: Detecta e baixa exames de todas as clínicas vinculadas à conta.
 - **Download Assíncrono**: Baixa múltiplas imagens simultaneamente.
 - **Detecção de URL**: Identifica automaticamente o servidor de imagens (CloudFront).
 - **Registro de Download**: O arquivo `download_state.json` garante que exames já baixados não sejam processados novamente.
+
+## Upload para Bytescale (CDN)
+Após o download, use o script de upload para disponibilizar as imagens no NeuroApp:
+```bash
+python bytescale_uploader.py
+```
+Este script gera o `bytescale_mapping.json` usado pela interface do app.
 
 ## Estrutura de Pastas
 - As imagens são salvas na pasta configurada no `.env` (padrão `downloads/`).

@@ -31,11 +31,15 @@ NeuroApp/
 │   ├── analytics/
 │   │   └── page.tsx          # Tela 2: Dashboard de Analytics
 │   ├── medical/
-│   │   └── page.tsx          # Tela 3: Fila de Laudos
-│   ├── results/
+│   │   └── page.tsx          # Tela 3: Fila de Laudos (com Sync EyerCloud)
+│   ├─- results/
 │   │   └── page.tsx          # Tela 4: Visualização de Resultados
+│   ├── units/
+│   │   └── page.tsx          # Tela 5: Gestão de Unidades de Saúde
 │   ├── layout.tsx            # Layout principal
 │   └── globals.css           # Estilos globais
+├── scripts/
+│   └── eyercloud_downloader/  # Scripts de automação EyerCloud
 ├── components/
 │   └── Navbar.tsx            # Componente de navegação
 ├── lib/
@@ -49,11 +53,24 @@ NeuroApp/
 
 ### Tela 1: Registro de Paciente (Técnico em Radiologia)
 
-- Formulário de cadastro com validação
-- Upload de exatamente 3 imagens (drag-and-drop)
-- Preview das imagens antes do envio
-- Checkbox de confirmação obrigatório
-- Salvamento em LocalStorage
+- Cadastro completo com validação
+- Integração de imagens médicas e histórico clínico
+- Salvamento em Banco de Dados (Postgres via Prisma)
+
+### Tela 2: Dashboard de Analytics
+
+- Métricas em tempo real de pacientes, imagens e laudos
+- Indicadores de produtividade por unidade e profissional
+
+### Tela 3: Fila de Laudos (Médico)
+
+- **Sincronização EyerCloud**: Download automático de exames e metadados
+- **Dados Extraídos**: CPF, Data de Nascimento, Sexo e Comorbidades (Diabetes, Glaucoma, etc.)
+- Visualização em lote para alta produtividade
+
+### Tela 5: Gestão de Unidades de Saúde
+
+- Visualização e monitoramento de unidades de saúde vinculadas
 
 **Campos:**
 - Nome completo

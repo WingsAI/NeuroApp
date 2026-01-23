@@ -57,7 +57,7 @@ export async function middleware(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     // List of public routes - Added newly created routes and the mapping file
-    const publicRoutes = ['/login', '/', '/patients', '/analytics', '/medical', '/referrals', '/results', '/bytescale_mapping.json', '/favicon.png'];
+    const publicRoutes = ['/login', '/', '/patients', '/analytics', '/medical', '/referrals', '/results', '/units', '/bytescale_mapping.json', '/favicon.png'];
     const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/'));
 
     // Redirect to login if route is not public and no user is found
