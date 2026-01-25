@@ -283,32 +283,42 @@ export default function Home() {
               </div>
             </div>
 
-            {/* EyeR Search */}
+            {/* EyeR Authorization Message */}
             {integrationMode === 'eyer' && (
-              <div className="premium-card p-8 bg-cardinal-950/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 opacity-10">
-                  <Sparkles className="w-24 h-24 text-cardinal-700" />
+              <div className="premium-card p-8 bg-amber-50 border-2 border-amber-200 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-20">
+                  <AlertCircle className="w-24 h-24 text-amber-600" />
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-xl font-serif font-bold text-charcoal mb-4">Sincronização EyeR</h3>
-                  <div className="flex flex-col md:flex-row gap-4">
+                  <h3 className="text-xl font-serif font-bold text-amber-800 mb-4 flex items-center">
+                    <AlertCircle className="w-6 h-6 mr-3" />
+                    Integração EyeR Phelcom
+                  </h3>
+                  <p className="text-amber-700 font-medium mb-6">
+                    Para utilizar a sincronização automática com equipamentos Phelcom EyeR, favor contactar:
+                  </p>
+                  <div className="bg-white/80 rounded-xl p-6 border border-amber-200">
+                    <p className="text-lg font-serif font-bold text-charcoal">Dr. Gustavo Sakuno</p>
+                    <p className="text-sm text-sandstone-600 mt-1">Responsável pela autorização de acesso à API EyeR</p>
+                  </div>
+                  <div className="flex flex-col md:flex-row gap-4 mt-6">
                     <div className="flex-1 relative">
                       <input
                         type="text"
                         value={eyerPatientId}
                         onChange={(e) => setEyerPatientId(e.target.value)}
-                        className="input-premium pl-12"
+                        className="input-premium pl-12 opacity-50 cursor-not-allowed"
                         placeholder="Ex: EYER-2024-001234"
+                        disabled
                       />
                       <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sandstone-300" />
                     </div>
                     <button
                       type="button"
-                      onClick={handleEyerSearch}
-                      disabled={loading}
-                      className="btn-cardinal whitespace-nowrap"
+                      disabled
+                      className="btn-cardinal whitespace-nowrap opacity-50 cursor-not-allowed"
                     >
-                      {loading ? <Loader2 className="animate-spin w-5 h-5" /> : 'Sincronizar Dados'}
+                      Sincronizar Dados
                     </button>
                   </div>
                 </div>
