@@ -130,9 +130,9 @@ def main():
         patient_name = patient_folder.name
         
         # Extrai nome limpo do paciente (remove o ID do exame)
-        # Formato: NOME_PACIENTE_697001cf
+        # Formato: NOME_PACIENTE_ID
         parts = patient_name.rsplit('_', 1)
-        if len(parts) == 2 and len(parts[1]) == 8:
+        if len(parts) == 2 and (len(parts[1]) >= 8 and all(c in '0123456789abcdefABCDEF' for c in parts[1])):
             clean_name = parts[0].replace('_', ' ')
             exam_id = parts[1]
         else:
@@ -156,19 +156,17 @@ def main():
                 with open(downloader_state_path, 'r', encoding='utf-8') as f:
                     d_state = json.load(f)
                     exam_id_full = patient_folder.name.split('_')[-1]
-                    for eid, details in d_state.get('exam_details', {}).items():
-                        # Matching mais flexível: prefixo, sufixo ou contido
-                        if exam_id in eid or eid in exam_id:
-                            clinic_name = details.get('clinic_name', clinic_name)
-                            patient_metadata = {
-                                'birthday': details.get('birthday'),
-                                'gender': details.get('gender'),
-                                'cpf': details.get('cpf'),
-                                'underlying_diseases': details.get('underlying_diseases'),
-                                'ophthalmic_diseases': details.get('ophthalmic_diseases'),
-                                'otherDisease': details.get('otherDisease')
-                            }
-                            break
+                    details = d_state.get('exam_details', {}).get(exam_id_full)
+                    if details:
+                        clinic_name = details.get('clinic_name', clinic_name)
+                        patient_metadata = {
+                            'birthday': details.get('birthday'),
+                            'gender': details.get('gender'),
+                            'cpf': details.get('cpf'),
+                            'underlying_diseases': details.get('underlying_diseases'),
+                            'ophthalmic_diseases': details.get('ophthalmic_diseases'),
+                            'otherDisease': details.get('otherDisease')
+                        }
             except Exception as e:
                 print(f"   ⚠️ Erro ao ler metadados do paciente: {e}")
 
@@ -204,41 +202,20 @@ def main():
                     with open(downloader_state_path, 'r', encoding='utf-8') as f:
                         d_state = json.load(f)
                         
-                        # Find the correct exam and then the image type
-                        for details in d_state.get('exam_details', {}).values():
-                            # Folder name must be an EXACT match to avoid partial ID overlapping
-                            if details.get('folder_name') == patient_folder.name:
-                                img_list = details.get('image_list', [])
-                                if img_list:
-                                    found_metadata = True
-                                    is_color = False # Reset default
-                                    for img_data in img_list:
-                                        if img_data['uuid'] == image_uuid:
-                                            if img_data.get('type') == 'COLOR':
-                                                is_color = True
-                                            break
-                                break
-                except Exception:
-                    pass
-            
-            # Critical fallback: if we DID NOT find metadata by exact folder name,
-            # try finding by the exam_id suffix as a backup, but only if it's the 8-char hex
-            if not found_metadata and len(exam_id) == 8:
-                try:
-                    with open(downloader_state_path, 'r', encoding='utf-8') as f:
-                        d_state = json.load(f)
-                        for eid, details in d_state.get('exam_details', {}).items():
-                            if eid == exam_id or eid.endswith(exam_id):
-                                img_list = details.get('image_list', [])
-                                if img_list:
-                                    found_metadata = True
-                                    is_color = False
-                                    for img_data in img_list:
-                                        if img_data['uuid'] == image_uuid:
-                                            if img_data.get('type') == 'COLOR':
-                                                is_color = True
-                                            break
-                                break
+                        # Use the exam_id extracted from folder name as the primary key
+                        # The folder name is NAME_FULLID
+                        details = d_state.get('exam_details', {}).get(exam_id)
+                        
+                        if details:
+                            img_list = details.get('image_list', [])
+                            if img_list:
+                                found_metadata = True
+                                is_color = False # Reset default to be strict
+                                for img_data in img_list:
+                                    if img_data['uuid'] == image_uuid:
+                                        if img_data.get('type') == 'COLOR':
+                                            is_color = True
+                                        break
                 except Exception:
                     pass
 

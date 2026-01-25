@@ -45,6 +45,8 @@ export default function Medical() {
     drSevere: false,
     drProliferative: false,
     glaucomaSuspect: false,
+    hypertensiveRetinopathy: false,
+    tumor: false,
     others: false,
   });
   const [patientEditableData, setPatientEditableData] = useState({
@@ -124,10 +126,10 @@ export default function Medical() {
             };
           });
 
-          // Sincronização automática silenciosa (lote maior para garantir dados)
+          // Sincronização automática silenciosa (lote controlado para garantir dados)
           if (patientsToSync.length > 0) {
             console.log(`Sincronizando ${patientsToSync.length} pacientes...`);
-            for (const item of patientsToSync.slice(0, 50)) {
+            for (const item of patientsToSync.slice(0, 30)) {
               try {
                 const formData = new FormData();
                 formData.append('id', item.id);
@@ -459,6 +461,8 @@ export default function Medical() {
         'Condição: RD Grave': (conditions as any).drSevere ? 'Sim' : 'Não',
         'Condição: RD Proliferativa': (conditions as any).drProliferative ? 'Sim' : 'Não',
         'Condição: Suspeita Glaucoma': (conditions as any).glaucomaSuspect ? 'Sim' : 'Não',
+        'Condição: Retinopatia Hipertensiva': (conditions as any).hypertensiveRetinopathy ? 'Sim' : 'Não',
+        'Condição: Tumor': (conditions as any).tumor ? 'Sim' : 'Não',
         'Condição: Outros': (conditions as any).others ? 'Sim' : 'Não',
       };
     });
@@ -551,20 +555,20 @@ export default function Medical() {
                     onClick={() => handleSelectPatient(patient)}
                   >
                     <div className="p-8">
-                      <div className="flex items-start justify-between mb-8">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-all duration-500">
+                      <div className="flex items-center justify-between mb-8 gap-4">
+                        <div className="flex items-center space-x-4 min-w-0 flex-1">
+                          <div className="flex-shrink-0 w-12 h-12 bg-sandstone-50 rounded-full flex items-center justify-center text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-all duration-500">
                             <User className="h-6 w-6" />
                           </div>
-                          <div>
-                            <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors">
+                          <div className="min-w-0 flex-1">
+                            <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors truncate">
                               {patient.name}
                             </h3>
-                            <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest">{patient.cpf}</p>
+                            <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest truncate">{patient.cpf}</p>
                           </div>
                         </div>
                         <span
-                          className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${patient.status === 'pending'
+                          className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex-shrink-0 whitespace-nowrap ${patient.status === 'pending'
                             ? 'bg-cardinal-50 text-cardinal-700 border border-cardinal-100'
                             : 'bg-blue-50 text-blue-700 border border-blue-100'
                             }`}
@@ -580,7 +584,7 @@ export default function Medical() {
                         </div>
                         <div className="flex items-center text-sm font-medium text-sandstone-600">
                           <MapPin className="h-4 w-4 mr-3 text-sandstone-400" />
-                          {patient.location}
+                          {patient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
                         </div>
                         <div className="flex items-center text-sm font-medium text-sandstone-600">
                           <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
@@ -597,7 +601,7 @@ export default function Medical() {
                       <div className="pt-6 border-t border-sandstone-100 flex items-center justify-between">
                         <div className="flex flex-col">
                           <span className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Unidade</span>
-                          <span className="text-xs font-serif text-charcoal italic">{patient.location}</span>
+                          <span className="text-xs font-serif text-charcoal italic">{patient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}</span>
                         </div>
                         <button className="flex items-center text-cardinal-700 font-bold text-sm group-hover:translate-x-1 transition-transform">
                           Analisar <ArrowRight className="ml-2 w-4 h-4" />
@@ -683,7 +687,7 @@ export default function Medical() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Unidade</p>
-                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.location}</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</p>
                     </div>
                   </div>
 
@@ -935,6 +939,8 @@ export default function Medical() {
                             { id: 'drSevere', label: 'RD Grave' },
                             { id: 'drProliferative', label: 'RD Proliferativa' },
                             { id: 'glaucomaSuspect', label: 'Glaucoma Suspeito' },
+                            { id: 'hypertensiveRetinopathy', label: 'Retinopatia Hipertensiva' },
+                            { id: 'tumor', label: 'Tumor / Massa' },
                             { id: 'others', label: 'Outros Achados' },
                           ].map((condition) => (
                             <button

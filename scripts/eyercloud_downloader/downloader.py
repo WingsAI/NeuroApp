@@ -103,6 +103,14 @@ async def process_exam(request, exam, cloudfront_base, state, referrer, clinic_n
     if 'exam_details' not in state:
         state['exam_details'] = {}
         
+    # Get image list if missing or if we need it
+    image_list = []
+    if exam_id not in state.get('downloaded_exams', []) or 'image_list' not in state['exam_details'].get(exam_id, {}):
+        details = await fetch_exam_details(request, exam_id)
+        image_list = details.get('examDataList', [])
+    else:
+        image_list = state['exam_details'][exam_id].get('image_list', [])
+
     state['exam_details'][exam_id] = {
         "patient_name": patient_data.get('fullName') or exam.get('patientFullName'),
         "clinic_name": clinic_name,
@@ -125,17 +133,19 @@ async def process_exam(request, exam, cloudfront_base, state, referrer, clinic_n
         },
         "otherDisease": patient_data.get('otherDisease'),
         "folder_name": f"{patient_name}_{exam_id}",
-        "download_date": date.today().isoformat()
+        "download_date": state['exam_details'].get(exam_id, {}).get('download_date') or date.today().isoformat(),
+        "image_list": image_list # Store images with types for later filtering
     }
     
-    if exam_id in state['downloaded_exams']:
+    if exam_id in state['downloaded_exams'] and image_list:
+        # If already downloaded but we just updated metadata, we can return
+        # unless some images are actually missing from disk?
+        # For safety, let's just return if it was already marked as downloaded.
         return 0
     
-    details = await fetch_exam_details(request, exam_id)
-    image_list = details.get('examDataList', [])
-
     if not image_list:
-        state['downloaded_exams'].append(exam_id)
+        if exam_id not in state['downloaded_exams']:
+            state['downloaded_exams'].append(exam_id)
         return 0
 
     exam_folder = os.path.join(DOWNLOAD_DIR, f"{patient_name}_{exam_id}")

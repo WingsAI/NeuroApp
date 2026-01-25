@@ -171,7 +171,7 @@ export default function Results() {
                           </div>
                         </td>
                         <td className="px-8 py-6 text-sm font-medium text-sandstone-600">
-                          {patient.location}
+                          {patient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
                         </td>
                         <td className="px-8 py-6 text-right">
                           <button
@@ -276,7 +276,7 @@ export default function Results() {
                       </div>
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Unidade</span>
-                        <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location}</span>
+                        <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</span>
                       </div>
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Técnico</span>
@@ -513,7 +513,7 @@ export default function Results() {
                       title="Registro & Triagem Inicial"
                       date={formatDateTime(selectedPatient.createdAt)}
                       status="Concluído"
-                      detail={`Iniciado na Unidade: ${selectedPatient.location}`}
+                      detail={`Iniciado na Unidade: ${selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}`}
                     />
                     <TimelineItem
                       title="Análise Neuroftalmológica"

@@ -45,6 +45,8 @@ export interface DiagnosticConditions {
   drSevere: boolean;
   drProliferative: boolean;
   glaucomaSuspect: boolean;
+  hypertensiveRetinopathy: boolean;
+  tumor: boolean;
   others: boolean;
 }
 
