@@ -325,271 +325,273 @@ export default function Home() {
               </div>
             )}
 
-            {/* Main Form Fields */}
-            <div className="premium-card p-8 space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <User className="w-4 h-4 mr-2" /> Nome do Paciente
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                    placeholder="Nome completo"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <Clipboard className="w-4 h-4 mr-2" /> CPF
-                  </label>
-                  <input
-                    type="text"
-                    name="cpf"
-                    value={formData.cpf}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                    placeholder="000.000.000-00"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <Calendar className="w-4 h-4 mr-2" /> Data de Nascimento
-                  </label>
-                  <input
-                    type="date"
-                    name="birthDate"
-                    value={formData.birthDate}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <Calendar className="w-4 h-4 mr-2" /> Data do Exame
-                  </label>
-                  <input
-                    type="date"
-                    name="examDate"
-                    value={formData.examDate}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <MapPin className="w-4 h-4 mr-2" /> Local do Exame
-                  </label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                    placeholder="Clínica ou Hospital"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <User className="w-4 h-4 mr-2" /> Técnico Responsável
-                  </label>
-                  <input
-                    type="text"
-                    name="technicianName"
-                    value={formData.technicianName}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                    placeholder="Nome completo do técnico"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <User className="w-4 h-4 mr-2" /> Gênero
-                  </label>
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={(e: any) => handleInputChange(e)}
-                    className="input-premium"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Outro">Outro</option>
-                    <option value="Não informado">Não informado</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <User className="w-4 h-4 mr-2" /> Raça/Cor
-                  </label>
-                  <select
-                    name="ethnicity"
-                    value={formData.ethnicity}
-                    onChange={(e: any) => handleInputChange(e)}
-                    className="input-premium"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Branca">Branca</option>
-                    <option value="Preta">Preta</option>
-                    <option value="Parda">Parda</option>
-                    <option value="Amarela">Amarela</option>
-                    <option value="Indígena">Indígena</option>
-                    <option value="Não informado">Não informado</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <Clipboard className="w-4 h-4 mr-2" /> Escolaridade
-                  </label>
-                  <select
-                    name="education"
-                    value={formData.education}
-                    onChange={(e: any) => handleInputChange(e)}
-                    className="input-premium"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Fundamental Incompleto">Fundamental Incompleto</option>
-                    <option value="Fundamental Completo">Fundamental Completo</option>
-                    <option value="Médio Incompleto">Médio Incompleto</option>
-                    <option value="Médio Completo">Médio Completo</option>
-                    <option value="Superior Incompleto">Superior Incompleto</option>
-                    <option value="Superior Completo">Superior Completo</option>
-                    <option value="Pós-graduação">Pós-graduação</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
-                    <Clipboard className="w-4 h-4 mr-2" /> Ocupação
-                  </label>
-                  <input
-                    type="text"
-                    name="occupation"
-                    value={formData.occupation}
-                    onChange={handleInputChange}
-                    className="input-premium"
-                    placeholder="Profissão / Ocupação"
-                  />
-                </div>
-              </div>
-
-              {/* Image Section */}
-              <div className="pt-8 border-t border-sandstone-100">
-                {integrationMode === 'manual' ? (
-                  <div className="space-y-4">
-                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
-                      Documentação Visual (6 Imagens)
+            {/* Main Form Fields - Only show for manual mode */}
+            {integrationMode === 'manual' && (
+              <div className="premium-card p-8 space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <User className="w-4 h-4 mr-2" /> Nome do Paciente
                     </label>
-                    <div
-                      onDrop={handleDrop}
-                      onDragOver={handleDragOver}
-                      className="group border-2 border-dashed border-sandstone-200 rounded-2xl p-12 text-center hover:border-cardinal-700 transition-all cursor-pointer bg-sandstone-50 hover:bg-white"
-                    >
-                      <input
-                        type="file"
-                        id="images"
-                        accept="image/*"
-                        multiple
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                      <label htmlFor="images" className="cursor-pointer">
-                        <div className="bg-white p-4 rounded-full w-20 h-20 mx-auto shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center">
-                          <Upload className="h-8 w-8 text-cardinal-700" />
-                        </div>
-                        <p className="mt-6 text-xl font-serif font-bold text-charcoal">Arraste as imagens aqui</p>
-                        <p className="mt-2 text-sandstone-500">ou clique para explorar arquivos locais</p>
-                      </label>
-                    </div>
-
-                    {images.length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
-                        {previewUrls.map((url, index) => (
-                          <div key={index} className="relative group rounded-xl overflow-hidden shadow-premium">
-                            <img src={url} alt="Preview" className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700" />
-                            <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <button
-                                type="button"
-                                onClick={() => removeImage(index)}
-                                className="bg-white/90 text-cardinal-700 p-3 rounded-full hover:bg-white"
-                              >
-                                <AlertCircle className="w-6 h-6" />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  previewUrls.length > 0 && (
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
-                        Imagens Sincronizadas (Phelcom EyeR - 6 Imagens)
-                      </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {previewUrls.map((url, index) => (
-                          <div key={index} className="relative rounded-xl overflow-hidden shadow-premium border-2 border-cardinal-700">
-                            <img src={url} alt="EyeR" className="w-full h-48 object-cover" />
-                            <div className="absolute top-3 left-3 bg-cardinal-700 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">
-                              Equipment Sync
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-
-              {/* Footer & Submit */}
-              <div className="pt-8 border-t border-sandstone-100 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="flex items-start max-w-md">
-                  <div className="flex items-center h-6">
                     <input
-                      id="confirm"
-                      type="checkbox"
-                      checked={confirmed}
-                      onChange={(e) => setConfirmed(e.target.checked)}
-                      className="w-5 h-5 text-cardinal-700 border-sandstone-300 rounded focus:ring-cardinal-500"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="Nome completo"
                     />
                   </div>
-                  <label htmlFor="confirm" className="ml-3 text-sm text-sandstone-600 font-medium">
-                    Declaro que validei a autenticidade das imagens e a precisão dos dados clínicos do paciente.
-                  </label>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Clipboard className="w-4 h-4 mr-2" /> CPF
+                    </label>
+                    <input
+                      type="text"
+                      name="cpf"
+                      value={formData.cpf}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="000.000.000-00"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Calendar className="w-4 h-4 mr-2" /> Data de Nascimento
+                    </label>
+                    <input
+                      type="date"
+                      name="birthDate"
+                      value={formData.birthDate}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Calendar className="w-4 h-4 mr-2" /> Data do Exame
+                    </label>
+                    <input
+                      type="date"
+                      name="examDate"
+                      value={formData.examDate}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <MapPin className="w-4 h-4 mr-2" /> Local do Exame
+                    </label>
+                    <input
+                      type="text"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="Clínica ou Hospital"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <User className="w-4 h-4 mr-2" /> Técnico Responsável
+                    </label>
+                    <input
+                      type="text"
+                      name="technicianName"
+                      value={formData.technicianName}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="Nome completo do técnico"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <User className="w-4 h-4 mr-2" /> Gênero
+                    </label>
+                    <select
+                      name="gender"
+                      value={formData.gender}
+                      onChange={(e: any) => handleInputChange(e)}
+                      className="input-premium"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                      <option value="Outro">Outro</option>
+                      <option value="Não informado">Não informado</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <User className="w-4 h-4 mr-2" /> Raça/Cor
+                    </label>
+                    <select
+                      name="ethnicity"
+                      value={formData.ethnicity}
+                      onChange={(e: any) => handleInputChange(e)}
+                      className="input-premium"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Branca">Branca</option>
+                      <option value="Preta">Preta</option>
+                      <option value="Parda">Parda</option>
+                      <option value="Amarela">Amarela</option>
+                      <option value="Indígena">Indígena</option>
+                      <option value="Não informado">Não informado</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Clipboard className="w-4 h-4 mr-2" /> Escolaridade
+                    </label>
+                    <select
+                      name="education"
+                      value={formData.education}
+                      onChange={(e: any) => handleInputChange(e)}
+                      className="input-premium"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                      <option value="Fundamental Completo">Fundamental Completo</option>
+                      <option value="Médio Incompleto">Médio Incompleto</option>
+                      <option value="Médio Completo">Médio Completo</option>
+                      <option value="Superior Incompleto">Superior Incompleto</option>
+                      <option value="Superior Completo">Superior Completo</option>
+                      <option value="Pós-graduação">Pós-graduação</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500 flex items-center">
+                      <Clipboard className="w-4 h-4 mr-2" /> Ocupação
+                    </label>
+                    <input
+                      type="text"
+                      name="occupation"
+                      value={formData.occupation}
+                      onChange={handleInputChange}
+                      className="input-premium"
+                      placeholder="Profissão / Ocupação"
+                    />
+                  </div>
                 </div>
 
-                <div className="w-full md:w-auto min-w-[240px]">
-                  <button
-                    type="submit"
-                    disabled={loading || success}
-                    className="w-full btn-cardinal flex items-center justify-center space-x-3"
-                  >
-                    {loading ? (
-                      <Loader2 className="animate-spin w-5 h-5" />
-                    ) : success ? (
-                      <CheckCircle2 className="w-5 h-5" />
-                    ) : (
-                      <Sparkles className="w-5 h-5" />
-                    )}
-                    <span className="text-lg uppercase tracking-widest font-bold">
-                      {loading ? 'Processando...' : success ? 'Sucesso' : user ? 'Finalizar Registro' : 'Entrar para Registrar'}
-                    </span>
-                  </button>
+                {/* Image Section */}
+                <div className="pt-8 border-t border-sandstone-100">
+                  {integrationMode === 'manual' ? (
+                    <div className="space-y-4">
+                      <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
+                        Documentação Visual (6 Imagens)
+                      </label>
+                      <div
+                        onDrop={handleDrop}
+                        onDragOver={handleDragOver}
+                        className="group border-2 border-dashed border-sandstone-200 rounded-2xl p-12 text-center hover:border-cardinal-700 transition-all cursor-pointer bg-sandstone-50 hover:bg-white"
+                      >
+                        <input
+                          type="file"
+                          id="images"
+                          accept="image/*"
+                          multiple
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                        <label htmlFor="images" className="cursor-pointer">
+                          <div className="bg-white p-4 rounded-full w-20 h-20 mx-auto shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center">
+                            <Upload className="h-8 w-8 text-cardinal-700" />
+                          </div>
+                          <p className="mt-6 text-xl font-serif font-bold text-charcoal">Arraste as imagens aqui</p>
+                          <p className="mt-2 text-sandstone-500">ou clique para explorar arquivos locais</p>
+                        </label>
+                      </div>
+
+                      {images.length > 0 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+                          {previewUrls.map((url, index) => (
+                            <div key={index} className="relative group rounded-xl overflow-hidden shadow-premium">
+                              <img src={url} alt="Preview" className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700" />
+                              <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button
+                                  type="button"
+                                  onClick={() => removeImage(index)}
+                                  className="bg-white/90 text-cardinal-700 p-3 rounded-full hover:bg-white"
+                                >
+                                  <AlertCircle className="w-6 h-6" />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    previewUrls.length > 0 && (
+                      <div className="space-y-4">
+                        <label className="text-sm font-bold uppercase tracking-wider text-sandstone-500">
+                          Imagens Sincronizadas (Phelcom EyeR - 6 Imagens)
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                          {previewUrls.map((url, index) => (
+                            <div key={index} className="relative rounded-xl overflow-hidden shadow-premium border-2 border-cardinal-700">
+                              <img src={url} alt="EyeR" className="w-full h-48 object-cover" />
+                              <div className="absolute top-3 left-3 bg-cardinal-700 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">
+                                Equipment Sync
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+
+                {/* Footer & Submit */}
+                <div className="pt-8 border-t border-sandstone-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="flex items-start max-w-md">
+                    <div className="flex items-center h-6">
+                      <input
+                        id="confirm"
+                        type="checkbox"
+                        checked={confirmed}
+                        onChange={(e) => setConfirmed(e.target.checked)}
+                        className="w-5 h-5 text-cardinal-700 border-sandstone-300 rounded focus:ring-cardinal-500"
+                      />
+                    </div>
+                    <label htmlFor="confirm" className="ml-3 text-sm text-sandstone-600 font-medium">
+                      Declaro que validei a autenticidade das imagens e a precisão dos dados clínicos do paciente.
+                    </label>
+                  </div>
+
+                  <div className="w-full md:w-auto min-w-[240px]">
+                    <button
+                      type="submit"
+                      disabled={loading || success}
+                      className="w-full btn-cardinal flex items-center justify-center space-x-3"
+                    >
+                      {loading ? (
+                        <Loader2 className="animate-spin w-5 h-5" />
+                      ) : success ? (
+                        <CheckCircle2 className="w-5 h-5" />
+                      ) : (
+                        <Sparkles className="w-5 h-5" />
+                      )}
+                      <span className="text-lg uppercase tracking-widest font-bold">
+                        {loading ? 'Processando...' : success ? 'Sucesso' : user ? 'Finalizar Registro' : 'Entrar para Registrar'}
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Notifications */}
             <div className="fixed bottom-8 right-8 z-50 pointer-events-none">
