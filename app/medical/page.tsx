@@ -394,6 +394,8 @@ export default function Medical() {
       drSevere: false,
       drProliferative: false,
       glaucomaSuspect: false,
+      hypertensiveRetinopathy: false,
+      tumor: false,
       others: false,
     });
   };
