@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Users, Image as LucideImage, Clock, CheckCircle2, TrendingUp, TrendingDown, Activity, RefreshCw } from 'lucide-react';
+import { Users, Image as LucideImage, Clock, CheckCircle2, TrendingUp, AlertCircle, Activity, RefreshCw, FileText, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getAnalyticsAction, getPatientsAction } from '@/app/actions/patients';
 import { AnalyticsData } from '@/types';
@@ -43,14 +43,24 @@ export default function Analytics() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-  };
-
   const formatFullDate = (dateString: string) => {
     return new Date(dateString).toLocaleString('pt-BR');
   };
+
+  // Calculate completion rate
+  const completionRate = stats.totalPatients > 0
+    ? Math.round((stats.completedReports / stats.totalPatients) * 100)
+    : 0;
+
+  // Calculate pending rate
+  const pendingRate = stats.totalPatients > 0
+    ? Math.round((stats.pendingReports / stats.totalPatients) * 100)
+    : 0;
+
+  // Average images per patient
+  const avgImagesPerPatient = stats.totalPatients > 0
+    ? (stats.totalImages / stats.totalPatients).toFixed(1)
+    : '0';
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-sandstone-50/30">
@@ -86,99 +96,116 @@ export default function Analytics() {
               title="Total de Pacientes"
               value={stats.totalPatients}
               icon={Users}
-              trend="+12%"
-              trendUp={true}
-              detail={`${stats.patientsToday} hoje`}
+              subtitle={`${stats.patientsToday} registrados hoje`}
+              color="cardinal"
             />
             <StatCard
-              title="Imagens Processadas"
+              title="Total de Imagens"
               value={stats.totalImages}
               icon={LucideImage}
-              trend="+5%"
-              trendUp={true}
-              detail={`${stats.imagesToday} hoje`}
+              subtitle={`~${avgImagesPerPatient} por paciente`}
+              color="blue"
             />
             <StatCard
-              title="Tempo Médio"
-              value={`${stats.averageProcessingTime}h`}
-              icon={Clock}
-              trend="-15%"
-              trendUp={true} // For time, down is good
-              detail="Desde o registro"
+              title="Laudos Pendentes"
+              value={stats.pendingReports}
+              icon={AlertCircle}
+              subtitle={`${pendingRate}% do total`}
+              color="amber"
             />
             <StatCard
               title="Laudos Concluídos"
               value={stats.completedReports}
               icon={CheckCircle2}
-              trend={`${Math.round((stats.completedReports / (stats.totalPatients || 1)) * 100)}%`}
-              trendUp={true}
-              detail={`${stats.pendingReports} pendentes`}
+              subtitle={`${completionRate}% concluído`}
+              color="green"
             />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Chart Placeholder / Recent Activity */}
+            {/* Status Overview */}
             <div className="lg:col-span-2 space-y-8">
+              {/* Progress Card */}
               <div className="premium-card p-10 bg-white">
-                <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h3 className="text-2xl font-serif font-bold text-charcoal mb-1 italic">Fluxo de Triagem</h3>
-                    <p className="text-sm font-medium text-sandstone-400">Volume de atendimentos vs Capacidade de análise</p>
-                  </div>
-                  <div className="flex space-x-3">
-                    <span className="flex items-center text-[10px] font-bold uppercase tracking-widest text-cardinal-700">
-                      <div className="w-2 h-2 bg-cardinal-700 rounded-full mr-2" /> Registros
-                    </span>
-                    <span className="flex items-center text-[10px] font-bold uppercase tracking-widest text-sandstone-300">
-                      <div className="w-2 h-2 bg-sandstone-200 rounded-full mr-2" /> Laudos
-                    </span>
+                    <h3 className="text-2xl font-serif font-bold text-charcoal mb-1 italic">Progresso Geral</h3>
+                    <p className="text-sm font-medium text-sandstone-400">Status de análise de todos os pacientes</p>
                   </div>
                 </div>
 
-                {/* Mock Chart Visualization */}
-                <div className="h-64 flex items-end justify-between gap-2">
-                  {[45, 62, 58, 75, 90, 85, 95].map((val, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center group">
-                      <div className="w-full bg-sandstone-50 rounded-t-lg relative overflow-hidden h-full flex items-end">
-                        <div
-                          className="w-full bg-cardinal-700/10 group-hover:bg-cardinal-700/20 transition-all rounded-t-lg"
-                          style={{ height: `${val}%` }}
-                        />
-                        <div
-                          className="absolute bottom-0 w-full bg-cardinal-700 transition-all"
-                          style={{ height: `${val * 0.7}%` }}
-                        />
-                      </div>
-                      <span className="mt-4 text-[10px] font-bold text-sandstone-400 uppercase tracking-tighter">
-                        {['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'][i]}
-                      </span>
+                {/* Progress Bar */}
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm font-bold">
+                      <span className="text-sandstone-600">Concluídos</span>
+                      <span className="text-green-600">{stats.completedReports} de {stats.totalPatients}</span>
                     </div>
-                  ))}
+                    <div className="h-4 bg-sandstone-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-green-500 rounded-full transition-all duration-500"
+                        style={{ width: `${completionRate}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm font-bold">
+                      <span className="text-sandstone-600">Pendentes</span>
+                      <span className="text-amber-600">{stats.pendingReports} de {stats.totalPatients}</span>
+                    </div>
+                    <div className="h-4 bg-sandstone-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-amber-500 rounded-full transition-all duration-500"
+                        style={{ width: `${pendingRate}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Summary Stats */}
+                <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-sandstone-100">
+                  <div className="text-center">
+                    <p className="text-3xl font-serif font-bold text-charcoal">{stats.totalPatients}</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-sandstone-400 mt-1">Total</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl font-serif font-bold text-amber-600">{stats.pendingReports}</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-sandstone-400 mt-1">Pendentes</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl font-serif font-bold text-green-600">{stats.completedReports}</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-sandstone-400 mt-1">Concluídos</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Quality Metrics */}
+              {/* Info Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="premium-card p-8 bg-charcoal text-white">
                   <div className="flex items-start justify-between mb-6">
                     <div className="p-3 bg-white/10 rounded-xl">
-                      <Activity className="w-6 h-6 text-cardinal-400" />
+                      <FileText className="w-6 h-6 text-cardinal-400" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-cardinal-400 px-3 py-1 bg-white/5 rounded-full border border-white/10">SLA Global</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-cardinal-400 px-3 py-1 bg-white/5 rounded-full border border-white/10">Taxa de Conclusão</span>
                   </div>
-                  <h4 className="text-4xl font-serif font-bold mb-2">98.4%</h4>
-                  <p className="text-sm font-medium text-sandstone-400 leading-relaxed uppercase tracking-wider">Eficiência de Resposta dentro de 24h</p>
+                  <h4 className="text-4xl font-serif font-bold mb-2">{completionRate}%</h4>
+                  <p className="text-sm font-medium text-sandstone-400 leading-relaxed uppercase tracking-wider">
+                    {stats.completedReports} laudos finalizados de {stats.totalPatients} pacientes
+                  </p>
                 </div>
 
                 <div className="premium-card p-8 bg-cardinal-700 text-white">
                   <div className="flex items-start justify-between mb-6">
                     <div className="p-3 bg-white/10 rounded-xl">
-                      <TrendingUp className="w-6 h-6 text-white" />
+                      <Activity className="w-6 h-6 text-white" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60 px-3 py-1 bg-white/5 rounded-full border border-white/10">KPI Mensal</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60 px-3 py-1 bg-white/5 rounded-full border border-white/10">Imagens</span>
                   </div>
-                  <h4 className="text-4xl font-serif font-bold mb-2">+240</h4>
-                  <p className="text-sm font-medium text-white/70 leading-relaxed uppercase tracking-wider">Novos diagnósticos processados este mês</p>
+                  <h4 className="text-4xl font-serif font-bold mb-2">{stats.totalImages}</h4>
+                  <p className="text-sm font-medium text-white/70 leading-relaxed uppercase tracking-wider">
+                    Média de {avgImagesPerPatient} imagens por paciente
+                  </p>
                 </div>
               </div>
             </div>
@@ -197,7 +224,9 @@ export default function Analytics() {
                       <div className="mt-1 w-2 h-2 rounded-full bg-cardinal-700 ring-4 ring-cardinal-50 group-hover:scale-125 transition-transform" />
                       <div>
                         <p className="text-sm font-bold text-charcoal group-hover:text-cardinal-700 transition-colors uppercase tracking-tight">{patient.name}</p>
-                        <p className="text-[10px] font-medium text-sandstone-400 uppercase tracking-widest mb-1">{patient.location}</p>
+                        <p className="text-[10px] font-medium text-sandstone-400 uppercase tracking-widest mb-1">
+                          {patient.location?.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
+                        </p>
                         <div className="flex items-center text-[10px] font-bold text-sandstone-300">
                           <Clock className="w-3 h-3 mr-1" />
                           {formatFullDate(patient.createdAt)}
@@ -209,23 +238,28 @@ export default function Analytics() {
               </div>
 
               <div className="premium-card p-6 bg-sandstone-100/50 border-dashed">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-charcoal mb-4">Produtividade por Região</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-charcoal mb-4 flex items-center">
+                  <MapPin className="w-4 h-4 mr-2 text-cardinal-700" />
+                  Pacientes por Região
+                </h4>
                 <div className="space-y-4">
                   {stats.productivityByRegion && Object.keys(stats.productivityByRegion).length > 0 ? (
-                    Object.entries(stats.productivityByRegion).map(([region, count], i) => (
-                      <div key={i} className="space-y-1">
-                        <div className="flex justify-between text-[10px] font-bold uppercase text-sandstone-500">
-                          <span>{region}</span>
-                          <span>{count} exames</span>
+                    Object.entries(stats.productivityByRegion)
+                      .sort(([, a], [, b]) => (b as number) - (a as number))
+                      .map(([region, count], i) => (
+                        <div key={i} className="space-y-1">
+                          <div className="flex justify-between text-[10px] font-bold uppercase text-sandstone-500">
+                            <span>{region.trim().startsWith('Tauá') ? 'Tauá-Ceará' : region}</span>
+                            <span>{count} pacientes</span>
+                          </div>
+                          <div className="h-1.5 bg-sandstone-200 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-cardinal-700 rounded-full"
+                              style={{ width: `${Math.min((count as number / (stats.totalPatients || 1)) * 100, 100)}%` }}
+                            />
+                          </div>
                         </div>
-                        <div className="h-1 bg-sandstone-200 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-cardinal-700"
-                            style={{ width: `${Math.min((count as number / (stats.totalPatients || 1)) * 100, 100)}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))
+                      ))
                   ) : (
                     <p className="text-[10px] text-sandstone-400 italic">Sem dados de região.</p>
                   )}
@@ -256,7 +290,7 @@ export default function Analytics() {
                         </div>
                       ))
                   ) : (
-                    <p className="text-[10px] text-sandstone-400 italic">Sem dados de produtividade.</p>
+                    <p className="text-[10px] text-sandstone-400 italic">Nenhum laudo concluído ainda.</p>
                   )}
                 </div>
               </div>
@@ -268,23 +302,27 @@ export default function Analytics() {
   );
 }
 
-function StatCard({ title, value, icon: Icon, trend, trendUp, detail }: any) {
+function StatCard({ title, value, icon: Icon, subtitle, color }: any) {
+  const colorClasses: Record<string, string> = {
+    cardinal: 'bg-cardinal-50 text-cardinal-700',
+    blue: 'bg-blue-50 text-blue-700',
+    amber: 'bg-amber-50 text-amber-700',
+    green: 'bg-green-50 text-green-700',
+  };
+
   return (
     <div className="premium-card p-8 group hover:translate-y-[-4px] transition-all duration-500">
       <div className="flex items-start justify-between mb-6">
-        <div className="p-4 bg-sandstone-50 rounded-2xl text-cardinal-700 group-hover:bg-cardinal-700 group-hover:text-white transition-colors duration-500 shadow-sm">
+        <div className={`p-4 rounded-2xl ${colorClasses[color]} group-hover:scale-110 transition-transform duration-500 shadow-sm`}>
           <Icon className="w-6 h-6" />
-        </div>
-        <div className={`flex items-center space-x-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${trendUp ? 'bg-green-50 text-green-700' : 'bg-cardinal-50 text-cardinal-700'}`}>
-          {trendUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-          <span>{trend}</span>
         </div>
       </div>
       <div>
         <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-[0.2em] mb-1">{title}</p>
         <h3 className="text-4xl font-serif font-bold text-charcoal mb-2">{value}</h3>
-        <p className="text-xs font-medium text-sandstone-500 italic">{detail}</p>
+        <p className="text-xs font-medium text-sandstone-500 italic">{subtitle}</p>
       </div>
     </div>
   );
 }
+
