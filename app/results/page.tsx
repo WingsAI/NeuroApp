@@ -201,7 +201,7 @@ export default function Results() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
           <div className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity" onClick={closeModal} />
 
-          <div className="relative bg-white w-full max-w-5xl max-h-[95vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col stagger-load">
+          <div className="relative bg-white w-full max-w-5xl max-h-[95vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col stagger-load print-area">
             {/* Modal Header */}
             <div className="px-8 py-6 bg-sandstone-50 border-b border-sandstone-100 flex items-center justify-between no-print">
               <div className="flex items-center space-x-4">
