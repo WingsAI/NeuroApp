@@ -23,7 +23,11 @@ export default function Results() {
 
   const loadPatients = async () => {
     const allPatients = await getPatientsAction();
-    setPatients(allPatients as any);
+    // Only show patients with completed reports
+    const completedPatients = (allPatients as Patient[]).filter(
+      (p) => p.status === 'completed' && p.report
+    );
+    setPatients(completedPatients);
   };
 
   const filterPatients = () => {
@@ -37,7 +41,7 @@ export default function Results() {
       (p: Patient) =>
         p.name.toLowerCase().includes(term) ||
         p.cpf.includes(term) ||
-        p.report?.doctorName.toLowerCase().includes(term) ||
+        p.report?.doctorName?.toLowerCase().includes(term) ||
         p.location.toLowerCase().includes(term)
     );
     setFilteredPatients(filtered);
