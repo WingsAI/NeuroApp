@@ -23,7 +23,6 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: 'Registro de Paciente', icon: ClipboardList },
-    { href: '/patients', label: 'Galeria', icon: Users },
     { href: '/analytics', label: 'Analytics', icon: BarChart3 },
     { href: '/medical', label: 'Fila de Laudos', icon: Activity },
     { href: '/referrals', label: 'Encaminhamentos', icon: Send },

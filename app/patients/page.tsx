@@ -42,8 +42,12 @@ export default function PatientsGallery() {
                     throw new Error('Falha ao carregar dados dos pacientes');
                 }
                 setPatients(data);
-            } catch (err) {
-                setError('Erro ao carregar dados. Verifique se o arquivo bytescale_mapping.json está em /public');
+            } catch (err: any) {
+                if (err.message?.includes('autorizado')) {
+                    setError('Sessão expirada. Faça login novamente.');
+                } else {
+                    setError('Erro ao carregar dados. Verifique sua conexão ou faça login novamente.');
+                }
                 console.error(err);
             } finally {
                 setLoading(false);
