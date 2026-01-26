@@ -111,6 +111,8 @@ async def process_exam(request, exam, cloudfront_base, state, referrer, clinic_n
     else:
         image_list = state['exam_details'][exam_id].get('image_list', [])
 
+    anamnesis = patient_data.get('anamnesis') or {}
+    
     state['exam_details'][exam_id] = {
         "patient_name": patient_data.get('fullName') or exam.get('patientFullName'),
         "clinic_name": clinic_name,
@@ -118,20 +120,20 @@ async def process_exam(request, exam, cloudfront_base, state, referrer, clinic_n
         "gender": patient_data.get('gender'),
         "cpf": patient_data.get('document2'), # API uses document2 for CPF
         "underlying_diseases": {
-            "diabetes": patient_data.get('diabetes'),
-            "hypertension": patient_data.get('hypertension'),
-            "cholesterol": patient_data.get('cholesterol'),
-            "smoker": patient_data.get('smoker')
+            "diabetes": anamnesis.get('diabetes', patient_data.get('diabetes', False)),
+            "hypertension": anamnesis.get('hypertension', patient_data.get('hypertension', False)),
+            "cholesterol": anamnesis.get('cholesterol', patient_data.get('cholesterol', False)),
+            "smoker": anamnesis.get('smoker', patient_data.get('smoker', False))
         },
         "ophthalmic_diseases": {
-            "diabeticRetinopathy": patient_data.get('diabeticRetinopathy'),
-            "dmri": patient_data.get('dmri'),
-            "glaucoma": patient_data.get('glaucoma'),
-            "cataract": patient_data.get('cataract'),
-            "pterygium": patient_data.get('pterygium'),
-            "lowVisualAcuity": patient_data.get('lowVisualAcuity')
+            "diabeticRetinopathy": anamnesis.get('diabeticRetinopathy', patient_data.get('diabeticRetinopathy', False)),
+            "dmri": anamnesis.get('dmri', patient_data.get('dmri', False)),
+            "glaucoma": anamnesis.get('glaucoma', patient_data.get('glaucoma', False)),
+            "cataract": anamnesis.get('cataract', patient_data.get('cataract', False)),
+            "pterygium": anamnesis.get('pterygium', patient_data.get('pterygium', False)),
+            "lowVisualAcuity": anamnesis.get('lowVisualAcuity', patient_data.get('lowVisualAcuity', False))
         },
-        "otherDisease": patient_data.get('otherDisease'),
+        "otherDisease": patient_data.get('otherDisease') or anamnesis.get('otherDisease'),
         "folder_name": f"{patient_name}_{exam_id}",
         "download_date": state['exam_details'].get(exam_id, {}).get('download_date') or date.today().isoformat(),
         "image_list": image_list # Store images with types for later filtering

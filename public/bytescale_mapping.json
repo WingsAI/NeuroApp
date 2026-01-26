@@ -38,9 +38,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -51,7 +51,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANA_CASSIA_FERREIRA_FIRMO_695e63c328b781ee6000edc7": {
         "images": [
@@ -119,7 +119,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANA_FERREIRA_BELIZARIO_697001b9029f1e6981546a73": {
         "images": [
@@ -174,9 +174,9 @@
         "gender": "",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -187,7 +187,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_ALVES_DA_SILVA_695e9f6828b781ee60010fe7": {
         "images": [
@@ -242,7 +242,7 @@
         "gender": "F",
         "cpf": "33042616304",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -251,11 +251,11 @@
             "diabeticRetinopathy": false,
             "dmri": false,
             "glaucoma": false,
-            "cataract": false,
+            "cataract": true,
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_ANTENORA_RODRIGUES_RAMOS_697001b9fa6df75200cfe279": {
         "images": [
@@ -310,10 +310,10 @@
         "gender": "F",
         "cpf": "00471596345",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -323,7 +323,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_ELIDETE_RODRIGUES_VIEIRA_697001c4fa6df75200cfe285": {
         "images": [
@@ -365,7 +365,7 @@
         "cpf": "01442069350",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -377,7 +377,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_ELIZIMARIA_DE_QUEIROZ_697001be4e429636ed944bfb": {
         "images": [
@@ -425,9 +425,9 @@
         "gender": "F",
         "cpf": "63713985391",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -438,7 +438,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_FERNANDES_DE_SOUSA_697001bffa6df75200cfe280": {
         "images": [
@@ -479,9 +479,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -492,7 +492,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_FERREIRA_DE_MORAIS_MACIEK_697001bf4e429636ed944bfd": {
         "images": [
@@ -554,7 +554,7 @@
         "gender": "F",
         "cpf": "25926314372",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -567,7 +567,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_FERREIRA_DE_SOUSA_697001c526260539c16a9607": {
         "images": [
@@ -615,9 +615,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -628,7 +628,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "Antonia_Guilherme_da_Silva_695e7b4dfa6df75200cbdd05": {
         "images": [
@@ -690,9 +690,9 @@
         "gender": "",
         "cpf": "20485794349",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -703,7 +703,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_HELENA_ALVES_697001bd029f1e6981546a77": {
         "images": [
@@ -813,9 +813,9 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -825,7 +825,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_ISABEL_MORAIS_BRAGA_697001cd26260539c16a9610": {
         "images": [
@@ -881,8 +881,8 @@
         "cpf": "40079317391",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -893,7 +893,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_PAULA_PEREIRA_DE_OLIVEIRA_697001c1029f1e6981546a7d": {
         "images": [
@@ -920,9 +920,9 @@
         "gender": "F",
         "cpf": "93568878372",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -933,7 +933,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_PAULA_PEREIRA_DE_OLIVEIRA_697001c126260539c16a9603": {
         "images": [
@@ -1002,9 +1002,9 @@
         "gender": "F",
         "cpf": "93568878372",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -1015,7 +1015,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIA_SOUSA_DO_NASCIMENTO_697001c5fa6df75200cfe286": {
         "images": [
@@ -1056,9 +1056,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -1069,7 +1069,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIO_BENTO_DO_NASCIMENTO_697001c926260539c16a960c": {
         "images": [
@@ -1125,9 +1125,9 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -1137,7 +1137,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIO_CARLOS_TEIXEIRA_697001bd029f1e6981546a76": {
         "images": [
@@ -1180,7 +1180,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -1191,7 +1191,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIO_FERREIRA_FIRMO_695e612d26260539c1667cce": {
         "images": [
@@ -1302,10 +1302,10 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -1315,7 +1315,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ANTONIO_GONCALVES_FERREIRA_697001c64e429636ed944c05": {
         "images": [
@@ -1561,7 +1561,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -1573,7 +1573,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "CAMILA_MARIA_FERREIRA_CITO_695e8a8c26260539c166954f": {
         "images": [
@@ -1629,8 +1629,8 @@
         "cpf": "01105454355",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -1641,7 +1641,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "CICERO_ERASMO_FERREIRA_DO_NASCIMENTO_697001c526260539c16a9606": {
         "images": [
@@ -1865,10 +1865,10 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -1878,7 +1878,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "CRISTINA_CANDIDO_DA_FRANCA_695e9ddefa6df75200cbee86": {
         "images": [
@@ -1919,9 +1919,9 @@
         "gender": "F",
         "cpf": "78156440315",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -1932,7 +1932,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "DAVINA_VALE_RODRIGUES_697001c826260539c16a960a": {
         "images": [
@@ -2001,9 +2001,9 @@
         "gender": "F",
         "cpf": "34853090363",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -2014,7 +2014,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "DELMIRA_ROBEIRO_LIMA_697001c026260539c16a9602": {
         "images": [
@@ -2130,9 +2130,9 @@
         "gender": "F",
         "cpf": "03749602328",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -2143,7 +2143,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "EDILONEIDE_PEREIRA_FERNANDES_697001ce26260539c16a9611": {
         "images": [
@@ -2288,8 +2288,8 @@
         "cpf": "00233301399",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -2300,7 +2300,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ERNISLANDIA_RIBEIRO_XAVIER_697001bcfa6df75200cfe27d": {
         "images": [
@@ -2342,7 +2342,7 @@
         "cpf": "01940109370",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -2354,7 +2354,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "EUDOCIANA_CAVALCANTE_MACEDO_697001cb4e429636ed944c0d": {
         "images": [
@@ -2457,7 +2457,7 @@
         "cpf": "01607180316",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -2469,7 +2469,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCINALDA_ALVES_DA_SILVA_TEIXEIRA_697001ba26260539c16a95fc": {
         "images": [
@@ -2511,9 +2511,9 @@
         "cpf": "92543715304",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -2523,7 +2523,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISA_ONELIA_BEZERRA_697001c74e429636ed944c07": {
         "images": [
@@ -2580,7 +2580,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -2591,7 +2591,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_ALVES_CAVALCANTE_DA_FRANCA_697001c5029f1e6981546a81": {
         "images": [
@@ -2632,10 +2632,10 @@
         "gender": "F",
         "cpf": "34676929315",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -2645,7 +2645,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_ALVES_DA_FRANCA_VERISSIMO_697001c24e429636ed944c00": {
         "images": [
@@ -2686,8 +2686,8 @@
         "gender": "F",
         "cpf": "82815259320",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -2699,7 +2699,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_ALVES_DE_SOUZA_697001ba029f1e6981546a74": {
         "images": [
@@ -2727,9 +2727,9 @@
         "cpf": "66555736372",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -2739,7 +2739,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_ANTONIA_PEREIRA_DA_SILVA_697001c426260539c16a9605": {
         "images": [
@@ -2781,7 +2781,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -2793,7 +2793,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_KELLIANE_ARAÚJO_DE_SOUSA_697001ce26260539c16a9612": {
         "images": [
@@ -2836,7 +2836,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -2847,7 +2847,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_MARIA_FERREIRA_DE_SOUSA_695e69854b0e754dac367640": {
         "images": [
@@ -2909,8 +2909,8 @@
         "gender": "F",
         "cpf": "63731525372",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -2922,7 +2922,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_RODRIGUES_BIZERRA_CAVALCANTE_697001cc4e429636ed944c0e": {
         "images": [
@@ -3006,8 +3006,8 @@
         "cpf": "30933838387",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -3018,7 +3018,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_SANDRA_De_Sousa_695ea2b84b0e754dac369600": {
         "images": [
@@ -3095,9 +3095,9 @@
         "cpf": "02489417398",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -3107,7 +3107,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_SARAIVA_DE_MELO_697001ca029f1e6981546a86": {
         "images": [
@@ -3156,19 +3156,19 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
             "dmri": false,
-            "glaucoma": false,
+            "glaucoma": true,
             "cataract": false,
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "Francisca_Torquato_Barbosa_695e8168fa6df75200cbdf5f": {
         "images": [
@@ -3230,8 +3230,8 @@
         "gender": "F",
         "cpf": "51854864300",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -3243,7 +3243,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCA_VIEIRA_DE_LIMA_SOUZA_695e857328b781ee600101af": {
         "images": [
@@ -3320,8 +3320,8 @@
         "cpf": "00249099390",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -3332,7 +3332,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_ALVES_DE_MACEDO_697001bb26260539c16a95fd": {
         "images": [
@@ -3375,18 +3375,18 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
             "dmri": false,
             "glaucoma": false,
-            "cataract": false,
-            "pterygium": false,
+            "cataract": true,
+            "pterygium": true,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_CAMILO_DE_SOUSA_697001bd26260539c16a95ff": {
         "images": [
@@ -3427,8 +3427,8 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -3440,7 +3440,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_CHAGAS_DA_costa_695ea6734b0e754dac36990b": {
         "images": [
@@ -3488,10 +3488,10 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -3501,7 +3501,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_CHAGAS_LOIOLA_697001c2029f1e6981546a7e": {
         "images": [
@@ -3543,7 +3543,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -3555,7 +3555,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_DAS_CHAGAS_PEREIRA_NETO_695e8bd24b0e754dac368772": {
         "images": [
@@ -3603,9 +3603,9 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -3616,7 +3616,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_ELIVAN_DE_SOUSA_697001c626260539c16a9608": {
         "images": [
@@ -3636,7 +3636,7 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -3649,7 +3649,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_ELIVAN_DE_SOUSA_697001c64e429636ed944c06": {
         "images": [
@@ -3690,7 +3690,7 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -3703,7 +3703,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_FEIJO_DA_SILVA_697001c3fa6df75200cfe283": {
         "images": [
@@ -3744,9 +3744,9 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -3757,7 +3757,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_FRANCINE_DE_OLIVEIRA_697001cb029f1e6981546a88": {
         "images": [
@@ -3813,7 +3813,7 @@
         "cpf": "40075508320",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -3825,7 +3825,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_OLIVEIRA_LOIOLA_695e77fbfa6df75200cbdb99": {
         "images": [
@@ -3923,9 +3923,9 @@
         "cpf": "01911482378",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -3935,7 +3935,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_RODRIGUES_BEZERRA_697001ba26260539c16a95fb": {
         "images": [
@@ -4004,9 +4004,9 @@
         "gender": "M",
         "cpf": "00233300317",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -4017,7 +4017,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_ROSENDO_MUNDA_697001c0029f1e6981546a7b": {
         "images": [
@@ -4045,7 +4045,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4057,7 +4057,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_SERGIO_OLIVEIRA_697001ce4e429636ed944c10": {
         "images": [
@@ -4113,7 +4113,7 @@
         "cpf": "45457611353",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4125,7 +4125,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "FRANCISCO_TEOBALDO_CIDRÃO_SOUTO_JUNIOR_697001cf029f1e6981546a8c": {
         "images": [
@@ -4242,7 +4242,7 @@
         "cpf": "02988778302",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4254,7 +4254,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "GERALDA_ESTEVAO_DA_SILVA_697001c3fa6df75200cfe284": {
         "images": [
@@ -4305,7 +4305,7 @@
             "diabetes": false,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -4315,7 +4315,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "GERALDO_ALVES_MOTA_695e6d1d26260539c16686c9": {
         "images": [
@@ -4377,10 +4377,10 @@
         "gender": "M",
         "cpf": "36953318368",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -4390,7 +4390,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "HERBET_HONORATO_FEITOSA_697001c926260539c16a960b": {
         "images": [
@@ -4493,7 +4493,7 @@
         "cpf": "53231511372",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4505,7 +4505,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "IRANI_LOURENCO_RODRIGUES_697001cb029f1e6981546a87": {
         "images": [
@@ -4547,8 +4547,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -4559,7 +4559,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ISAMAR_INACIO_DA_FRANCA_695e88ae28b781ee600102d1": {
         "images": [
@@ -4657,7 +4657,7 @@
         "cpf": "53840429315",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4669,7 +4669,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "IVNA_LUZIA_ALVES_DE_SOUSA_697001c9029f1e6981546a85": {
         "images": [
@@ -4882,7 +4882,7 @@
         "cpf": "78125650334",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4894,7 +4894,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOANA_DARC_FERREIRA_MONTE_697001cf26260539c16a9613": {
         "images": [
@@ -4964,7 +4964,7 @@
         "cpf": "84318074315",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -4976,7 +4976,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOAQUIM_FERNANDES_DO_NASCIMENTO_697001ccfa6df75200cfe28e": {
         "images": [
@@ -5039,7 +5039,7 @@
         "cpf": "03109010305",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -5051,7 +5051,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOAQUIM_RODRIGUES_SOUSA_697001c0029f1e6981546a7a": {
         "images": [
@@ -5093,7 +5093,7 @@
         "cpf": "21890501387",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -5105,7 +5105,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOSE_ADECIO_LIMA_DOS_REIS_697001ca4e429636ed944c0b": {
         "images": [
@@ -5215,7 +5215,7 @@
         "cpf": "31657796191",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -5227,7 +5227,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOSE_ALVES_DE_SOUZA_FILHO_697001c04e429636ed944bfe": {
         "images": [
@@ -5276,7 +5276,7 @@
         "cpf": "04352098841",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -5288,7 +5288,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOSE_OLAVO_GOMES_PEREIRA_695ea48b4b0e754dac369791": {
         "images": [
@@ -5351,9 +5351,9 @@
         "cpf": "11300583878",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -5363,7 +5363,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOSE_RODRIGUES_TORQUATO_JUNIOR_697001c7029f1e6981546a83": {
         "images": [
@@ -5458,9 +5458,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5471,7 +5471,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JOÃO_JOSIAS_DA_SILVA_697001cd029f1e6981546a8a": {
         "images": [
@@ -5557,7 +5557,7 @@
             "diabetes": false,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -5567,7 +5567,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "JULIA_PEREIRA_DE_SOUZA_697001ca26260539c16a960d": {
         "images": [
@@ -5630,8 +5630,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5642,7 +5642,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LEONILIA_JUVENAL_OLIVEIRA_SILVA_697001bb029f1e6981546a75": {
         "images": [
@@ -5683,20 +5683,20 @@
         "gender": "F",
         "cpf": "51283182300",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
             "dmri": false,
             "glaucoma": false,
-            "cataract": false,
+            "cataract": true,
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LEONOR_DO_NASCIMENTO_SILVA_697001be4e429636ed944bfc": {
         "images": [
@@ -5738,8 +5738,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5750,7 +5750,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LUCIA_DE_FATIMA_SILVA_GOMES_697001c0fa6df75200cfe281": {
         "images": [
@@ -5791,9 +5791,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5804,7 +5804,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LUIZ_CRISTINA_RODRIGUES_695e7285fa6df75200cbd89c": {
         "images": [
@@ -5881,8 +5881,8 @@
         "cpf": "01178153304",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5893,7 +5893,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LUIZ_SERAFIM_FA_SILA_697001b926260539c16a95fa": {
         "images": [
@@ -5955,9 +5955,9 @@
         "gender": "M",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -5968,7 +5968,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LUIZA_ANA_BEZERRA_DE_SOUSA_697001bdfa6df75200cfe27f": {
         "images": [
@@ -6016,8 +6016,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6029,7 +6029,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "LUIZA_MARIA_FERREIRA_VIANA_695e87464b0e754dac368575": {
         "images": [
@@ -6078,7 +6078,7 @@
         "cpf": "36101583368",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6090,7 +6090,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MANOEL_RODRIGUEs_DO_NASCIMENTO_697001be029f1e6981546a78": {
         "images": [
@@ -6132,8 +6132,8 @@
         "cpf": "67491090397",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6144,7 +6144,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_ALVES_DE_OLIVEIRA_697001b94e429636ed944bf6": {
         "images": [
@@ -6186,9 +6186,9 @@
         "cpf": "88066959320",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -6198,7 +6198,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_ALVES_GONCALVES_697001bcfa6df75200cfe27e": {
         "images": [
@@ -6246,9 +6246,9 @@
         "gender": "F",
         "cpf": "63699478300",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6259,7 +6259,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_AMELIA_BEZERRA_DA_SILVA_697001c3029f1e6981546a7f": {
         "images": [
@@ -6300,9 +6300,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6313,7 +6313,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_CAVALCANTE_DA_SILVA_695eabf8fa6df75200cbf953": {
         "images": [
@@ -6361,10 +6361,10 @@
         "gender": "F",
         "cpf": "63735156304",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -6374,7 +6374,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_CLAUDENE_VERISSIMO_DA_FRANCA_697001c2fa6df75200cfe282": {
         "images": [
@@ -6424,7 +6424,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6435,7 +6435,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DA_CONCEICAO_CAVALCANTE_ROSENDO_697001bc26260539c16a95fe": {
         "images": [
@@ -6490,8 +6490,8 @@
         "gender": "F",
         "cpf": "24559806349",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6503,7 +6503,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DA_CONCEICAO_PINENTEL_DOS_SANTOS_697001bb4e429636ed944bf8": {
         "images": [
@@ -6545,7 +6545,7 @@
         "cpf": "01871295335",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6557,7 +6557,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DA_CONCEICAO_SOUSA_E_SILVA_697001c6029f1e6981546a82": {
         "images": [
@@ -6599,9 +6599,9 @@
         "cpf": "17129796391",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -6611,7 +6611,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DAS_GRACAS_ALVES_VENANCIO_697001c8fa6df75200cfe289": {
         "images": [
@@ -6660,7 +6660,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6672,7 +6672,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DAS_GRACAS_DA_SILVA_697001ca4e429636ed944c0c": {
         "images": [
@@ -6713,9 +6713,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6726,7 +6726,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DAS_GRACAS_PEREIRA_LIMA_697001c726260539c16a9609": {
         "images": [
@@ -6768,7 +6768,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -6780,7 +6780,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DE_FATIMA_DO_NASCIMENTO_697001c14e429636ed944bff": {
         "images": [
@@ -6828,9 +6828,9 @@
         "gender": "F",
         "cpf": "11132299349",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6841,7 +6841,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DIOMAR_LIMA_DOS_REIS_695e5bfa26260539c16678c0": {
         "images": [
@@ -6932,8 +6932,8 @@
         "cpf": "33067341368",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -6944,7 +6944,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DIVA_DA_SILVA_DE_SOUZA_697001bb4e429636ed944bf7": {
         "images": [
@@ -7034,8 +7034,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7047,7 +7047,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DO_CARMO_TORQUATO_DE_SOUSA_697001cbfa6df75200cfe28c": {
         "images": [
@@ -7096,8 +7096,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7108,7 +7108,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DO_ROSARIO_DAMIAO_OPLIVEIRA_695e976426260539c1669cdd": {
         "images": [
@@ -7156,9 +7156,9 @@
         "gender": "F",
         "cpf": "94351279320",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7169,7 +7169,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_DO_ROSARIO_FERREIRA_SOUSA_695e9bc228b781ee60010d96": {
         "images": [
@@ -7210,9 +7210,9 @@
         "gender": "F",
         "cpf": "44320825349",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7223,7 +7223,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_ERLIENE_DE_LIMA_697001c34e429636ed944c01": {
         "images": [
@@ -7265,8 +7265,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7277,7 +7277,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_EUDOCIA_BENEVIDES_CAVALCANTE_697001bc4e429636ed944bf9": {
         "images": [
@@ -7326,7 +7326,7 @@
         "cpf": "36952613315",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7338,7 +7338,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_FELIX_DE_ASSIS_CAVALCANTE_695e8319fa6df75200cbdfe5": {
         "images": [
@@ -7365,9 +7365,9 @@
         "gender": "F",
         "cpf": "63691302300",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7378,7 +7378,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_FERREIRA_FIRMO_697001cf029f1e6981546a8e": {
         "images": [
@@ -7501,8 +7501,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7514,7 +7514,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_GRACI_DE_LIMA_MARCELINO_697001c7fa6df75200cfe288": {
         "images": [
@@ -7556,7 +7556,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7564,11 +7564,11 @@
             "diabeticRetinopathy": false,
             "dmri": false,
             "glaucoma": false,
-            "cataract": false,
+            "cataract": true,
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_HOLANDA_DOS_Santos_695e8d12fa6df75200cbe3f3": {
         "images": [
@@ -7609,9 +7609,9 @@
         "gender": "F",
         "cpf": "02063037345",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7622,7 +7622,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_ISA_FERREIRA_CITO_697001c94e429636ed944c0a": {
         "images": [
@@ -7663,9 +7663,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7676,7 +7676,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_JOSÉ_TORQUARTO_BARBOSA_DA_SILVA_697001ce029f1e6981546a8b": {
         "images": [
@@ -7745,9 +7745,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7758,7 +7758,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_JULIA_ZInzin_de_Assis_697001cb26260539c16a960e": {
         "images": [
@@ -7813,8 +7813,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7826,7 +7826,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_LIDIANE_SILVA_ANDRADE_697001c226260539c16a9604": {
         "images": [
@@ -7869,7 +7869,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -7880,7 +7880,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_LUIZA_FERREIRA_FIRMO_695e6fc0fa6df75200cbd6c9": {
         "images": [
@@ -7950,7 +7950,7 @@
         "cpf": "04593023378",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -7962,7 +7962,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_LUIZA_FERREIRA_MONTE_695e55504b0e754dac3666c4": {
         "images": [
@@ -8088,7 +8088,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -8100,7 +8100,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_MAFALDA_FERREIRA_CITO_695e841e28b781ee6001011b": {
         "images": [
@@ -8148,10 +8148,10 @@
         "gender": "F",
         "cpf": "39953718334",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -8161,7 +8161,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_PAIVA_ALVES_SANTANA_697001bf029f1e6981546a79": {
         "images": [
@@ -8209,9 +8209,9 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -8222,7 +8222,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_PEREIRA_DA_SILVA_697001cc029f1e6981546a89": {
         "images": [
@@ -8292,7 +8292,7 @@
         "cpf": "05315324370",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -8304,7 +8304,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_PINHO_GOMES_DOS_SANTOS_695e7cd326260539c1668ffe": {
         "images": [
@@ -8366,10 +8366,10 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -8379,7 +8379,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_REGINA_VERISSIMO_697001c34e429636ed944c02": {
         "images": [
@@ -8428,7 +8428,7 @@
         "cpf": "95949860349",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -8440,7 +8440,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_VANUSA_ALMEIDA_697001c1029f1e6981546a7c": {
         "images": [
@@ -8488,8 +8488,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -8501,7 +8501,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARIA_VERISSIMO_DO_NASCIMENTO_697001bd4e429636ed944bfa": {
         "images": [
@@ -8549,8 +8549,8 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
+            "diabetes": true,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -8562,7 +8562,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MARILIA_CAVALCANTE_ROSENDO_69700546029f1e6981546b9b": {
         "images": [
@@ -8657,7 +8657,7 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -8670,7 +8670,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "MILTON_DE_SOUSA_695e5f4f4b0e754dac366e74": {
         "images": [
@@ -8746,10 +8746,10 @@
         "gender": "M",
         "cpf": "34678379304",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
-            "smoker": false
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -8759,7 +8759,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "NAIANA_CRISTINA_RODRIGUES_DOS_SANTOS_6970067426260539c16a97a8": {
         "images": [
@@ -8816,7 +8816,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -8827,7 +8827,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "Nayara_petrola_695e5b3026260539c1667810": {
         "images": [
@@ -8964,10 +8964,10 @@
         "gender": "M",
         "cpf": "95046399334",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -8977,7 +8977,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "RAIMUNDA_LUCIA_PEREIRA_OLIVEIRA_69700547029f1e6981546b9c": {
         "images": [
@@ -9033,8 +9033,8 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -9045,7 +9045,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "RAIMUNDA_NONATA_DA_SILVA_69700546fa6df75200cfe3a0": {
         "images": [
@@ -9094,9 +9094,9 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -9106,7 +9106,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "RAIMUNDA_SOARES_DE_ARAUJO_69700544029f1e6981546b9a": {
         "images": [
@@ -9148,7 +9148,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -9160,7 +9160,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "REGIANE_MARQUES_DOS_REIS_697005474e429636ed944d50": {
         "images": [
@@ -9209,7 +9209,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -9221,7 +9221,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "REGINA_SELIA_DE_OLIVEIRA_6970054526260539c16a972b": {
         "images": [
@@ -9323,9 +9323,9 @@
         "gender": "M",
         "cpf": "26600547898",
         "underlying_diseases": {
-            "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "diabetes": true,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -9336,7 +9336,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "ROZINEIDE_OLANDA_DE_SOUSA_69700673029f1e6981546bf8": {
         "images": [
@@ -9445,7 +9445,7 @@
         "gender": "F",
         "cpf": "",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -9458,7 +9458,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "SENHORA_RODRIGUES_DE_ARAÚJO_697006724e429636ed944dce": {
         "images": [
@@ -9536,7 +9536,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -9547,7 +9547,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "SOLANGE_MARIA_LIMA_LACERDA_E_SILVA_695ea8d628b781ee6001172e": {
         "images": [
@@ -9591,7 +9591,7 @@
             "diabetes": false,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -9601,7 +9601,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "SOTELINA_CARDOSO_CIDRÃO_6970067326260539c16a97a7": {
         "images": [
@@ -9686,7 +9686,7 @@
         "underlying_diseases": {
             "diabetes": false,
             "hypertension": false,
-            "cholesterol": false,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -9697,7 +9697,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "SUELITA_ALVES_TORQUATO_69700673fa6df75200cfe40b": {
         "images": [
@@ -9820,7 +9820,7 @@
         "gender": "F",
         "cpf": "63713284334",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
             "smoker": false
@@ -9833,7 +9833,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "TATIANE_FEIJÓ_DA_SILVA_69700672fa6df75200cfe40a": {
         "images": [
@@ -10087,10 +10087,10 @@
         "gender": "F",
         "cpf": "03115596383",
         "underlying_diseases": {
-            "diabetes": false,
+            "diabetes": true,
             "hypertension": false,
             "cholesterol": false,
-            "smoker": false
+            "smoker": true
         },
         "ophthalmic_diseases": {
             "diabeticRetinopathy": false,
@@ -10100,7 +10100,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "TEREZINHA_HONORATO_DA_SILVA_6970054726260539c16a972c": {
         "images": [
@@ -10142,7 +10142,7 @@
         "cpf": "",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -10154,7 +10154,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "TEREZINHA_RODRIGUES_DOS_SANTOS_697006734e429636ed944dcf": {
         "images": [
@@ -10217,8 +10217,8 @@
         "cpf": "63704781304",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
-            "cholesterol": false,
+            "hypertension": true,
+            "cholesterol": true,
             "smoker": false
         },
         "ophthalmic_diseases": {
@@ -10229,7 +10229,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     },
     "VANIA_FERREIRA_MONTE_695e665228b781ee6000efc0": {
         "images": [
@@ -10285,7 +10285,7 @@
         "cpf": "00548104344",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },
@@ -10297,6 +10297,6 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": ""
+        "otherDisease": null
     }
 }
