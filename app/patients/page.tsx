@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import { Search, User, Image as ImageIcon, X, ChevronLeft, ChevronRight, Loader2, Eye, Calendar, FolderOpen } from 'lucide-react';
+import { getCloudMappingAction } from '@/app/actions/patients';
 
 interface PatientImage {
     filename: string;
@@ -36,11 +37,10 @@ export default function PatientsGallery() {
     useEffect(() => {
         const loadPatients = async () => {
             try {
-                const response = await fetch('/bytescale_mapping.json');
-                if (!response.ok) {
+                const data = await getCloudMappingAction();
+                if (!data) {
                     throw new Error('Falha ao carregar dados dos pacientes');
                 }
-                const data = await response.json();
                 setPatients(data);
             } catch (err) {
                 setError('Erro ao carregar dados. Verifique se o arquivo bytescale_mapping.json está em /public');

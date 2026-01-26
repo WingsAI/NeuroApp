@@ -265,6 +265,23 @@ export default function Results() {
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Idade</span>
                         <span className="text-sm font-medium text-charcoal">{new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos</span>
                       </div>
+                      {selectedPatient.underlyingDiseases && Object.values(selectedPatient.underlyingDiseases).some(v => v === true) && (
+                        <div className="flex justify-between items-start border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400 mt-1">Hístórico/Comorbidades</span>
+                          <div className="flex flex-wrap justify-end gap-1 max-w-[200px]">
+                            {Object.entries(selectedPatient.underlyingDiseases)
+                              .filter(([_, v]) => v === true)
+                              .map(([key]) => (
+                                <span key={key} className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded border border-cardinal-100 uppercase">
+                                  {key === 'hypertension' ? 'Hipertensão' :
+                                    key === 'diabetes' ? 'Diabetes' :
+                                      key === 'cholesterol' ? 'Colesterol' :
+                                        key === 'smoker' ? 'Tabagismo' : key}
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

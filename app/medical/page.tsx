@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck, Download, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction, updatePatientAction, createPatient } from '@/app/actions/patients';
+import { getPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
@@ -84,9 +84,8 @@ export default function Medical() {
       let combinedPatients: Patient[] = [...(dbPatients as any)];
 
       try {
-        const response = await fetch('/bytescale_mapping.json');
-        if (response.ok) {
-          const mappingData = await response.json();
+        const mappingData = await getCloudMappingAction();
+        if (mappingData) {
           const dbIds = new Set(dbPatients.map(p => p.id));
 
           const cloudEntries = Object.entries(mappingData);
@@ -715,7 +714,10 @@ export default function Medical() {
                             .filter(([_, value]) => value === true)
                             .map(([key, _]) => (
                               <span key={key} className="px-3 py-1.5 bg-cardinal-50 border border-cardinal-100 text-cardinal-700 rounded-lg text-[10px] font-bold uppercase italic">
-                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                                {key === 'hypertension' ? 'Hipertensão' :
+                                  key === 'diabetes' ? 'Diabetes' :
+                                    key === 'cholesterol' ? 'Colesterol' :
+                                      key === 'smoker' ? 'Tabagismo' : key}
                               </span>
                             ))}
                           {(!selectedPatient.underlyingDiseases || Object.values(selectedPatient.underlyingDiseases).every(v => v !== true)) && (

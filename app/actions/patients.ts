@@ -4,8 +4,21 @@ import prisma from '@/lib/prisma';
 import { uploadFileToS3, getSignedFileUrl } from '@/lib/s3';
 import { Patient, AnalyticsData, PatientImage } from '@/types';
 import { revalidatePath } from 'next/cache';
+import { createClient } from '@/lib/supabase-server';
+import fs from 'fs';
+import path from 'path';
+
+async function checkAuth() {
+    const supabase = createClient();
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) {
+        throw new Error('Não autorizado');
+    }
+    return user;
+}
 
 export async function createPatient(formData: FormData) {
+    await checkAuth();
     const id = formData.get('id') as string;
     const name = formData.get('name') as string;
     const cpf = formData.get('cpf') as string;
@@ -115,6 +128,7 @@ export async function createPatient(formData: FormData) {
 }
 
 export async function getPatientsAction() {
+    await checkAuth();
     const patients = await prisma.patient.findMany({
         include: {
             images: true,
@@ -154,6 +168,7 @@ export async function getPatientsAction() {
 }
 
 export async function updatePatientAction(id: string, updates: any) {
+    await checkAuth();
     // Handle specific updates like report or referral
     if (updates.report) {
         await prisma.medicalReport.upsert({
@@ -222,6 +237,7 @@ export async function updatePatientAction(id: string, updates: any) {
 }
 
 export async function getAnalyticsAction(): Promise<AnalyticsData> {
+    await checkAuth();
     const patients = await prisma.patient.findMany({
         include: {
             images: true,
@@ -278,4 +294,19 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         productivityByRegion,
         productivityByProfessional,
     } as any;
+}
+
+export async function getCloudMappingAction() {
+    await checkAuth();
+    try {
+        const mappingPath = path.join(process.cwd(), 'bytescale_mapping.json');
+        if (!fs.existsSync(mappingPath)) {
+            return null;
+        }
+        const content = fs.readFileSync(mappingPath, 'utf8');
+        return JSON.parse(content);
+    } catch (error) {
+        console.error('Erro ao ler mapeamento:', error);
+        return null;
+    }
 }
