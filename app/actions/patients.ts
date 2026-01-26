@@ -297,28 +297,38 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
 }
 
 export async function getCloudMappingAction() {
-    // A verificação de auth é feita pelo middleware nas rotas protegidas
-    // Ainda assim, verificamos mas não bloqueamos se falhar
+    console.log('[SERVER] getCloudMappingAction called');
     try {
-        await checkAuth();
-    } catch (authError) {
-        console.warn('[getCloudMappingAction] Auth check failed, but proceeding since middleware protects routes:', authError);
+        const user = await checkAuth();
+        console.log('[SERVER] Auth success for:', user.email);
+    } catch (authError: any) {
+        console.warn('[SERVER] Auth check failed:', authError.message);
     }
 
     try {
-        const mappingPath = path.join(process.cwd(), 'bytescale_mapping.json');
-        console.log('[getCloudMappingAction] Looking for mapping at:', mappingPath);
+        const rootPath = process.cwd();
+        const mappingPath = path.join(rootPath, 'bytescale_mapping.json');
+        console.log('[SERVER] process.cwd():', rootPath);
+        console.log('[SERVER] Target mapping path:', mappingPath);
 
         if (!fs.existsSync(mappingPath)) {
-            console.warn('[getCloudMappingAction] Mapping file not found');
+            console.error('[SERVER] FILE NOT FOUND at:', mappingPath);
+            // Fallback to public if it was moved back
+            const publicPath = path.join(rootPath, 'public', 'bytescale_mapping.json');
+            if (fs.existsSync(publicPath)) {
+                console.log('[SERVER] Found file at fallback public path:', publicPath);
+                const content = fs.readFileSync(publicPath, 'utf8');
+                return JSON.parse(content);
+            }
             return null;
         }
+
         const content = fs.readFileSync(mappingPath, 'utf8');
         const data = JSON.parse(content);
-        console.log('[getCloudMappingAction] Loaded', Object.keys(data).length, 'entries');
+        console.log('[SERVER] Success! Entries found:', Object.keys(data).length);
         return data;
     } catch (error) {
-        console.error('[getCloudMappingAction] Erro ao ler mapeamento:', error);
+        console.error('[SERVER] Fatal error in getCloudMappingAction:', error);
         return null;
     }
 }
