@@ -26,6 +26,11 @@ export const uploadFileToS3 = async (file: Buffer, fileName: string, contentType
 };
 
 export const getSignedFileUrl = async (key: string) => {
+    // If it's already a full URL (like Bytescale), return it directly
+    if (key.startsWith('http://') || key.startsWith('https://')) {
+        return key;
+    }
+
     const bucketName = process.env.AWS_S3_BUCKET_NAME!;
     const command = new GetObjectCommand({
         Bucket: bucketName,

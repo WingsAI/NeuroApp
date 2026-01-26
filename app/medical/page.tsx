@@ -82,61 +82,80 @@ export default function Medical() {
       console.log(`[DEBUG] DB Patients: ${dbPatients.length}`);
 
       // 2. Carregar pacientes do Arquivo de Mapeamento (Bytescale)
-      let combinedPatients: Patient[] = [...(dbPatients as any)];
-
+      let mappingData = null;
       try {
-        const mappingData = await getCloudMappingAction();
+        mappingData = await getCloudMappingAction();
         console.log(`[DEBUG] Cloud Mapping loaded: ${mappingData ? Object.keys(mappingData).length : 0} entries`);
+      } catch (jsonErr) {
+        console.error('Erro ao carregar mapping cloud:', jsonErr);
+      }
 
-        if (mappingData) {
-          const dbIds = new Set(dbPatients.map(p => p.id));
+      let combinedPatients: Patient[] = [];
 
-          const cloudEntries = Object.entries(mappingData);
-          const patientsToSync: any[] = [];
+      if (mappingData) {
+        const cloudEntries = Object.entries(mappingData);
+        const patientsToSync: any[] = [];
 
-          const cloudPatients: Patient[] = cloudEntries.map(([key, data]: [string, any]) => {
-            const patientId = data.exam_id || key;
-            const existingDbPatient = dbPatients.find(p => p.id === patientId);
-            const isAlreadyInDb = !!existingDbPatient;
+        const cloudPatients: Patient[] = cloudEntries.map(([key, data]: [string, any]) => {
+          const patientId = data.exam_id || key;
+          const existingDbPatient = dbPatients.find(p => p.id === patientId);
+          const isAlreadyInDb = !!existingDbPatient;
 
-            // Se o paciente está no DB mas não tem imagens, vamos usar as da nuvem
-            const images = (isAlreadyInDb && existingDbPatient.images && existingDbPatient.images.length > 0)
-              ? existingDbPatient.images
-              : data.images.map((img: any, idx: number) => ({
-                id: `${key}-${idx}`,
-                data: img.bytescale_url,
-                fileName: img.filename,
-                uploadedAt: img.upload_date
-              }));
+          // SEMPRE usar imagens da nuvem (Bytescale) se disponíveis
+          // Apenas usar imagens do DB se a nuvem não tiver
+          const cloudImages = data.images?.length > 0
+            ? data.images.map((img: any, idx: number) => ({
+              id: `${key}-${idx}`,
+              data: img.bytescale_url,
+              fileName: img.filename,
+              uploadedAt: img.upload_date
+            }))
+            : [];
 
-            if (!isAlreadyInDb) {
-              patientsToSync.push({ id: patientId, data: data });
-            }
+          const dbImages = isAlreadyInDb && existingDbPatient.images?.length > 0
+            ? existingDbPatient.images
+            : [];
 
-            return {
-              id: patientId,
-              name: data.patient_name,
-              cpf: isAlreadyInDb ? existingDbPatient.cpf : data.cpf || 'PENDENTE',
-              phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
-              birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
-              examDate: data.images[0]?.upload_date || new Date().toISOString(),
-              location: data.clinic_name || 'Phelcom EyeR Cloud',
-              gender: data.gender || '',
-              technicianName: 'EyerCloud Sync',
-              underlyingDiseases: data.underlying_diseases,
-              ophthalmicDiseases: data.ophthalmic_diseases,
-              status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
-              createdAt: data.images[0]?.upload_date || new Date().toISOString(),
-              images: images
-            };
-          });
+          // Prioridade: imagens da nuvem > imagens do DB
+          const images = cloudImages.length > 0 ? cloudImages : dbImages;
 
-          console.log(`[DEBUG] Cloud Patients mapped: ${cloudPatients.length}, To sync: ${patientsToSync.length}`);
+          if (!isAlreadyInDb) {
+            patientsToSync.push({ id: patientId, data: data });
+          }
 
-          // Sincronização automática silenciosa (lote maior para sincronizar todos)
-          if (patientsToSync.length > 0) {
-            console.log(`Sincronizando ${patientsToSync.length} pacientes...`);
-            for (const item of patientsToSync.slice(0, 100)) {
+          return {
+            id: patientId,
+            name: data.patient_name,
+            cpf: isAlreadyInDb ? existingDbPatient.cpf : data.cpf || 'PENDENTE',
+            phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
+            birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
+            examDate: data.images[0]?.upload_date || new Date().toISOString(),
+            location: data.clinic_name || 'Phelcom EyeR Cloud',
+            gender: data.gender || '',
+            technicianName: 'EyerCloud Sync',
+            underlyingDiseases: data.underlying_diseases,
+            ophthalmicDiseases: data.ophthalmic_diseases,
+            status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
+            createdAt: data.images[0]?.upload_date || new Date().toISOString(),
+            images: images
+          };
+        });
+
+        console.log(`[DEBUG] Cloud Patients mapped: ${cloudPatients.length}, To sync: ${patientsToSync.length}`);
+
+        // Mesclar: Usar cloudPatients como base para os que estão na nuvem,
+        // e adicionar dbPatients que NÃO estão no mapeamento da nuvem
+        const cloudIds = new Set(cloudPatients.map(p => p.id));
+        const dbOnlyPatients = dbPatients.filter(p => !cloudIds.has(p.id)) as any;
+
+        combinedPatients = [...cloudPatients, ...dbOnlyPatients];
+        console.log(`[DEBUG] Combined patients: ${combinedPatients.length}`);
+
+        // INICIAR SINCRONIZAÇÃO EM SEGUNDO PLANO - NÃO BLOQUEANTE
+        if (patientsToSync.length > 0) {
+          (async () => {
+            console.log(`[BACKGROUND] Sincronizando ${patientsToSync.length} pacientes em segundo plano...`);
+            for (const item of patientsToSync.slice(0, 50)) {
               try {
                 const formData = new FormData();
                 formData.append('id', item.id);
@@ -147,32 +166,19 @@ export default function Medical() {
                 formData.append('location', item.data.clinic_name || 'Phelcom EyeR Cloud');
                 formData.append('technicianName', 'Auto Sync');
                 formData.append('gender', item.data.gender || '');
-
-                if (item.data.underlying_diseases) {
-                  formData.append('underlyingDiseases', JSON.stringify(item.data.underlying_diseases));
-                }
-                if (item.data.ophthalmic_diseases) {
-                  formData.append('ophthalmicDiseases', JSON.stringify(item.data.ophthalmic_diseases));
-                }
-
+                if (item.data.underlying_diseases) formData.append('underlyingDiseases', JSON.stringify(item.data.underlying_diseases));
+                if (item.data.ophthalmic_diseases) formData.append('ophthalmicDiseases', JSON.stringify(item.data.ophthalmic_diseases));
                 item.data.images.forEach((img: any) => formData.append('eyerUrls', img.bytescale_url));
                 await createPatient(formData);
               } catch (syncErr) {
                 console.error(`Falha ao sincronizar ${item.id}:`, syncErr);
               }
             }
-          }
-
-          // Mesclar: Usar cloudPatients como base para os que estão na nuvem, 
-          // e adicionar dbPatients que NÃO estão no mapeamento da nuvem
-          const cloudIds = new Set(cloudPatients.map(p => p.id));
-          const dbOnlyPatients = dbPatients.filter(p => !cloudIds.has(p.id)) as any;
-
-          combinedPatients = [...cloudPatients, ...dbOnlyPatients];
-          console.log(`[DEBUG] Combined patients: ${combinedPatients.length}`);
+            console.log(`[BACKGROUND] Sincronização finalizada.`);
+          })();
         }
-      } catch (jsonErr) {
-        console.error('Erro ao carregar mapping cloud:', jsonErr);
+      } else {
+        combinedPatients = [...(dbPatients as any)];
       }
 
       // Deduplicação por ID (mais precisa)
@@ -192,6 +198,7 @@ export default function Medical() {
       pendingPatients.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 
       setPatients(pendingPatients);
+      console.log(`[DEBUG] Displaying ${pendingPatients.length} patients.`);
     } catch (err) {
       console.error('Erro ao carregar pacientes:', err);
     } finally {
