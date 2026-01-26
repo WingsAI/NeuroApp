@@ -35,6 +35,7 @@ export interface MedicalReport {
   diagnosis: string;
   recommendations: string;
   diagnosticConditions: DiagnosticConditions;
+  selectedImages?: { od: string | null, oe: string | null };
   completedAt: string;
 }
 
@@ -45,6 +46,9 @@ export interface DiagnosticConditions {
   drSevere: boolean;
   drProliferative: boolean;
   glaucomaSuspect: boolean;
+  hrMild: boolean;
+  hrModerate: boolean;
+  hrSevere: boolean;
   hypertensiveRetinopathy: boolean;
   tumor: boolean;
   others: boolean;

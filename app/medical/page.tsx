@@ -45,6 +45,9 @@ export default function Medical() {
     drSevere: false,
     drProliferative: false,
     glaucomaSuspect: false,
+    hrMild: false,
+    hrModerate: false,
+    hrSevere: false,
     hypertensiveRetinopathy: false,
     tumor: false,
     others: false,
@@ -336,6 +339,7 @@ export default function Medical() {
         diagnosis: reportForm.diagnosis,
         recommendations: reportForm.recommendations,
         diagnosticConditions: diagnosticConditions,
+        selectedImages: selectedReportImages,
         completedAt: new Date().toISOString(),
       };
 
@@ -394,6 +398,9 @@ export default function Medical() {
       drSevere: false,
       drProliferative: false,
       glaucomaSuspect: false,
+      hrMild: false,
+      hrModerate: false,
+      hrSevere: false,
       hypertensiveRetinopathy: false,
       tumor: false,
       others: false,
@@ -464,6 +471,9 @@ export default function Medical() {
         'Condição: RD Proliferativa': (conditions as any).drProliferative ? 'Sim' : 'Não',
         'Condição: Suspeita Glaucoma': (conditions as any).glaucomaSuspect ? 'Sim' : 'Não',
         'Condição: Retinopatia Hipertensiva': (conditions as any).hypertensiveRetinopathy ? 'Sim' : 'Não',
+        'Condição: RH Leve': (conditions as any).hrMild ? 'Sim' : 'Não',
+        'Condição: RH Moderada': (conditions as any).hrModerate ? 'Sim' : 'Não',
+        'Condição: RH Grave': (conditions as any).hrSevere ? 'Sim' : 'Não',
         'Condição: Tumor': (conditions as any).tumor ? 'Sim' : 'Não',
         'Condição: Outros': (conditions as any).others ? 'Sim' : 'Não',
       };
@@ -942,6 +952,9 @@ export default function Medical() {
                             { id: 'drProliferative', label: 'RD Proliferativa' },
                             { id: 'glaucomaSuspect', label: 'Glaucoma Suspeito' },
                             { id: 'hypertensiveRetinopathy', label: 'Retinopatia Hipertensiva' },
+                            { id: 'hrMild', label: 'RH Leve' },
+                            { id: 'hrModerate', label: 'RH Moderada' },
+                            { id: 'hrSevere', label: 'RH Grave' },
                             { id: 'tumor', label: 'Tumor / Massa' },
                             { id: 'others', label: 'Outros Achados' },
                           ].map((condition) => (

@@ -235,8 +235,7 @@ export default function Results() {
               <div className="max-w-4xl mx-auto space-y-12">
                 {/* Document Subheader */}
                 <div className="text-center space-y-4 border-b-2 border-cardinal-700 pb-8">
-                  <div className="text-cardinal-700 font-serif text-3xl font-bold uppercase tracking-[0.2em]">NeuroApp</div>
-                  <h1 className="text-2xl font-serif font-bold text-charcoal">CERTIFICADO DE ANÁLISE NEUROFTALMOLÓGICA</h1>
+                  <h1 className="text-2xl font-serif font-bold text-charcoal uppercase">Relatório Oftalmológico</h1>
                   <div className="flex items-center justify-center space-x-6 text-[10px] font-bold uppercase tracking-widest text-sandstone-400">
                     <span className="flex items-center"><ShieldCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Protocolo Seguro</span>
                     <span className="flex items-center"><FileCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Verificado por Especialista</span>
@@ -281,10 +280,6 @@ export default function Results() {
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Unidade</span>
                         <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</span>
-                      </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Técnico</span>
-                        <span className="text-sm font-medium text-charcoal">{selectedPatient.technicianName}</span>
                       </div>
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Emissão</span>
@@ -345,27 +340,62 @@ export default function Results() {
                 {/* Image Catalog */}
                 <div className="space-y-6">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 flex items-center no-print">
-                    <ImageIcon className="w-4 h-4 mr-2" /> Acervo Iconográfico do Exame
+                    <ImageIcon className="w-4 h-4 mr-2" /> Acervo Iconográfico Selecionado
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {selectedPatient.images.map((image, index) => (
-                      <div key={image.id} className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {selectedPatient.report.selectedImages?.od ? (
+                      <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                         <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
                           <img
-                            src={image.data}
-                            alt={`Bio-imagem ${index + 1}`}
+                            src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data || ''}
+                            alt="Olho Direito"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                            onClick={() => window.open(image.data, '_blank')}
+                            onClick={() => {
+                              const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data;
+                              if (url) window.open(url, '_blank');
+                            }}
                           />
                         </div>
                         <div className="mt-3 flex justify-between items-center px-2">
-                          <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Captura {index + 1}</span>
-                          <span className="p-1 bg-sandstone-50 rounded-full text-sandstone-300">
-                            <Eye className="w-3 h-3" />
-                          </span>
+                          <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Direito (OD)</span>
                         </div>
                       </div>
-                    ))}
+                    ) : null}
+                    {selectedPatient.report.selectedImages?.oe ? (
+                      <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                        <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
+                          <img
+                            src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data || ''}
+                            alt="Olho Esquerdo"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            onClick={() => {
+                              const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data;
+                              if (url) window.open(url, '_blank');
+                            }}
+                          />
+                        </div>
+                        <div className="mt-3 flex justify-between items-center px-2">
+                          <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Esquerdo (OE)</span>
+                        </div>
+                      </div>
+                    ) : null}
+                    {(!selectedPatient.report.selectedImages?.od && !selectedPatient.report.selectedImages?.oe) && (
+                      selectedPatient.images.slice(0, 2).map((image, index) => (
+                        <div key={image.id} className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                          <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
+                            <img
+                              src={image.data}
+                              alt={`Bio-imagem ${index + 1}`}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                              onClick={() => window.open(image.data, '_blank')}
+                            />
+                          </div>
+                          <div className="mt-3 flex justify-between items-center px-2">
+                            <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Captura {index + 1}</span>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
 
@@ -405,6 +435,21 @@ export default function Results() {
                             {selectedPatient.report.diagnosticConditions.glaucomaSuspect && (
                               <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
                                 Suspeita de Glaucoma
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.hrMild && (
+                              <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RH Leve
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.hrModerate && (
+                              <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RH Moderada
+                              </span>
+                            )}
+                            {selectedPatient.report.diagnosticConditions.hrSevere && (
+                              <span className="px-3 py-1 bg-blue-700 text-white border border-blue-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                RH Grave
                               </span>
                             )}
                             {selectedPatient.report.diagnosticConditions.others && (

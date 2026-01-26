@@ -164,6 +164,7 @@ export async function updatePatientAction(id: string, updates: any) {
                 diagnosis: updates.report.diagnosis,
                 recommendations: updates.report.recommendations,
                 diagnosticConditions: updates.report.diagnosticConditions,
+                selectedImages: updates.report.selectedImages,
                 completedAt: new Date(updates.report.completedAt || undefined),
             },
             create: {
@@ -172,6 +173,7 @@ export async function updatePatientAction(id: string, updates: any) {
                 diagnosis: updates.report.diagnosis,
                 recommendations: updates.report.recommendations,
                 diagnosticConditions: updates.report.diagnosticConditions,
+                selectedImages: updates.report.selectedImages,
                 patientId: id,
                 completedAt: new Date(updates.report.completedAt || undefined),
             }

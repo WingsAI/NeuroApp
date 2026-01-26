@@ -107,7 +107,7 @@
         "cpf": "80048463353",
         "underlying_diseases": {
             "diabetes": false,
-            "hypertension": false,
+            "hypertension": true,
             "cholesterol": false,
             "smoker": false
         },

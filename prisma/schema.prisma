@@ -52,6 +52,7 @@ model MedicalReport {
   diagnosis            String
   recommendations      String
   diagnosticConditions Json     // Store the DiagnosticConditions object
+  selectedImages       Json?    // Store the selectedImages object {od, oe}
   completedAt          DateTime @default(now())
   
   patientId            String   @unique
