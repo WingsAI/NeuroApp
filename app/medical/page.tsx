@@ -169,18 +169,21 @@ export default function Medical() {
         console.error('Erro ao carregar mapping cloud:', jsonErr);
       }
 
-      // Deduplicação final por Nome e Data do Exame
-      const seen = new Set();
+      // Deduplicação por ID (mais precisa)
+      const seenIds = new Set<string>();
       const finalPatients = combinedPatients.filter(p => {
-        const key = `${p.name}-${p.examDate.slice(0, 10)}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
+        if (seenIds.has(p.id)) return false;
+        seenIds.add(p.id);
         return true;
       });
 
+      // Filtrar apenas pacientes que NÃO estão com laudo completo
       const pendingPatients = finalPatients.filter(
-        (p: Patient) => p.status === 'pending' || p.status === 'in_analysis'
+        (p: Patient) => p.status !== 'completed'
       );
+
+      // Ordenar alfabeticamente por nome
+      pendingPatients.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 
       setPatients(pendingPatients);
     } catch (err) {
@@ -203,6 +206,8 @@ export default function Medical() {
         p.cpf.includes(term) ||
         p.location.toLowerCase().includes(term)
     );
+    // Already sorted from source, but ensure consistency
+    filtered.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
     setVisibleCount(10); // Reset pagination on search
     setFilteredPatients(filtered);
   };
