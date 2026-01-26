@@ -54,7 +54,11 @@ export async function middleware(request: NextRequest) {
         }
     )
 
-    const { data: { user } } = await supabase.auth.getUser()
+    // IMPORTANT: Refresh the session to keep it alive and update cookies
+    const { data: { session } } = await supabase.auth.getSession()
+
+    // Get the user from session
+    const user = session?.user ?? null
 
     // List of public routes - Only login and root are public
     const publicRoutes = ['/login', '/', '/favicon.png'];

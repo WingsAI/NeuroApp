@@ -10,11 +10,11 @@ import path from 'path';
 
 async function checkAuth() {
     const supabase = createClient();
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (error || !user) {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (error || !session?.user) {
         throw new Error('Não autorizado');
     }
-    return user;
+    return session.user;
 }
 
 export async function createPatient(formData: FormData) {
