@@ -94,6 +94,7 @@ export default function Medical() {
 
       if (mappingData) {
         const cloudEntries = Object.entries(mappingData);
+        console.log(`[DEBUG] Found ${cloudEntries.length} entries in cloud mapping`);
         const patientsToSync: any[] = [];
 
         const cloudPatients: Patient[] = cloudEntries.map(([key, data]: [string, any]) => {
@@ -101,9 +102,8 @@ export default function Medical() {
           const existingDbPatient = dbPatients.find(p => p.id === patientId);
           const isAlreadyInDb = !!existingDbPatient;
 
-          // SEMPRE usar imagens da nuvem (Bytescale) se disponíveis
-          // Apenas usar imagens do DB se a nuvem não tiver
-          const cloudImages = data.images?.length > 0
+          // Priority: Cloud images > DB images
+          const cloudImages = (data.images && data.images.length > 0)
             ? data.images.map((img: any, idx: number) => ({
               id: `${key}-${idx}`,
               data: img.bytescale_url,
@@ -112,12 +112,9 @@ export default function Medical() {
             }))
             : [];
 
-          const dbImages = isAlreadyInDb && existingDbPatient.images?.length > 0
-            ? existingDbPatient.images
-            : [];
-
-          // Prioridade: imagens da nuvem > imagens do DB
-          const images = cloudImages.length > 0 ? cloudImages : dbImages;
+          const images = (cloudImages.length > 0)
+            ? cloudImages
+            : (isAlreadyInDb ? existingDbPatient.images : []);
 
           if (!isAlreadyInDb) {
             patientsToSync.push({ id: patientId, data: data });
@@ -126,17 +123,17 @@ export default function Medical() {
           return {
             id: patientId,
             name: data.patient_name,
-            cpf: isAlreadyInDb ? existingDbPatient.cpf : data.cpf || 'PENDENTE',
+            cpf: isAlreadyInDb ? existingDbPatient.cpf : (data.cpf && data.cpf !== '' ? data.cpf : 'PENDENTE'),
             phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
             birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
-            examDate: data.images[0]?.upload_date || new Date().toISOString(),
+            examDate: data.images ? data.images[0]?.upload_date : new Date().toISOString(),
             location: data.clinic_name || 'Phelcom EyeR Cloud',
             gender: data.gender || '',
             technicianName: 'EyerCloud Sync',
             underlyingDiseases: data.underlying_diseases,
             ophthalmicDiseases: data.ophthalmic_diseases,
             status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
-            createdAt: data.images[0]?.upload_date || new Date().toISOString(),
+            createdAt: data.images ? data.images[0]?.upload_date : new Date().toISOString(),
             images: images
           };
         });

@@ -35,12 +35,47 @@ export async function createPatient(formData: FormData) {
     const underlyingDiseases = formData.get('underlyingDiseases') ? JSON.parse(formData.get('underlyingDiseases') as string) : undefined;
     const ophthalmicDiseases = formData.get('ophthalmicDiseases') ? JSON.parse(formData.get('ophthalmicDiseases') as string) : undefined;
 
-    // Create patient in DB
-    const patient = await prisma.patient.create({
-        data: {
+    // Generate a unique CPF if it's missing or duplicate
+    let finalCpf = cpf;
+    if (!finalCpf || finalCpf === 'PENDENTE' || finalCpf.trim() === '') {
+        finalCpf = `AUTO-${id || Date.now()}`;
+    }
+
+    // Check if another patient (with different ID) already has this CPF
+    if (id) {
+        const conflict = await prisma.patient.findFirst({
+            where: {
+                cpf: finalCpf,
+                id: { not: id }
+            }
+        });
+        if (conflict) {
+            finalCpf = `AUTO-${id}-${Math.random().toString(36).slice(2, 7)}`;
+        }
+    }
+
+    // Upsert patient in DB
+    const patient = await prisma.patient.upsert({
+        where: { id: id || 'new-patient' },
+        update: {
+            name,
+            cpf: finalCpf,
+            birthDate,
+            examDate,
+            location,
+            technicianName,
+            gender,
+            ethnicity,
+            education,
+            occupation,
+            phone,
+            underlyingDiseases,
+            ophthalmicDiseases,
+        },
+        create: {
             id: id || undefined,
             name,
-            cpf,
+            cpf: finalCpf,
             birthDate,
             examDate,
             location,
@@ -56,6 +91,10 @@ export async function createPatient(formData: FormData) {
         },
     });
 
+    const isAwsConfigured = process.env.AWS_ACCESS_KEY_ID &&
+        process.env.AWS_ACCESS_KEY_ID !== 'your-access-key-id' &&
+        process.env.AWS_SECRET_ACCESS_KEY !== 'your-secret-access-key';
+
     const files = formData.getAll('images') as File[];
     const eyerUrls = formData.getAll('eyerUrls') as string[];
 
@@ -63,12 +102,24 @@ export async function createPatient(formData: FormData) {
     if (files.length > 0 && files[0].size > 0) {
         for (const file of files) {
             const buffer = Buffer.from(await file.arrayBuffer());
-            const s3Key = await uploadFileToS3(buffer, file.name, file.type);
+            const fileName = file.name;
+            const contentType = file.type;
+
+            let imageUrl = '';
+            if (isAwsConfigured) {
+                const s3Key = await uploadFileToS3(buffer, fileName, contentType);
+                imageUrl = s3Key;
+            } else {
+                console.warn('[SERVER] AWS not configured, skipping S3 upload for local file');
+                // In a real app we'd need a local storage fallback, 
+                // but for now we just log it and potentially skip
+                continue;
+            }
 
             await prisma.patientImage.create({
                 data: {
-                    url: s3Key,
-                    fileName: file.name,
+                    url: imageUrl,
+                    fileName: fileName,
                     patientId: patient.id,
                 },
             });
@@ -80,39 +131,67 @@ export async function createPatient(formData: FormData) {
 
             if (dataUrl.startsWith('data:')) {
                 // Handle Base64
-                const base64 = dataUrl.split(',')[1];
-                const buffer = Buffer.from(base64, 'base64');
-                const mimeMatch = dataUrl.match(/data:([^;]+);/);
-                const contentType = mimeMatch ? mimeMatch[1] : 'image/jpeg';
-                const s3Key = await uploadFileToS3(buffer, `eyer-${i}.jpg`, contentType);
-
-                await prisma.patientImage.create({
-                    data: {
-                        url: s3Key,
-                        fileName: `eyer-image-${i + 1}.jpg`,
-                        patientId: patient.id,
-                    },
-                });
-            } else if (dataUrl.startsWith('http')) {
-                // Handle Cloud URL (fetch from Bytescale)
-                try {
-                    const response = await fetch(dataUrl);
-                    const arrayBuffer = await response.arrayBuffer();
-                    const buffer = Buffer.from(arrayBuffer);
-                    const contentType = response.headers.get('content-type') || 'image/jpeg';
-                    const fileName = dataUrl.split('/').pop() || `cloud-image-${i}.jpg`;
-
-                    const s3Key = await uploadFileToS3(buffer, fileName, contentType);
+                if (isAwsConfigured) {
+                    const base64 = dataUrl.split(',')[1];
+                    const buffer = Buffer.from(base64, 'base64');
+                    const mimeMatch = dataUrl.match(/data:([^;]+);/);
+                    const contentType = mimeMatch ? mimeMatch[1] : 'image/jpeg';
+                    const s3Key = await uploadFileToS3(buffer, `eyer-${i}.jpg`, contentType);
 
                     await prisma.patientImage.create({
                         data: {
                             url: s3Key,
-                            fileName: fileName,
+                            fileName: `eyer-image-${i + 1}.jpg`,
                             patientId: patient.id,
                         },
                     });
-                } catch (fetchErr) {
-                    console.error(`Failed to fetch cloud image: ${dataUrl}`, fetchErr);
+                } else {
+                    console.warn('[SERVER] AWS not configured, skipping S3 upload for base64 image');
+                }
+            } else if (dataUrl.startsWith('http')) {
+                // Handle Cloud URL
+                if (isAwsConfigured) {
+                    try {
+                        const response = await fetch(dataUrl);
+                        if (response.ok) {
+                            const arrayBuffer = await response.arrayBuffer();
+                            const buffer = Buffer.from(arrayBuffer);
+                            const contentType = response.headers.get('content-type') || 'image/jpeg';
+                            const fileName = dataUrl.split('/').pop() || `cloud-image-${i}.jpg`;
+
+                            const s3Key = await uploadFileToS3(buffer, fileName, contentType);
+
+                            await prisma.patientImage.create({
+                                data: {
+                                    url: s3Key,
+                                    fileName: fileName,
+                                    patientId: patient.id,
+                                },
+                            });
+                        } else {
+                            // If S3 configured but fetch failed, we can still store the direct URL
+                            throw new Error('Fetch failed');
+                        }
+                    } catch (fetchErr) {
+                        console.error(`[SERVER] Failed to sync to S3, storing direct URL: ${dataUrl}`);
+                        await prisma.patientImage.create({
+                            data: {
+                                url: dataUrl,
+                                fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
+                                patientId: patient.id,
+                            },
+                        });
+                    }
+                } else {
+                    // AWS NOT CONFIGURED: Save the Bytescale URL directly in the DB!
+                    console.log(`[SERVER] AWS not configured, storing direct Bytescale URL: ${dataUrl}`);
+                    await prisma.patientImage.create({
+                        data: {
+                            url: dataUrl,
+                            fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
+                            patientId: patient.id,
+                        },
+                    });
                 }
             }
         }
@@ -307,26 +386,52 @@ export async function getCloudMappingAction() {
 
     try {
         const rootPath = process.cwd();
-        const mappingPath = path.join(rootPath, 'bytescale_mapping.json');
-        console.log('[SERVER] process.cwd():', rootPath);
-        console.log('[SERVER] Target mapping path:', mappingPath);
+        // Try multiple locations for the mapping file
+        const pathsToTry = [
+            path.join(rootPath, 'bytescale_mapping.json'),
+            path.join(rootPath, 'public', 'bytescale_mapping.json'),
+            path.join(rootPath, '..', 'bytescale_mapping.json'),
+            path.resolve('bytescale_mapping.json'),
+            'e:\\GitHub\\NeuroApp\\bytescale_mapping.json'
+        ];
 
-        if (!fs.existsSync(mappingPath)) {
-            console.error('[SERVER] FILE NOT FOUND at:', mappingPath);
-            // Fallback to public if it was moved back
-            const publicPath = path.join(rootPath, 'public', 'bytescale_mapping.json');
-            if (fs.existsSync(publicPath)) {
-                console.log('[SERVER] Found file at fallback public path:', publicPath);
-                const content = fs.readFileSync(publicPath, 'utf8');
-                return JSON.parse(content);
-            }
+        let foundPath = null;
+        for (const p of pathsToTry) {
+            console.log('[SERVER] Testing path:', p);
+            try {
+                if (fs.existsSync(p)) {
+                    foundPath = p;
+                    console.log('[SERVER] Found file at:', p);
+                    break;
+                }
+            } catch (e) { }
+        }
+
+        if (!foundPath) {
+            console.error('[SERVER] FILE NOT FOUND in any of the tested paths. Looking in current dir files...');
+            try {
+                const files = fs.readdirSync(rootPath);
+                console.log('[SERVER] Files in root:', files.filter(f => f.endsWith('.json')));
+            } catch (e) { }
+            return null;
+        }
+        const content = fs.readFileSync(foundPath, 'utf8');
+        if (!content || content.trim() === '') {
+            console.error('[SERVER] File is empty!');
             return null;
         }
 
-        const content = fs.readFileSync(mappingPath, 'utf8');
         const data = JSON.parse(content);
-        console.log('[SERVER] Success! Entries found:', Object.keys(data).length);
-        return data;
+        const entries = Object.keys(data);
+        console.log('[SERVER] Success! Entries found:', entries.length);
+
+        // Return a clean object to ensure serialization
+        const cleanData: any = {};
+        entries.forEach(key => {
+            cleanData[key] = data[key];
+        });
+
+        return cleanData;
     } catch (error) {
         console.error('[SERVER] Fatal error in getCloudMappingAction:', error);
         return null;
