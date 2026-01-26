@@ -37,21 +37,22 @@ export async function createPatient(formData: FormData) {
 
     // Generate a unique CPF if it's missing or duplicate
     let finalCpf = cpf;
-    if (!finalCpf || finalCpf === 'PENDENTE' || finalCpf.trim() === '') {
-        finalCpf = `AUTO-${id || Date.now()}`;
+    if (!finalCpf || finalCpf === 'PENDENTE' || finalCpf.trim() === '' || finalCpf === 'null') {
+        finalCpf = `AUTO-${id || Math.random().toString(36).slice(2, 11)}`;
     }
 
     // Check if another patient (with different ID) already has this CPF
-    if (id) {
-        const conflict = await prisma.patient.findFirst({
-            where: {
-                cpf: finalCpf,
-                id: { not: id }
-            }
-        });
-        if (conflict) {
-            finalCpf = `AUTO-${id}-${Math.random().toString(36).slice(2, 7)}`;
+    // We check this BEFORE the upsert to avoid the Unique Constraint error
+    const conflict = await prisma.patient.findFirst({
+        where: {
+            cpf: finalCpf,
+            id: { not: id || 'new-patient' }
         }
+    });
+
+    if (conflict) {
+        // If there's a conflict, generate a purely unique dummy CPF
+        finalCpf = `CONFLICT-${id || ''}-${Math.random().toString(36).slice(2, 7)}`;
     }
 
     // Upsert patient in DB
@@ -415,6 +416,7 @@ export async function getCloudMappingAction() {
             } catch (e) { }
             return null;
         }
+        console.log('[SERVER] Reading mapping from:', foundPath);
         const content = fs.readFileSync(foundPath, 'utf8');
         if (!content || content.trim() === '') {
             console.error('[SERVER] File is empty!');
@@ -422,13 +424,13 @@ export async function getCloudMappingAction() {
         }
 
         const data = JSON.parse(content);
-        const entries = Object.keys(data);
+        const entries = Object.entries(data);
         console.log('[SERVER] Success! Entries found:', entries.length);
 
-        // Return a clean object to ensure serialization
+        // Return a clean, shallow object to ensure perfect serialization
         const cleanData: any = {};
-        entries.forEach(key => {
-            cleanData[key] = data[key];
+        entries.forEach(([key, val]) => {
+            cleanData[key] = val;
         });
 
         return cleanData;
