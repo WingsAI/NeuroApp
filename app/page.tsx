@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 import { Upload, AlertCircle, CheckCircle2, Loader2, Sparkles, User, Calendar, MapPin, Clipboard } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { createPatient } from '@/app/actions/patients';
@@ -28,6 +28,7 @@ export default function Home() {
 
   useEffect(() => {
     const checkUser = async () => {
+      const supabase = createClient();
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
     };

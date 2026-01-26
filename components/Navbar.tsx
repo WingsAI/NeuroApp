@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LogOut, Activity, BarChart3, ClipboardList, FileText, Send, Users, MapPin } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
@@ -11,7 +11,9 @@ export default function Navbar() {
   const router = useRouter();
 
   const handleLogout = async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
+    router.push('/login');
     router.refresh();
   };
 

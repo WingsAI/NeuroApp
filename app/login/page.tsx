@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 import { useRouter } from 'next/navigation';
 import { ShieldCheck, Activity, Loader2, UserPlus } from 'lucide-react';
 
@@ -17,6 +17,8 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         setError('');
+
+        const supabase = createClient();
 
         try {
             if (isSignUp) {

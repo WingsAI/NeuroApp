@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import { getHealthUnitsAction, createHealthUnitAction, updateHealthUnitAction, deleteHealthUnitAction } from '@/app/actions/units';
 import { HealthUnit } from '@/types';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 
 export default function Units() {
     const [units, setUnits] = useState<HealthUnit[]>([]);
@@ -28,6 +28,7 @@ export default function Units() {
 
     useEffect(() => {
         const checkUser = async () => {
+            const supabase = createClient();
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
                 router.push('/login');
