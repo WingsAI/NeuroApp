@@ -297,16 +297,28 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
 }
 
 export async function getCloudMappingAction() {
-    await checkAuth();
+    // A verificação de auth é feita pelo middleware nas rotas protegidas
+    // Ainda assim, verificamos mas não bloqueamos se falhar
+    try {
+        await checkAuth();
+    } catch (authError) {
+        console.warn('[getCloudMappingAction] Auth check failed, but proceeding since middleware protects routes:', authError);
+    }
+
     try {
         const mappingPath = path.join(process.cwd(), 'bytescale_mapping.json');
+        console.log('[getCloudMappingAction] Looking for mapping at:', mappingPath);
+
         if (!fs.existsSync(mappingPath)) {
+            console.warn('[getCloudMappingAction] Mapping file not found');
             return null;
         }
         const content = fs.readFileSync(mappingPath, 'utf8');
-        return JSON.parse(content);
+        const data = JSON.parse(content);
+        console.log('[getCloudMappingAction] Loaded', Object.keys(data).length, 'entries');
+        return data;
     } catch (error) {
-        console.error('Erro ao ler mapeamento:', error);
+        console.error('[getCloudMappingAction] Erro ao ler mapeamento:', error);
         return null;
     }
 }

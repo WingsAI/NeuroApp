@@ -79,12 +79,15 @@ export default function Medical() {
       setIsSyncing(true);
       // 1. Carregar pacientes do Banco de Dados (Supabase)
       const dbPatients = await getPatientsAction();
+      console.log(`[DEBUG] DB Patients: ${dbPatients.length}`);
 
       // 2. Carregar pacientes do Arquivo de Mapeamento (Bytescale)
       let combinedPatients: Patient[] = [...(dbPatients as any)];
 
       try {
         const mappingData = await getCloudMappingAction();
+        console.log(`[DEBUG] Cloud Mapping loaded: ${mappingData ? Object.keys(mappingData).length : 0} entries`);
+
         if (mappingData) {
           const dbIds = new Set(dbPatients.map(p => p.id));
 
@@ -128,10 +131,12 @@ export default function Medical() {
             };
           });
 
-          // Sincronização automática silenciosa (lote controlado para garantir dados)
+          console.log(`[DEBUG] Cloud Patients mapped: ${cloudPatients.length}, To sync: ${patientsToSync.length}`);
+
+          // Sincronização automática silenciosa (lote maior para sincronizar todos)
           if (patientsToSync.length > 0) {
             console.log(`Sincronizando ${patientsToSync.length} pacientes...`);
-            for (const item of patientsToSync.slice(0, 30)) {
+            for (const item of patientsToSync.slice(0, 100)) {
               try {
                 const formData = new FormData();
                 formData.append('id', item.id);
@@ -164,6 +169,7 @@ export default function Medical() {
           const dbOnlyPatients = dbPatients.filter(p => !cloudIds.has(p.id)) as any;
 
           combinedPatients = [...cloudPatients, ...dbOnlyPatients];
+          console.log(`[DEBUG] Combined patients: ${combinedPatients.length}`);
         }
       } catch (jsonErr) {
         console.error('Erro ao carregar mapping cloud:', jsonErr);
