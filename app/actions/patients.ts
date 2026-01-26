@@ -10,11 +10,12 @@ import path from 'path';
 
 async function checkAuth() {
     const supabase = createClient();
-    const { data: { session }, error } = await supabase.auth.getSession();
-    if (error || !session?.user) {
+    // Using getUser() is more secure for server-side checks
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) {
         throw new Error('Não autorizado');
     }
-    return session.user;
+    return user;
 }
 
 export async function createPatient(formData: FormData) {
@@ -387,18 +388,18 @@ export async function getCloudMappingAction() {
 
     try {
         const rootPath = process.cwd();
-        // Try multiple locations for the mapping file
+        // Extensive list of paths to try in production/Railway
         const pathsToTry = [
             path.join(rootPath, 'bytescale_mapping.json'),
             path.join(rootPath, 'public', 'bytescale_mapping.json'),
-            path.join(rootPath, '..', 'bytescale_mapping.json'),
+            path.join(rootPath, '.next', 'server', 'bytescale_mapping.json'),
             path.resolve('bytescale_mapping.json'),
-            'e:\\GitHub\\NeuroApp\\bytescale_mapping.json'
+            '/app/bytescale_mapping.json', // Docker/Railway default root
+            path.join(rootPath, '..', 'bytescale_mapping.json')
         ];
 
         let foundPath = null;
         for (const p of pathsToTry) {
-            console.log('[SERVER] Testing path:', p);
             try {
                 if (fs.existsSync(p)) {
                     foundPath = p;
@@ -409,10 +410,17 @@ export async function getCloudMappingAction() {
         }
 
         if (!foundPath) {
-            console.error('[SERVER] FILE NOT FOUND in any of the tested paths. Looking in current dir files...');
+            console.error('[SERVER] FILE NOT FOUND. Listing root directory for diagnosis...');
             try {
                 const files = fs.readdirSync(rootPath);
-                console.log('[SERVER] Files in root:', files.filter(f => f.endsWith('.json')));
+                console.log('[SERVER] Files at Root:', files.join(', '));
+
+                // One more crazy attempt: look for it recursively in common dirs
+                const publicDir = path.join(rootPath, 'public');
+                if (fs.existsSync(publicDir)) {
+                    const pubFiles = fs.readdirSync(publicDir);
+                    console.log('[SERVER] Files in Public:', pubFiles.join(', '));
+                }
             } catch (e) { }
             return null;
         }
