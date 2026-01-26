@@ -74,6 +74,13 @@ export default function Medical() {
     filterPatients();
   }, [searchTerm, patients]);
 
+  const formatCPF = (cpf: string) => {
+    if (!cpf || cpf.startsWith('AUTO-') || cpf.startsWith('CONFLICT-') || cpf === 'PENDENTE') {
+      return 'Não-Informado';
+    }
+    return cpf;
+  };
+
   const loadPatients = async () => {
     try {
       setIsSyncing(true);
@@ -590,7 +597,7 @@ export default function Medical() {
                             <h3 className="text-lg font-serif font-bold text-charcoal leading-tight group-hover:text-cardinal-700 transition-colors truncate">
                               {patient.name}
                             </h3>
-                            <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest truncate">{patient.cpf}</p>
+                            <p className="text-sm font-bold text-sandstone-400 uppercase tracking-widest truncate">{formatCPF(patient.cpf)}</p>
                           </div>
                         </div>
                         <span
@@ -697,7 +704,7 @@ export default function Medical() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-cardinal-700 tracking-wider">Documento (CPF)</p>
-                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.cpf || 'Não informado'}</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{formatCPF(selectedPatient.cpf)}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Nasc.</p>

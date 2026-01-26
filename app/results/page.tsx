@@ -57,6 +57,13 @@ export default function Results() {
     setSelectedPatient(null);
   };
 
+  const formatCPF = (cpf: string) => {
+    if (!cpf || cpf.startsWith('AUTO-') || cpf.startsWith('CONFLICT-') || cpf === 'PENDENTE') {
+      return 'Não-Informado';
+    }
+    return cpf;
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -157,7 +164,7 @@ export default function Results() {
                             </div>
                             <div>
                               <div className="text-sm font-bold text-charcoal">{patient.name}</div>
-                              <div className="text-[10px] text-sandstone-400 font-bold uppercase tracking-wider">{patient.cpf}</div>
+                              <div className="text-[10px] text-sandstone-400 font-bold uppercase tracking-wider">{formatCPF(patient.cpf)}</div>
                             </div>
                           </div>
                         </td>
@@ -255,7 +262,7 @@ export default function Results() {
                       </div>
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Documento/CPF</span>
-                        <span className="text-sm font-medium text-charcoal">{selectedPatient.cpf}</span>
+                        <span className="text-sm font-medium text-charcoal">{formatCPF(selectedPatient.cpf)}</span>
                       </div>
                       <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
                         <span className="text-[10px] uppercase font-bold text-sandstone-400">Nascimento</span>
