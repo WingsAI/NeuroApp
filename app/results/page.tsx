@@ -12,6 +12,7 @@ export default function Results() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [filterTab, setFilterTab] = useState<'all' | 'satisfactory' | 'unsatisfactory'>('all');
 
   useEffect(() => {
     loadPatients();
@@ -19,7 +20,23 @@ export default function Results() {
 
   useEffect(() => {
     filterPatients();
-  }, [searchTerm, patients]);
+  }, [searchTerm, patients, filterTab]);
+
+  const counts = {
+    all: patients.length,
+    satisfactory: patients.filter(p => {
+      try {
+        const f = JSON.parse(p.report?.findings || '{}');
+        return f.od?.quality !== 'unsatisfactory' && f.oe?.quality !== 'unsatisfactory';
+      } catch (e) { return true; }
+    }).length,
+    unsatisfactory: patients.filter(p => {
+      try {
+        const f = JSON.parse(p.report?.findings || '{}');
+        return f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+      } catch (e) { return false; }
+    }).length
+  };
 
   const loadPatients = async () => {
     const allPatients = await getPatientsAction();
@@ -31,19 +48,37 @@ export default function Results() {
   };
 
   const filterPatients = () => {
-    if (!searchTerm.trim()) {
-      setFilteredPatients(patients);
-      return;
+    let filtered = patients;
+
+    // Filter by Tab
+    if (filterTab === 'satisfactory') {
+      filtered = filtered.filter(p => {
+        try {
+          const f = JSON.parse(p.report?.findings || '{}');
+          return f.od?.quality !== 'unsatisfactory' && f.oe?.quality !== 'unsatisfactory';
+        } catch (e) { return true; }
+      });
+    } else if (filterTab === 'unsatisfactory') {
+      filtered = filtered.filter(p => {
+        try {
+          const f = JSON.parse(p.report?.findings || '{}');
+          return f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+        } catch (e) { return false; }
+      });
     }
 
-    const term = searchTerm.toLowerCase();
-    const filtered = patients.filter(
-      (p: Patient) =>
-        p.name.toLowerCase().includes(term) ||
-        p.cpf.includes(term) ||
-        p.report?.doctorName?.toLowerCase().includes(term) ||
-        p.location.toLowerCase().includes(term)
-    );
+    // Filter by Search Term
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (p: Patient) =>
+          p.name.toLowerCase().includes(term) ||
+          p.cpf.includes(term) ||
+          p.report?.doctorName?.toLowerCase().includes(term) ||
+          p.location.toLowerCase().includes(term)
+      );
+    }
+
     setFilteredPatients(filtered);
   };
 
@@ -104,16 +139,45 @@ export default function Results() {
             </p>
           </div>
 
-          {/* Search Bar */}
-          <div className="relative max-w-2xl group">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
-            <input
-              type="text"
-              placeholder="Buscar por paciente, documento, médico ou unidade..."
-              value={searchTerm}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-              className="input-premium pl-12 h-14 text-lg shadow-sm"
-            />
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            {/* Search Bar */}
+            <div className="relative flex-1 group">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sandstone-400 group-focus-within:text-cardinal-700 transition-colors" />
+              <input
+                type="text"
+                placeholder="Buscar por paciente, documento, médico ou unidade..."
+                value={searchTerm}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                className="input-premium pl-12 h-14 text-lg shadow-sm w-full"
+              />
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex p-1.5 bg-sandstone-100 rounded-2xl w-fit">
+              <button
+                onClick={() => setFilterTab('all')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'all' ? 'bg-white text-charcoal shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+              >
+                <span>Todos</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'all' ? 'bg-charcoal text-white' : 'bg-sandstone-200 text-sandstone-500'}`}>{counts.all}</span>
+              </button>
+              <button
+                onClick={() => setFilterTab('satisfactory')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'satisfactory' ? 'bg-white text-green-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Satisfatórios</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'satisfactory' ? 'bg-green-600 text-white' : 'bg-green-100 text-green-600'}`}>{counts.satisfactory}</span>
+              </button>
+              <button
+                onClick={() => setFilterTab('unsatisfactory')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'unsatisfactory' ? 'bg-white text-cardinal-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+              >
+                <AlertTriangle className="w-4 h-4" />
+                <span>Insatisfatórios</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'unsatisfactory' ? 'bg-cardinal-700 text-white' : 'bg-cardinal-100 text-cardinal-600'}`}>{counts.unsatisfactory}</span>
+              </button>
+            </div>
           </div>
 
           {/* Results List */}
@@ -176,10 +240,27 @@ export default function Results() {
                           </div>
                         </td>
                         <td className="px-8 py-6">
-                          <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 border border-green-100 text-[10px] font-bold uppercase tracking-widest">
-                            <CheckCircle2 className="w-3 h-3 mr-1.5" />
-                            Concluído em {formatDate(patient.report?.completedAt || '')}
-                          </div>
+                          {(() => {
+                            try {
+                              const f = JSON.parse(patient.report?.findings || '{}');
+                              const isUnsatisfactory = f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+
+                              if (isUnsatisfactory) {
+                                return (
+                                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-100 text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                    <AlertTriangle className="w-3 h-3 mr-1.5" />
+                                    Re-exame Necessário
+                                  </div>
+                                );
+                              }
+                            } catch (e) { }
+                            return (
+                              <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 border border-green-100 text-[10px] font-bold uppercase tracking-widest">
+                                <CheckCircle2 className="w-3 h-3 mr-1.5" />
+                                Concluído em {formatDate(patient.report?.completedAt || '')}
+                              </div>
+                            );
+                          })()}
                         </td>
                         <td className="px-8 py-6 text-sm font-medium text-sandstone-600">
                           {patient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
@@ -201,521 +282,523 @@ export default function Results() {
             </div>
           )}
         </div>
-      </main>
+      </main >
 
       {/* Report View Modal */}
-      {showModal && selectedPatient && selectedPatient.report && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-          <div className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity" onClick={closeModal} />
+      {
+        showModal && selectedPatient && selectedPatient.report && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <div className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity" onClick={closeModal} />
 
-          <div className="relative bg-white w-full max-w-5xl max-h-[95vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col stagger-load print-area">
-            {/* Modal Header */}
-            <div className="px-8 py-6 bg-sandstone-50 border-b border-sandstone-100 flex items-center justify-between no-print">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-cardinal-700 rounded-xl text-white shadow-lg">
-                  <FileText className="h-6 w-6" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-serif font-bold text-charcoal">Dossiê de Laudo</h2>
-                  <p className="text-sm font-medium text-sandstone-500 uppercase tracking-widest">Certificação # {selectedPatient.report.id.slice(-8).toUpperCase()}</p>
-                </div>
-              </div>
-              <div className="flex space-x-3">
-                <button
-                  onClick={handlePrint}
-                  className="p-3 bg-white text-sandstone-600 hover:text-cardinal-700 border border-sandstone-200 rounded-xl hover:shadow-md transition-all flex items-center space-x-2"
-                >
-                  <Printer className="h-5 w-5" />
-                  <span className="text-xs font-bold uppercase tracking-widest px-2">Imprimir</span>
-                </button>
-                <button
-                  onClick={closeModal}
-                  className="p-3 bg-white text-sandstone-400 hover:text-charcoal border border-sandstone-200 rounded-xl hover:shadow-md transition-all"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Document Content */}
-            <div className="flex-1 overflow-y-auto p-12 bg-white print:p-0">
-              <div className="max-w-4xl mx-auto space-y-12">
-                {/* Document Subheader */}
-                <div className="text-center space-y-4 border-b-2 border-cardinal-700 pb-8">
-                  <h1 className="text-2xl font-serif font-bold text-charcoal uppercase">Relatório Oftalmológico</h1>
-                  <div className="flex items-center justify-center space-x-6 text-[10px] font-bold uppercase tracking-widest text-sandstone-400">
-                    <span className="flex items-center"><ShieldCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Protocolo Seguro</span>
-                    <span className="flex items-center"><FileCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Verificado por Especialista</span>
+            <div className="relative bg-white w-full max-w-5xl max-h-[95vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col stagger-load print-area">
+              {/* Modal Header */}
+              <div className="px-8 py-6 bg-sandstone-50 border-b border-sandstone-100 flex items-center justify-between no-print">
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-cardinal-700 rounded-xl text-white shadow-lg">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-serif font-bold text-charcoal">Dossiê de Laudo</h2>
+                    <p className="text-sm font-medium text-sandstone-500 uppercase tracking-widest">Certificação # {selectedPatient.report.id.slice(-8).toUpperCase()}</p>
                   </div>
                 </div>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={handlePrint}
+                    className="p-3 bg-white text-sandstone-600 hover:text-cardinal-700 border border-sandstone-200 rounded-xl hover:shadow-md transition-all flex items-center space-x-2"
+                  >
+                    <Printer className="h-5 w-5" />
+                    <span className="text-xs font-bold uppercase tracking-widest px-2">Imprimir</span>
+                  </button>
+                  <button
+                    onClick={closeModal}
+                    className="p-3 bg-white text-sandstone-400 hover:text-charcoal border border-sandstone-200 rounded-xl hover:shadow-md transition-all"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
 
-                {/* Patient & Exam Metadata */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="premium-card p-8 bg-sandstone-50/50 border-none">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                      <User className="w-4 h-4 mr-2" /> Identificação do Paciente
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Nome</span>
-                        <span className="text-sm font-serif font-bold text-charcoal">{selectedPatient.name}</span>
+              {/* Document Content */}
+              <div className="flex-1 overflow-y-auto p-12 bg-white print:p-0">
+                <div className="max-w-4xl mx-auto space-y-12">
+                  {/* Document Subheader */}
+                  <div className="text-center space-y-4 border-b-2 border-cardinal-700 pb-8">
+                    <h1 className="text-2xl font-serif font-bold text-charcoal uppercase">Relatório Oftalmológico</h1>
+                    <div className="flex items-center justify-center space-x-6 text-[10px] font-bold uppercase tracking-widest text-sandstone-400">
+                      <span className="flex items-center"><ShieldCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Protocolo Seguro</span>
+                      <span className="flex items-center"><FileCheck className="w-3 h-3 mr-1 text-cardinal-700" /> Verificado por Especialista</span>
+                    </div>
+                  </div>
+
+                  {/* Patient & Exam Metadata */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="premium-card p-8 bg-sandstone-50/50 border-none">
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
+                        <User className="w-4 h-4 mr-2" /> Identificação do Paciente
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Nome</span>
+                          <span className="text-sm font-serif font-bold text-charcoal">{selectedPatient.name}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Documento/CPF</span>
+                          <span className="text-sm font-medium text-charcoal">{formatCPF(selectedPatient.cpf)}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Nascimento</span>
+                          <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.birthDate)}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Idade</span>
+                          <span className="text-sm font-medium text-charcoal">{new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos</span>
+                        </div>
+                        {selectedPatient.underlyingDiseases && Object.values(selectedPatient.underlyingDiseases).some(v => v === true) && (
+                          <div className="flex justify-between items-start border-b border-sandstone-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-sandstone-400 mt-1">Hístórico/Comorbidades</span>
+                            <div className="flex flex-wrap justify-end gap-1 max-w-[200px]">
+                              {Object.entries(selectedPatient.underlyingDiseases)
+                                .filter(([_, v]) => v === true)
+                                .map(([key]) => (
+                                  <span key={key} className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded border border-cardinal-100 uppercase">
+                                    {key === 'hypertension' ? 'Hipertensão' :
+                                      key === 'diabetes' ? 'Diabetes' :
+                                        key === 'cholesterol' ? 'Colesterol' :
+                                          key === 'smoker' ? 'Tabagismo' : key}
+                                  </span>
+                                ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Documento/CPF</span>
-                        <span className="text-sm font-medium text-charcoal">{formatCPF(selectedPatient.cpf)}</span>
+                    </div>
+
+                    <div className="premium-card p-8 bg-sandstone-50/50 border-none">
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
+                        <Calendar className="w-4 h-4 mr-2" /> Dados do Procedimento
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Data Exame</span>
+                          <span className="text-sm font-serif font-bold text-charcoal">{formatDate(selectedPatient.examDate)}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Unidade</span>
+                          <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</span>
+                        </div>
+                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Emissão</span>
+                          <span className="text-sm font-medium text-charcoal">{formatDateTime(selectedPatient.report.completedAt)}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Nascimento</span>
-                        <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.birthDate)}</span>
-                      </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Idade</span>
-                        <span className="text-sm font-medium text-charcoal">{new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos</span>
-                      </div>
-                      {selectedPatient.underlyingDiseases && Object.values(selectedPatient.underlyingDiseases).some(v => v === true) && (
-                        <div className="flex justify-between items-start border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400 mt-1">Hístórico/Comorbidades</span>
-                          <div className="flex flex-wrap justify-end gap-1 max-w-[200px]">
-                            {Object.entries(selectedPatient.underlyingDiseases)
-                              .filter(([_, v]) => v === true)
-                              .map(([key]) => (
-                                <span key={key} className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded border border-cardinal-100 uppercase">
-                                  {key === 'hypertension' ? 'Hipertensão' :
-                                    key === 'diabetes' ? 'Diabetes' :
-                                      key === 'cholesterol' ? 'Colesterol' :
-                                        key === 'smoker' ? 'Tabagismo' : key}
-                                </span>
-                              ))}
+                    </div>
+                  </div>
+
+                  {/* Referral Info (if exists) */}
+                  {selectedPatient.referral && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="premium-card p-8 bg-cardinal-50/30 border-cardinal-100">
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
+                          <ArrowUpRight className="w-4 h-4 mr-2" /> Encaminhamento & Referência
+                        </h3>
+                        <div className="grid grid-cols-1 gap-6">
+                          <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-sandstone-400">Especialidade</span>
+                            <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specialty}</span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-sandstone-400">Priorização</span>
+                            <span className="text-sm font-bold text-cardinal-700">
+                              {selectedPatient.referral.urgency === 'emergency' ? '🔴 Emergência' :
+                                selectedPatient.referral.urgency === 'urgent' ? '🟠 Urgente' : '🟢 Rotina'}
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-sandstone-400">Data</span>
+                            <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.referral.referralDate)}</span>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </div>
 
-                  <div className="premium-card p-8 bg-sandstone-50/50 border-none">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                      <Calendar className="w-4 h-4 mr-2" /> Dados do Procedimento
+                      <div className="premium-card p-8 bg-blue-50/30 border-blue-100">
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-blue-800 mb-6 flex items-center">
+                          <ShieldCheck className="w-4 h-4 mr-2" /> Seguimento & Desfecho
+                        </h3>
+                        <div className="grid grid-cols-1 gap-6">
+                          <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-blue-400">Serviço de Atenção</span>
+                            <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specializedService || 'Aguardando definição'}</span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-blue-400">Desfecho Final</span>
+                            <span className="text-sm font-bold text-blue-700">{selectedPatient.referral.outcome || 'Em acompanhamento'}</span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-blue-200 pb-2">
+                            <span className="text-[10px] uppercase font-bold text-blue-400">Data Desfecho</span>
+                            <span className="text-sm font-medium text-charcoal">{selectedPatient.referral.outcomeDate ? formatDate(selectedPatient.referral.outcomeDate) : '--/--/----'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Image Catalog */}
+                  <div className="space-y-6">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 flex items-center no-print">
+                      <ImageIcon className="w-4 h-4 mr-2" /> Acervo Iconográfico Selecionado
                     </h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Data Exame</span>
-                        <span className="text-sm font-serif font-bold text-charcoal">{formatDate(selectedPatient.examDate)}</span>
-                      </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Unidade</span>
-                        <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</span>
-                      </div>
-                      <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                        <span className="text-[10px] uppercase font-bold text-sandstone-400">Emissão</span>
-                        <span className="text-sm font-medium text-charcoal">{formatDateTime(selectedPatient.report.completedAt)}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Referral Info (if exists) */}
-                {selectedPatient.referral && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="premium-card p-8 bg-cardinal-50/30 border-cardinal-100">
-                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                        <ArrowUpRight className="w-4 h-4 mr-2" /> Encaminhamento & Referência
-                      </h3>
-                      <div className="grid grid-cols-1 gap-6">
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Especialidade</span>
-                          <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specialty}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Priorização</span>
-                          <span className="text-sm font-bold text-cardinal-700">
-                            {selectedPatient.referral.urgency === 'emergency' ? '🔴 Emergência' :
-                              selectedPatient.referral.urgency === 'urgent' ? '🟠 Urgente' : '🟢 Rotina'}
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Data</span>
-                          <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.referral.referralDate)}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="premium-card p-8 bg-blue-50/30 border-blue-100">
-                      <h3 className="text-xs font-bold uppercase tracking-widest text-blue-800 mb-6 flex items-center">
-                        <ShieldCheck className="w-4 h-4 mr-2" /> Seguimento & Desfecho
-                      </h3>
-                      <div className="grid grid-cols-1 gap-6">
-                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-blue-400">Serviço de Atenção</span>
-                          <span className="text-sm font-bold text-charcoal">{selectedPatient.referral.specializedService || 'Aguardando definição'}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-blue-400">Desfecho Final</span>
-                          <span className="text-sm font-bold text-blue-700">{selectedPatient.referral.outcome || 'Em acompanhamento'}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-blue-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-blue-400">Data Desfecho</span>
-                          <span className="text-sm font-medium text-charcoal">{selectedPatient.referral.outcomeDate ? formatDate(selectedPatient.referral.outcomeDate) : '--/--/----'}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Image Catalog */}
-                <div className="space-y-6">
-                  <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 flex items-center no-print">
-                    <ImageIcon className="w-4 h-4 mr-2" /> Acervo Iconográfico Selecionado
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {selectedPatient.report.selectedImages?.od ? (
-                      <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
-                        <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
-                          <img
-                            src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data || ''}
-                            alt="Olho Direito"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                            onClick={() => {
-                              const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data;
-                              if (url) window.open(url, '_blank');
-                            }}
-                          />
-                        </div>
-                        <div className="mt-3 flex justify-between items-center px-2">
-                          <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Direito (OD)</span>
-                        </div>
-                      </div>
-                    ) : null}
-                    {selectedPatient.report.selectedImages?.oe ? (
-                      <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
-                        <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
-                          <img
-                            src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data || ''}
-                            alt="Olho Esquerdo"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                            onClick={() => {
-                              const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data;
-                              if (url) window.open(url, '_blank');
-                            }}
-                          />
-                        </div>
-                        <div className="mt-3 flex justify-between items-center px-2">
-                          <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Esquerdo (OE)</span>
-                        </div>
-                      </div>
-                    ) : null}
-                    {(!selectedPatient.report.selectedImages?.od && !selectedPatient.report.selectedImages?.oe) && (
-                      selectedPatient.images.slice(0, 2).map((image, index) => (
-                        <div key={image.id} className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {selectedPatient.report.selectedImages?.od ? (
+                        <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                           <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
                             <img
-                              src={image.data}
-                              alt={`Bio-imagem ${index + 1}`}
+                              src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data || ''}
+                              alt="Olho Direito"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                              onClick={() => window.open(image.data, '_blank')}
+                              onClick={() => {
+                                const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data;
+                                if (url) window.open(url, '_blank');
+                              }}
                             />
                           </div>
                           <div className="mt-3 flex justify-between items-center px-2">
-                            <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Captura {index + 1}</span>
+                            <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Direito (OD)</span>
                           </div>
                         </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-
-                {/* Report Findings & Diagnosis */}
-                <div className="space-y-12 py-12 border-t border-sandstone-100">
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <div className="lg:col-span-1">
-                      <h3 className="text-sm font-serif font-bold text-charcoal mb-4 italic">Condições Clínicas</h3>
-                      {selectedPatient.report.diagnosticConditions && (
-                        Object.entries(selectedPatient.report.diagnosticConditions || {}).some(([k, v]) => v) ? (
-                          <div className="flex flex-wrap gap-2">
-                            {selectedPatient.report.diagnosticConditions.normal && (
-                              <span className="px-3 py-1 bg-green-50 text-green-700 border border-green-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                Exame Normal
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.drMild && (
-                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RD Leve
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.drModerate && (
-                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RD Moderada
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.drSevere && (
-                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RD Grave
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.drProliferative && (
-                              <span className="px-3 py-1 bg-cardinal-700 text-white border border-cardinal-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RD Proliferativa
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.glaucomaSuspect && (
-                              <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                Suspeita de Glaucoma
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.hrMild && (
-                              <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RH Leve
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.hrModerate && (
-                              <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RH Moderada
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.hrSevere && (
-                              <span className="px-3 py-1 bg-blue-700 text-white border border-blue-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                RH Grave
-                              </span>
-                            )}
-                            {selectedPatient.report.diagnosticConditions.others && (
-                              <span className="px-3 py-1 bg-sandstone-100 text-sandstone-700 border border-sandstone-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                                Outros
-                              </span>
-                            )}
+                      ) : null}
+                      {selectedPatient.report.selectedImages?.oe ? (
+                        <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                          <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
+                            <img
+                              src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data || ''}
+                              alt="Olho Esquerdo"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                              onClick={() => {
+                                const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data;
+                                if (url) window.open(url, '_blank');
+                              }}
+                            />
                           </div>
-                        ) : (
-                          <span className="text-sm font-serif italic text-sandstone-400">Escrutínio oftalmológico sem evidências de neuropatias principais.</span>
-                        )
+                          <div className="mt-3 flex justify-between items-center px-2">
+                            <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Olho Esquerdo (OE)</span>
+                          </div>
+                        </div>
+                      ) : null}
+                      {(!selectedPatient.report.selectedImages?.od && !selectedPatient.report.selectedImages?.oe) && (
+                        selectedPatient.images.slice(0, 2).map((image, index) => (
+                          <div key={image.id} className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
+                            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
+                              <img
+                                src={image.data}
+                                alt={`Bio-imagem ${index + 1}`}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                onClick={() => window.open(image.data, '_blank')}
+                              />
+                            </div>
+                            <div className="mt-3 flex justify-between items-center px-2">
+                              <span className="text-[10px] font-bold text-sandstone-400 uppercase tracking-widest">Captura {index + 1}</span>
+                            </div>
+                          </div>
+                        ))
                       )}
                     </div>
+                  </div>
 
-                    <div className="lg:col-span-2 space-y-10">
-                      <section>
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Achados Clínicos</h4>
-                        <div className="space-y-6">
-                          {(() => {
-                            try {
-                              const f = JSON.parse(selectedPatient.report.findings);
-                              if (f.od && f.oe) {
-                                return (
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-4">
-                                      <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Direito (OD)</h5>
-                                      <div className="space-y-3">
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.od.opticNerve || 'Sem notas'}</p>
+                  {/* Report Findings & Diagnosis */}
+                  <div className="space-y-12 py-12 border-t border-sandstone-100">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                      <div className="lg:col-span-1">
+                        <h3 className="text-sm font-serif font-bold text-charcoal mb-4 italic">Condições Clínicas</h3>
+                        {selectedPatient.report.diagnosticConditions && (
+                          Object.entries(selectedPatient.report.diagnosticConditions || {}).some(([k, v]) => v) ? (
+                            <div className="flex flex-wrap gap-2">
+                              {selectedPatient.report.diagnosticConditions.normal && (
+                                <span className="px-3 py-1 bg-green-50 text-green-700 border border-green-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Exame Normal
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.drMild && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RD Leve
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.drModerate && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RD Moderada
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.drSevere && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RD Grave
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.drProliferative && (
+                                <span className="px-3 py-1 bg-cardinal-700 text-white border border-cardinal-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RD Proliferativa
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.glaucomaSuspect && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Suspeita de Glaucoma
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.hrMild && (
+                                <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RH Leve
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.hrModerate && (
+                                <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RH Moderada
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.hrSevere && (
+                                <span className="px-3 py-1 bg-blue-700 text-white border border-blue-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  RH Grave
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.others && (
+                                <span className="px-3 py-1 bg-sandstone-100 text-sandstone-700 border border-sandstone-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Outros
+                                </span>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-sm font-serif italic text-sandstone-400">Escrutínio oftalmológico sem evidências de neuropatias principais.</span>
+                          )
+                        )}
+                      </div>
+
+                      <div className="lg:col-span-2 space-y-10">
+                        <section>
+                          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Achados Clínicos</h4>
+                          <div className="space-y-6">
+                            {(() => {
+                              try {
+                                const f = JSON.parse(selectedPatient.report.findings);
+                                if (f.od && f.oe) {
+                                  return (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                      <div className="space-y-4">
+                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Direito (OD)</h5>
+                                        <div className="space-y-3">
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.od.opticNerve || 'Sem notas'}</p>
+                                          </div>
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.od.retina || 'Sem notas'}</p>
+                                          </div>
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.od.vessels || 'Sem notas'}</p>
+                                          </div>
                                         </div>
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.od.retina || 'Sem notas'}</p>
-                                        </div>
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.od.vessels || 'Sem notas'}</p>
+                                      </div>
+                                      <div className="space-y-4">
+                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Esquerdo (OE)</h5>
+                                        <div className="space-y-3">
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.oe.opticNerve || 'Sem notas'}</p>
+                                          </div>
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.oe.retina || 'Sem notas'}</p>
+                                          </div>
+                                          <div className="p-3 bg-sandstone-50 rounded-lg">
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
+                                            <p className="text-sm font-serif text-charcoal">{f.oe.vessels || 'Sem notas'}</p>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                    <div className="space-y-4">
-                                      <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Esquerdo (OE)</h5>
-                                      <div className="space-y-3">
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.oe.opticNerve || 'Sem notas'}</p>
-                                        </div>
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.oe.retina || 'Sem notas'}</p>
-                                        </div>
-                                        <div className="p-3 bg-sandstone-50 rounded-lg">
-                                          <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
-                                          <p className="text-sm font-serif text-charcoal">{f.oe.vessels || 'Sem notas'}</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
+                                  );
+                                }
+                              } catch (e) {
+                                return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{selectedPatient.report.findings}</p>;
                               }
-                            } catch (e) {
                               return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{selectedPatient.report.findings}</p>;
-                            }
-                            return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{selectedPatient.report.findings}</p>;
-                          })()}
-                        </div>
-                      </section>
+                            })()}
+                          </div>
+                        </section>
 
-                      <section>
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conclusão Diagnóstica</h4>
-                        <div className="p-6 bg-sandstone-50 border-l-4 border-cardinal-700 rounded-r-2xl">
-                          <p className="text-lg text-charcoal font-serif font-bold italic leading-relaxed">
+                        <section>
+                          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conclusão Diagnóstica</h4>
+                          <div className="p-6 bg-sandstone-50 border-l-4 border-cardinal-700 rounded-r-2xl">
+                            <p className="text-lg text-charcoal font-serif font-bold italic leading-relaxed">
+                              {(() => {
+                                const diagnosis = selectedPatient.report.diagnosis || '';
+                                if (diagnosis.includes(' - ')) {
+                                  return diagnosis.split(' - ')[0];
+                                }
+                                return diagnosis;
+                              })()}
+                            </p>
+                          </div>
+                        </section>
+
+                        {(() => {
+                          try {
+                            const f = JSON.parse(selectedPatient.report.findings);
+                            const isOdUnsatisfactory = f.od?.quality === 'unsatisfactory';
+                            const isOeUnsatisfactory = f.oe?.quality === 'unsatisfactory';
+
+                            if (isOdUnsatisfactory || isOeUnsatisfactory) {
+                              return (
+                                <section className="bg-orange-50/50 border-l-4 border-orange-400 p-6 rounded-r-2xl space-y-3">
+                                  <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 space-x-2 flex items-center">
+                                    <AlertTriangle className="w-3.5 h-3.5" />
+                                    <span>Limitações Técnicas Detectadas</span>
+                                  </h4>
+                                  <div className="space-y-4">
+                                    {isOdUnsatisfactory && (
+                                      <div>
+                                        <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Direito (OD)</p>
+                                        <p className="text-sm font-serif text-charcoal italic">{f.od.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
+                                      </div>
+                                    )}
+                                    {isOeUnsatisfactory && (
+                                      <div>
+                                        <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Esquerdo (OE)</p>
+                                        <p className="text-sm font-serif text-charcoal italic">{f.oe.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
+                                      </div>
+                                    )}
+                                  </div>
+                                </section>
+                              );
+                            }
+                          } catch (e) {
+                            return null;
+                          }
+                          return null;
+                        })()}
+
+                        <section>
+                          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conduta Sugerida</h4>
+                          <div className="space-y-4">
                             {(() => {
                               const diagnosis = selectedPatient.report.diagnosis || '';
+                              const phrases = [];
+
+                              // 1. Check for split from diagnosis
                               if (diagnosis.includes(' - ')) {
-                                return diagnosis.split(' - ')[0];
+                                phrases.push(diagnosis.split(' - ').slice(1).join(' - '));
                               }
-                              return diagnosis;
+
+                              // 2. Check for new field
+                              if (selectedPatient.report.suggestedConduct) {
+                                phrases.push(selectedPatient.report.suggestedConduct);
+                              }
+
+                              // 3. Fallback to recommendations if others are empty (legacy)
+                              if (phrases.length === 0 && selectedPatient.report.recommendations) {
+                                phrases.push(selectedPatient.report.recommendations);
+                              }
+
+                              if (phrases.length === 0) {
+                                return <p className="text-sm text-sandstone-400 font-medium italic">Nenhuma conduta especificada.</p>;
+                              }
+
+                              return phrases.map((p, i) => (
+                                <p key={i} className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
+                                  {p}
+                                </p>
+                              ));
                             })()}
-                          </p>
-                        </div>
-                      </section>
+                          </div>
+                        </section>
 
-                      {(() => {
-                        try {
-                          const f = JSON.parse(selectedPatient.report.findings);
-                          const isOdUnsatisfactory = f.od?.quality === 'unsatisfactory';
-                          const isOeUnsatisfactory = f.oe?.quality === 'unsatisfactory';
-
-                          if (isOdUnsatisfactory || isOeUnsatisfactory) {
-                            return (
-                              <section className="bg-orange-50/50 border-l-4 border-orange-400 p-6 rounded-r-2xl space-y-3">
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 space-x-2 flex items-center">
-                                  <AlertTriangle className="w-3.5 h-3.5" />
-                                  <span>Limitações Técnicas Detectadas</span>
-                                </h4>
-                                <div className="space-y-4">
-                                  {isOdUnsatisfactory && (
-                                    <div>
-                                      <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Direito (OD)</p>
-                                      <p className="text-sm font-serif text-charcoal italic">{f.od.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
-                                    </div>
-                                  )}
-                                  {isOeUnsatisfactory && (
-                                    <div>
-                                      <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Esquerdo (OE)</p>
-                                      <p className="text-sm font-serif text-charcoal italic">{f.oe.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
-                                    </div>
-                                  )}
-                                </div>
-                              </section>
-                            );
-                          }
-                        } catch (e) {
-                          return null;
-                        }
-                        return null;
-                      })()}
-
-                      <section>
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conduta Sugerida</h4>
-                        <div className="space-y-4">
-                          {(() => {
-                            const diagnosis = selectedPatient.report.diagnosis || '';
-                            const phrases = [];
-
-                            // 1. Check for split from diagnosis
-                            if (diagnosis.includes(' - ')) {
-                              phrases.push(diagnosis.split(' - ').slice(1).join(' - '));
-                            }
-
-                            // 2. Check for new field
-                            if (selectedPatient.report.suggestedConduct) {
-                              phrases.push(selectedPatient.report.suggestedConduct);
-                            }
-
-                            // 3. Fallback to recommendations if others are empty (legacy)
-                            if (phrases.length === 0 && selectedPatient.report.recommendations) {
-                              phrases.push(selectedPatient.report.recommendations);
-                            }
-
-                            if (phrases.length === 0) {
-                              return <p className="text-sm text-sandstone-400 font-medium italic">Nenhuma conduta especificada.</p>;
-                            }
-
-                            return phrases.map((p, i) => (
-                              <p key={i} className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
-                                {p}
+                        {/* Display recommendations separately if they Exist and are different from suggestedConduct */}
+                        {selectedPatient.report.recommendations &&
+                          !selectedPatient.report.diagnosis.includes(selectedPatient.report.recommendations) &&
+                          selectedPatient.report.suggestedConduct !== selectedPatient.report.recommendations && (
+                            <section>
+                              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Recomendações Adicionais</h4>
+                              <p className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
+                                {selectedPatient.report.recommendations}
                               </p>
-                            ));
-                          })()}
-                        </div>
-                      </section>
-
-                      {/* Display recommendations separately if they Exist and are different from suggestedConduct */}
-                      {selectedPatient.report.recommendations &&
-                        !selectedPatient.report.diagnosis.includes(selectedPatient.report.recommendations) &&
-                        selectedPatient.report.suggestedConduct !== selectedPatient.report.recommendations && (
-                          <section>
-                            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Recomendações Adicionais</h4>
-                            <p className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
-                              {selectedPatient.report.recommendations}
-                            </p>
-                          </section>
-                        )}
+                            </section>
+                          )}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Signature Block */}
-                <div className="pt-16 pb-8 border-t border-sandstone-100 flex flex-col items-center text-center">
-                  <div className="text-charcoal font-serif text-xl font-bold mb-1 italic">
-                    {selectedPatient.report.doctorName}
+                  {/* Signature Block */}
+                  <div className="pt-16 pb-8 border-t border-sandstone-100 flex flex-col items-center text-center">
+                    <div className="text-charcoal font-serif text-xl font-bold mb-1 italic">
+                      {selectedPatient.report.doctorName}
+                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-4">
+                      Responsável Médico pela Validação
+                    </div>
+                    <div className="w-48 h-px bg-sandstone-300 opacity-50 mb-4" />
+                    <div className="text-[10px] font-medium text-sandstone-500">
+                      Documento assinado digitalmente | {formatDateTime(selectedPatient.report.completedAt)}
+                    </div>
                   </div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-4">
-                    Responsável Médico pela Validação
-                  </div>
-                  <div className="w-48 h-px bg-sandstone-300 opacity-50 mb-4" />
-                  <div className="text-[10px] font-medium text-sandstone-500">
-                    Documento assinado digitalmente | {formatDateTime(selectedPatient.report.completedAt)}
-                  </div>
-                </div>
 
-                {/* Traceability Timeline */}
-                <div className="space-y-8 no-print pt-12 border-t border-sandstone-100">
-                  <h3 className="text-xs font-bold uppercase tracking-widest text-sandstone-400 flex items-center">
-                    <Clock className="w-4 h-4 mr-2" /> Rastreabilidade do Fluxo Operacional
-                  </h3>
-                  <div className="relative pl-8 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-sandstone-100">
-                    <TimelineItem
-                      title="Registro & Triagem Inicial"
-                      date={formatDateTime(selectedPatient.createdAt)}
-                      status="Concluído"
-                      detail={`Iniciado na Unidade: ${selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}`}
-                    />
-                    <TimelineItem
-                      title="Análise Neuroftalmológica"
-                      date={formatDateTime(selectedPatient.report.completedAt)}
-                      status="Concluído"
-                      detail={`Validado por: ${selectedPatient.report.doctorName}`}
-                    />
-                    {selectedPatient.referral && (
+                  {/* Traceability Timeline */}
+                  <div className="space-y-8 no-print pt-12 border-t border-sandstone-100">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-sandstone-400 flex items-center">
+                      <Clock className="w-4 h-4 mr-2" /> Rastreabilidade do Fluxo Operacional
+                    </h3>
+                    <div className="relative pl-8 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-sandstone-100">
                       <TimelineItem
-                        title="Encaminhamento para Especialista"
-                        date={formatDateTime(selectedPatient.referral.referralDate)}
+                        title="Registro & Triagem Inicial"
+                        date={formatDateTime(selectedPatient.createdAt)}
                         status="Concluído"
-                        detail={`Destino: ${selectedPatient.referral.specialty}`}
+                        detail={`Iniciado na Unidade: ${selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}`}
                       />
-                    )}
-                    {selectedPatient.referral?.outcome && (
                       <TimelineItem
-                        title="Desfecho & Seguimento Final"
-                        date={selectedPatient.referral.outcomeDate ? formatDateTime(selectedPatient.referral.outcomeDate) : 'Em processamento'}
-                        status="Definido"
-                        detail={`Status: ${selectedPatient.referral.outcome}`}
+                        title="Análise Neuroftalmológica"
+                        date={formatDateTime(selectedPatient.report.completedAt)}
+                        status="Concluído"
+                        detail={`Validado por: ${selectedPatient.report.doctorName}`}
                       />
-                    )}
+                      {selectedPatient.referral && (
+                        <TimelineItem
+                          title="Encaminhamento para Especialista"
+                          date={formatDateTime(selectedPatient.referral.referralDate)}
+                          status="Concluído"
+                          detail={`Destino: ${selectedPatient.referral.specialty}`}
+                        />
+                      )}
+                      {selectedPatient.referral?.outcome && (
+                        <TimelineItem
+                          title="Desfecho & Seguimento Final"
+                          date={selectedPatient.referral.outcomeDate ? formatDateTime(selectedPatient.referral.outcomeDate) : 'Em processamento'}
+                          status="Definido"
+                          detail={`Status: ${selectedPatient.referral.outcome}`}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Modal Footer Controls */}
-            <div className="px-8 py-6 bg-sandstone-50 border-t border-sandstone-100 flex justify-end gap-4 no-print">
-              <button
-                onClick={closeModal}
-                className="px-8 py-3 text-sandstone-400 font-bold uppercase tracking-widest text-[10px] hover:bg-white rounded-xl transition-colors border border-transparent hover:border-sandstone-200"
-              >
-                Voltar ao Índice
-              </button>
-              <button
-                onClick={handlePrint}
-                className="btn-cardinal px-10 py-3 text-xs uppercase tracking-widest font-bold flex items-center space-x-3"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Salvar PDF / Imprimir</span>
-              </button>
+              {/* Modal Footer Controls */}
+              <div className="px-8 py-6 bg-sandstone-50 border-t border-sandstone-100 flex justify-end gap-4 no-print">
+                <button
+                  onClick={closeModal}
+                  className="px-8 py-3 text-sandstone-400 font-bold uppercase tracking-widest text-[10px] hover:bg-white rounded-xl transition-colors border border-transparent hover:border-sandstone-200"
+                >
+                  Voltar ao Índice
+                </button>
+                <button
+                  onClick={handlePrint}
+                  className="btn-cardinal px-10 py-3 text-xs uppercase tracking-widest font-bold flex items-center space-x-3"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Salvar PDF / Imprimir</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <style jsx global>{`
         @media print {
@@ -738,7 +821,7 @@ export default function Results() {
           margin-left: 1rem;
         }
       `}</style>
-    </div>
+    </div >
   );
 }
 
