@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight } from 'lucide-react';
+import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatientsAction } from '@/app/actions/patients';
 import { Patient } from '@/types';
@@ -557,6 +557,42 @@ export default function Results() {
                           </p>
                         </div>
                       </section>
+
+                      {(() => {
+                        try {
+                          const f = JSON.parse(selectedPatient.report.findings);
+                          const isOdUnsatisfactory = f.od?.quality === 'unsatisfactory';
+                          const isOeUnsatisfactory = f.oe?.quality === 'unsatisfactory';
+
+                          if (isOdUnsatisfactory || isOeUnsatisfactory) {
+                            return (
+                              <section className="bg-orange-50/50 border-l-4 border-orange-400 p-6 rounded-r-2xl space-y-3">
+                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 space-x-2 flex items-center">
+                                  <AlertTriangle className="w-3.5 h-3.5" />
+                                  <span>Limitações Técnicas Detectadas</span>
+                                </h4>
+                                <div className="space-y-4">
+                                  {isOdUnsatisfactory && (
+                                    <div>
+                                      <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Direito (OD)</p>
+                                      <p className="text-sm font-serif text-charcoal italic">{f.od.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
+                                    </div>
+                                  )}
+                                  {isOeUnsatisfactory && (
+                                    <div>
+                                      <p className="text-[9px] font-bold text-orange-800 uppercase mb-1">Olho Esquerdo (OE)</p>
+                                      <p className="text-sm font-serif text-charcoal italic">{f.oe.limitationReason || 'Qualidade de imagem insuficiente para análise detalhada.'}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              </section>
+                            );
+                          }
+                        } catch (e) {
+                          return null;
+                        }
+                        return null;
+                      })()}
 
                       <section>
                         <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conduta Sugerida</h4>

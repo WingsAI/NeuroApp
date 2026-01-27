@@ -25,6 +25,7 @@ export default function Medical() {
       isOpticNerveStandard: false,
       isRetinaStandard: false,
       isVesselsStandard: false,
+      limitationReason: '',
     },
     oe: {
       quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
@@ -34,6 +35,7 @@ export default function Medical() {
       isOpticNerveStandard: false,
       isRetinaStandard: false,
       isVesselsStandard: false,
+      limitationReason: '',
     },
     diagnosis: '',
     recommendations: '',
@@ -401,6 +403,7 @@ export default function Medical() {
         isOpticNerveStandard: false,
         isRetinaStandard: false,
         isVesselsStandard: false,
+        limitationReason: '',
       },
       oe: {
         quality: 'satisfactory',
@@ -410,6 +413,7 @@ export default function Medical() {
         isOpticNerveStandard: false,
         isRetinaStandard: false,
         isVesselsStandard: false,
+        limitationReason: '',
       },
       diagnosis: '',
       recommendations: '',
@@ -482,6 +486,8 @@ export default function Medical() {
         'OE Nervo Óptico': findings.oe?.opticNerve || 'N/A',
         'OE Retina': findings.oe?.retina || 'N/A',
         'OE Vasos': findings.oe?.vessels || 'N/A',
+        'OD Limitação': findings.od?.limitationReason || 'N/A',
+        'OE Limitação': findings.oe?.limitationReason || 'N/A',
 
         // Conclusões
         'Diagnóstico Conclusivo': p.report?.diagnosis || 'N/A',
@@ -855,6 +861,20 @@ export default function Medical() {
                             </div>
                           </div>
 
+                          {reportForm.od.quality === 'unsatisfactory' && (
+                            <div className="p-4 bg-cardinal-50/50 border border-cardinal-100 rounded-xl space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">Justificativa da Limitação Técnica (OD)</label>
+                              <textarea
+                                name="limitationReason"
+                                value={reportForm.od.limitationReason}
+                                onChange={(e) => handleEyeReportInputChange('od', e)}
+                                rows={2}
+                                className="w-full bg-white border border-cardinal-100 rounded-lg p-3 text-xs font-serif leading-relaxed focus:ring-1 focus:ring-cardinal-700 outline-none transition-all placeholder:text-cardinal-200"
+                                placeholder="Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"
+                              />
+                            </div>
+                          )}
+
                           {/* Findings OD */}
                           {['opticNerve', 'retina', 'vessels'].map((field) => {
                             const labels: any = { opticNerve: 'Nervo Óptico', retina: 'Retina', vessels: 'Vasos' };
@@ -925,6 +945,20 @@ export default function Medical() {
                               ))}
                             </div>
                           </div>
+
+                          {reportForm.oe.quality === 'unsatisfactory' && (
+                            <div className="p-4 bg-cardinal-50/50 border border-cardinal-100 rounded-xl space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">Justificativa da Limitação Técnica (OE)</label>
+                              <textarea
+                                name="limitationReason"
+                                value={reportForm.oe.limitationReason}
+                                onChange={(e) => handleEyeReportInputChange('oe', e)}
+                                rows={2}
+                                className="w-full bg-white border border-cardinal-100 rounded-lg p-3 text-xs font-serif leading-relaxed focus:ring-1 focus:ring-cardinal-700 outline-none transition-all placeholder:text-cardinal-200"
+                                placeholder="Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"
+                              />
+                            </div>
+                          )}
 
                           {/* Findings OE */}
                           {['opticNerve', 'retina', 'vessels'].map((field) => {
@@ -1073,35 +1107,38 @@ export default function Medical() {
                     )}
                   </div>
                 </form>
+              </div >
+            </div >
+          </div >
+        </div >
+      )
+      }
+
+      {/* Internal Lightbox for Images */}
+      {
+        selectedImage && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 animate-in fade-in zoom-in duration-300">
+            <div className="absolute inset-0 bg-charcoal/95 backdrop-blur-md" onClick={() => setSelectedImage(null)} />
+
+            <div className="relative max-w-5xl w-full max-h-full flex flex-col items-center">
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-12 right-0 p-3 text-white hover:text-cardinal-400 transition-colors"
+              >
+                <X className="h-8 w-8" />
+              </button>
+              <img
+                src={selectedImage}
+                alt="Visualização Ampliada"
+                className="w-full h-auto object-contain rounded-lg shadow-2xl border border-white/10"
+              />
+              <div className="mt-4 px-6 py-2 bg-white/10 backdrop-blur rounded-full border border-white/20">
+                <p className="text-white text-xs font-bold uppercase tracking-widest">Visualização em Alta Definição</p>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Internal Lightbox for Images */}
-      {selectedImage && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 animate-in fade-in zoom-in duration-300">
-          <div className="absolute inset-0 bg-charcoal/95 backdrop-blur-md" onClick={() => setSelectedImage(null)} />
-
-          <div className="relative max-w-5xl w-full max-h-full flex flex-col items-center">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 p-3 text-white hover:text-cardinal-400 transition-colors"
-            >
-              <X className="h-8 w-8" />
-            </button>
-            <img
-              src={selectedImage}
-              alt="Visualização Ampliada"
-              className="w-full h-auto object-contain rounded-lg shadow-2xl border border-white/10"
-            />
-            <div className="mt-4 px-6 py-2 bg-white/10 backdrop-blur rounded-full border border-white/20">
-              <p className="text-white text-xs font-bold uppercase tracking-widest">Visualização em Alta Definição</p>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }
