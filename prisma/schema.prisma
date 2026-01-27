@@ -51,6 +51,7 @@ model MedicalReport {
   findings             String
   diagnosis            String
   recommendations      String
+  suggestedConduct     String?  // New field for suggested conduct
   diagnosticConditions Json     // Store the DiagnosticConditions object
   selectedImages       Json?    // Store the selectedImages object {od, oe}
   completedAt          DateTime @default(now())

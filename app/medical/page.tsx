@@ -37,6 +37,7 @@ export default function Medical() {
     },
     diagnosis: '',
     recommendations: '',
+    suggestedConduct: '',
   });
   const [diagnosticConditions, setDiagnosticConditions] = useState({
     normal: false,
@@ -359,6 +360,7 @@ export default function Medical() {
         }),
         diagnosis: reportForm.diagnosis,
         recommendations: reportForm.recommendations,
+        suggestedConduct: reportForm.suggestedConduct,
         diagnosticConditions: diagnosticConditions,
         selectedImages: selectedReportImages,
         completedAt: new Date().toISOString(),
@@ -411,6 +413,7 @@ export default function Medical() {
       },
       diagnosis: '',
       recommendations: '',
+      suggestedConduct: '',
     });
     setDiagnosticConditions({
       normal: false,
@@ -482,6 +485,7 @@ export default function Medical() {
 
         // Conclusões
         'Diagnóstico Conclusivo': p.report?.diagnosis || 'N/A',
+        'Conduta Sugerida': p.report?.suggestedConduct || 'N/A',
         'Recomendações': p.report?.recommendations || 'N/A',
 
         // Sinalizadores Diagnósticos
@@ -1022,9 +1026,20 @@ export default function Medical() {
                             value={reportForm.diagnosis}
                             onChange={handleReportInputChange}
                             required
-                            rows={4}
-                            className="w-full bg-sandstone-50/50 border border-sandstone-200 rounded-xl px-4 py-4 text-sm font-serif leading-relaxed text-charcoal outline-none focus:bg-white focus:ring-2 focus:ring-cardinal-700/10 transition-all"
+                            rows={3}
+                            className="w-full bg-sandstone-50/50 border border-sandstone-200 rounded-xl px-4 py-3 text-sm font-serif leading-relaxed text-charcoal outline-none focus:bg-white focus:ring-2 focus:ring-cardinal-700/10 transition-all"
                             placeholder="Escreva a conclusão diagnóstica final aqui..."
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-bold uppercase tracking-widest text-sandstone-500">Conduta Sugerida</label>
+                          <textarea
+                            name="suggestedConduct"
+                            value={reportForm.suggestedConduct}
+                            onChange={handleReportInputChange}
+                            rows={3}
+                            className="w-full bg-sandstone-50/50 border border-sandstone-200 rounded-xl px-4 py-3 text-sm font-serif leading-relaxed text-charcoal outline-none focus:bg-white focus:ring-2 focus:ring-cardinal-700/10 transition-all"
+                            placeholder="Descreva a conduta sugerida para este caso..."
                           />
                         </div>
                       </div>

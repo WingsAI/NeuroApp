@@ -547,17 +547,63 @@ export default function Results() {
                         <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conclusão Diagnóstica</h4>
                         <div className="p-6 bg-sandstone-50 border-l-4 border-cardinal-700 rounded-r-2xl">
                           <p className="text-lg text-charcoal font-serif font-bold italic leading-relaxed">
-                            {selectedPatient.report.diagnosis}
+                            {(() => {
+                              const diagnosis = selectedPatient.report.diagnosis || '';
+                              if (diagnosis.includes(' - ')) {
+                                return diagnosis.split(' - ')[0];
+                              }
+                              return diagnosis;
+                            })()}
                           </p>
                         </div>
                       </section>
 
                       <section>
                         <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Conduta Sugerida</h4>
-                        <p className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
-                          {selectedPatient.report.recommendations}
-                        </p>
+                        <div className="space-y-4">
+                          {(() => {
+                            const diagnosis = selectedPatient.report.diagnosis || '';
+                            const phrases = [];
+
+                            // 1. Check for split from diagnosis
+                            if (diagnosis.includes(' - ')) {
+                              phrases.push(diagnosis.split(' - ').slice(1).join(' - '));
+                            }
+
+                            // 2. Check for new field
+                            if (selectedPatient.report.suggestedConduct) {
+                              phrases.push(selectedPatient.report.suggestedConduct);
+                            }
+
+                            // 3. Fallback to recommendations if others are empty (legacy)
+                            if (phrases.length === 0 && selectedPatient.report.recommendations) {
+                              phrases.push(selectedPatient.report.recommendations);
+                            }
+
+                            if (phrases.length === 0) {
+                              return <p className="text-sm text-sandstone-400 font-medium italic">Nenhuma conduta especificada.</p>;
+                            }
+
+                            return phrases.map((p, i) => (
+                              <p key={i} className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
+                                {p}
+                              </p>
+                            ));
+                          })()}
+                        </div>
                       </section>
+
+                      {/* Display recommendations separately if they Exist and are different from suggestedConduct */}
+                      {selectedPatient.report.recommendations &&
+                        !selectedPatient.report.diagnosis.includes(selectedPatient.report.recommendations) &&
+                        selectedPatient.report.suggestedConduct !== selectedPatient.report.recommendations && (
+                          <section>
+                            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-4 divider-after">Recomendações Adicionais</h4>
+                            <p className="text-sm text-sandstone-600 font-medium leading-relaxed italic">
+                              {selectedPatient.report.recommendations}
+                            </p>
+                          </section>
+                        )}
                     </div>
                   </div>
                 </div>

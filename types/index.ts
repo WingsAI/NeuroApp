@@ -34,6 +34,7 @@ export interface MedicalReport {
   findings: string;
   diagnosis: string;
   recommendations: string;
+  suggestedConduct?: string;
   diagnosticConditions: DiagnosticConditions;
   selectedImages?: { od: string | null, oe: string | null };
   completedAt: string;

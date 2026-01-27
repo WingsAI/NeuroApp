@@ -214,8 +214,19 @@ export default function Referrals() {
                       <div className="p-4 bg-sandstone-50 rounded-xl border border-sandstone-100">
                         <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider mb-2">Conclusão do Laudo</p>
                         <p className="text-sm font-serif italic text-charcoal line-clamp-2 leading-relaxed">
-                          "{patient.report?.diagnosis}"
+                          "{(() => {
+                            const diagnosis = patient.report?.diagnosis || '';
+                            return diagnosis.includes(' - ') ? diagnosis.split(' - ')[0] : diagnosis;
+                          })()}"
                         </p>
+                        {(patient.report?.suggestedConduct || (patient.report?.diagnosis && patient.report.diagnosis.includes(' - '))) && (
+                          <div className="mt-2 pt-2 border-t border-sandstone-200/50">
+                            <p className="text-[9px] font-bold uppercase text-cardinal-700/60 tracking-wider mb-1">Conduta Sugerida</p>
+                            <p className="text-[11px] font-serif italic text-sandstone-600 line-clamp-1">
+                              {patient.report?.suggestedConduct || patient.report?.diagnosis.split(' - ').slice(1).join(' - ')}
+                            </p>
+                          </div>
+                        )}
                       </div>
                       {patient.report && getConditionsList(patient.report.diagnosticConditions).length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-2">
@@ -290,8 +301,18 @@ export default function Referrals() {
                   <div className="space-y-4">
                     <div>
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Conclusão Diagnóstica</p>
-                      <p className="text-sm font-medium text-sandstone-600 line-clamp-2 italic">"{selectedPatient.report.diagnosis}"</p>
+                      <p className="text-sm font-serif font-bold text-charcoal italic leading-tight">
+                        {selectedPatient.report.diagnosis.includes(' - ') ? selectedPatient.report.diagnosis.split(' - ')[0] : selectedPatient.report.diagnosis}
+                      </p>
                     </div>
+                    {(selectedPatient.report.suggestedConduct || selectedPatient.report.diagnosis.includes(' - ')) && (
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Conduta Sugerida</p>
+                        <p className="text-sm font-medium text-sandstone-600 italic">
+                          {selectedPatient.report.suggestedConduct || selectedPatient.report.diagnosis.split(' - ').slice(1).join(' - ')}
+                        </p>
+                      </div>
+                    )}
                     {getConditionsList(selectedPatient.report.diagnosticConditions).length > 0 && (
                       <div>
                         <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider mb-2">Marcadores de Alerta</p>
