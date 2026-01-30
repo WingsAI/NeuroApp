@@ -69,10 +69,11 @@ export default function Medical() {
     od: null,
     oe: null
   });
+  const [showCompleted, setShowCompleted] = useState(false);
 
   useEffect(() => {
     loadPatients();
-  }, []);
+  }, [showCompleted]);
 
   useEffect(() => {
     filterPatients();
@@ -197,16 +198,16 @@ export default function Medical() {
         return true;
       });
 
-      // Filtrar apenas pacientes que NÃO estão com laudo completo
-      const pendingPatients = finalPatients.filter(
-        (p: Patient) => p.status !== 'completed'
+      // Filtrar por status baseado no toggle
+      const filteredByStatus = finalPatients.filter(
+        (p: Patient) => showCompleted ? p.status === 'completed' : p.status !== 'completed'
       );
 
       // Ordenar alfabeticamente por nome
-      pendingPatients.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+      filteredByStatus.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 
-      setPatients(pendingPatients);
-      console.log(`[DEBUG] Displaying ${pendingPatients.length} patients.`);
+      setPatients(filteredByStatus);
+      console.log(`[DEBUG] Displaying ${filteredByStatus.length} patients (${showCompleted ? 'Completed' : 'Pending'}).`);
     } catch (err) {
       console.error('Erro ao carregar pacientes:', err);
     } finally {
@@ -243,6 +244,38 @@ export default function Medical() {
       cpf: patient.cpf || '',
       phone: patient.phone || '',
     });
+
+    // Popular o formulário se já existir um laudo
+    if (patient.report) {
+      try {
+        const findings = typeof patient.report.findings === 'string'
+          ? JSON.parse(patient.report.findings)
+          : patient.report.findings;
+
+        setReportForm({
+          doctorName: patient.report.doctorName || 'Dr. Gustavo Sakuno',
+          doctorCRM: patient.report.doctorCRM || 'CRM-SP 177.943',
+          od: findings.od || reportForm.od,
+          oe: findings.oe || reportForm.oe,
+          diagnosis: patient.report.diagnosis || '',
+          recommendations: patient.report.recommendations || '',
+          suggestedConduct: patient.report.suggestedConduct || '',
+        });
+        setDiagnosticConditions(patient.report.diagnosticConditions || {
+          normal: false, drMild: false, drModerate: false, drSevere: false, drProliferative: false,
+          glaucomaSuspect: false, hrMild: false, hrModerate: false, hrSevere: false,
+          hypertensiveRetinopathy: false, tumor: false, others: false,
+        });
+        setSelectedReportImages(patient.report.selectedImages || { od: null, oe: null });
+      } catch (e) {
+        console.error('Erro ao processar laudo existente:', e);
+        resetForm();
+      }
+    } else {
+      resetForm();
+      setSelectedReportImages({ od: null, oe: null });
+    }
+
     setShowModal(true);
 
     // Se o CPF for 'PENDENTE', significa que é um paciente da nuvem que ainda não está no banco
@@ -385,7 +418,7 @@ export default function Medical() {
         resetForm();
         setSuccess(false);
         loadPatients();
-        router.push('/referrals');
+        // Permanecer na tela de laudo conforme solicitado
       }, 1500);
     } catch (err) {
       console.error('Erro ao salvar laudo:', err);
@@ -549,6 +582,17 @@ export default function Medical() {
                   <span className="text-[10px] font-bold uppercase tracking-widest">Sincronizando Nuvem...</span>
                 </div>
               )}
+
+              <button
+                onClick={() => setShowCompleted(!showCompleted)}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-sm ${showCompleted
+                  ? 'bg-cardinal-700 text-white border border-cardinal-800'
+                  : 'bg-white border border-sandstone-200 text-sandstone-600 hover:bg-sandstone-50'
+                  }`}
+              >
+                <FileText className="w-4 h-4" />
+                <span>{showCompleted ? 'Ver Pendentes' : 'Editar Laudos'}</span>
+              </button>
 
               <button
                 onClick={handleExportExcel}
@@ -1103,12 +1147,12 @@ export default function Medical() {
                         {success ? (
                           <>
                             <CheckCircle2 className="w-6 h-6" />
-                            <span>Laudo Validado com Sucesso</span>
+                            <span>Laudo {selectedPatient.report ? 'Atualizado' : 'Validado'} com Sucesso</span>
                           </>
                         ) : (
                           <>
                             <ShieldCheck className="w-6 h-6" />
-                            <span>Validar & Assinar Digitalmente</span>
+                            <span>{selectedPatient.report ? 'Atualizar & Assinar Digitalmente' : 'Validar & Assinar Digitalmente'}</span>
                           </>
                         )}
                       </button>
