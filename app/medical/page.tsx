@@ -19,7 +19,7 @@ export default function Medical() {
     doctorName: 'Dr. Gustavo Sakuno',
     doctorCRM: 'CRM-SP 177.943',
     od: {
-      quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
+      quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory' | 'impossible',
       opticNerve: '',
       retina: '',
       vessels: '',
@@ -29,7 +29,7 @@ export default function Medical() {
       limitationReason: '',
     },
     oe: {
-      quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
+      quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory' | 'impossible',
       opticNerve: '',
       retina: '',
       vessels: '',
@@ -345,16 +345,43 @@ export default function Medical() {
     }
   };
 
-  const handleEyeQualityChange = (eye: 'od' | 'oe', quality: 'satisfactory' | 'unsatisfactory') => {
-    setReportForm(prev => ({
-      ...prev,
-      [eye]: {
-        ...prev[eye],
-        quality,
-      },
-      // Se for insatisfatório em qualquer um, sugerir no diagnóstico
-      ...(quality === 'unsatisfactory' ? { diagnosis: `Imagem Insatisfatória para Laudo (${eye.toUpperCase()})` } : {})
-    }));
+  const handleEyeQualityChange = (eye: 'od' | 'oe', quality: 'satisfactory' | 'unsatisfactory' | 'impossible') => {
+    setReportForm(prev => {
+      const eyeData = { ...prev[eye] };
+
+      if (quality === 'impossible') {
+        eyeData.opticNerve = 'Impossível avaliar / Ausente';
+        eyeData.retina = 'Impossível avaliar / Ausente';
+        eyeData.vessels = 'Impossível avaliar / Ausente';
+        eyeData.isOpticNerveStandard = false;
+        eyeData.isRetinaStandard = false;
+        eyeData.isVesselsStandard = false;
+        eyeData.limitationReason = 'Paciente sem o olho ou impossibilidade física de captura';
+
+        // Clear selected image for this eye
+        setSelectedReportImages(prevImages => ({
+          ...prevImages,
+          [eye]: null
+        }));
+      } else if (prev[eye].quality === 'impossible') {
+        // Clear the "impossible" placeholders if switching back
+        eyeData.opticNerve = '';
+        eyeData.retina = '';
+        eyeData.vessels = '';
+        eyeData.limitationReason = '';
+      }
+
+      return {
+        ...prev,
+        [eye]: {
+          ...eyeData,
+          quality,
+        },
+        // Se for insatisfatório ou impossível em qualquer um, sugerir no diagnóstico
+        ...(quality === 'unsatisfactory' ? { diagnosis: `Imagem Insatisfatória para Laudo (${eye.toUpperCase()})` } : {}),
+        ...(quality === 'impossible' ? { diagnosis: `Impossibilidade de captura / Olho Ausente (${eye.toUpperCase()})` } : {})
+      };
+    });
   };
 
   const handleReportInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -895,14 +922,16 @@ export default function Medical() {
                           <div className="flex items-center justify-between p-3 bg-sandstone-50 rounded-lg border border-sandstone-100">
                             <span className="text-[10px] font-bold uppercase text-sandstone-500">Qualidade</span>
                             <div className="flex gap-2">
-                              {['satisfactory', 'unsatisfactory'].map((q) => (
+                              {['satisfactory', 'unsatisfactory', 'impossible'].map((q) => (
                                 <button
                                   key={q}
                                   type="button"
                                   onClick={() => handleEyeQualityChange('od', q as any)}
-                                  className={`px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest transition-all ${reportForm.od.quality === q ? (q === 'satisfactory' ? 'bg-green-600 text-white' : 'bg-cardinal-700 text-white') : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
+                                  className={`px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest transition-all ${reportForm.od.quality === q
+                                    ? (q === 'satisfactory' ? 'bg-green-600 text-white' : q === 'impossible' ? 'bg-charcoal text-white' : 'bg-cardinal-700 text-white')
+                                    : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
                                 >
-                                  {q === 'satisfactory' ? 'Satisfatória' : 'Insatisfatória'}
+                                  {q === 'satisfactory' ? 'Satisfatória' : q === 'impossible' ? 'Impossível' : 'Insatisfatória'}
                                 </button>
                               ))}
                             </div>
@@ -923,11 +952,11 @@ export default function Medical() {
                           )}
 
                           {/* Findings OD */}
-                          {['opticNerve', 'retina', 'vessels'].map((field) => {
+                          {reportForm.od.quality !== 'impossible' && ['opticNerve', 'retina', 'vessels'].map((field) => {
                             const labels: any = { opticNerve: 'Nervo Óptico', retina: 'Retina', vessels: 'Vasos' };
                             const standardKey: any = `is${field.charAt(0).toUpperCase()}${field.slice(1)}Standard`;
                             return (
-                              <div key={field} className="space-y-2">
+                              <div key={field} className="space-y-2 animate-in fade-in duration-300">
                                 <div className="flex justify-between items-center px-1">
                                   <label className="text-[10px] font-bold uppercase tracking-widest text-sandstone-500">{labels[field]}</label>
                                   <label className="flex items-center space-x-1.5 cursor-pointer group">
@@ -952,6 +981,13 @@ export default function Medical() {
                               </div>
                             );
                           })}
+
+                          {reportForm.od.quality === 'impossible' && (
+                            <div className="flex flex-col items-center justify-center p-10 bg-sandstone-50 rounded-xl border border-dashed border-sandstone-200 opacity-60">
+                              <X className="w-8 h-8 text-sandstone-300 mb-2" />
+                              <p className="text-[10px] font-bold uppercase text-sandstone-400">Captura não realizada para este olho</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -980,14 +1016,16 @@ export default function Medical() {
                           <div className="flex items-center justify-between p-3 bg-sandstone-50 rounded-lg border border-sandstone-100">
                             <span className="text-[10px] font-bold uppercase text-sandstone-500">Qualidade</span>
                             <div className="flex gap-2">
-                              {['satisfactory', 'unsatisfactory'].map((q) => (
+                              {['satisfactory', 'unsatisfactory', 'impossible'].map((q) => (
                                 <button
                                   key={q}
                                   type="button"
                                   onClick={() => handleEyeQualityChange('oe', q as any)}
-                                  className={`px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest transition-all ${reportForm.oe.quality === q ? (q === 'satisfactory' ? 'bg-green-600 text-white' : 'bg-cardinal-700 text-white') : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
+                                  className={`px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest transition-all ${reportForm.oe.quality === q
+                                    ? (q === 'satisfactory' ? 'bg-green-600 text-white' : q === 'impossible' ? 'bg-charcoal text-white' : 'bg-cardinal-700 text-white')
+                                    : 'bg-white text-sandstone-400 border border-sandstone-200'}`}
                                 >
-                                  {q === 'satisfactory' ? 'Satisfatória' : 'Insatisfatória'}
+                                  {q === 'satisfactory' ? 'Satisfatória' : q === 'impossible' ? 'Impossível' : 'Insatisfatória'}
                                 </button>
                               ))}
                             </div>
@@ -1008,11 +1046,11 @@ export default function Medical() {
                           )}
 
                           {/* Findings OE */}
-                          {['opticNerve', 'retina', 'vessels'].map((field) => {
+                          {reportForm.oe.quality !== 'impossible' && ['opticNerve', 'retina', 'vessels'].map((field) => {
                             const labels: any = { opticNerve: 'Nervo Óptico', retina: 'Retina', vessels: 'Vasos' };
                             const standardKey: any = `is${field.charAt(0).toUpperCase()}${field.slice(1)}Standard`;
                             return (
-                              <div key={field} className="space-y-2">
+                              <div key={field} className="space-y-2 animate-in fade-in duration-300">
                                 <div className="flex justify-between items-center px-1">
                                   <label className="text-[10px] font-bold uppercase tracking-widest text-sandstone-500">{labels[field]}</label>
                                   <label className="flex items-center space-x-1.5 cursor-pointer group">
@@ -1037,6 +1075,13 @@ export default function Medical() {
                               </div>
                             );
                           })}
+
+                          {reportForm.oe.quality === 'impossible' && (
+                            <div className="flex flex-col items-center justify-center p-10 bg-sandstone-50 rounded-xl border border-dashed border-sandstone-200 opacity-60">
+                              <X className="w-8 h-8 text-sandstone-300 mb-2" />
+                              <p className="text-[10px] font-bold uppercase text-sandstone-400">Captura não realizada para este olho</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -1139,10 +1184,18 @@ export default function Medical() {
                     <div className="flex justify-center pt-8">
                       <button
                         type="submit"
-                        disabled={success || !selectedReportImages.od || !selectedReportImages.oe}
-                        className={`min-w-[400px] px-12 py-5 rounded-2xl text-white font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center space-x-4 transition-all shadow-2xl ${(!selectedReportImages.od || !selectedReportImages.oe)
-                          ? 'bg-sandstone-300 cursor-not-allowed grayscale'
-                          : 'bg-cardinal-800 hover:bg-cardinal-900 shadow-cardinal-200'}`}
+                        disabled={
+                          success ||
+                          (!selectedReportImages.od && reportForm.od.quality !== 'impossible') ||
+                          (!selectedReportImages.oe && reportForm.oe.quality !== 'impossible')
+                        }
+                        className={`min-w-[400px] px-12 py-5 rounded-2xl text-white font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center space-x-4 transition-all shadow-2xl ${(
+                            (selectedReportImages.od || reportForm.od.quality === 'impossible') &&
+                            (selectedReportImages.oe || reportForm.oe.quality === 'impossible')
+                          )
+                            ? 'bg-cardinal-800 hover:bg-cardinal-900 shadow-cardinal-200'
+                            : 'bg-sandstone-300 cursor-not-allowed grayscale'
+                          }`}
                       >
                         {success ? (
                           <>
