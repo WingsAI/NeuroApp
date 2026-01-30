@@ -219,31 +219,42 @@ export async function getPatientsAction() {
         orderBy: { createdAt: 'desc' },
     });
 
-    // Convert S3 keys to signed URLs and map back to our Type
     const mappedPatients = await Promise.all(patients.map(async (p: any) => {
-        const imagesWithUrls = await Promise.all(p.images.map(async (img: any) => ({
-            ...img,
-            data: await getSignedFileUrl(img.url),
-            uploadedAt: img.uploadedAt.toISOString(),
-        })));
+        try {
+            const imagesWithUrls = await Promise.all(p.images.map(async (img: any) => ({
+                ...img,
+                data: await getSignedFileUrl(img.url),
+                uploadedAt: img.uploadedAt?.toISOString?.() || new Date(img.uploadedAt || Date.now()).toISOString(),
+            })));
 
-        return {
-            ...p,
-            birthDate: p.birthDate.toISOString(),
-            examDate: p.examDate.toISOString(),
-            createdAt: p.createdAt.toISOString(),
-            images: imagesWithUrls,
-            report: p.report ? {
-                ...p.report,
-                doctorCRM: p.report.doctorCRM,
-                diagnosticConditions: p.report.diagnosticConditions as any,
-                completedAt: p.report.completedAt.toISOString(),
-            } : undefined,
-            referral: p.referral ? {
-                ...p.referral,
-                referralDate: p.referral.referralDate.toISOString(),
-            } : undefined,
-        } as any;
+            return {
+                ...p,
+                birthDate: p.birthDate?.toISOString?.() || new Date(p.birthDate || Date.now()).toISOString(),
+                examDate: p.examDate?.toISOString?.() || new Date(p.examDate || Date.now()).toISOString(),
+                createdAt: p.createdAt?.toISOString?.() || new Date(p.createdAt || Date.now()).toISOString(),
+                images: imagesWithUrls,
+                report: p.report ? {
+                    ...p.report,
+                    doctorCRM: p.report.doctorCRM,
+                    diagnosticConditions: p.report.diagnosticConditions as any,
+                    completedAt: p.report.completedAt?.toISOString?.() || new Date(p.report.completedAt || Date.now()).toISOString(),
+                } : undefined,
+                referral: p.referral ? {
+                    ...p.referral,
+                    referralDate: p.referral.referralDate?.toISOString?.() || new Date(p.referral.referralDate || Date.now()).toISOString(),
+                } : undefined,
+            } as any;
+        } catch (e) {
+            console.error('Error mapping patient:', p.id, e);
+            // Return a minimally mapped patient object if mapping fails for one
+            return {
+                ...p,
+                birthDate: String(p.birthDate),
+                examDate: String(p.examDate),
+                createdAt: String(p.createdAt),
+                images: [],
+            } as any;
+        }
     }));
 
     return mappedPatients;
