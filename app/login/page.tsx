@@ -52,13 +52,15 @@ export default function Login() {
             <div className="noise-overlay" />
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="flex justify-center mb-8">
-                    <div className="bg-cardinal-700 p-3 rounded-2xl shadow-xl">
-                        <Activity className="h-10 w-10 text-white" />
-                    </div>
+                <div className="flex justify-center mb-6">
+                    <img
+                        src="/logo.png"
+                        alt="TeleSight App"
+                        className="h-16 w-auto object-contain"
+                    />
                 </div>
                 <h2 className="text-center text-4xl font-serif font-bold text-charcoal">
-                    Neuro<span className="text-cardinal-700">App</span>
+                    Prev-AVC | <span className="text-cardinal-700">TeleSight</span>
                 </h2>
                 <p className="mt-2 text-center text-sm font-medium text-sandstone-500 uppercase tracking-widest">
                     {isSignUp ? 'Solicitar Acesso ao Sistema' : 'Acesso Restrito a Especialistas'}

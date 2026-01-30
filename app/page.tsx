@@ -235,6 +235,7 @@ export default function Home() {
           {/* Header Section */}
           <div className="max-w-2xl">
             <div className="accent-line" />
+            <h4 className="text-sm font-bold uppercase tracking-widest text-sandstone-400 mb-2">Prev-AVC | TeleSight App</h4>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-charcoal mb-6 leading-[1.1]">
               Registro de <span className="text-cardinal-700 italic">Paciente</span>
             </h1>

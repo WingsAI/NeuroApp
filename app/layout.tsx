@@ -13,7 +13,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "NeuroApp - Sistema de Neuroftalmologia",
+  title: "Prev-AVC | TeleSight App",
   description: "Plataforma de gestão de imagens e laudos neuroftalmológicos",
 };
 

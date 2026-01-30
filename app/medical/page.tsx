@@ -576,7 +576,7 @@ export default function Medical() {
     const ws = XLSX.utils.json_to_sheet(dataToExport);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Fila de Laudos Detalhada");
-    XLSX.writeFile(wb, `NeuroApp_Laudos_Completo_${new Date().toISOString().split('T')[0]}.xlsx`);
+    XLSX.writeFile(wb, `TeleSight_Laudos_Completo_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const formatDate = (dateString: string) => {
@@ -1190,11 +1190,11 @@ export default function Medical() {
                           (!selectedReportImages.oe && reportForm.oe.quality !== 'impossible')
                         }
                         className={`min-w-[400px] px-12 py-5 rounded-2xl text-white font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center space-x-4 transition-all shadow-2xl ${(
-                            (selectedReportImages.od || reportForm.od.quality === 'impossible') &&
-                            (selectedReportImages.oe || reportForm.oe.quality === 'impossible')
-                          )
-                            ? 'bg-cardinal-800 hover:bg-cardinal-900 shadow-cardinal-200'
-                            : 'bg-sandstone-300 cursor-not-allowed grayscale'
+                          (selectedReportImages.od || reportForm.od.quality === 'impossible') &&
+                          (selectedReportImages.oe || reportForm.oe.quality === 'impossible')
+                        )
+                          ? 'bg-cardinal-800 hover:bg-cardinal-900 shadow-cardinal-200'
+                          : 'bg-sandstone-300 cursor-not-allowed grayscale'
                           }`}
                       >
                         {success ? (
