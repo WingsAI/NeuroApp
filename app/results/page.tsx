@@ -584,7 +584,7 @@ export default function Results() {
                                         <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Direito (OD)</h5>
                                         <div className="space-y-3">
                                           <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Nervo</p>
                                             <p className="text-sm font-serif text-charcoal">{f.od.opticNerve || 'Sem notas'}</p>
                                           </div>
                                           <div className="p-3 bg-sandstone-50 rounded-lg">
@@ -601,7 +601,7 @@ export default function Results() {
                                         <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Esquerdo (OE)</h5>
                                         <div className="space-y-3">
                                           <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Córnea / Nervo</p>
+                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Nervo</p>
                                             <p className="text-sm font-serif text-charcoal">{f.oe.opticNerve || 'Sem notas'}</p>
                                           </div>
                                           <div className="p-3 bg-sandstone-50 rounded-lg">
