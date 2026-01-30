@@ -235,6 +235,7 @@ export async function getPatientsAction() {
             images: imagesWithUrls,
             report: p.report ? {
                 ...p.report,
+                doctorCRM: p.report.doctorCRM,
                 diagnosticConditions: p.report.diagnosticConditions as any,
                 completedAt: p.report.completedAt.toISOString(),
             } : undefined,
@@ -256,6 +257,7 @@ export async function updatePatientAction(id: string, updates: any) {
             where: { patientId: id },
             update: {
                 doctorName: updates.report.doctorName,
+                doctorCRM: updates.report.doctorCRM,
                 findings: updates.report.findings,
                 diagnosis: updates.report.diagnosis,
                 recommendations: updates.report.recommendations,
@@ -266,6 +268,7 @@ export async function updatePatientAction(id: string, updates: any) {
             },
             create: {
                 doctorName: updates.report.doctorName,
+                doctorCRM: updates.report.doctorCRM,
                 findings: updates.report.findings,
                 diagnosis: updates.report.diagnosis,
                 recommendations: updates.report.recommendations,

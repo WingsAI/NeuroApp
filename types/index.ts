@@ -31,6 +31,7 @@ export interface MedicalReport {
   id: string;
   patientId: string;
   doctorName: string;
+  doctorCRM?: string;
   findings: string;
   diagnosis: string;
   recommendations: string;

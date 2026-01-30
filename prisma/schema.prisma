@@ -48,6 +48,7 @@ model PatientImage {
 model MedicalReport {
   id                   String   @id @default(cuid())
   doctorName           String
+  doctorCRM            String?  // New field for doctor's CRM
   findings             String
   diagnosis            String
   recommendations      String

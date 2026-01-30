@@ -17,6 +17,7 @@ export default function Medical() {
   const [showModal, setShowModal] = useState(false);
   const [reportForm, setReportForm] = useState({
     doctorName: 'Dr. Gustavo Sakuno',
+    doctorCRM: 'CRM-SP 177.943',
     od: {
       quality: 'satisfactory' as 'satisfactory' | 'unsatisfactory',
       opticNerve: '',
@@ -356,6 +357,7 @@ export default function Medical() {
     try {
       const report = {
         doctorName: reportForm.doctorName,
+        doctorCRM: reportForm.doctorCRM,
         findings: JSON.stringify({
           od: reportForm.od,
           oe: reportForm.oe,
@@ -395,6 +397,7 @@ export default function Medical() {
   const resetForm = () => {
     setReportForm({
       doctorName: 'Dr. Gustavo Sakuno',
+      doctorCRM: 'CRM-SP 177.943',
       od: {
         quality: 'satisfactory',
         opticNerve: '',
@@ -1050,6 +1053,16 @@ export default function Medical() {
                             value={reportForm.doctorName}
                             onChange={handleReportInputChange}
                             required
+                            placeholder="Nome do Médico"
+                            className="w-full bg-sandstone-50/50 border border-sandstone-200 rounded-xl px-4 py-3 text-sm font-serif font-bold text-charcoal outline-none focus:bg-white focus:ring-2 focus:ring-cardinal-700/10 transition-all mb-2"
+                          />
+                          <input
+                            type="text"
+                            name="doctorCRM"
+                            value={reportForm.doctorCRM}
+                            onChange={handleReportInputChange}
+                            required
+                            placeholder="CRM"
                             className="w-full bg-sandstone-50/50 border border-sandstone-200 rounded-xl px-4 py-3 text-sm font-serif font-bold text-charcoal outline-none focus:bg-white focus:ring-2 focus:ring-cardinal-700/10 transition-all"
                           />
                         </div>
