@@ -71,6 +71,7 @@ model PatientReferral {
   specializedService String?  // Service in Atenção Especializada
   outcome            String?  // Outcome/Desfecho
   outcomeDate        DateTime?
+  scheduledDate      DateTime?
   status             String   @default("pending") // pending, scheduled, completed, outcome_defined
   
   patientId    String   @unique

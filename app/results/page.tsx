@@ -40,9 +40,9 @@ export default function Results() {
 
   const loadPatients = async () => {
     const allPatients = await getPatientsAction();
-    // Only show patients with completed reports
+    // Only show patients with completed reports AND a technician-scheduled date
     const completedPatients = (allPatients as Patient[]).filter(
-      (p) => p.status === 'completed' && p.report
+      (p) => p.status === 'completed' && p.report && p.referral?.scheduledDate
     );
     setPatients(completedPatients);
   };

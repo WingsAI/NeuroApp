@@ -304,6 +304,7 @@ export async function updatePatientAction(id: string, updates: any) {
                 specializedService: updates.referral.specializedService,
                 outcome: updates.referral.outcome,
                 outcomeDate: updates.referral.outcomeDate ? new Date(updates.referral.outcomeDate) : undefined,
+                scheduledDate: updates.referral.scheduledDate ? new Date(updates.referral.scheduledDate) : undefined,
                 status: updates.referral.status,
             },
             create: {
@@ -314,6 +315,7 @@ export async function updatePatientAction(id: string, updates: any) {
                 specializedService: updates.referral.specializedService,
                 outcome: updates.referral.outcome,
                 outcomeDate: updates.referral.outcomeDate ? new Date(updates.referral.outcomeDate) : undefined,
+                scheduledDate: updates.referral.scheduledDate ? new Date(updates.referral.scheduledDate) : undefined,
                 status: updates.referral.status,
                 patientId: id,
             }

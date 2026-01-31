@@ -66,6 +66,7 @@ export interface PatientReferral {
   specializedService?: string;
   outcome?: string;
   outcomeDate?: string;
+  scheduledDate?: string;
   status: 'pending' | 'scheduled' | 'completed' | 'outcome_defined';
 }
 
