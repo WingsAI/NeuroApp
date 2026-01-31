@@ -501,7 +501,6 @@ export default function Medical() {
       hrMild: false,
       hrModerate: false,
       hrSevere: false,
-      hypertensiveRetinopathy: false,
       tumor: false,
       others: false,
     });
