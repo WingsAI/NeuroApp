@@ -335,13 +335,23 @@ export default function Medical() {
         }
       }));
     } else {
-      setReportForm(prev => ({
-        ...prev,
-        [eye]: {
+      setReportForm(prev => {
+        const updatedEye = {
           ...prev[eye],
           [name]: value
+        };
+
+        let updatedDiagnosis = prev.diagnosis;
+        if (updatedEye.quality === 'impossible' && name === 'limitationReason') {
+          updatedDiagnosis = `Impossibilidade de captura / Olho Ausente (${eye.toUpperCase()}): ${value}`;
         }
-      }));
+
+        return {
+          ...prev,
+          [eye]: updatedEye,
+          diagnosis: updatedDiagnosis
+        };
+      });
     }
   };
 
@@ -379,7 +389,7 @@ export default function Medical() {
         },
         // Se for insatisfatório ou impossível em qualquer um, sugerir no diagnóstico
         ...(quality === 'unsatisfactory' ? { diagnosis: `Imagem Insatisfatória para Laudo (${eye.toUpperCase()})` } : {}),
-        ...(quality === 'impossible' ? { diagnosis: `Impossibilidade de captura / Olho Ausente (${eye.toUpperCase()})` } : {})
+        ...(quality === 'impossible' ? { diagnosis: `Impossibilidade de captura / Olho Ausente (${eye.toUpperCase()}): ${eyeData.limitationReason}` } : {})
       };
     });
   };
@@ -937,16 +947,18 @@ export default function Medical() {
                             </div>
                           </div>
 
-                          {reportForm.od.quality === 'unsatisfactory' && (
+                          {(reportForm.od.quality === 'unsatisfactory' || reportForm.od.quality === 'impossible') && (
                             <div className="p-4 bg-cardinal-50/50 border border-cardinal-100 rounded-xl space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">Justificativa da Limitação Técnica (OD)</label>
+                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">
+                                {reportForm.od.quality === 'impossible' ? 'Motivo da Impossibilidade (OD)' : 'Justificativa da Limitação Técnica (OD)'}
+                              </label>
                               <textarea
                                 name="limitationReason"
                                 value={reportForm.od.limitationReason}
                                 onChange={(e) => handleEyeReportInputChange('od', e)}
                                 rows={2}
                                 className="w-full bg-white border border-cardinal-100 rounded-lg p-3 text-xs font-serif leading-relaxed focus:ring-1 focus:ring-cardinal-700 outline-none transition-all placeholder:text-cardinal-200"
-                                placeholder="Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"
+                                placeholder={reportForm.od.quality === 'impossible' ? "Ex: Paciente com prótese, Atrofia ocular, etc..." : "Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"}
                               />
                             </div>
                           )}
@@ -982,12 +994,7 @@ export default function Medical() {
                             );
                           })}
 
-                          {reportForm.od.quality === 'impossible' && (
-                            <div className="flex flex-col items-center justify-center p-10 bg-sandstone-50 rounded-xl border border-dashed border-sandstone-200 opacity-60">
-                              <X className="w-8 h-8 text-sandstone-300 mb-2" />
-                              <p className="text-[10px] font-bold uppercase text-sandstone-400">Captura não realizada para este olho</p>
-                            </div>
-                          )}
+                          {/* Removed redundant placeholder as the justification field is now shown */}
                         </div>
                       </div>
                     </div>
@@ -1031,16 +1038,18 @@ export default function Medical() {
                             </div>
                           </div>
 
-                          {reportForm.oe.quality === 'unsatisfactory' && (
+                          {(reportForm.oe.quality === 'unsatisfactory' || reportForm.oe.quality === 'impossible') && (
                             <div className="p-4 bg-cardinal-50/50 border border-cardinal-100 rounded-xl space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">Justificativa da Limitação Técnica (OE)</label>
+                              <label className="text-[10px] font-bold uppercase tracking-widest text-cardinal-700 block">
+                                {reportForm.oe.quality === 'impossible' ? 'Motivo da Impossibilidade (OE)' : 'Justificativa da Limitação Técnica (OE)'}
+                              </label>
                               <textarea
                                 name="limitationReason"
                                 value={reportForm.oe.limitationReason}
                                 onChange={(e) => handleEyeReportInputChange('oe', e)}
                                 rows={2}
                                 className="w-full bg-white border border-cardinal-100 rounded-lg p-3 text-xs font-serif leading-relaxed focus:ring-1 focus:ring-cardinal-700 outline-none transition-all placeholder:text-cardinal-200"
-                                placeholder="Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"
+                                placeholder={reportForm.oe.quality === 'impossible' ? "Ex: Paciente com prótese, Atrofia ocular, etc..." : "Descreva o motivo (ex: Opacidade de meios, Miose pupilar, Catarata densa...)"}
                               />
                             </div>
                           )}
@@ -1076,12 +1085,7 @@ export default function Medical() {
                             );
                           })}
 
-                          {reportForm.oe.quality === 'impossible' && (
-                            <div className="flex flex-col items-center justify-center p-10 bg-sandstone-50 rounded-xl border border-dashed border-sandstone-200 opacity-60">
-                              <X className="w-8 h-8 text-sandstone-300 mb-2" />
-                              <p className="text-[10px] font-bold uppercase text-sandstone-400">Captura não realizada para este olho</p>
-                            </div>
-                          )}
+                          {/* Removed redundant placeholder */}
                         </div>
                       </div>
                     </div>
