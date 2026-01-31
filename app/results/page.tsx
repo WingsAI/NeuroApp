@@ -331,67 +331,55 @@ export default function Results() {
                     </div>
                   </div>
 
-                  {/* Patient & Exam Metadata */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="premium-card p-8 bg-sandstone-50/50 border-none">
-                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                        <User className="w-4 h-4 mr-2" /> Identificação do Paciente
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Nome</span>
-                          <span className="text-sm font-serif font-bold text-charcoal">{selectedPatient.name}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Documento/CPF</span>
-                          <span className="text-sm font-medium text-charcoal">{formatCPF(selectedPatient.cpf)}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Nascimento</span>
-                          <span className="text-sm font-medium text-charcoal">{formatDate(selectedPatient.birthDate)}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Idade</span>
-                          <span className="text-sm font-medium text-charcoal">{new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos</span>
-                        </div>
-                        {selectedPatient.underlyingDiseases && Object.values(selectedPatient.underlyingDiseases).some(v => v === true) && (
-                          <div className="flex justify-between items-start border-b border-sandstone-200 pb-2">
-                            <span className="text-[10px] uppercase font-bold text-sandstone-400 mt-1">Hístórico/Comorbidades</span>
-                            <div className="flex flex-wrap justify-end gap-1 max-w-[200px]">
-                              {Object.entries(selectedPatient.underlyingDiseases)
-                                .filter(([_, v]) => v === true)
-                                .map(([key]) => (
-                                  <span key={key} className="text-[10px] font-bold text-cardinal-700 bg-cardinal-50 px-2 py-0.5 rounded border border-cardinal-100 uppercase">
-                                    {key === 'hypertension' ? 'Hipertensão' :
-                                      key === 'diabetes' ? 'Diabetes' :
-                                        key === 'cholesterol' ? 'Colesterol' :
-                                          key === 'smoker' ? 'Tabagismo' : key}
-                                  </span>
-                                ))}
-                            </div>
+                  {/* Patient & Exam Metadata Summary Block */}
+                  <div className="bg-sandstone-50/50 p-6 rounded-xl border border-sandstone-100 shadow-sm print:p-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-4 text-[10px]">
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Paciente</span>
+                        <span className="text-sm font-serif font-bold text-charcoal whitespace-nowrap">{selectedPatient.name}</span>
+                      </div>
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Documento / CPF</span>
+                        <span className="text-xs font-bold text-charcoal">{formatCPF(selectedPatient.cpf)}</span>
+                      </div>
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Nascimento / Idade</span>
+                        <span className="text-xs font-bold text-charcoal">
+                          {formatDate(selectedPatient.birthDate)} ({new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos)
+                        </span>
+                      </div>
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Data do Exame</span>
+                        <span className="text-xs font-bold text-charcoal">{formatDate(selectedPatient.examDate)}</span>
+                      </div>
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Unidade / Local</span>
+                        <span className="text-xs font-bold text-charcoal flex items-center">
+                          <MapPin className="w-3 h-3 mr-1" />
+                          {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}
+                        </span>
+                      </div>
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                        <span className="uppercase font-bold text-sandstone-400 mb-0.5">Validação Médica</span>
+                        <span className="text-xs font-serif font-bold italic text-charcoal">{formatDateTime(selectedPatient.report.completedAt)}</span>
+                      </div>
+                      {selectedPatient.underlyingDiseases && Object.values(selectedPatient.underlyingDiseases).some(v => v === true) && (
+                        <div className="flex flex-col border-b border-sandstone-200 pb-1 lg:col-span-2">
+                          <span className="uppercase font-bold text-sandstone-400 mb-0.5">Histórico / Comorbidades</span>
+                          <div className="flex flex-wrap gap-1">
+                            {Object.entries(selectedPatient.underlyingDiseases)
+                              .filter(([_, v]) => v === true)
+                              .map(([key]) => (
+                                <span key={key} className="text-[9px] font-bold text-cardinal-700 bg-cardinal-50 px-1.5 py-0.5 rounded border border-cardinal-100 uppercase italic">
+                                  {key === 'hypertension' ? 'Hipertensão' :
+                                    key === 'diabetes' ? 'Diabetes' :
+                                      key === 'cholesterol' ? 'Colesterol' :
+                                        key === 'smoker' ? 'Tabagismo' : key}
+                                </span>
+                              ))}
                           </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="premium-card p-8 bg-sandstone-50/50 border-none">
-                      <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 mb-6 flex items-center">
-                        <Calendar className="w-4 h-4 mr-2" /> Dados do Procedimento
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Data Exame</span>
-                          <span className="text-sm font-serif font-bold text-charcoal">{formatDate(selectedPatient.examDate)}</span>
                         </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Unidade</span>
-                          <span className="text-sm font-medium text-charcoal flex items-center"><MapPin className="w-3 h-3 mr-1" /> {selectedPatient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : selectedPatient.location}</span>
-                        </div>
-                        <div className="flex justify-between items-end border-b border-sandstone-200 pb-2">
-                          <span className="text-[10px] uppercase font-bold text-sandstone-400">Emissão</span>
-                          <span className="text-sm font-medium text-charcoal">{formatDateTime(selectedPatient.report.completedAt)}</span>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
 
@@ -444,11 +432,11 @@ export default function Results() {
                   )}
 
                   {/* Image Catalog */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 print:space-y-2">
                     <h3 className="text-xs font-bold uppercase tracking-widest text-cardinal-800 flex items-center no-print">
                       <ImageIcon className="w-4 h-4 mr-2" /> Acervo Iconográfico Selecionado
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-4 max-w-3xl mx-auto print:max-w-2xl">
                       {selectedPatient.report.selectedImages?.od ? (
                         <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                           <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
@@ -579,38 +567,38 @@ export default function Results() {
                                 const f = JSON.parse(selectedPatient.report.findings);
                                 if (f.od && f.oe) {
                                   return (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                      <div className="space-y-4">
-                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Direito (OD)</h5>
-                                        <div className="space-y-3">
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Nervo</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.od.opticNerve || 'Sem notas'}</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                                      <div className="space-y-3">
+                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-1">Olho Direito (OD)</h5>
+                                        <div className="grid grid-cols-1 gap-2">
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Nervo</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.od.opticNerve || 'Sem notas'}</p>
                                           </div>
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.od.retina || 'Sem notas'}</p>
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Retina</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.od.retina || 'Sem notas'}</p>
                                           </div>
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.od.vessels || 'Sem notas'}</p>
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Vasos</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.od.vessels || 'Sem notas'}</p>
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="space-y-4">
-                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-2">Olho Esquerdo (OE)</h5>
-                                        <div className="space-y-3">
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Nervo</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.oe.opticNerve || 'Sem notas'}</p>
+                                      <div className="space-y-3">
+                                        <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-1">Olho Esquerdo (OE)</h5>
+                                        <div className="grid grid-cols-1 gap-2">
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Nervo</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.oe.opticNerve || 'Sem notas'}</p>
                                           </div>
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Retina / Mácula</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.oe.retina || 'Sem notas'}</p>
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Retina</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.oe.retina || 'Sem notas'}</p>
                                           </div>
-                                          <div className="p-3 bg-sandstone-50 rounded-lg">
-                                            <p className="text-[9px] font-bold text-sandstone-400 uppercase mb-1">Arcadas / Vasos</p>
-                                            <p className="text-sm font-serif text-charcoal">{f.oe.vessels || 'Sem notas'}</p>
+                                          <div className="flex items-start space-x-3 p-2 bg-sandstone-50/50 rounded-lg border border-sandstone-100">
+                                            <p className="text-[8px] font-bold text-sandstone-400 uppercase w-16 mt-1">Vasos</p>
+                                            <p className="text-xs font-serif text-charcoal leading-snug">{f.oe.vessels || 'Sem notas'}</p>
                                           </div>
                                         </div>
                                       </div>
@@ -808,10 +796,15 @@ export default function Results() {
       <style jsx global>{`
         @media print {
           .no-print { display: none !important; }
-          body { background: white !important; }
+          body { background: white !important; margin: 0 !important; padding: 0 !important; }
           .min-h-screen { min-height: 0 !important; overflow: visible !important; }
           .stagger-load { transform: none !important; opacity: 1 !important; }
           .premium-card { border: 1px solid #e5e7eb !important; box-shadow: none !important; }
+          .print-area { padding: 0 !important; box-shadow: none !important; }
+          @page {
+            margin: 1cm;
+            size: portrait;
+          }
         }
         .divider-after {
           position: relative;
