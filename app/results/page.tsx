@@ -733,7 +733,7 @@ export default function Results() {
                     </div>
                     {(selectedPatient.report.doctorCRM || selectedPatient.report.doctorName === 'Dr. Gustavo Sakuno') && (
                       <div className="text-[12px] font-bold text-sandstone-600 mb-2">
-                        CRM: {selectedPatient.report.doctorCRM || 'CRM-SP 177.943'}
+                        {selectedPatient.report.doctorCRM || 'CRM-SP 177.943'}
                       </div>
                     )}
                     <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-4">

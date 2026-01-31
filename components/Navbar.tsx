@@ -36,12 +36,17 @@ export default function Navbar() {
         <div className="flex justify-between h-20">
           <div className="flex w-full justify-between items-center">
             <div className="flex-shrink-0 flex items-center group cursor-pointer" onClick={() => router.push('/')}>
-              <div className="relative h-10 w-40 transition-transform duration-300 group-hover:scale-105">
-                <img
-                  src="/logo.png"
-                  alt="TeleSight App"
-                  className="h-full w-full object-contain"
-                />
+              <div className="flex items-center space-x-3 transition-transform duration-300 group-hover:scale-105">
+                <div className="relative h-10 w-10">
+                  <img
+                    src="/logo.png"
+                    alt="TeleSight"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <span className="text-2xl font-serif font-bold tracking-tight text-charcoal">
+                  TeleSight <span className="text-cardinal-700">App</span>
+                </span>
               </div>
             </div>
 
