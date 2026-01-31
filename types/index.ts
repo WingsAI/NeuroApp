@@ -51,7 +51,6 @@ export interface DiagnosticConditions {
   hrMild: boolean;
   hrModerate: boolean;
   hrSevere: boolean;
-  hypertensiveRetinopathy: boolean;
   tumor: boolean;
   others: boolean;
 }

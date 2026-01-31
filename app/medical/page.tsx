@@ -52,7 +52,6 @@ export default function Medical() {
     hrMild: false,
     hrModerate: false,
     hrSevere: false,
-    hypertensiveRetinopathy: false,
     tumor: false,
     others: false,
   });
@@ -1109,7 +1108,6 @@ export default function Medical() {
                             { id: 'drSevere', label: 'RD Grave' },
                             { id: 'drProliferative', label: 'RD Proliferativa' },
                             { id: 'glaucomaSuspect', label: 'Glaucoma Suspeito' },
-                            { id: 'hypertensiveRetinopathy', label: 'Retinopatia Hipertensiva' },
                             { id: 'hrMild', label: 'RH Leve' },
                             { id: 'hrModerate', label: 'RH Moderada' },
                             { id: 'hrSevere', label: 'RH Grave' },
