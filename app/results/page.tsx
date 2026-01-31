@@ -40,9 +40,9 @@ export default function Results() {
 
   const loadPatients = async () => {
     const allPatients = await getPatientsAction();
-    // Only show patients with completed reports AND a technician-scheduled date
+    // Only show patients with completed reports
     const completedPatients = (allPatients as Patient[]).filter(
-      (p) => p.status === 'completed' && p.report && p.referral?.scheduledDate
+      (p) => p.status === 'completed' && p.report
     );
     setPatients(completedPatients);
   };
@@ -244,6 +244,16 @@ export default function Results() {
                             try {
                               const f = JSON.parse(patient.report?.findings || '{}');
                               const isUnsatisfactory = f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+                              const isImpossible = f.od?.quality === 'impossible' || f.oe?.quality === 'impossible';
+
+                              if (isImpossible) {
+                                return (
+                                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-700 border border-red-100 text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                    <AlertTriangle className="w-3 h-3 mr-1.5" />
+                                    Re-exame Urgente
+                                  </div>
+                                );
+                              }
 
                               if (isUnsatisfactory) {
                                 return (
