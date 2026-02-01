@@ -85,11 +85,13 @@ async function sync() {
                         update: {
                             url: img.bytescale_url,
                             fileName: img.filename,
+                            type: img.type || 'COLOR',
                         },
                         create: {
                             id: imgId,
                             url: img.bytescale_url,
                             fileName: img.filename,
+                            type: img.type || 'COLOR',
                             patientId: id
                         }
                     });

@@ -39,6 +39,7 @@ model PatientImage {
   id         String   @id @default(cuid())
   url        String   // URL to S3 bucket
   fileName   String
+  type       String?  // COLOR or ANTERIOR
   uploadedAt DateTime @default(now())
   
   patientId  String

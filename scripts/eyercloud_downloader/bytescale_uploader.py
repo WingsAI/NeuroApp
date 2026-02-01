@@ -210,17 +210,18 @@ def main():
                             img_list = details.get('image_list', [])
                             if img_list:
                                 found_metadata = True
-                                is_color = False # Reset default to be strict
+                                is_allowed_type = False # Reset default to be strict
                                 for img_data in img_list:
                                     if img_data['uuid'] == image_uuid:
-                                        if img_data.get('type') == 'COLOR':
-                                            is_color = True
+                                        img_type = img_data.get('type')
+                                        if img_type in ['COLOR', 'ANTERIOR']:
+                                            is_allowed_type = True
                                         break
                 except Exception:
                     pass
 
-            # If we explicitly found metadata and it's NOT color, skip it
-            if not is_color:
+            # If we explicitly found metadata and it's NOT an allowed type, skip it
+            if not is_allowed_type:
                 total_skipped += 1
                 continue
 
@@ -244,6 +245,7 @@ def main():
                 # Adiciona ao mapeamento
                 patient_data['images'].append({
                     'filename': image.name,
+                    'type': img_type if found_metadata else 'UNKNOWN',
                     'local_path': image_path,
                     'bytescale_path': result.get('filePath'),
                     'bytescale_url': result.get('fileUrl'),
