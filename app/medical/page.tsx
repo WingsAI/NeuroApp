@@ -8,7 +8,7 @@ import { Patient, MedicalReport } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
 
-export default function Medical() {
+function MedicalContent() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -1271,5 +1271,20 @@ export default function Medical() {
         )
       }
     </div >
+  );
+}
+
+export default function Medical() {
+  return (
+    <React.Suspense fallback={
+      <div className="min-h-screen bg-sandstone-50 flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <Loader2 className="w-12 h-12 text-cardinal-700 animate-spin" />
+          <p className="text-charcoal font-serif font-bold text-xl uppercase tracking-widest">Carregando Terminal...</p>
+        </div>
+      </div>
+    }>
+      <MedicalContent />
+    </React.Suspense>
   );
 }
