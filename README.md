@@ -58,11 +58,12 @@ AWS_SECRET_ACCESS_KEY="..."
 AWS_BUCKET_NAME="..."
 AWS_REGION="..."
 
-# Google Drive Sync
-GOOGLE_SERVICE_ACCOUNT_EMAIL="..."
-GOOGLE_PRIVATE_KEY="..."
+# Google Drive Sync (OAuth2)
+GOOGLE_CLIENT_ID="seu_client_id"
+GOOGLE_CLIENT_SECRET="seu_client_secret"
+GOOGLE_REFRESH_TOKEN="token_gerado_no_oauth"
 NEXT_PUBLIC_APP_URL="https://seu-dominio.com"
-NEXT_PUBLIC_ENABLE_DRIVE_SYNC="true" # Define como "false" ou remova para desativar o botão
+NEXT_PUBLIC_ENABLE_DRIVE_SYNC="true"
 ```
 
 ## Estrutura de Metadados de Diagnóstico

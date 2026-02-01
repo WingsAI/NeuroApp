@@ -31,17 +31,18 @@ export async function syncReportsToDriveAction() {
 
         console.log(`[DRIVE] Encontrados ${reports.length} laudos para sincronizar.`);
 
-        // 2. Setup Google Drive Auth
-        // Recomenda-se usar as seguintes variáveis de ambiente:
-        // GOOGLE_SERVICE_ACCOUNT_EMAIL
-        // GOOGLE_PRIVATE_KEY (com \n substituídos)
-        const auth = new google.auth.JWT({
-            email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-            scopes: ['https://www.googleapis.com/auth/drive.file']
+        // 2. Setup Google Drive Auth (OAuth2)
+        const oauth2Client = new google.auth.OAuth2(
+            process.env.GOOGLE_CLIENT_ID,
+            process.env.GOOGLE_CLIENT_SECRET,
+            `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/callback/google`
+        );
+
+        oauth2Client.setCredentials({
+            refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
         });
 
-        const drive = google.drive({ version: 'v3', auth });
+        const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
         // 3. Setup Puppeteer for PDF generation
         const isLocal = process.env.NODE_ENV === 'development';
