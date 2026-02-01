@@ -6,252 +6,77 @@ Plataforma web para gestão de imagens e laudos médicos neuroftalmológicos, de
 
 NeuroApp é uma solução completa para conectar técnicos em radiologia e médicos especializados através de um fluxo digital de trabalho. O sistema permite:
 
-- **Registro de Pacientes**: Técnicos podem registrar pacientes e fazer upload de imagens
-- **Analytics**: Dashboard com métricas e indicadores em tempo real
-- **Fila de Laudos**: Médicos podem selecionar pacientes e elaborar laudos
-- **Rastreabilidade**: Fluxo completo desde a triagem até o desfecho na Atenção Especializada
-- **Documentação de Dados**: [Guia de Banco de Dados e Variáveis](./DATABASE_GUIDE.md)
+- **Registro de Pacientes**: Técnicos podem registrar pacientes e fazer upload de imagens médicas.
+- **Analytics**: Dashboard avançado com métricas de produtividade e indicadores em tempo real.
+- **Terminal de Análise**: Médicos especializados elaboram laudos com integração ao EyerCloud.
+- **Fluxo de Encaminhamento**: Gestão completa de encaminhamentos para a rede de saúde (Referrals).
+- **Sincronização com Google Drive**: Upload automatizado de laudos PDF para armazenamento institucional.
+- **Rastreabilidade**: Fluxo completo desde a triagem até o desfecho na Atenção Especializada.
+
+## Funcionalidades Principais
+
+### 1. Registro e Triagem
+- Cadastro sociodemográfico completo (CPF, Idade, Escolaridade).
+- Upload de imagens médicas para Bucket S3.
+- Histórico clínico e comorbidades (Hipertensão, Diabetes, etc).
+
+### 2. Terminal Médico (Laudo)
+- Sincronização automática com EyerCloud.
+- Diagnóstico detalhado por olho (OD/OE).
+- Classificação de qualidade de imagem (Satifatória, Insatisfatória, Impossível).
+- Marcadores específicos para Retinopatia Diabética, Glaucoma e Retinopatia Hipertensiva.
+
+### 3. Gestão de Encaminhamentos (Referrals)
+- Visualização em lista horizontal com filtros avançados.
+- **Bulk Scheduling**: Seleção múltipla de pacientes para agendamento em lote.
+- Controle de data de agendamento e status de prioridade (Rotina, Urgência, Emergência).
+
+### 4. Consultório de Resultados
+- Visualização imediata de laudos concluídos.
+- **Sync Google Drive**: Botão dedicado para envio de laudos técnicos em PDF para pasta institucional.
+- Impressão otimizada com layout pericial.
+- Status visuais para re-exame necessário/urgente.
 
 ## Tecnologias Utilizadas
 
-- **Next.js 14**: Framework React com App Router
-- **TypeScript**: Tipagem estática para maior segurança
-- **Tailwind CSS**: Estilização moderna e responsiva
-- **Prisma ORM**: Gerenciamento de banco de dados
-- **PostgreSQL**: Armazenamento persistente de dados
-- **AWS S3**: Armazenamento de imagens médicas
-- **Lucide React**: Ícones otimizados
+- **FW**: Next.js 14 (App Router)
+- **Linguagem**: TypeScript
+- **Banco de Dados**: PostgreSQL via Prisma ORM
+- **Estilização**: Tailwind CSS + Estética Premium (Glassmorphism/Dark Mode)
+- **PDF/Sync**: Puppeteer (headless) + Google Drive API
+- **Ícones**: Lucide React
 
-## Estrutura do Projeto
-
-```
-NeuroApp/
-├── app/
-│   ├── page.tsx              # Tela 1: Registro de Paciente
-│   ├── analytics/
-│   │   └── page.tsx          # Tela 2: Dashboard de Analytics
-│   ├── medical/
-│   │   └── page.tsx          # Tela 3: Fila de Laudos (com Sync EyerCloud)
-│   ├─- results/
-│   │   └── page.tsx          # Tela 4: Visualização de Resultados
-│   ├── units/
-│   │   └── page.tsx          # Tela 5: Gestão de Unidades de Saúde
-│   ├── layout.tsx            # Layout principal
-│   └── globals.css           # Estilos globais
-├── scripts/
-│   └── eyercloud_downloader/  # Scripts de automação EyerCloud
-├── components/
-│   └── Navbar.tsx            # Componente de navegação
-├── lib/
-│   └── storage.ts            # Funções de armazenamento
-├── types/
-│   └── index.ts              # Definições de tipos TypeScript
-└── public/                   # Arquivos estáticos
-```
-
-## Funcionalidades por Tela
-
-### Tela 1: Registro de Paciente (Técnico em Radiologia)
-
-- Cadastro completo com validação
-- Integração de imagens médicas e histórico clínico
-- Salvamento em Banco de Dados (Postgres via Prisma)
-
-### Tela 2: Dashboard de Analytics
-
-- Métricas em tempo real de pacientes, imagens e laudos
-- Indicadores de produtividade por unidade e profissional
-
-### Tela 3: Fila de Laudos (Médico)
-
-- **Sincronização EyerCloud**: Download automático de exames e metadados
-- **Dados Extraídos**: CPF, Data de Nascimento, Sexo e Comorbidades (Diabetes, Glaucoma, etc.)
-- Visualização em lote para alta produtividade
-
-### Tela 5: Gestão de Unidades de Saúde
-
-- Visualização e monitoramento de unidades de saúde vinculadas
-
-**Campos:**
-- Nome completo
-- CPF
-- Data de nascimento
-- Data do exame
-- Local do exame
-- Nome do técnico
-
-### Tela 2: Dashboard de Analytics
-
-- Total de pacientes registrados
-- Total de imagens enviadas
-- Laudos pendentes
-- Laudos concluídos
-- Pacientes e imagens do dia
-- Tempo médio de processamento
-- Atividade recente
-- Gráficos de distribuição
-
-### Tela 3: Fila de Laudos (Médico)
-
-- Lista de pacientes aguardando análise
-- Busca por nome, CPF ou local
-- Visualização de dados do paciente
-- Preview das 3 imagens neuroftalmológicas
-- Formulário de elaboração de laudo
-- Campos: achados clínicos, diagnóstico e recomendações
-
-### Tela 4: Visualização de Resultados
-
-- Lista de laudos concluídos
-- Busca avançada
-- Visualização completa do laudo
-- Informações do paciente e médico
-- Data e local do exame
-- Função de impressão
-
-## Como Executar
-
-### Pré-requisitos
-
-- Node.js 18+ instalado
-- npm ou yarn
-
-### Instalação
-
-1. Clone o repositório:
-```bash
-git clone <seu-repositorio>
-cd NeuroApp
-```
-
-2. Instale as dependências:
-```bash
-npm install
-```
-
-3. Execute o servidor de desenvolvimento:
-```bash
-npm run dev
-```
-
-4. Abra o navegador em [http://localhost:3000](http://localhost:3000)
-
-### Comandos Disponíveis
-
-```bash
-npm run dev      # Inicia o servidor de desenvolvimento
-npm run build    # Cria build de produção
-npm start        # Inicia o servidor de produção
-npm run lint     # Executa o linter
-```
-
-## Deploy na Vercel
-
-### Passo a passo:
-
-1. Faça push do código para o GitHub
-
-2. Acesse [vercel.com](https://vercel.com)
-
-3. Importe o repositório
-
-4. Configure o projeto (Next.js será detectado automaticamente)
-
-5. Clique em "Deploy"
-
-### Variáveis de Ambiente (Futuro)
-
-Quando integrar com S3, adicione no Vercel:
+## Variáveis de Ambiente Necessárias
 
 ```env
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_BUCKET_NAME=your_bucket_name
-AWS_REGION=us-east-1
+# Database
+DATABASE_URL="postgresql://..."
+
+# Storage (AWS S3)
+AWS_ACCESS_KEY_ID="..."
+AWS_SECRET_ACCESS_KEY="..."
+AWS_BUCKET_NAME="..."
+AWS_REGION="..."
+
+# Google Drive Sync
+GOOGLE_SERVICE_ACCOUNT_EMAIL="..."
+GOOGLE_PRIVATE_KEY="..."
+NEXT_PUBLIC_APP_URL="https://seu-dominio.com"
+NEXT_PUBLIC_ENABLE_DRIVE_SYNC="true" # Define como "false" ou remova para desativar o botão
 ```
 
-## Próximos Passos (Produção)
+## Estrutura de Metadados de Diagnóstico
 
-### Integração com AWS S3
-
-Atualmente, as imagens são salvas no LocalStorage do navegador. Para produção:
-
-1. Configurar bucket S3 na AWS
-2. Implementar upload para S3 no componente de registro
-3. Armazenar apenas URLs das imagens no banco de dados
-4. Adicionar autenticação para acesso às imagens
-
-### Banco de Dados
-
-Migrar de LocalStorage para banco de dados real:
-
-- **Opções**: PostgreSQL, MongoDB, Supabase
-- **ORM**: Prisma ou Drizzle
-- Implementar API routes no Next.js
-- Adicionar autenticação e autorização
-
-### Autenticação
-
-Implementar sistema de login para diferentes perfis:
-
-- Técnico em Radiologia
-- Médico
-- Administrador
-
-**Opções**: NextAuth.js, Clerk, Supabase Auth
-
-### Melhorias Futuras
-
-- [ ] Sistema de notificações
-- [ ] Exportação de laudos em PDF
-- [ ] Upload de imagens DICOM
-- [ ] Integração com PACS
-- [ ] Assinatura digital de laudos
-- [ ] Histórico de edições
-- [ ] Relatórios estatísticos avançados
-- [ ] Backup automático de dados
-
-## Design e UX
-
-O design foi inspirado em plataformas médicas modernas, com foco em:
-
-- Interface limpa e profissional
-- Navegação intuitiva
-- Responsividade total (mobile, tablet, desktop)
-- Feedback visual claro
-- Acessibilidade
-
-## Segurança
-
-### Considerações Importantes
-
-- Dados sensíveis (CPF, informações médicas)
-- Conformidade com LGPD
-- Criptografia de dados em trânsito e repouso
-- Controle de acesso baseado em funções (RBAC)
-- Logs de auditoria
-
-### Para Produção
-
-- Implementar HTTPS
-- Validação de entrada no servidor
-- Rate limiting
-- Proteção contra XSS e CSRF
-- Backup regular de dados
-
-## Suporte e Contato
-
-Para dúvidas ou suporte, entre em contato:
-
-- **Email**: [seu@email.com]
-- **Telefone**: [seu telefone]
-
-## Licença
-
-© 2025 NeuroApp. Todos os direitos reservados.
+O sistema utiliza uma estrutura JSON para `diagnosticConditions` que inclui:
+- `normal`: Exame sem alterações
+- `drMild`, `drModerate`, `drSevere`, `drProliferative`: Retinopatia Diabética
+- `glaucomaSuspect`: Suspeita de Glaucoma
+- `hrMild`, `hrModerate`, `hrSevere`: Retinopatia Hipertensiva
+- `others`: Outros achados
 
 ---
 
-**Desenvolvido por**: João Victor
-**Versão**: 1.0.0
-**Data**: Novembro 2025
+© 2025-2026 NeuroApp. Todos os direitos reservados.
+**Versão**: 1.2.0
+**Status**: Produção / Em Evolução
+

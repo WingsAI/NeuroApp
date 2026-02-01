@@ -5,7 +5,7 @@ import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCirc
 import Navbar from '@/components/Navbar';
 import { getPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
 
 export default function Medical() {
@@ -14,6 +14,8 @@ export default function Medical() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const editId = searchParams.get('id');
   const [showModal, setShowModal] = useState(false);
   const [reportForm, setReportForm] = useState({
     doctorName: 'Dr. Gustavo Sakuno',
@@ -77,6 +79,24 @@ export default function Medical() {
   useEffect(() => {
     filterPatients();
   }, [searchTerm, patients]);
+
+  useEffect(() => {
+    if (editId) {
+      setShowCompleted(true);
+    }
+  }, [editId]);
+
+  useEffect(() => {
+    if (editId && patients.length > 0) {
+      const patientToEdit = patients.find(p => p.id === editId);
+      if (patientToEdit) {
+        handleSelectPatient(patientToEdit);
+        setShowModal(true);
+        // Clear param after selection to avoid re-opening on logic refreshes? 
+        // Or keep it for direct link sharing.
+      }
+    }
+  }, [editId, patients]);
 
   const formatCPF = (cpf: string) => {
     if (!cpf || cpf.startsWith('AUTO-') || cpf.startsWith('CONFLICT-') || cpf === 'PENDENTE') {

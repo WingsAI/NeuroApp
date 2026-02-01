@@ -53,6 +53,8 @@ Contém a análise clínica e validação diagnóstica realizada pelo médico.
 | `diagnosis` | String | Conclusão diagnóstica final. |
 | `recommendations`| String | Recomendações e condutas sugeridas. |
 | `diagnosticConditions`| Json | Objeto booleano com condições (Glaucoma, Catarata, etc). |
+| `syncedToDrive` | Boolean | Indica se o laudo foi sincronizado com o Google Drive. |
+| `driveFileId` | String? | ID do arquivo no Google Drive após a sincronização. |
 | `completedAt` | DateTime | Data de assinatura e finalização do laudo. |
 | `patientId` | String (Único)| FK - Relacionamento 1:1 com `Patient`. |
 
@@ -69,11 +71,12 @@ Responsável pela rastreabilidade e encaminhamento para a Atenção Especializad
 | `specialty` | String | Especialidade de destino (Retina, Glaucoma, etc). |
 | `urgency` | String | Nível de prioridade: `routine`, `urgent`, `emergency`. |
 | `notes` | String | Observações clínicas adicionais para o especialista. |
-| `specializedService`| String? | Qual serviço de Atenção Especializada recebeu o paciente. |
-| `outcome` | String? | Desfecho final (Ex: Início de tratamento, Cirurgia). |
-| `outcomeDate` | DateTime?| Data em que o desfecho foi consolidado. |
-| `status` | String | Fluxo pós-triagem: `pending`, `scheduled`, `outcome_defined`. |
-| `patientId` | String (Único)| FK - Relacionamento 1:1 com `Patient`. |
+| `specializedService` | String?  | Qual serviço de Atenção Especializada recebeu o paciente. |
+| `outcome`            | String?  | Desfecho final (Ex: Início de tratamento, Cirurgia). |
+| `scheduledDate`      | DateTime? | Data agendada para atendimento na rede especializada. |
+| `outcomeDate`        | DateTime? | Data em que o desfecho foi consolidado. |
+| `status`             | String   | Fluxo pós-triagem: `pending`, `scheduled`, `outcome_defined`. |
+| `patientId`          | String (Único)| FK - Relacionamento 1:1 com `Patient`. |
 
 ---
 

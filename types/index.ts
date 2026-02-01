@@ -39,6 +39,8 @@ export interface MedicalReport {
   diagnosticConditions: DiagnosticConditions;
   selectedImages?: { od: string | null, oe: string | null };
   completedAt: string;
+  syncedToDrive?: boolean;
+  driveFileId?: string;
 }
 
 export interface DiagnosticConditions {

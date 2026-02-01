@@ -57,6 +57,9 @@ model MedicalReport {
   selectedImages       Json?    // Store the selectedImages object {od, oe}
   completedAt          DateTime @default(now())
   
+  syncedToDrive        Boolean  @default(false)
+  driveFileId          String?
+  
   patientId            String   @unique
   patient              Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
 }

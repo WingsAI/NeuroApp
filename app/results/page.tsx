@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle } from 'lucide-react';
+import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle, UploadCloud, Loader2, Pencil } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatientsAction } from '@/app/actions/patients';
+import { syncReportsToDriveAction } from '@/app/actions/drive';
 import { Patient } from '@/types';
+import { useRouter } from 'next/navigation';
 
 export default function Results() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -13,6 +15,9 @@ export default function Results() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [filterTab, setFilterTab] = useState<'all' | 'satisfactory' | 'unsatisfactory'>('all');
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     loadPatients();
@@ -103,6 +108,25 @@ export default function Results() {
     window.print();
   };
 
+  const handleSyncToDrive = async () => {
+    setIsSyncing(true);
+    setSyncStatus(null);
+    try {
+      const result = await syncReportsToDriveAction();
+      if (result.success) {
+        setSyncStatus({ count: result.count, message: result.message });
+        loadPatients(); // Refresh to update synced status if needed
+      } else {
+        alert('Erro na sincronização: ' + result.error);
+      }
+    } catch (error) {
+      alert('Erro ao processar sincronização.');
+    } finally {
+      setIsSyncing(false);
+      setTimeout(() => setSyncStatus(null), 5000);
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR', {
       day: '2-digit',
@@ -177,6 +201,33 @@ export default function Results() {
                 <span>Insatisfatórios</span>
                 <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'unsatisfactory' ? 'bg-cardinal-700 text-white' : 'bg-cardinal-100 text-cardinal-600'}`}>{counts.unsatisfactory}</span>
               </button>
+            </div>
+
+            <div className="flex flex-col items-end gap-3">
+              {process.env.NEXT_PUBLIC_ENABLE_DRIVE_SYNC === 'true' && (
+                <>
+                  <button
+                    onClick={handleSyncToDrive}
+                    disabled={isSyncing}
+                    className={`flex items-center space-x-3 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg ${isSyncing
+                      ? 'bg-sandstone-100 text-sandstone-400 cursor-not-allowed'
+                      : 'bg-charcoal text-white hover:bg-cardinal-700 hover:-translate-y-1 shadow-charcoal/20'
+                      }`}
+                  >
+                    {isSyncing ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <UploadCloud className="w-5 h-5" />
+                    )}
+                    <span>{isSyncing ? 'Sincronizando...' : 'Sincronizar Drive'}</span>
+                  </button>
+                  {syncStatus && (
+                    <div className="text-[10px] font-bold text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100 animate-pulse">
+                      {syncStatus.message}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </div>
 
@@ -314,6 +365,13 @@ export default function Results() {
                 </div>
                 <div className="flex space-x-3">
                   <button
+                    onClick={() => router.push(`/medical?id=${selectedPatient.id}`)}
+                    className="p-3 bg-white text-sandstone-600 hover:text-blue-700 border border-sandstone-200 rounded-xl hover:shadow-md transition-all flex items-center space-x-2"
+                  >
+                    <Pencil className="h-5 w-5" />
+                    <span className="text-xs font-bold uppercase tracking-widest px-2">Editar Laudo</span>
+                  </button>
+                  <button
                     onClick={handlePrint}
                     className="p-3 bg-white text-sandstone-600 hover:text-cardinal-700 border border-sandstone-200 rounded-xl hover:shadow-md transition-all flex items-center space-x-2"
                   >
@@ -344,9 +402,9 @@ export default function Results() {
                   {/* Patient & Exam Metadata Summary Block */}
                   <div className="bg-sandstone-50/50 p-6 rounded-xl border border-sandstone-100 shadow-sm print:p-4">
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-4 text-[10px]">
-                      <div className="flex flex-col border-b border-sandstone-200 pb-1">
+                      <div className="flex flex-col border-b border-sandstone-200 pb-1 h-full">
                         <span className="uppercase font-bold text-sandstone-400 mb-0.5">Paciente</span>
-                        <span className="text-sm font-serif font-bold text-charcoal whitespace-nowrap">{selectedPatient.name}</span>
+                        <span className="text-sm font-serif font-bold text-charcoal leading-tight break-words">{selectedPatient.name}</span>
                       </div>
                       <div className="flex flex-col border-b border-sandstone-200 pb-1">
                         <span className="uppercase font-bold text-sandstone-400 mb-0.5">Documento / CPF</span>
