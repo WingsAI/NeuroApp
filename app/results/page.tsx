@@ -263,6 +263,7 @@ export default function Results() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
   const [renderPatient, setRenderPatient] = useState<Patient | null>(null);
+  const [exportProgress, setExportProgress] = useState<{ current: number, total: number } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -316,6 +317,7 @@ export default function Results() {
   const exportAllFilteredPDFs = async () => {
     if (filteredPatients.length === 0) return;
     setIsExporting(true);
+    setExportProgress({ current: 0, total: filteredPatients.length });
     try {
       const { jsPDF } = await import('jspdf');
       const JSZip = (await import('jszip')).default || (await import('jszip'));
@@ -323,9 +325,14 @@ export default function Results() {
       const saveAs = fileSaver.saveAs || fileSaver.default?.saveAs || fileSaver.default;
 
       const zip = new JSZip();
+      let count = 0;
 
       for (const patient of filteredPatients) {
-        if (!patient.report) continue;
+        if (!patient.report) {
+          count++;
+          setExportProgress({ current: count, total: filteredPatients.length });
+          continue;
+        }
 
         // Set patient to be rendered in the hidden capture area
         setRenderPatient(patient);
@@ -334,7 +341,11 @@ export default function Results() {
         await new Promise(resolve => setTimeout(resolve, 1200));
 
         const captureArea = document.getElementById('report-capture-area');
-        if (!captureArea) continue;
+        if (!captureArea) {
+          count++;
+          setExportProgress({ current: count, total: filteredPatients.length });
+          continue;
+        }
 
         const canvas = await html2canvas(captureArea, {
           // @ts-ignore
@@ -353,6 +364,9 @@ export default function Results() {
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
         zip.file(fileName, pdfBlob);
+
+        count++;
+        setExportProgress({ current: count, total: filteredPatients.length });
       }
 
       setRenderPatient(null);
@@ -364,6 +378,7 @@ export default function Results() {
     } finally {
       setIsExporting(false);
       setRenderPatient(null);
+      setExportProgress(null);
     }
   };
 
@@ -586,6 +601,37 @@ export default function Results() {
               )}
             </div>
           </div>
+
+          {/* Progress Bar for Export */}
+          {exportProgress && (
+            <div className="bg-white p-6 rounded-2xl shadow-xl border border-sandstone-200 animate-in fade-in slide-in-from-top-4 duration-500 mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-green-100 rounded-lg text-green-700 animate-pulse">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-charcoal">Exportação em Massa de PDFs</h3>
+                    <p className="text-[10px] font-medium text-sandstone-500 uppercase tracking-widest">
+                      Processando alta-fidelidade: {exportProgress.current} de {exportProgress.total}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-lg font-serif font-bold italic text-green-700">
+                  {Math.round((exportProgress.current / exportProgress.total) * 100)}%
+                </span>
+              </div>
+              <div className="w-full h-3 bg-sandstone-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-green-600 transition-all duration-500 ease-out"
+                  style={{ width: `${(exportProgress.current / exportProgress.total) * 100}%` }}
+                />
+              </div>
+              <p className="mt-4 text-[10px] text-center text-sandstone-400 font-medium">
+                Por favor, não feche esta aba. A renderização é feita no seu navegador para garantir a qualidade técnica.
+              </p>
+            </div>
+          )}
 
           {/* Results List */}
           {filteredPatients.length === 0 ? (
