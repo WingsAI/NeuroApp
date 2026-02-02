@@ -56,8 +56,9 @@ export default function Results() {
     setIsExporting(true);
     try {
       const { jsPDF } = await import('jspdf');
-      const { default: JSZip } = await import('jszip');
-      const { saveAs } = await import('file-saver');
+      const JSZip = (await import('jszip')).default || (await import('jszip'));
+      const fileSaver = await import('file-saver');
+      const saveAs = fileSaver.saveAs || fileSaver.default?.saveAs || fileSaver.default;
 
       const zip = new JSZip();
 
