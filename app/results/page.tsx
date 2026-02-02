@@ -352,7 +352,9 @@ export default function Results() {
           scale: 2, // High resolution
           useCORS: true,
           logging: false,
-          backgroundColor: '#ffffff'
+          backgroundColor: '#ffffff',
+          width: 1000,
+          windowWidth: 1000
         });
 
         const imgData = canvas.toDataURL('image/jpeg', 0.95);
@@ -1314,7 +1316,7 @@ export default function Results() {
       {/* Hidden Render Area for PDF Export */}
       <div
         id="report-capture-area"
-        className="fixed top-0 left-0 -z-50 pointer-events-none opacity-0"
+        className="fixed left-[-9999px] top-0 pointer-events-none"
         style={{ width: '1000px' }}
       >
         {renderPatient && <ReportPrintTemplate patient={renderPatient} />}
