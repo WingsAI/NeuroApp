@@ -8,6 +8,251 @@ import { syncReportsToDriveAction } from '@/app/actions/drive';
 import { Patient } from '@/types';
 import { useRouter } from 'next/navigation';
 
+import html2canvas from 'html2canvas';
+
+// Helper component for high-fidelity printing/exporting
+function ReportPrintTemplate({ patient }: { patient: Patient }) {
+  if (!patient || !patient.report) return null;
+
+  const formatDate = (dateString: string) => {
+    if (!dateString) return '---';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR');
+    } catch (e) { return dateString; }
+  };
+
+  const formatDateTime = (dateString: string) => {
+    if (!dateString) return '---';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleTimeString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    } catch (e) { return dateString; }
+  };
+
+  const formatCPF = (cpf: string) => {
+    if (!cpf) return '---';
+    const numeric = cpf.replace(/\D/g, '');
+    if (numeric.length !== 11) return cpf;
+    return numeric.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  };
+
+  return (
+    <div className="bg-white p-16 w-[1000px] mx-auto min-h-[1400px]">
+      <div className="max-w-4xl mx-auto space-y-12">
+        {/* Document Subheader */}
+        <div className="text-center space-y-4 border-b-2 border-cardinal-700 pb-8">
+          <h1 className="text-3xl font-serif font-bold text-charcoal uppercase">Relatório Oftalmológico</h1>
+          <div className="flex items-center justify-center space-x-6 text-[11px] font-bold uppercase tracking-widest text-sandstone-400">
+            <span className="flex items-center"><ShieldCheck className="w-3.5 h-3.5 mr-1 text-cardinal-700" /> Protocolo Seguro</span>
+            <span className="flex items-center"><FileCheck className="w-3.5 h-3.5 mr-1 text-cardinal-700" /> Verificado por Especialista</span>
+          </div>
+        </div>
+
+        {/* Patient & Exam Metadata Summary Block */}
+        <div className="bg-sandstone-50/50 p-8 rounded-2xl border border-sandstone-100 shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-6 text-[11px]">
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Paciente</span>
+              <span className="text-base font-serif font-bold text-charcoal leading-tight">{patient.name}</span>
+            </div>
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Documento / CPF</span>
+              <span className="text-xs font-bold text-charcoal">{formatCPF(patient.cpf)}</span>
+            </div>
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Nascimento / Idade</span>
+              <span className="text-xs font-bold text-charcoal">
+                {formatDate(patient.birthDate)} ({new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} anos)
+              </span>
+            </div>
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Data do Exame</span>
+              <span className="text-xs font-bold text-charcoal">{formatDate(patient.examDate)}</span>
+            </div>
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Unidade / Local</span>
+              <span className="text-xs font-bold text-charcoal flex items-center">
+                <MapPin className="w-3.5 h-3.5 mr-1.5" />
+                {patient.location.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
+              </span>
+            </div>
+            <div className="flex flex-col border-b border-sandstone-200 pb-2">
+              <span className="uppercase font-bold text-sandstone-400 mb-1">Validação Médica</span>
+              <span className="text-xs font-serif font-bold italic text-charcoal">{formatDateTime(patient.report.completedAt)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Image Catalog */}
+        <div className="space-y-6">
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cardinal-800 flex items-center">
+            <ImageIcon className="w-4 h-4 mr-2.5" /> Acervo Iconográfico Selecionado
+          </h3>
+          <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {patient.report.selectedImages?.od ? (
+              <div className="premium-card p-3 overflow-hidden bg-sandstone-50/30">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-sandstone-100">
+                  <img
+                    src={patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.data || ''}
+                    alt="Olho Direito"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="mt-4 flex justify-center items-center">
+                  <span className="text-[11px] font-bold text-sandstone-400 uppercase tracking-[0.2em]">Olho Direito (OD)</span>
+                </div>
+              </div>
+            ) : null}
+            {patient.report.selectedImages?.oe ? (
+              <div className="premium-card p-3 overflow-hidden bg-sandstone-50/30">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-sandstone-100">
+                  <img
+                    src={patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.data || ''}
+                    alt="Olho Esquerdo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="mt-4 flex justify-center items-center">
+                  <span className="text-[11px] font-bold text-sandstone-400 uppercase tracking-[0.2em]">Olho Esquerdo (OE)</span>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        {/* Report Findings & Diagnosis */}
+        <div className="space-y-14 py-14 border-t border-sandstone-100">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+            <div className="lg:col-span-1">
+              <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-6">Condições Clínicas</h3>
+              {patient.report.diagnosticConditions && (
+                <div className="flex flex-wrap gap-2.5">
+                  {Object.entries(patient.report.diagnosticConditions || {}).map(([key, value]) => {
+                    if (!value) return null;
+                    const labels: any = {
+                      normal: 'Exame Normal',
+                      drMild: 'RD Leve',
+                      drModerate: 'RD Moderada',
+                      drSevere: 'RD Grave',
+                      drProliferative: 'RD Proliferativa',
+                      glaucomaSuspect: 'Suspeita de Glaucoma',
+                      hrMild: 'RH Leve',
+                      hrModerate: 'RH Moderada',
+                      hrSevere: 'RH Grave',
+                      reconvocarUrgente: 'Re-convocar Prioridade',
+                      reconvocar: 'Re-convocar',
+                      encaminhar: 'Encaminhar',
+                      tumor: 'Tumor / Massa',
+                      others: 'Outros'
+                    };
+                    const isRed = ['drMild', 'drModerate', 'drSevere', 'drProliferative', 'glaucomaSuspect', 'tumor'].includes(key);
+                    const isOrange = ['reconvocar', 'reconvocarUrgente'].includes(key);
+                    const isGreen = key === 'normal';
+
+                    return (
+                      <span key={key} className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm border ${isRed ? 'bg-cardinal-50 text-cardinal-700 border-cardinal-100' :
+                        isOrange ? 'bg-orange-50 text-orange-700 border-orange-100' :
+                          isGreen ? 'bg-green-50 text-green-700 border-green-100' :
+                            'bg-sandstone-100 text-sandstone-700 border-sandstone-200'
+                        }`}>
+                        {labels[key] || key}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <div className="lg:col-span-2 space-y-12">
+              <section>
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
+                  <span>Achados Clínicos</span>
+                  <div className="flex-1 h-px bg-sandstone-100 ml-4" />
+                </h4>
+                <div className="space-y-8">
+                  {(() => {
+                    try {
+                      const f = JSON.parse(patient.report?.findings || '{}');
+                      if (f.od && f.oe) {
+                        return (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div className="space-y-4">
+                              <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-1.5">Olho Direito (OD)</h5>
+                              <div className="space-y-3">
+                                {['opticNerve', 'retina', 'vessels'].map(key => (
+                                  <div key={key} className="flex items-start space-x-4 p-3 bg-sandstone-50/50 rounded-xl border border-sandstone-100">
+                                    <p className="text-[9px] font-bold text-sandstone-400 uppercase w-16 mt-1">{key === 'opticNerve' ? 'Nervo' : key === 'vessels' ? 'Vasos' : 'Retina'}</p>
+                                    <p className="text-xs font-serif text-charcoal leading-relaxed">{(f.od as any)[key] || 'Sem notas'}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="space-y-4">
+                              <h5 className="text-[10px] font-bold text-cardinal-700 uppercase tracking-widest border-b border-cardinal-100 pb-1.5">Olho Esquerdo (OE)</h5>
+                              <div className="space-y-3">
+                                {['opticNerve', 'retina', 'vessels'].map(key => (
+                                  <div key={key} className="flex items-start space-x-4 p-3 bg-sandstone-50/50 rounded-xl border border-sandstone-100">
+                                    <p className="text-[9px] font-bold text-sandstone-400 uppercase w-16 mt-1">{key === 'opticNerve' ? 'Nervo' : key === 'vessels' ? 'Vasos' : 'Retina'}</p>
+                                    <p className="text-xs font-serif text-charcoal leading-relaxed">{(f.oe as any)[key] || 'Sem notas'}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                    } catch (e) { }
+                    return <p className="text-base text-charcoal font-serif leading-relaxed text-justify">{patient.report?.findings}</p>;
+                  })()}
+                </div>
+              </section>
+
+              <section>
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
+                  <span>Conclusão Diagnóstica</span>
+                  <div className="flex-1 h-px bg-sandstone-100 ml-4" />
+                </h4>
+                <div className="p-8 bg-sandstone-50 border-l-8 border-cardinal-700 rounded-r-3xl">
+                  <p className="text-xl text-charcoal font-serif font-bold italic leading-relaxed text-justify">
+                    {patient.report.diagnosis || 'Sem diagnóstico especificado.'}
+                  </p>
+                </div>
+              </section>
+
+              <section>
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
+                  <span>Conduta Sugerida</span>
+                  <div className="flex-1 h-px bg-sandstone-100 ml-4" />
+                </h4>
+                <div className="p-6 bg-sandstone-50/50 rounded-2xl border border-sandstone-100">
+                  <p className="text-base text-sandstone-600 font-serif leading-relaxed italic text-justify">
+                    {patient.report.suggestedConduct || patient.report.recommendations || 'Manter acompanhamento periódico.'}
+                  </p>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        {/* Signature Block */}
+        <div className="pt-24 pb-12 border-t border-sandstone-100 flex flex-col items-center text-center">
+          <div className="text-charcoal font-serif text-3xl font-bold mb-2 italic">
+            {patient.report.doctorName}
+          </div>
+          <div className="text-sm font-bold text-sandstone-500 uppercase tracking-[0.4em] mb-4">
+            {patient.report.doctorCRM || 'CRM-SP 177.943'}
+          </div>
+          <div className="w-64 h-px bg-sandstone-200 mb-6" />
+          <div className="text-[11px] font-medium text-sandstone-400">
+            Documento assinado digitalmente • {formatDateTime(patient.report.completedAt)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Results() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
@@ -17,7 +262,7 @@ export default function Results() {
   const [filterTab, setFilterTab] = useState<'all' | 'completed' | 're_exam' | 'urgent'>('all');
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
-  const router = useRouter();
+  const [renderPatient, setRenderPatient] = useState<Patient | null>(null);
 
   useEffect(() => {
     loadPatients();
@@ -81,222 +326,45 @@ export default function Results() {
       for (const patient of filteredPatients) {
         if (!patient.report) continue;
 
-        const doc = new jsPDF();
-        const findings = JSON.parse(patient.report.findings || '{}');
+        // Set patient to be rendered in the hidden capture area
+        setRenderPatient(patient);
 
-        // --- BACKGROUND & BORDERS ---
-        doc.setFillColor(255, 255, 255);
-        doc.rect(0, 0, 210, 297, 'F');
+        // Wait for rendering and images to load
+        await new Promise(resolve => setTimeout(resolve, 1200));
 
-        // --- HEADER ---
-        doc.setFillColor(153, 27, 27); // Cardinal 700
-        doc.rect(0, 0, 210, 25, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(16);
-        doc.setFont("times", "bolditalic");
-        doc.text("Relatório Oftalmológico", 105, 12, { align: "center" });
+        const captureArea = document.getElementById('report-capture-area');
+        if (!captureArea) continue;
 
-        doc.setFontSize(8);
-        doc.setFont("helvetica", "bold");
-        doc.text("PROTOCOLO SEGURO  •  VERIFICADO POR ESPECIALISTA", 105, 18, { align: "center" });
+        const canvas = await html2canvas(captureArea, {
+          scale: 2, // High resolution
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff'
+        });
 
-        // --- PATIENT METADATA BOX ---
-        const metaY = 32;
-        doc.setFillColor(248, 247, 245); // Sandstone 50
-        doc.rect(15, metaY, 180, 28, 'F');
-        doc.setDrawColor(214, 211, 209); // Sandstone 200
-        doc.setLineWidth(0.1);
-        doc.rect(15, metaY, 180, 28, 'S');
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        const doc = new jsPDF('p', 'mm', 'a4');
 
-        doc.setTextColor(163, 163, 163); // Sandstone 400
-        doc.setFontSize(7);
-        doc.setFont("helvetica", "bold");
-        doc.text("PACIENTE", 20, metaY + 7);
-        doc.text("CPF", 100, metaY + 7);
-        doc.text("DATA DO EXAME", 150, metaY + 7);
-        doc.text("UNIDADE", 20, metaY + 18);
-        doc.text("NASCIMENTO", 100, metaY + 18);
-        doc.text("CERTIFICAÇÃO", 150, metaY + 18);
-
-        doc.setTextColor(23, 23, 23); // Charcoal
-        doc.setFontSize(10);
-        doc.setFont("times", "bold");
-        doc.text(patient.name, 20, metaY + 12);
-        doc.text(formatCPF(patient.cpf), 100, metaY + 12);
-        doc.text(formatDate(patient.examDate), 150, metaY + 12);
-        doc.text(patient.location, 20, metaY + 23);
-        doc.text(formatDate(patient.birthDate), 100, metaY + 23);
-        doc.text(`#${patient.report.id.slice(-8).toUpperCase()}`, 150, metaY + 23);
-
-        // --- CLINICAL TAGS ---
-        let tagX = 15;
-        const cond = patient.report.diagnosticConditions;
-        if (cond) {
-          doc.setFontSize(7);
-          const tags = [
-            { id: 'normal', label: 'EXAME NORMAL', bg: [220, 252, 231], text: [21, 128, 61] },
-            { id: 'drMild', label: 'RD LEVE', bg: [254, 242, 242], text: [153, 27, 27] },
-            { id: 'drModerate', label: 'RD MODERADA', bg: [254, 242, 242], text: [153, 27, 27] },
-            { id: 'drSevere', label: 'RD GRAVE', bg: [254, 242, 242], text: [153, 27, 27] },
-            { id: 'drProliferative', label: 'RD PROLIFERATIVA', bg: [153, 27, 27], text: [255, 255, 255] },
-            { id: 'glaucomaSuspect', label: 'SUSPEITA GLAUCOMA', bg: [254, 242, 242], text: [153, 27, 27] },
-            { id: 'reconvocarUrgente', label: 'RE-CONVOCAR PRIORIDADE', bg: [255, 237, 213], text: [194, 65, 12] },
-            { id: 'reconvocar', label: 'RE-CONVOCAR', bg: [255, 247, 237], text: [194, 65, 12] },
-            { id: 'encaminhar', label: 'ENCAMINHAR', bg: [243, 232, 255], text: [126, 34, 206] },
-          ];
-
-          for (const tag of tags) {
-            if (cond[tag.id as keyof typeof cond]) {
-              const textWidth = doc.getTextWidth(tag.label);
-              doc.setFillColor(tag.bg[0], tag.bg[1], tag.bg[2]);
-              doc.roundedRect(tagX, 64, textWidth + 8, 7, 1.5, 1.5, 'F');
-              doc.setTextColor(tag.text[0], tag.text[1], tag.text[2]);
-              doc.setFont("helvetica", "bold");
-              doc.text(tag.label, tagX + 4, 68.5);
-              tagX += textWidth + 12;
-            }
-          }
-        }
-
-        // --- RETINOGRAPHY SECTION ---
-        doc.setDrawColor(153, 27, 27);
-        doc.setLineWidth(0.5);
-        doc.line(15, 78, 40, 78);
-        doc.setTextColor(153, 27, 27);
-        doc.setFontSize(9);
-        doc.setFont("times", "bolditalic");
-        doc.text("Acervo Iconográfico Selecionado", 15, 83);
-
-        const imgOD = patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.data;
-        const imgOE = patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.data;
-
-        const imgY = 88;
-        const imgW = 85;
-        const imgH = 64;
-
-        if (imgOD) {
-          const b64 = await getBase64Image(imgOD);
-          if (b64) {
-            doc.setFillColor(240, 240, 240);
-            doc.rect(15, imgY, imgW, imgH, 'F');
-            doc.addImage(b64, 'JPEG', 15, imgY, imgW, imgH, undefined, 'MEDIUM');
-          }
-          doc.setTextColor(163, 163, 163);
-          doc.setFontSize(7);
-          doc.setFont("helvetica", "bold");
-          doc.text("OLHO DIREITO (OD)", 57.5, imgY + imgH + 5, { align: "center" });
-        }
-
-        if (imgOE) {
-          const b64 = await getBase64Image(imgOE);
-          if (b64) {
-            doc.setFillColor(240, 240, 240);
-            doc.rect(110, imgY, imgW, imgH, 'F');
-            doc.addImage(b64, 'JPEG', 110, imgY, imgW, imgH, undefined, 'MEDIUM');
-          }
-          doc.setTextColor(163, 163, 163);
-          doc.setFontSize(7);
-          doc.setFont("helvetica", "bold");
-          doc.text("OLHO ESQUERDO (OE)", 152.5, imgY + imgH + 5, { align: "center" });
-        }
-
-        // --- CLINICAL FINDINGS ---
-        const findY = 168;
-        doc.setDrawColor(163, 163, 163);
-        doc.setLineWidth(0.1);
-        doc.line(15, findY, 195, findY);
-
-        doc.setTextColor(153, 27, 27);
-        doc.setFontSize(9);
-        doc.setFont("times", "bolditalic");
-        doc.text("Achados Clínicos", 15, findY + 6);
-
-        // OD Findings
-        doc.setFillColor(250, 250, 249);
-        doc.rect(15, findY + 10, 85, 30, 'F');
-        doc.setTextColor(153, 27, 27);
-        doc.setFontSize(7);
-        doc.setFont("helvetica", "bold");
-        doc.text("OLHO DIREITO (OD)", 20, findY + 15);
-
-        doc.setTextColor(23, 23, 23);
-        doc.setFontSize(8);
-        doc.setFont("times", "normal");
-        const odText = `Nervo: ${findings.od?.opticNerve || 'Sem notas'}\nRetina: ${findings.od?.retina || 'Sem notas'}`;
-        doc.text(odText, 20, findY + 20, { maxWidth: 75 });
-
-        // OE Findings
-        doc.setFillColor(250, 250, 249);
-        doc.rect(110, findY + 10, 85, 30, 'F');
-        doc.setTextColor(153, 27, 27);
-        doc.setFontSize(7);
-        doc.setFont("helvetica", "bold");
-        doc.text("OLHO ESQUERDO (OE)", 115, findY + 15);
-
-        doc.setTextColor(23, 23, 23);
-        doc.setFontSize(8);
-        doc.setFont("times", "normal");
-        const oeText = `Nervo: ${findings.oe?.opticNerve || 'Sem notas'}\nRetina: ${findings.oe?.retina || 'Sem notas'}`;
-        doc.text(oeText, 115, findY + 20, { maxWidth: 75 });
-
-        // --- CONCLUSION & CONDUCT ---
-        const diagY = findY + 48;
-        doc.setTextColor(23, 23, 23);
-        doc.setFontSize(11);
-        doc.setFont("times", "bolditalic");
-        doc.text("Conclusão Clínica", 15, diagY);
-
-        doc.setTextColor(64, 64, 64);
-        doc.setFontSize(10);
-        doc.setFont("times", "normal");
-        const splitDiag = doc.splitTextToSize(patient.report.diagnosis || "Sem diagnóstico.", 180);
-        doc.text(splitDiag, 15, diagY + 7);
-
-        const condY = diagY + 15 + (splitDiag.length * 5);
-        doc.setTextColor(23, 23, 23);
-        doc.setFontSize(11);
-        doc.setFont("times", "bolditalic");
-        doc.text("Conduta Sugerida", 15, condY);
-
-        doc.setTextColor(64, 64, 64);
-        doc.setFontSize(9);
-        doc.setFont("times", "italic");
-        const splitCond = doc.splitTextToSize(patient.report.suggestedConduct || "Sem conduta.", 180);
-        doc.text(splitCond, 15, condY + 7);
-
-        // --- FOOTER & SIGNATURE ---
-        doc.setDrawColor(231, 229, 224);
-        doc.setLineWidth(0.1);
-        doc.line(15, 265, 195, 265);
-
-        doc.setTextColor(23, 23, 23);
-        doc.setFontSize(12);
-        doc.setFont("times", "bolditalic");
-        doc.text(patient.report.doctorName || "Dr. Gustavo Sakuno", 105, 275, { align: "center" });
-
-        doc.setTextColor(115, 115, 115);
-        doc.setFontSize(8);
-        doc.setFont("helvetica", "bold");
-        doc.text(patient.report.doctorCRM || "CRM-SP 177.943", 105, 280, { align: "center" });
-
-        doc.setFontSize(7);
-        doc.setFont("helvetica", "normal");
-        doc.text(`Documento assinado digitalmente | ${formatDateTime(patient.report.completedAt)}`, 105, 287, { align: "center" });
+        // Add image to cover the whole A4 page (210x297mm)
+        doc.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
 
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
         zip.file(fileName, pdfBlob);
       }
 
-      const content = await zip.generateAsync({ type: "blob" });
-      saveAs(content, `laudos_neuroapp_${new Date().toISOString().split('T')[0]}.zip`);
+      setRenderPatient(null);
+      const content = await zip.generateAsync({ type: 'blob' });
+      saveAs(content, `Laudos_NeuroApp_${new Date().toISOString().split('T')[0]}.zip`);
     } catch (error) {
-      console.error("Erro ao exportar PDFs:", error);
-      alert("Erro ao exportar arquivos.");
+      console.error('Erro na exportação:', error);
+      alert('Erro ao gerar os PDFs. Por favor, tente novamente.');
     } finally {
       setIsExporting(false);
+      setRenderPatient(null);
     }
   };
+
 
   const loadPatients = async () => {
     const allPatients = await getPatientsAction();
@@ -1194,6 +1262,15 @@ export default function Results() {
           margin-left: 1rem;
         }
       `}</style>
+
+      {/* Hidden Render Area for PDF Export */}
+      <div
+        id="report-capture-area"
+        className="fixed top-0 left-0 -z-50 pointer-events-none opacity-0"
+        style={{ width: '1000px' }}
+      >
+        {renderPatient && <ReportPrintTemplate patient={renderPatient} />}
+      </div>
     </div >
   );
 }
