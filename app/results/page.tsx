@@ -263,6 +263,7 @@ export default function Results() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
   const [renderPatient, setRenderPatient] = useState<Patient | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     loadPatients();
