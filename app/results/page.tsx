@@ -51,6 +51,22 @@ export default function Results() {
     }).length
   };
 
+  const getBase64Image = async (url: string): Promise<string> => {
+    if (url.startsWith('data:')) return url;
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    } catch (e) {
+      return '';
+    }
+  };
+
   const exportAllFilteredPDFs = async () => {
     if (filteredPatients.length === 0) return;
     setIsExporting(true);
@@ -68,79 +84,151 @@ export default function Results() {
         const doc = new jsPDF();
         const findings = JSON.parse(patient.report.findings || '{}');
 
-        // Header
+        // Header Background
         doc.setFillColor(153, 27, 27); // Cardinal 700
-        doc.rect(0, 0, 210, 15, 'F');
+        doc.rect(0, 0, 210, 20, 'F');
         doc.setTextColor(255, 255, 255);
-        doc.setFontSize(14);
+        doc.setFontSize(16);
         doc.setFont("helvetica", "bold");
-        doc.text("LAUDO NEUROFTALMOLOGICO", 105, 10, { align: "center" });
+        doc.text("RELATORIO OFTALMOLOGICO PERICIAL", 105, 13, { align: "center" });
 
-        // Patient Info
-        doc.setTextColor(64, 64, 64);
+        // Patient Box
+        doc.setFillColor(248, 247, 245); // Sandstone 50
+        doc.rect(15, 25, 180, 25, 'F');
+        doc.setDrawColor(231, 229, 224); // Sandstone 100
+        doc.rect(15, 25, 180, 25, 'S');
+
+        doc.setTextColor(115, 115, 115); // Sandstone 500
+        doc.setFontSize(8);
+        doc.text("PACIENTE", 20, 32);
+        doc.text("CPF", 90, 32);
+        doc.text("DATA DO EXAME", 140, 32);
+        doc.text("UNIDADE", 20, 42);
+        doc.text("PROTOCOLO", 140, 42);
+
+        doc.setTextColor(23, 23, 23); // Charcoal
         doc.setFontSize(10);
-        doc.text(`Paciente: ${patient.name}`, 20, 30);
-        doc.text(`CPF: ${formatCPF(patient.cpf)}`, 20, 35);
-        doc.text(`Nascimento: ${formatDate(patient.birthDate)}`, 120, 30);
-        doc.text(`Data do Exame: ${formatDate(patient.examDate)}`, 120, 35);
-        doc.text(`Unidade: ${patient.location}`, 20, 40);
+        doc.text(patient.name.toUpperCase(), 20, 37);
+        doc.text(formatCPF(patient.cpf), 90, 37);
+        doc.text(formatDate(patient.examDate), 140, 37);
+        doc.text(patient.location, 20, 47);
+        doc.text(`#${patient.report.id.slice(-8).toUpperCase()}`, 140, 47);
 
-        doc.setDrawColor(200, 200, 200);
-        doc.line(20, 45, 190, 45);
+        // Clinical Tags (RD, Glaucoma, etc)
+        let tagX = 20;
+        const cond = patient.report.diagnosticConditions;
+        if (cond) {
+          doc.setFontSize(7);
+          const tags = [
+            { id: 'normal', label: 'NORMAL', bg: [220, 252, 231], text: [21, 128, 61] },
+            { id: 'drMild', label: 'RD LEVE', bg: [254, 226, 226], text: [153, 27, 27] },
+            { id: 'drModerate', label: 'RD MODERADA', bg: [254, 226, 226], text: [153, 27, 27] },
+            { id: 'drSevere', label: 'RD GRAVE', bg: [254, 226, 226], text: [153, 27, 27] },
+            { id: 'drProliferative', label: 'RD PROLIFERATIVA', bg: [153, 27, 27], text: [255, 255, 255] },
+            { id: 'glaucomaSuspect', label: 'SUSPEITA GLAUCOMA', bg: [254, 226, 226], text: [153, 27, 27] },
+            { id: 'reconvocarUrgente', label: 'RE-CONVOCAR PRIORIDADE', bg: [255, 237, 213], text: [194, 65, 12] },
+            { id: 'reconvocar', label: 'RE-CONVOCAR', bg: [255, 247, 237], text: [194, 65, 12] },
+            { id: 'encaminhar', label: 'ENCAMINHAR', bg: [243, 232, 255], text: [126, 34, 206] },
+          ];
 
-        // Findings
-        doc.setFontSize(11);
+          for (const tag of tags) {
+            if (cond[tag.id as keyof typeof cond]) {
+              const textWidth = doc.getTextWidth(tag.label);
+              doc.setFillColor(tag.bg[0], tag.bg[1], tag.bg[2]);
+              doc.roundedRect(tagX, 55, textWidth + 6, 6, 1, 1, 'F');
+              doc.setTextColor(tag.text[0], tag.text[1], tag.text[2]);
+              doc.text(tag.label, tagX + 3, 59.5);
+              tagX += textWidth + 10;
+            }
+          }
+        }
+
+        // Retinography Images
         doc.setTextColor(153, 27, 27);
-        doc.text("Achados Clinicos", 20, 55);
-
-        doc.setTextColor(64, 64, 64);
         doc.setFontSize(9);
         doc.setFont("helvetica", "bold");
-        doc.text("Olho Direito (OD):", 20, 65);
-        doc.setFont("helvetica", "normal");
-        doc.text(`Nervo: ${findings.od?.opticNerve || 'Padrao'}`, 25, 72);
-        doc.text(`Retina: ${findings.od?.retina || 'Padrao'}`, 25, 77);
-        doc.text(`Vasos: ${findings.od?.vessels || 'Padrao'}`, 25, 82);
+        doc.text("ACERVO ICONOGRAFICO", 20, 72);
+        doc.line(20, 74, 190, 74);
 
-        doc.setFont("helvetica", "bold");
-        doc.text("Olho Esquerdo (OE):", 110, 65);
-        doc.setFont("helvetica", "normal");
-        doc.text(`Nervo: ${findings.oe?.opticNerve || 'Padrao'}`, 115, 72);
-        doc.text(`Retina: ${findings.oe?.retina || 'Padrao'}`, 115, 77);
-        doc.text(`Vasos: ${findings.oe?.vessels || 'Padrao'}`, 115, 82);
+        const imgOD = patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.url;
+        const imgOE = patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.url;
 
-        // Diagnosis
-        doc.setFontSize(11);
+        if (imgOD) {
+          const b64 = await getBase64Image(imgOD);
+          if (b64) doc.addImage(b64, 'JPEG', 20, 78, 80, 60, undefined, 'FAST');
+          doc.setTextColor(115, 115, 115);
+          doc.setFontSize(7);
+          doc.text("OLHO DIREITO (OD)", 60, 142, { align: "center" });
+        }
+
+        if (imgOE) {
+          const b64 = await getBase64Image(imgOE);
+          if (b64) doc.addImage(b64, 'JPEG', 110, 78, 80, 60, undefined, 'FAST');
+          doc.setTextColor(115, 115, 115);
+          doc.setFontSize(7);
+          doc.text("OLHO ESQUERDO (OE)", 150, 142, { align: "center" });
+        }
+
+        // Findings Section
+        const findingsY = 155;
         doc.setTextColor(153, 27, 27);
+        doc.setFontSize(9);
         doc.setFont("helvetica", "bold");
-        doc.text("Conclusao Clinica", 20, 100);
+        doc.text("ACHADOS CLINICOS", 20, findingsY);
+        doc.line(20, findingsY + 2, 190, findingsY + 2);
 
-        doc.setTextColor(64, 64, 64);
-        doc.setFontSize(10);
-        doc.setFont("helvetica", "normal");
-        const splitDiagnosis = doc.splitTextToSize(patient.report.diagnosis || "Sem diagnostico", 170);
-        doc.text(splitDiagnosis, 20, 110);
-
-        // Conduct
-        doc.setFontSize(11);
-        doc.setTextColor(153, 27, 27);
-        doc.setFont("helvetica", "bold");
-        doc.text("Conduta Sugerida", 20, 150);
-
-        doc.setTextColor(64, 64, 64);
-        doc.setFontSize(10);
-        doc.setFont("helvetica", "normal");
-        const splitConduct = doc.splitTextToSize(patient.report.suggestedConduct || "Sem conduta", 170);
-        doc.text(splitConduct, 20, 160);
-
-        // Signature
-        doc.setFontSize(10);
-        doc.setFont("helvetica", "bold");
-        doc.text(patient.report.doctorName || "Dr. Gustavo Sakuno", 105, 250, { align: "center" });
-        doc.setFont("helvetica", "normal");
-        doc.text(patient.report.doctorCRM || "CRM-SP 177.943", 105, 255, { align: "center" });
+        doc.setTextColor(23, 23, 23);
         doc.setFontSize(8);
-        doc.text("Assinado digitalmente", 105, 260, { align: "center" });
+        doc.setFont("helvetica", "bold");
+        doc.text("OD:", 20, findingsY + 10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Nervo: ${findings.od?.opticNerve || 'Padrao'}`, 20, findingsY + 15, { maxWidth: 80 });
+        doc.text(`Retina: ${findings.od?.retina || 'Padrao'}`, 20, findingsY + 23, { maxWidth: 80 });
+
+        doc.setFont("helvetica", "bold");
+        doc.text("OE:", 110, findingsY + 10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Nervo: ${findings.oe?.opticNerve || 'Padrao'}`, 110, findingsY + 15, { maxWidth: 80 });
+        doc.text(`Retina: ${findings.oe?.retina || 'Padrao'}`, 110, findingsY + 23, { maxWidth: 80 });
+
+        // Conclusao & Conduta
+        const diagnosisY = findingsY + 40;
+        doc.setTextColor(153, 27, 27);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "bold");
+        doc.text("CONCLUSAO CLINICA", 20, diagnosisY);
+        doc.line(20, diagnosisY + 2, 190, diagnosisY + 2);
+
+        doc.setTextColor(23, 23, 23);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        const splitDiag = doc.splitTextToSize(patient.report.diagnosis || "", 170);
+        doc.text(splitDiag, 20, diagnosisY + 10);
+
+        const conductY = diagnosisY + 25 + (splitDiag.length * 4);
+        doc.setTextColor(153, 27, 27);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "bold");
+        doc.text("CONDUTA SUGERIDA", 20, conductY);
+        doc.line(20, conductY + 2, 190, conductY + 2);
+
+        doc.setTextColor(23, 23, 23);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        const splitCond = doc.splitTextToSize(patient.report.suggestedConduct || "", 170);
+        doc.text(splitCond, 20, conductY + 10);
+
+        // Signature Station
+        doc.setTextColor(115, 115, 115);
+        doc.setFontSize(7);
+        doc.text("________________________________________________", 105, 275, { align: "center" });
+        doc.setTextColor(23, 23, 23);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text(patient.report.doctorName || "Dr. Gustavo Sakuno", 105, 282, { align: "center" });
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "normal");
+        doc.text(patient.report.doctorCRM || "CRM-SP 177.943", 105, 287, { align: "center" });
 
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
