@@ -150,8 +150,8 @@ export default function Results() {
         doc.text("ACERVO ICONOGRAFICO", 20, 72);
         doc.line(20, 74, 190, 74);
 
-        const imgOD = patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.url;
-        const imgOE = patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.url;
+        const imgOD = patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.data;
+        const imgOE = patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.data;
 
         if (imgOD) {
           const b64 = await getBase64Image(imgOD);
