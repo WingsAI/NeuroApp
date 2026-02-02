@@ -336,6 +336,7 @@ export default function Results() {
         if (!captureArea) continue;
 
         const canvas = await html2canvas(captureArea, {
+          // @ts-ignore
           scale: 2, // High resolution
           useCORS: true,
           logging: false,
