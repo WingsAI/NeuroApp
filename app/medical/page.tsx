@@ -525,6 +525,9 @@ function MedicalContent() {
       hrModerate: false,
       hrSevere: false,
       tumor: false,
+      reconvocarUrgente: false,
+      reconvocar: false,
+      encaminhar: false,
       others: false,
     });
   };
