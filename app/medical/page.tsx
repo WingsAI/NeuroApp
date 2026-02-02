@@ -55,6 +55,9 @@ function MedicalContent() {
     hrModerate: false,
     hrSevere: false,
     tumor: false,
+    reconvocarUrgente: false,
+    reconvocar: false,
+    encaminhar: false,
     others: false,
   });
   const [patientEditableData, setPatientEditableData] = useState({
@@ -283,7 +286,7 @@ function MedicalContent() {
         setDiagnosticConditions(patient.report.diagnosticConditions || {
           normal: false, drMild: false, drModerate: false, drSevere: false, drProliferative: false,
           glaucomaSuspect: false, hrMild: false, hrModerate: false, hrSevere: false,
-          hypertensiveRetinopathy: false, tumor: false, others: false,
+          tumor: false, reconvocarUrgente: false, reconvocar: false, encaminhar: false, others: false,
         });
         setSelectedReportImages(patient.report.selectedImages || { od: null, oe: null });
       } catch (e) {
@@ -1131,6 +1134,9 @@ function MedicalContent() {
                             { id: 'hrModerate', label: 'RH Moderada' },
                             { id: 'hrSevere', label: 'RH Grave' },
                             { id: 'tumor', label: 'Tumor / Massa' },
+                            { id: 'reconvocarUrgente', label: 'Re-convocar Prioridade' },
+                            { id: 'reconvocar', label: 'Re-convocar' },
+                            { id: 'encaminhar', label: 'Encaminhar' },
                             { id: 'others', label: 'Outros Achados' },
                           ].map((condition) => (
                             <button

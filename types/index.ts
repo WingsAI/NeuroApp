@@ -54,6 +54,9 @@ export interface DiagnosticConditions {
   hrModerate: boolean;
   hrSevere: boolean;
   tumor: boolean;
+  reconvocarUrgente: boolean;
+  reconvocar: boolean;
+  encaminhar: boolean;
   others: boolean;
 }
 

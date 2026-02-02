@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle, UploadCloud, Loader2, Pencil } from 'lucide-react';
+import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle, UploadCloud, Loader2, Pencil, Download } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { getPatientsAction } from '@/app/actions/patients';
 import { syncReportsToDriveAction } from '@/app/actions/drive';
@@ -14,7 +14,7 @@ export default function Results() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [filterTab, setFilterTab] = useState<'all' | 'satisfactory' | 'unsatisfactory'>('all');
+  const [filterTab, setFilterTab] = useState<'all' | 'completed' | 're_exam' | 'urgent'>('all');
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
   const router = useRouter();
@@ -27,20 +27,83 @@ export default function Results() {
     filterPatients();
   }, [searchTerm, patients, filterTab]);
 
+  const [isExporting, setIsExporting] = useState(false);
+
   const counts = {
     all: patients.length,
-    satisfactory: patients.filter(p => {
+    completed: patients.filter(p => {
       try {
         const f = JSON.parse(p.report?.findings || '{}');
-        return f.od?.quality !== 'unsatisfactory' && f.oe?.quality !== 'unsatisfactory';
+        return f.od?.quality === 'satisfactory' && f.oe?.quality === 'satisfactory';
       } catch (e) { return true; }
     }).length,
-    unsatisfactory: patients.filter(p => {
+    re_exam: patients.filter(p => {
       try {
         const f = JSON.parse(p.report?.findings || '{}');
-        return f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+        return (f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory') && f.od?.quality !== 'impossible' && f.oe?.quality !== 'impossible';
+      } catch (e) { return false; }
+    }).length,
+    urgent: patients.filter(p => {
+      try {
+        const f = JSON.parse(p.report?.findings || '{}');
+        return f.od?.quality === 'impossible' || f.oe?.quality === 'impossible';
       } catch (e) { return false; }
     }).length
+  };
+
+  const exportAllFilteredPDFs = async () => {
+    if (filteredPatients.length === 0) return;
+    setIsExporting(true);
+    try {
+      const { jsPDF } = await import('jspdf');
+      const { default: JSZip } = await import('jszip');
+      const { saveAs } = await import('file-saver');
+
+      const zip = new JSZip();
+
+      for (const patient of filteredPatients) {
+        if (!patient.report) continue;
+
+        const doc = new jsPDF();
+        const findings = JSON.parse(patient.report.findings || '{}');
+
+        // Basic PDF Generation 
+        doc.setFontSize(18);
+        doc.text("LAUDO NEUROFTALMOLOGICO", 105, 20, { align: "center" });
+
+        doc.setFontSize(10);
+        doc.text(`Paciente: ${patient.name}`, 20, 40);
+        doc.text(`CPF: ${formatCPF(patient.cpf)}`, 20, 45);
+        doc.text(`Data do Exame: ${formatDate(patient.examDate)}`, 20, 50);
+
+        doc.line(20, 55, 190, 55);
+
+        doc.setFontSize(12);
+        doc.text("Conclusao Clinica", 20, 65);
+        doc.setFontSize(10);
+        const splitDiagnosis = doc.splitTextToSize(patient.report.diagnosis || "Sem diagnostico", 170);
+        doc.text(splitDiagnosis, 20, 75);
+
+        doc.text("Conduta Sugerida", 20, 110);
+        const splitConduct = doc.splitTextToSize(patient.report.suggestedConduct || "Sem conduta", 170);
+        doc.text(splitConduct, 20, 120);
+
+        doc.text(`Responsavel: ${patient.report.doctorName}`, 105, 250, { align: "center" });
+        doc.text(`${patient.report.doctorCRM || 'CRM-SP 177.943'}`, 105, 255, { align: "center" });
+
+        const pdfBlob = doc.output('blob');
+        const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
+        zip.file(fileName, pdfBlob);
+      }
+
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, `laudos_neuroapp_${new Date().toISOString().split('T')[0]}.zip`);
+    } catch (error) {
+      console.error("Erro ao exportar PDFs:", error);
+      alert("Erro ao exportar arquivos.");
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const loadPatients = async () => {
@@ -56,18 +119,25 @@ export default function Results() {
     let filtered = patients;
 
     // Filter by Tab
-    if (filterTab === 'satisfactory') {
+    if (filterTab === 'completed') {
       filtered = filtered.filter(p => {
         try {
           const f = JSON.parse(p.report?.findings || '{}');
-          return f.od?.quality !== 'unsatisfactory' && f.oe?.quality !== 'unsatisfactory';
+          return f.od?.quality === 'satisfactory' && f.oe?.quality === 'satisfactory';
         } catch (e) { return true; }
       });
-    } else if (filterTab === 'unsatisfactory') {
+    } else if (filterTab === 're_exam') {
       filtered = filtered.filter(p => {
         try {
           const f = JSON.parse(p.report?.findings || '{}');
-          return f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory';
+          return (f.od?.quality === 'unsatisfactory' || f.oe?.quality === 'unsatisfactory') && f.od?.quality !== 'impossible' && f.oe?.quality !== 'impossible';
+        } catch (e) { return false; }
+      });
+    } else if (filterTab === 'urgent') {
+      filtered = filtered.filter(p => {
+        try {
+          const f = JSON.parse(p.report?.findings || '{}');
+          return f.od?.quality === 'impossible' || f.oe?.quality === 'impossible';
         } catch (e) { return false; }
       });
     }
@@ -186,24 +256,48 @@ export default function Results() {
                 <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'all' ? 'bg-charcoal text-white' : 'bg-sandstone-200 text-sandstone-500'}`}>{counts.all}</span>
               </button>
               <button
-                onClick={() => setFilterTab('satisfactory')}
-                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'satisfactory' ? 'bg-white text-green-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+                onClick={() => setFilterTab('completed')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'completed' ? 'bg-white text-green-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
               >
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Satisfatórios</span>
-                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'satisfactory' ? 'bg-green-600 text-white' : 'bg-green-100 text-green-600'}`}>{counts.satisfactory}</span>
+                <span>Concluído</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'completed' ? 'bg-green-600 text-white' : 'bg-green-100 text-green-600'}`}>{counts.completed}</span>
               </button>
               <button
-                onClick={() => setFilterTab('unsatisfactory')}
-                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'unsatisfactory' ? 'bg-white text-cardinal-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+                onClick={() => setFilterTab('re_exam')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 're_exam' ? 'bg-white text-cardinal-700 shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
               >
                 <AlertTriangle className="w-4 h-4" />
-                <span>Insatisfatórios</span>
-                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'unsatisfactory' ? 'bg-cardinal-700 text-white' : 'bg-cardinal-100 text-cardinal-600'}`}>{counts.unsatisfactory}</span>
+                <span>Re-exame</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 're_exam' ? 'bg-cardinal-700 text-white' : 'bg-cardinal-100 text-cardinal-600'}`}>{counts.re_exam}</span>
+              </button>
+              <button
+                onClick={() => setFilterTab('urgent')}
+                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center space-x-2 ${filterTab === 'urgent' ? 'bg-white text-charcoal shadow-sm' : 'text-sandstone-400 hover:text-sandstone-600'}`}
+              >
+                <AlertTriangle className="w-4 h-4" />
+                <span>Urgente</span>
+                <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${filterTab === 'urgent' ? 'bg-charcoal text-white' : 'bg-charcoal-50 text-charcoal'}`}>{counts.urgent}</span>
               </button>
             </div>
 
             <div className="flex flex-col items-end gap-3">
+              <button
+                onClick={exportAllFilteredPDFs}
+                disabled={isExporting || filteredPatients.length === 0}
+                className={`flex items-center space-x-3 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg ${isExporting
+                  ? 'bg-sandstone-100 text-sandstone-400 cursor-not-allowed'
+                  : 'bg-green-700 text-white hover:bg-green-800 hover:-translate-y-1 shadow-green-900/10'
+                  }`}
+              >
+                {isExporting ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Download className="w-5 h-5" />
+                )}
+                <span>{isExporting ? 'Processando...' : `Exportar Todos (${filteredPatients.length})`}</span>
+              </button>
+
               {process.env.NEXT_PUBLIC_ENABLE_DRIVE_SYNC === 'true' && (
                 <>
                   <button
@@ -612,6 +706,27 @@ export default function Results() {
                               {selectedPatient.report.diagnosticConditions.hrSevere && (
                                 <span className="px-3 py-1 bg-blue-700 text-white border border-blue-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
                                   RH Grave
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.reconvocarUrgente && (
+                                <span className="px-3 py-1 bg-orange-600 text-white border border-orange-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Re-convocar Prioridade
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.reconvocar && (
+                                <span className="px-3 py-1 bg-orange-100 text-orange-700 border border-orange-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Re-convocar
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.encaminhar && (
+                                <span className="px-3 py-1 bg-purple-600 text-white border border-purple-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Encaminhar
+                                  <ArrowUpRight className="w-3 h-3 inline-block ml-1" />
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.tumor && (
+                                <span className="px-3 py-1 bg-red-700 text-white border border-red-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Tumor / Massa
                                 </span>
                               )}
                               {selectedPatient.report.diagnosticConditions.others && (
