@@ -68,29 +68,79 @@ export default function Results() {
         const doc = new jsPDF();
         const findings = JSON.parse(patient.report.findings || '{}');
 
-        // Basic PDF Generation 
-        doc.setFontSize(18);
-        doc.text("LAUDO NEUROFTALMOLOGICO", 105, 20, { align: "center" });
+        // Header
+        doc.setFillColor(153, 27, 27); // Cardinal 700
+        doc.rect(0, 0, 210, 15, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text("LAUDO NEUROFTALMOLOGICO", 105, 10, { align: "center" });
 
+        // Patient Info
+        doc.setTextColor(64, 64, 64);
         doc.setFontSize(10);
-        doc.text(`Paciente: ${patient.name}`, 20, 40);
-        doc.text(`CPF: ${formatCPF(patient.cpf)}`, 20, 45);
-        doc.text(`Data do Exame: ${formatDate(patient.examDate)}`, 20, 50);
+        doc.text(`Paciente: ${patient.name}`, 20, 30);
+        doc.text(`CPF: ${formatCPF(patient.cpf)}`, 20, 35);
+        doc.text(`Nascimento: ${formatDate(patient.birthDate)}`, 120, 30);
+        doc.text(`Data do Exame: ${formatDate(patient.examDate)}`, 120, 35);
+        doc.text(`Unidade: ${patient.location}`, 20, 40);
 
-        doc.line(20, 55, 190, 55);
+        doc.setDrawColor(200, 200, 200);
+        doc.line(20, 45, 190, 45);
 
-        doc.setFontSize(12);
-        doc.text("Conclusao Clinica", 20, 65);
+        // Findings
+        doc.setFontSize(11);
+        doc.setTextColor(153, 27, 27);
+        doc.text("Achados Clinicos", 20, 55);
+
+        doc.setTextColor(64, 64, 64);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "bold");
+        doc.text("Olho Direito (OD):", 20, 65);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Nervo: ${findings.od?.opticNerve || 'Padrao'}`, 25, 72);
+        doc.text(`Retina: ${findings.od?.retina || 'Padrao'}`, 25, 77);
+        doc.text(`Vasos: ${findings.od?.vessels || 'Padrao'}`, 25, 82);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Olho Esquerdo (OE):", 110, 65);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Nervo: ${findings.oe?.opticNerve || 'Padrao'}`, 115, 72);
+        doc.text(`Retina: ${findings.oe?.retina || 'Padrao'}`, 115, 77);
+        doc.text(`Vasos: ${findings.oe?.vessels || 'Padrao'}`, 115, 82);
+
+        // Diagnosis
+        doc.setFontSize(11);
+        doc.setTextColor(153, 27, 27);
+        doc.setFont("helvetica", "bold");
+        doc.text("Conclusao Clinica", 20, 100);
+
+        doc.setTextColor(64, 64, 64);
         doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
         const splitDiagnosis = doc.splitTextToSize(patient.report.diagnosis || "Sem diagnostico", 170);
-        doc.text(splitDiagnosis, 20, 75);
+        doc.text(splitDiagnosis, 20, 110);
 
-        doc.text("Conduta Sugerida", 20, 110);
+        // Conduct
+        doc.setFontSize(11);
+        doc.setTextColor(153, 27, 27);
+        doc.setFont("helvetica", "bold");
+        doc.text("Conduta Sugerida", 20, 150);
+
+        doc.setTextColor(64, 64, 64);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
         const splitConduct = doc.splitTextToSize(patient.report.suggestedConduct || "Sem conduta", 170);
-        doc.text(splitConduct, 20, 120);
+        doc.text(splitConduct, 20, 160);
 
-        doc.text(`Responsavel: ${patient.report.doctorName}`, 105, 250, { align: "center" });
-        doc.text(`${patient.report.doctorCRM || 'CRM-SP 177.943'}`, 105, 255, { align: "center" });
+        // Signature
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text(patient.report.doctorName || "Dr. Gustavo Sakuno", 105, 250, { align: "center" });
+        doc.setFont("helvetica", "normal");
+        doc.text(patient.report.doctorCRM || "CRM-SP 177.943", 105, 255, { align: "center" });
+        doc.setFontSize(8);
+        doc.text("Assinado digitalmente", 105, 260, { align: "center" });
 
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
