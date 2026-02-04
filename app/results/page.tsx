@@ -368,7 +368,7 @@ export default function Results() {
           backgroundColor: '#ffffff',
           width: 1000,
           windowWidth: 1000
-        });
+        } as any);
         const imgData1 = canvas1.toDataURL('image/jpeg', 0.95);
         doc.addImage(imgData1, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
 
@@ -381,7 +381,7 @@ export default function Results() {
           backgroundColor: '#ffffff',
           width: 1000,
           windowWidth: 1000
-        });
+        } as any);
         const imgData2 = canvas2.toDataURL('image/jpeg', 0.95);
         doc.addImage(imgData2, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
 
