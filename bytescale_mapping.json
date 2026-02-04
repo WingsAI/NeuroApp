@@ -16556,5 +16556,1139 @@
         },
         "otherDisease": null,
         "exam_date": null
+    },
+    "BRAZ_MUNIZ_6980f149": {
+        "images": [
+            {
+                "filename": "1050f7af-8c9e-42f8-a781-c70be8da1c6c.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\1050f7af-8c9e-42f8-a781-c70be8da1c6c.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/1050f7af-8c9e-42f8-a781-c70be8da1c6c.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/1050f7af-8c9e-42f8-a781-c70be8da1c6c.jpg",
+                "upload_date": "2026-02-04T00:15:31.977474"
+            },
+            {
+                "filename": "27606864-e8cb-4ba4-aeac-2b47f23afcd6.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\27606864-e8cb-4ba4-aeac-2b47f23afcd6.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/27606864-e8cb-4ba4-aeac-2b47f23afcd6.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/27606864-e8cb-4ba4-aeac-2b47f23afcd6.jpg",
+                "upload_date": "2026-02-04T00:15:33.352122"
+            },
+            {
+                "filename": "28dcaf35-80cb-48bd-9c72-bd086360065a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\28dcaf35-80cb-48bd-9c72-bd086360065a.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/28dcaf35-80cb-48bd-9c72-bd086360065a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/28dcaf35-80cb-48bd-9c72-bd086360065a.jpg",
+                "upload_date": "2026-02-04T00:15:33.761961"
+            },
+            {
+                "filename": "3507acb7-baaa-45e6-b7be-1d40c2f386fa.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\3507acb7-baaa-45e6-b7be-1d40c2f386fa.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/3507acb7-baaa-45e6-b7be-1d40c2f386fa.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/3507acb7-baaa-45e6-b7be-1d40c2f386fa.jpg",
+                "upload_date": "2026-02-04T00:15:34.262076"
+            },
+            {
+                "filename": "3acc3206-ab94-4a70-b744-ae67f6d255ea.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\3acc3206-ab94-4a70-b744-ae67f6d255ea.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/3acc3206-ab94-4a70-b744-ae67f6d255ea.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/3acc3206-ab94-4a70-b744-ae67f6d255ea.jpg",
+                "upload_date": "2026-02-04T00:15:34.715921"
+            },
+            {
+                "filename": "45865115-6b17-4935-9078-a48fa0b45f43.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\45865115-6b17-4935-9078-a48fa0b45f43.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/45865115-6b17-4935-9078-a48fa0b45f43.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/45865115-6b17-4935-9078-a48fa0b45f43.jpg",
+                "upload_date": "2026-02-04T00:15:35.048434"
+            },
+            {
+                "filename": "55548aa3-c027-4238-b4b7-51ab7f311114.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\55548aa3-c027-4238-b4b7-51ab7f311114.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/55548aa3-c027-4238-b4b7-51ab7f311114.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/55548aa3-c027-4238-b4b7-51ab7f311114.jpg",
+                "upload_date": "2026-02-04T00:15:35.491890"
+            },
+            {
+                "filename": "5ada6505-46a2-4145-8af6-b4d4adceaada.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\5ada6505-46a2-4145-8af6-b4d4adceaada.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/5ada6505-46a2-4145-8af6-b4d4adceaada.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/5ada6505-46a2-4145-8af6-b4d4adceaada.jpg",
+                "upload_date": "2026-02-04T00:15:35.998577"
+            },
+            {
+                "filename": "7f05b7a5-a5c6-46a6-a6c0-ef92d189d984.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\7f05b7a5-a5c6-46a6-a6c0-ef92d189d984.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/7f05b7a5-a5c6-46a6-a6c0-ef92d189d984.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/7f05b7a5-a5c6-46a6-a6c0-ef92d189d984.jpg",
+                "upload_date": "2026-02-04T00:15:36.400536"
+            },
+            {
+                "filename": "8327e135-21f8-42a7-84d7-fe21295a8fc5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\8327e135-21f8-42a7-84d7-fe21295a8fc5.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/8327e135-21f8-42a7-84d7-fe21295a8fc5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/8327e135-21f8-42a7-84d7-fe21295a8fc5.jpg",
+                "upload_date": "2026-02-04T00:15:36.849182"
+            },
+            {
+                "filename": "8959f589-e2f7-46ac-b6c9-798586397644.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\8959f589-e2f7-46ac-b6c9-798586397644.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/8959f589-e2f7-46ac-b6c9-798586397644.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/8959f589-e2f7-46ac-b6c9-798586397644.jpg",
+                "upload_date": "2026-02-04T00:15:37.249050"
+            },
+            {
+                "filename": "94fea8af-9380-45f1-8ca6-3327dfbeaebd.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\94fea8af-9380-45f1-8ca6-3327dfbeaebd.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/94fea8af-9380-45f1-8ca6-3327dfbeaebd.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/94fea8af-9380-45f1-8ca6-3327dfbeaebd.jpg",
+                "upload_date": "2026-02-04T00:15:37.669169"
+            },
+            {
+                "filename": "a37abdd6-2656-406c-9cb0-7726696e6738.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\a37abdd6-2656-406c-9cb0-7726696e6738.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/a37abdd6-2656-406c-9cb0-7726696e6738.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/a37abdd6-2656-406c-9cb0-7726696e6738.jpg",
+                "upload_date": "2026-02-04T00:15:38.100042"
+            },
+            {
+                "filename": "f82dbbbf-a5b9-4551-ba5f-88a62c729e74.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\BRAZ_MUNIZ_6980f149\\f82dbbbf-a5b9-4551-ba5f-88a62c729e74.jpg",
+                "bytescale_path": "/neuroapp/patients/BRAZ_MUNIZ_6980f149/f82dbbbf-a5b9-4551-ba5f-88a62c729e74.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/BRAZ_MUNIZ_6980f149/f82dbbbf-a5b9-4551-ba5f-88a62c729e74.jpg",
+                "upload_date": "2026-02-04T00:15:38.707628"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/BRAZ_MUNIZ_6980f149",
+        "patient_name": "BRAZ MUNIZ",
+        "exam_id": "6980f149",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b": {
+        "images": [
+            {
+                "filename": "0602baea-1d5b-4fc1-a782-f724f4c4b974.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\0602baea-1d5b-4fc1-a782-f724f4c4b974.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/0602baea-1d5b-4fc1-a782-f724f4c4b974.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/0602baea-1d5b-4fc1-a782-f724f4c4b974.jpg",
+                "upload_date": "2026-02-04T00:15:39.627020"
+            },
+            {
+                "filename": "1099c29c-ece7-4d7c-8923-c3bd05db3ab9.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\1099c29c-ece7-4d7c-8923-c3bd05db3ab9.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/1099c29c-ece7-4d7c-8923-c3bd05db3ab9.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/1099c29c-ece7-4d7c-8923-c3bd05db3ab9.jpg",
+                "upload_date": "2026-02-04T00:15:40.058289"
+            },
+            {
+                "filename": "15921155-de06-45d0-a3fe-857f6e80972b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\15921155-de06-45d0-a3fe-857f6e80972b.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/15921155-de06-45d0-a3fe-857f6e80972b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/15921155-de06-45d0-a3fe-857f6e80972b.jpg",
+                "upload_date": "2026-02-04T00:15:40.524549"
+            },
+            {
+                "filename": "3c10c598-8e5f-45f4-8691-4db503ac0c0e.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\3c10c598-8e5f-45f4-8691-4db503ac0c0e.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/3c10c598-8e5f-45f4-8691-4db503ac0c0e.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/3c10c598-8e5f-45f4-8691-4db503ac0c0e.jpg",
+                "upload_date": "2026-02-04T00:15:40.959043"
+            },
+            {
+                "filename": "467b5fb2-48ed-445d-a275-f771c8e128ad.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\467b5fb2-48ed-445d-a275-f771c8e128ad.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/467b5fb2-48ed-445d-a275-f771c8e128ad.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/467b5fb2-48ed-445d-a275-f771c8e128ad.jpg",
+                "upload_date": "2026-02-04T00:15:41.509784"
+            },
+            {
+                "filename": "5937c0e6-0c7a-4f9b-9118-efbf27ca120c.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\5937c0e6-0c7a-4f9b-9118-efbf27ca120c.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/5937c0e6-0c7a-4f9b-9118-efbf27ca120c.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/5937c0e6-0c7a-4f9b-9118-efbf27ca120c.jpg",
+                "upload_date": "2026-02-04T00:15:42.089743"
+            },
+            {
+                "filename": "5df3af24-4270-4614-8d5f-af4657aa3720.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\5df3af24-4270-4614-8d5f-af4657aa3720.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/5df3af24-4270-4614-8d5f-af4657aa3720.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/5df3af24-4270-4614-8d5f-af4657aa3720.jpg",
+                "upload_date": "2026-02-04T00:15:42.717726"
+            },
+            {
+                "filename": "63d6b0c9-3eac-4271-8733-e9ce80304a61.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\63d6b0c9-3eac-4271-8733-e9ce80304a61.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/63d6b0c9-3eac-4271-8733-e9ce80304a61.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/63d6b0c9-3eac-4271-8733-e9ce80304a61.jpg",
+                "upload_date": "2026-02-04T00:15:43.320491"
+            },
+            {
+                "filename": "a5300aea-ee42-4360-8414-a5fe587543e4.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\a5300aea-ee42-4360-8414-a5fe587543e4.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/a5300aea-ee42-4360-8414-a5fe587543e4.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/a5300aea-ee42-4360-8414-a5fe587543e4.jpg",
+                "upload_date": "2026-02-04T00:15:43.736600"
+            },
+            {
+                "filename": "ba281b3d-2890-4e95-b9bf-29ddcccf0ebb.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\ba281b3d-2890-4e95-b9bf-29ddcccf0ebb.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/ba281b3d-2890-4e95-b9bf-29ddcccf0ebb.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/ba281b3d-2890-4e95-b9bf-29ddcccf0ebb.jpg",
+                "upload_date": "2026-02-04T00:15:44.206542"
+            },
+            {
+                "filename": "c282a5f7-c629-43e3-b57c-9e6d23960891.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\c282a5f7-c629-43e3-b57c-9e6d23960891.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/c282a5f7-c629-43e3-b57c-9e6d23960891.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/c282a5f7-c629-43e3-b57c-9e6d23960891.jpg",
+                "upload_date": "2026-02-04T00:15:44.779926"
+            },
+            {
+                "filename": "d1cbe2b1-7588-4ca1-8744-91ba7131891d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\d1cbe2b1-7588-4ca1-8744-91ba7131891d.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/d1cbe2b1-7588-4ca1-8744-91ba7131891d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/d1cbe2b1-7588-4ca1-8744-91ba7131891d.jpg",
+                "upload_date": "2026-02-04T00:15:45.212123"
+            },
+            {
+                "filename": "d79234c0-e31a-4fce-83b4-f548bbaf3101.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b\\d79234c0-e31a-4fce-83b4-f548bbaf3101.jpg",
+                "bytescale_path": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b/d79234c0-e31a-4fce-83b4-f548bbaf3101.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOUREN%C3%87O_6980ec4b/d79234c0-e31a-4fce-83b4-f548bbaf3101.jpg",
+                "upload_date": "2026-02-04T00:15:45.567900"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/CAMILA_SAMANTA_DOS_SANTOS_LOURENÇO_6980ec4b",
+        "patient_name": "CAMILA SAMANTA DOS SANTOS LOURENÇO",
+        "exam_id": "6980ec4b",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "CELIA_HELENA_DA_SILVA_6980ec4b": {
+        "images": [
+            {
+                "filename": "0aaa98be-db86-448c-89d9-6d44e5a45435.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\0aaa98be-db86-448c-89d9-6d44e5a45435.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/0aaa98be-db86-448c-89d9-6d44e5a45435.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/0aaa98be-db86-448c-89d9-6d44e5a45435.jpg",
+                "upload_date": "2026-02-04T00:15:46.019515"
+            },
+            {
+                "filename": "3899f34c-0195-41eb-8e64-71658f9432b4.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\3899f34c-0195-41eb-8e64-71658f9432b4.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/3899f34c-0195-41eb-8e64-71658f9432b4.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/3899f34c-0195-41eb-8e64-71658f9432b4.jpg",
+                "upload_date": "2026-02-04T00:15:46.471575"
+            },
+            {
+                "filename": "3d47fe31-3b40-4270-9765-f18485b789ec.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\3d47fe31-3b40-4270-9765-f18485b789ec.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/3d47fe31-3b40-4270-9765-f18485b789ec.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/3d47fe31-3b40-4270-9765-f18485b789ec.jpg",
+                "upload_date": "2026-02-04T00:15:46.968787"
+            },
+            {
+                "filename": "5792e06e-9506-4de9-aec5-0f7655efd958.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\5792e06e-9506-4de9-aec5-0f7655efd958.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/5792e06e-9506-4de9-aec5-0f7655efd958.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/5792e06e-9506-4de9-aec5-0f7655efd958.jpg",
+                "upload_date": "2026-02-04T00:15:47.361186"
+            },
+            {
+                "filename": "8c3e44ed-b0d5-4a43-b367-683f23817dcc.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\8c3e44ed-b0d5-4a43-b367-683f23817dcc.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/8c3e44ed-b0d5-4a43-b367-683f23817dcc.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/8c3e44ed-b0d5-4a43-b367-683f23817dcc.jpg",
+                "upload_date": "2026-02-04T00:15:47.789226"
+            },
+            {
+                "filename": "8e4cc211-8f58-42e3-979c-b40be84fd34a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\8e4cc211-8f58-42e3-979c-b40be84fd34a.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/8e4cc211-8f58-42e3-979c-b40be84fd34a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/8e4cc211-8f58-42e3-979c-b40be84fd34a.jpg",
+                "upload_date": "2026-02-04T00:15:48.173895"
+            },
+            {
+                "filename": "bb01f8b7-d579-4d16-a49a-cae303a6c444.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\bb01f8b7-d579-4d16-a49a-cae303a6c444.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/bb01f8b7-d579-4d16-a49a-cae303a6c444.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/bb01f8b7-d579-4d16-a49a-cae303a6c444.jpg",
+                "upload_date": "2026-02-04T00:15:48.577927"
+            },
+            {
+                "filename": "be45dc6f-5a58-4582-81b2-bbd264fdc1fe.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\be45dc6f-5a58-4582-81b2-bbd264fdc1fe.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/be45dc6f-5a58-4582-81b2-bbd264fdc1fe.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/be45dc6f-5a58-4582-81b2-bbd264fdc1fe.jpg",
+                "upload_date": "2026-02-04T00:15:49.074802"
+            },
+            {
+                "filename": "c5884aad-2b04-4291-afb6-dda0b47c419b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\c5884aad-2b04-4291-afb6-dda0b47c419b.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/c5884aad-2b04-4291-afb6-dda0b47c419b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/c5884aad-2b04-4291-afb6-dda0b47c419b.jpg",
+                "upload_date": "2026-02-04T00:15:49.616697"
+            },
+            {
+                "filename": "efec7502-518c-4fc4-93d9-bdc4987e8b36.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\CELIA_HELENA_DA_SILVA_6980ec4b\\efec7502-518c-4fc4-93d9-bdc4987e8b36.jpg",
+                "bytescale_path": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/efec7502-518c-4fc4-93d9-bdc4987e8b36.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b/efec7502-518c-4fc4-93d9-bdc4987e8b36.jpg",
+                "upload_date": "2026-02-04T00:15:50.058004"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/CELIA_HELENA_DA_SILVA_6980ec4b",
+        "patient_name": "CELIA HELENA DA SILVA",
+        "exam_id": "6980ec4b",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "CLARICE_JERÔNIMO_6980eb65": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/CLARICE_JERÔNIMO_6980eb65",
+        "patient_name": "CLARICE JERÔNIMO",
+        "exam_id": "6980eb65",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "DIOMARA_DE_SOUZA_MUNIZ_6980efdc": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/DIOMARA_DE_SOUZA_MUNIZ_6980efdc",
+        "patient_name": "DIOMARA DE SOUZA MUNIZ",
+        "exam_id": "6980efdc",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "GLÓRIA_ALVES_SOUZA_6980eb67": {
+        "images": [
+            {
+                "filename": "032a7d46-1457-43f7-b1d8-5b5caa6208fc.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\032a7d46-1457-43f7-b1d8-5b5caa6208fc.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/032a7d46-1457-43f7-b1d8-5b5caa6208fc.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/032a7d46-1457-43f7-b1d8-5b5caa6208fc.jpg",
+                "upload_date": "2026-02-04T00:16:05.203008"
+            },
+            {
+                "filename": "2bd2821a-6cd7-4f6c-a575-79f6a5dc1844.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\2bd2821a-6cd7-4f6c-a575-79f6a5dc1844.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/2bd2821a-6cd7-4f6c-a575-79f6a5dc1844.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/2bd2821a-6cd7-4f6c-a575-79f6a5dc1844.jpg",
+                "upload_date": "2026-02-04T00:16:05.647392"
+            },
+            {
+                "filename": "406f1ad4-5d02-48b7-80e8-c9c2a1d3dc5d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\406f1ad4-5d02-48b7-80e8-c9c2a1d3dc5d.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/406f1ad4-5d02-48b7-80e8-c9c2a1d3dc5d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/406f1ad4-5d02-48b7-80e8-c9c2a1d3dc5d.jpg",
+                "upload_date": "2026-02-04T00:16:06.077771"
+            },
+            {
+                "filename": "59aa3e51-a659-4864-a0f3-3355427b7df0.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\59aa3e51-a659-4864-a0f3-3355427b7df0.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/59aa3e51-a659-4864-a0f3-3355427b7df0.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/59aa3e51-a659-4864-a0f3-3355427b7df0.jpg",
+                "upload_date": "2026-02-04T00:16:06.461218"
+            },
+            {
+                "filename": "73949d47-2603-4ef7-8bce-0cfdc7d5dd87.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\73949d47-2603-4ef7-8bce-0cfdc7d5dd87.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/73949d47-2603-4ef7-8bce-0cfdc7d5dd87.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/73949d47-2603-4ef7-8bce-0cfdc7d5dd87.jpg",
+                "upload_date": "2026-02-04T00:16:06.963495"
+            },
+            {
+                "filename": "82036d5b-ac43-46e3-899a-915d6a86b24b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\82036d5b-ac43-46e3-899a-915d6a86b24b.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/82036d5b-ac43-46e3-899a-915d6a86b24b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/82036d5b-ac43-46e3-899a-915d6a86b24b.jpg",
+                "upload_date": "2026-02-04T00:16:07.383639"
+            },
+            {
+                "filename": "8885041c-40c4-4f62-ac33-f98f6f31e696.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\8885041c-40c4-4f62-ac33-f98f6f31e696.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/8885041c-40c4-4f62-ac33-f98f6f31e696.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/8885041c-40c4-4f62-ac33-f98f6f31e696.jpg",
+                "upload_date": "2026-02-04T00:16:07.810523"
+            },
+            {
+                "filename": "a9163c16-bdb5-421f-84a5-2f8e01eebb9d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\a9163c16-bdb5-421f-84a5-2f8e01eebb9d.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/a9163c16-bdb5-421f-84a5-2f8e01eebb9d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/a9163c16-bdb5-421f-84a5-2f8e01eebb9d.jpg",
+                "upload_date": "2026-02-04T00:16:08.191088"
+            },
+            {
+                "filename": "b3ab4798-9ca4-4c3a-ad77-6ddc9f1750cc.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\b3ab4798-9ca4-4c3a-ad77-6ddc9f1750cc.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/b3ab4798-9ca4-4c3a-ad77-6ddc9f1750cc.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/b3ab4798-9ca4-4c3a-ad77-6ddc9f1750cc.jpg",
+                "upload_date": "2026-02-04T00:16:08.613051"
+            },
+            {
+                "filename": "cd4f5449-f210-4bff-ad8c-e88c90ba2280.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\cd4f5449-f210-4bff-ad8c-e88c90ba2280.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/cd4f5449-f210-4bff-ad8c-e88c90ba2280.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/cd4f5449-f210-4bff-ad8c-e88c90ba2280.jpg",
+                "upload_date": "2026-02-04T00:16:09.054060"
+            },
+            {
+                "filename": "e85a7b33-63bb-49ba-b1f8-a1d62ade9941.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\e85a7b33-63bb-49ba-b1f8-a1d62ade9941.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/e85a7b33-63bb-49ba-b1f8-a1d62ade9941.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/e85a7b33-63bb-49ba-b1f8-a1d62ade9941.jpg",
+                "upload_date": "2026-02-04T00:16:09.461579"
+            },
+            {
+                "filename": "fee47879-bfa2-481f-aba9-da02b51cbb05.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\GLÓRIA_ALVES_SOUZA_6980eb67\\fee47879-bfa2-481f-aba9-da02b51cbb05.jpg",
+                "bytescale_path": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67/fee47879-bfa2-481f-aba9-da02b51cbb05.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/GL%C3%93RIA_ALVES_SOUZA_6980eb67/fee47879-bfa2-481f-aba9-da02b51cbb05.jpg",
+                "upload_date": "2026-02-04T00:16:09.850473"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/GLÓRIA_ALVES_SOUZA_6980eb67",
+        "patient_name": "GLÓRIA ALVES SOUZA",
+        "exam_id": "6980eb67",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65": {
+        "images": [
+            {
+                "filename": "335c55f9-6ef2-49cc-9f4e-10b149f38705.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\335c55f9-6ef2-49cc-9f4e-10b149f38705.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/335c55f9-6ef2-49cc-9f4e-10b149f38705.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/335c55f9-6ef2-49cc-9f4e-10b149f38705.jpg",
+                "upload_date": "2026-02-04T00:16:11.067771"
+            },
+            {
+                "filename": "388415b1-43f3-4ea7-b793-e1c8d699ffb8.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\388415b1-43f3-4ea7-b793-e1c8d699ffb8.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/388415b1-43f3-4ea7-b793-e1c8d699ffb8.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/388415b1-43f3-4ea7-b793-e1c8d699ffb8.jpg",
+                "upload_date": "2026-02-04T00:16:11.475763"
+            },
+            {
+                "filename": "46492455-1d00-40ec-a581-bd879af4e4f1.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\46492455-1d00-40ec-a581-bd879af4e4f1.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/46492455-1d00-40ec-a581-bd879af4e4f1.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/46492455-1d00-40ec-a581-bd879af4e4f1.jpg",
+                "upload_date": "2026-02-04T00:16:11.978371"
+            },
+            {
+                "filename": "49bea194-3aa0-4ebb-885a-974e17c28251.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\49bea194-3aa0-4ebb-885a-974e17c28251.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/49bea194-3aa0-4ebb-885a-974e17c28251.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/49bea194-3aa0-4ebb-885a-974e17c28251.jpg",
+                "upload_date": "2026-02-04T00:16:12.397969"
+            },
+            {
+                "filename": "4ee18118-f90c-4d3c-bad4-ab315adb5b83.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\4ee18118-f90c-4d3c-bad4-ab315adb5b83.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/4ee18118-f90c-4d3c-bad4-ab315adb5b83.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/4ee18118-f90c-4d3c-bad4-ab315adb5b83.jpg",
+                "upload_date": "2026-02-04T00:16:12.763663"
+            },
+            {
+                "filename": "5b46e09b-973d-4b76-8711-2652266c57ca.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\5b46e09b-973d-4b76-8711-2652266c57ca.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/5b46e09b-973d-4b76-8711-2652266c57ca.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/5b46e09b-973d-4b76-8711-2652266c57ca.jpg",
+                "upload_date": "2026-02-04T00:16:13.120042"
+            },
+            {
+                "filename": "6d515082-30af-490b-afdb-939c2dad4659.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\6d515082-30af-490b-afdb-939c2dad4659.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/6d515082-30af-490b-afdb-939c2dad4659.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/6d515082-30af-490b-afdb-939c2dad4659.jpg",
+                "upload_date": "2026-02-04T00:16:13.504850"
+            },
+            {
+                "filename": "90530c90-8510-45e5-afb1-826d8100fd2a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\90530c90-8510-45e5-afb1-826d8100fd2a.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/90530c90-8510-45e5-afb1-826d8100fd2a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/90530c90-8510-45e5-afb1-826d8100fd2a.jpg",
+                "upload_date": "2026-02-04T00:16:13.918409"
+            },
+            {
+                "filename": "cade590f-d466-406c-a192-61d24638cec3.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\cade590f-d466-406c-a192-61d24638cec3.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/cade590f-d466-406c-a192-61d24638cec3.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/cade590f-d466-406c-a192-61d24638cec3.jpg",
+                "upload_date": "2026-02-04T00:16:14.348376"
+            },
+            {
+                "filename": "f062d74a-52f5-46c4-8cfd-052eea6eb59f.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65\\f062d74a-52f5-46c4-8cfd-052eea6eb59f.jpg",
+                "bytescale_path": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65/f062d74a-52f5-46c4-8cfd-052eea6eb59f.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARA%C3%9AJO_6980eb65/f062d74a-52f5-46c4-8cfd-052eea6eb59f.jpg",
+                "upload_date": "2026-02-04T00:16:14.700071"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/ISABEL_CRISTINA_PEREIRA_ARAÚJO_6980eb65",
+        "patient_name": "ISABEL CRISTINA PEREIRA ARAÚJO",
+        "exam_id": "6980eb65",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "IVAN_LÚCIO_DE_LIMA_6980eb66": {
+        "images": [
+            {
+                "filename": "0b5d8159-d712-4775-a657-4bc17a1fbbca.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\0b5d8159-d712-4775-a657-4bc17a1fbbca.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/0b5d8159-d712-4775-a657-4bc17a1fbbca.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/0b5d8159-d712-4775-a657-4bc17a1fbbca.jpg",
+                "upload_date": "2026-02-04T00:16:15.935807"
+            },
+            {
+                "filename": "1186da28-f451-4257-8bb5-49e3dfe24ee1.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\1186da28-f451-4257-8bb5-49e3dfe24ee1.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/1186da28-f451-4257-8bb5-49e3dfe24ee1.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/1186da28-f451-4257-8bb5-49e3dfe24ee1.jpg",
+                "upload_date": "2026-02-04T00:16:16.363973"
+            },
+            {
+                "filename": "11bd375c-9a05-4742-b968-c9bca73c4f4c.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\11bd375c-9a05-4742-b968-c9bca73c4f4c.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/11bd375c-9a05-4742-b968-c9bca73c4f4c.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/11bd375c-9a05-4742-b968-c9bca73c4f4c.jpg",
+                "upload_date": "2026-02-04T00:16:16.775363"
+            },
+            {
+                "filename": "27f06fb6-f699-4aa4-986f-062342353213.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\27f06fb6-f699-4aa4-986f-062342353213.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/27f06fb6-f699-4aa4-986f-062342353213.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/27f06fb6-f699-4aa4-986f-062342353213.jpg",
+                "upload_date": "2026-02-04T00:16:17.225935"
+            },
+            {
+                "filename": "2de85fc8-0bd5-4ebe-a3e9-142f219a15c3.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\2de85fc8-0bd5-4ebe-a3e9-142f219a15c3.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/2de85fc8-0bd5-4ebe-a3e9-142f219a15c3.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/2de85fc8-0bd5-4ebe-a3e9-142f219a15c3.jpg",
+                "upload_date": "2026-02-04T00:16:17.661076"
+            },
+            {
+                "filename": "4d8c274e-aa25-4b83-96cd-f395d51b93fa.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\4d8c274e-aa25-4b83-96cd-f395d51b93fa.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/4d8c274e-aa25-4b83-96cd-f395d51b93fa.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/4d8c274e-aa25-4b83-96cd-f395d51b93fa.jpg",
+                "upload_date": "2026-02-04T00:16:18.047399"
+            },
+            {
+                "filename": "4da7ad77-e4f7-4bdd-9e2b-57579b133a6b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\4da7ad77-e4f7-4bdd-9e2b-57579b133a6b.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/4da7ad77-e4f7-4bdd-9e2b-57579b133a6b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/4da7ad77-e4f7-4bdd-9e2b-57579b133a6b.jpg",
+                "upload_date": "2026-02-04T00:16:18.449339"
+            },
+            {
+                "filename": "5dcf24ab-52b4-45ab-adb1-9ebfcefdf2a5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\5dcf24ab-52b4-45ab-adb1-9ebfcefdf2a5.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/5dcf24ab-52b4-45ab-adb1-9ebfcefdf2a5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/5dcf24ab-52b4-45ab-adb1-9ebfcefdf2a5.jpg",
+                "upload_date": "2026-02-04T00:16:18.859100"
+            },
+            {
+                "filename": "5fd012f2-1084-4b7f-9881-9fc03c1c1cce.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\5fd012f2-1084-4b7f-9881-9fc03c1c1cce.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/5fd012f2-1084-4b7f-9881-9fc03c1c1cce.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/5fd012f2-1084-4b7f-9881-9fc03c1c1cce.jpg",
+                "upload_date": "2026-02-04T00:16:19.272620"
+            },
+            {
+                "filename": "b6afa038-de96-4ce8-8f4e-5d30ec7011a8.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\IVAN_LÚCIO_DE_LIMA_6980eb66\\b6afa038-de96-4ce8-8f4e-5d30ec7011a8.jpg",
+                "bytescale_path": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66/b6afa038-de96-4ce8-8f4e-5d30ec7011a8.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/IVAN_L%C3%9ACIO_DE_LIMA_6980eb66/b6afa038-de96-4ce8-8f4e-5d30ec7011a8.jpg",
+                "upload_date": "2026-02-04T00:16:19.667395"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/IVAN_LÚCIO_DE_LIMA_6980eb66",
+        "patient_name": "IVAN LÚCIO DE LIMA",
+        "exam_id": "6980eb66",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64": {
+        "images": [
+            {
+                "filename": "2463d8e5-405c-40d5-ab23-37f6bb3f70be.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\2463d8e5-405c-40d5-ab23-37f6bb3f70be.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/2463d8e5-405c-40d5-ab23-37f6bb3f70be.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/2463d8e5-405c-40d5-ab23-37f6bb3f70be.jpg",
+                "upload_date": "2026-02-04T00:16:28.433942"
+            },
+            {
+                "filename": "379422b9-c656-4a87-b19e-6c4a0c40c80f.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\379422b9-c656-4a87-b19e-6c4a0c40c80f.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/379422b9-c656-4a87-b19e-6c4a0c40c80f.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/379422b9-c656-4a87-b19e-6c4a0c40c80f.jpg",
+                "upload_date": "2026-02-04T00:16:28.848642"
+            },
+            {
+                "filename": "51d0be33-a744-4c9d-b5b2-690f03cd3f4e.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\51d0be33-a744-4c9d-b5b2-690f03cd3f4e.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/51d0be33-a744-4c9d-b5b2-690f03cd3f4e.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/51d0be33-a744-4c9d-b5b2-690f03cd3f4e.jpg",
+                "upload_date": "2026-02-04T00:16:29.227901"
+            },
+            {
+                "filename": "72bee36a-7d21-4067-a025-fd7ff4efcb7d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\72bee36a-7d21-4067-a025-fd7ff4efcb7d.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/72bee36a-7d21-4067-a025-fd7ff4efcb7d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/72bee36a-7d21-4067-a025-fd7ff4efcb7d.jpg",
+                "upload_date": "2026-02-04T00:16:30.078499"
+            },
+            {
+                "filename": "74e2ec05-3b59-4540-ae04-6ea66de8af2b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\74e2ec05-3b59-4540-ae04-6ea66de8af2b.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/74e2ec05-3b59-4540-ae04-6ea66de8af2b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/74e2ec05-3b59-4540-ae04-6ea66de8af2b.jpg",
+                "upload_date": "2026-02-04T00:16:30.504110"
+            },
+            {
+                "filename": "794b39ab-a512-485b-9de5-7be66d87f6a1.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\794b39ab-a512-485b-9de5-7be66d87f6a1.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/794b39ab-a512-485b-9de5-7be66d87f6a1.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/794b39ab-a512-485b-9de5-7be66d87f6a1.jpg",
+                "upload_date": "2026-02-04T00:16:31.367273"
+            },
+            {
+                "filename": "7d28ce3e-d697-4c2e-b895-9ac1d8e607b5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\7d28ce3e-d697-4c2e-b895-9ac1d8e607b5.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/7d28ce3e-d697-4c2e-b895-9ac1d8e607b5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/7d28ce3e-d697-4c2e-b895-9ac1d8e607b5.jpg",
+                "upload_date": "2026-02-04T00:16:31.872092"
+            },
+            {
+                "filename": "a22a1181-efbf-45e5-9608-a13bece52dd0.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\a22a1181-efbf-45e5-9608-a13bece52dd0.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/a22a1181-efbf-45e5-9608-a13bece52dd0.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/a22a1181-efbf-45e5-9608-a13bece52dd0.jpg",
+                "upload_date": "2026-02-04T00:16:32.297488"
+            },
+            {
+                "filename": "bb2b0c5f-4081-4c8d-9eb5-e513ffaaa932.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\bb2b0c5f-4081-4c8d-9eb5-e513ffaaa932.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/bb2b0c5f-4081-4c8d-9eb5-e513ffaaa932.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/bb2b0c5f-4081-4c8d-9eb5-e513ffaaa932.jpg",
+                "upload_date": "2026-02-04T00:16:32.693323"
+            },
+            {
+                "filename": "beef6e03-844c-41e9-9644-e740e3c289ca.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\beef6e03-844c-41e9-9644-e740e3c289ca.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/beef6e03-844c-41e9-9644-e740e3c289ca.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/beef6e03-844c-41e9-9644-e740e3c289ca.jpg",
+                "upload_date": "2026-02-04T00:16:33.171205"
+            },
+            {
+                "filename": "c0e256e0-23f3-4f49-8cdc-525f068c51f5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\c0e256e0-23f3-4f49-8cdc-525f068c51f5.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/c0e256e0-23f3-4f49-8cdc-525f068c51f5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/c0e256e0-23f3-4f49-8cdc-525f068c51f5.jpg",
+                "upload_date": "2026-02-04T00:16:33.593987"
+            },
+            {
+                "filename": "ccdb687f-a89e-45d8-8b01-510001034144.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\ccdb687f-a89e-45d8-8b01-510001034144.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/ccdb687f-a89e-45d8-8b01-510001034144.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/ccdb687f-a89e-45d8-8b01-510001034144.jpg",
+                "upload_date": "2026-02-04T00:16:34.002359"
+            },
+            {
+                "filename": "d417d9d0-f855-4360-9c8b-f5ec83d1ab84.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\d417d9d0-f855-4360-9c8b-f5ec83d1ab84.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/d417d9d0-f855-4360-9c8b-f5ec83d1ab84.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/d417d9d0-f855-4360-9c8b-f5ec83d1ab84.jpg",
+                "upload_date": "2026-02-04T00:16:34.451431"
+            },
+            {
+                "filename": "e7797ff1-8e47-47b9-a7ef-9a27fce43779.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64\\e7797ff1-8e47-47b9-a7ef-9a27fce43779.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/e7797ff1-8e47-47b9-a7ef-9a27fce43779.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64/e7797ff1-8e47-47b9-a7ef-9a27fce43779.jpg",
+                "upload_date": "2026-02-04T00:16:34.872932"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/MARIA_APARECIDA_ALVES_DA_SILVA_6980eb64",
+        "patient_name": "MARIA APARECIDA ALVES DA SILVA",
+        "exam_id": "6980eb64",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "MARIA_APARECIDA_DA_SILVA_6980f29b": {
+        "images": [
+            {
+                "filename": "054cb758-f64f-4256-93f8-373c4bb6de7e.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\054cb758-f64f-4256-93f8-373c4bb6de7e.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/054cb758-f64f-4256-93f8-373c4bb6de7e.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/054cb758-f64f-4256-93f8-373c4bb6de7e.jpg",
+                "upload_date": "2026-02-04T00:16:35.671691"
+            },
+            {
+                "filename": "1315b004-fb04-4394-ba4d-e44cb7af531d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\1315b004-fb04-4394-ba4d-e44cb7af531d.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/1315b004-fb04-4394-ba4d-e44cb7af531d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/1315b004-fb04-4394-ba4d-e44cb7af531d.jpg",
+                "upload_date": "2026-02-04T00:16:36.104841"
+            },
+            {
+                "filename": "22f33e27-3f10-477a-b11e-7ab9c6cc29bb.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\22f33e27-3f10-477a-b11e-7ab9c6cc29bb.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/22f33e27-3f10-477a-b11e-7ab9c6cc29bb.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/22f33e27-3f10-477a-b11e-7ab9c6cc29bb.jpg",
+                "upload_date": "2026-02-04T00:16:36.544808"
+            },
+            {
+                "filename": "279a65af-dcee-4292-a8c6-e5440937442d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\279a65af-dcee-4292-a8c6-e5440937442d.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/279a65af-dcee-4292-a8c6-e5440937442d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/279a65af-dcee-4292-a8c6-e5440937442d.jpg",
+                "upload_date": "2026-02-04T00:16:36.910294"
+            },
+            {
+                "filename": "2a061266-3304-4b89-abaf-58c7ca57744a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\2a061266-3304-4b89-abaf-58c7ca57744a.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/2a061266-3304-4b89-abaf-58c7ca57744a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/2a061266-3304-4b89-abaf-58c7ca57744a.jpg",
+                "upload_date": "2026-02-04T00:16:37.341981"
+            },
+            {
+                "filename": "2e35af6e-bc4a-44b2-8d09-6f62bdafdffc.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\2e35af6e-bc4a-44b2-8d09-6f62bdafdffc.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/2e35af6e-bc4a-44b2-8d09-6f62bdafdffc.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/2e35af6e-bc4a-44b2-8d09-6f62bdafdffc.jpg",
+                "upload_date": "2026-02-04T00:16:37.836861"
+            },
+            {
+                "filename": "48661fcb-104e-4b24-824a-10167f7af2c9.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\48661fcb-104e-4b24-824a-10167f7af2c9.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/48661fcb-104e-4b24-824a-10167f7af2c9.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/48661fcb-104e-4b24-824a-10167f7af2c9.jpg",
+                "upload_date": "2026-02-04T00:16:38.214512"
+            },
+            {
+                "filename": "49d48e87-fa49-497b-a668-677739fc8438.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\49d48e87-fa49-497b-a668-677739fc8438.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/49d48e87-fa49-497b-a668-677739fc8438.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/49d48e87-fa49-497b-a668-677739fc8438.jpg",
+                "upload_date": "2026-02-04T00:16:38.655896"
+            },
+            {
+                "filename": "64f361f0-0dc1-4530-ab2d-eb0186f1c0e1.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\64f361f0-0dc1-4530-ab2d-eb0186f1c0e1.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/64f361f0-0dc1-4530-ab2d-eb0186f1c0e1.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/64f361f0-0dc1-4530-ab2d-eb0186f1c0e1.jpg",
+                "upload_date": "2026-02-04T00:16:39.082479"
+            },
+            {
+                "filename": "6ba30a3f-42ec-4c32-bbc5-697af4951492.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\6ba30a3f-42ec-4c32-bbc5-697af4951492.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/6ba30a3f-42ec-4c32-bbc5-697af4951492.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/6ba30a3f-42ec-4c32-bbc5-697af4951492.jpg",
+                "upload_date": "2026-02-04T00:16:39.498347"
+            },
+            {
+                "filename": "910ebfc3-0347-4775-b365-faef00e720ae.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\910ebfc3-0347-4775-b365-faef00e720ae.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/910ebfc3-0347-4775-b365-faef00e720ae.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/910ebfc3-0347-4775-b365-faef00e720ae.jpg",
+                "upload_date": "2026-02-04T00:16:39.922659"
+            },
+            {
+                "filename": "ade05179-27ce-4929-8128-127cb24931cb.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\ade05179-27ce-4929-8128-127cb24931cb.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/ade05179-27ce-4929-8128-127cb24931cb.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/ade05179-27ce-4929-8128-127cb24931cb.jpg",
+                "upload_date": "2026-02-04T00:16:40.357187"
+            },
+            {
+                "filename": "d34b0095-1125-40c8-b8c6-8bdaee3ca33a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\d34b0095-1125-40c8-b8c6-8bdaee3ca33a.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d34b0095-1125-40c8-b8c6-8bdaee3ca33a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d34b0095-1125-40c8-b8c6-8bdaee3ca33a.jpg",
+                "upload_date": "2026-02-04T00:16:41.052687"
+            },
+            {
+                "filename": "d7d155da-936a-4ca6-9a20-a623a464b113.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\d7d155da-936a-4ca6-9a20-a623a464b113.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d7d155da-936a-4ca6-9a20-a623a464b113.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d7d155da-936a-4ca6-9a20-a623a464b113.jpg",
+                "upload_date": "2026-02-04T00:16:41.500117"
+            },
+            {
+                "filename": "d84931c8-2147-41a0-8370-b870706f5211.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\d84931c8-2147-41a0-8370-b870706f5211.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d84931c8-2147-41a0-8370-b870706f5211.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/d84931c8-2147-41a0-8370-b870706f5211.jpg",
+                "upload_date": "2026-02-04T00:16:41.988532"
+            },
+            {
+                "filename": "f0fb2785-19b8-43b8-8bd9-1db7f5fb3628.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_APARECIDA_DA_SILVA_6980f29b\\f0fb2785-19b8-43b8-8bd9-1db7f5fb3628.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/f0fb2785-19b8-43b8-8bd9-1db7f5fb3628.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b/f0fb2785-19b8-43b8-8bd9-1db7f5fb3628.jpg",
+                "upload_date": "2026-02-04T00:16:42.429018"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/MARIA_APARECIDA_DA_SILVA_6980f29b",
+        "patient_name": "MARIA APARECIDA DA SILVA",
+        "exam_id": "6980f29b",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "MARIA_DA_GLORIA_SOUZA_LIMA_NUNES_6980f608": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/MARIA_DA_GLORIA_SOUZA_LIMA_NUNES_6980f608",
+        "patient_name": "MARIA DA GLORIA SOUZA LIMA NUNES",
+        "exam_id": "6980f608",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "MARIA_MARILDA_LOPES_LUCIO_6980eb67": {
+        "images": [
+            {
+                "filename": "1990d44e-2a72-47c3-812c-af306afee521.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\1990d44e-2a72-47c3-812c-af306afee521.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/1990d44e-2a72-47c3-812c-af306afee521.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/1990d44e-2a72-47c3-812c-af306afee521.jpg",
+                "upload_date": "2026-02-04T00:16:53.885613"
+            },
+            {
+                "filename": "20206911-2d5d-473b-8586-e57ca45fd43b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\20206911-2d5d-473b-8586-e57ca45fd43b.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/20206911-2d5d-473b-8586-e57ca45fd43b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/20206911-2d5d-473b-8586-e57ca45fd43b.jpg",
+                "upload_date": "2026-02-04T00:16:54.311183"
+            },
+            {
+                "filename": "2c7ee37d-f2e8-45a7-bf04-e390dda40ca9.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\2c7ee37d-f2e8-45a7-bf04-e390dda40ca9.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/2c7ee37d-f2e8-45a7-bf04-e390dda40ca9.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/2c7ee37d-f2e8-45a7-bf04-e390dda40ca9.jpg",
+                "upload_date": "2026-02-04T00:16:54.749250"
+            },
+            {
+                "filename": "675afb53-c257-42ab-ba4d-d10092d74b2d.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\675afb53-c257-42ab-ba4d-d10092d74b2d.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/675afb53-c257-42ab-ba4d-d10092d74b2d.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/675afb53-c257-42ab-ba4d-d10092d74b2d.jpg",
+                "upload_date": "2026-02-04T00:16:55.183047"
+            },
+            {
+                "filename": "a3f2758d-759f-4938-bc74-8bdea33b401a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\a3f2758d-759f-4938-bc74-8bdea33b401a.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/a3f2758d-759f-4938-bc74-8bdea33b401a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/a3f2758d-759f-4938-bc74-8bdea33b401a.jpg",
+                "upload_date": "2026-02-04T00:16:55.533924"
+            },
+            {
+                "filename": "af1645b8-63ae-488c-a380-4df881412924.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\af1645b8-63ae-488c-a380-4df881412924.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/af1645b8-63ae-488c-a380-4df881412924.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/af1645b8-63ae-488c-a380-4df881412924.jpg",
+                "upload_date": "2026-02-04T00:16:55.956070"
+            },
+            {
+                "filename": "aff857c4-4203-42a5-9124-89af40e906f1.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\aff857c4-4203-42a5-9124-89af40e906f1.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/aff857c4-4203-42a5-9124-89af40e906f1.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/aff857c4-4203-42a5-9124-89af40e906f1.jpg",
+                "upload_date": "2026-02-04T00:16:56.413578"
+            },
+            {
+                "filename": "c329dede-d70d-4bcc-8d89-56384e756260.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\c329dede-d70d-4bcc-8d89-56384e756260.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/c329dede-d70d-4bcc-8d89-56384e756260.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/c329dede-d70d-4bcc-8d89-56384e756260.jpg",
+                "upload_date": "2026-02-04T00:16:56.894599"
+            },
+            {
+                "filename": "c58a6bfd-e04f-4436-9dfc-7d6af02ce89a.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\c58a6bfd-e04f-4436-9dfc-7d6af02ce89a.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/c58a6bfd-e04f-4436-9dfc-7d6af02ce89a.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/c58a6bfd-e04f-4436-9dfc-7d6af02ce89a.jpg",
+                "upload_date": "2026-02-04T00:16:57.242465"
+            },
+            {
+                "filename": "cd82f7f4-209a-4c40-affa-db935895ee90.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\cd82f7f4-209a-4c40-affa-db935895ee90.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/cd82f7f4-209a-4c40-affa-db935895ee90.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/cd82f7f4-209a-4c40-affa-db935895ee90.jpg",
+                "upload_date": "2026-02-04T00:16:57.667336"
+            },
+            {
+                "filename": "ecc47cf0-61e2-4ab1-97b5-fc9cb4072372.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\ecc47cf0-61e2-4ab1-97b5-fc9cb4072372.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/ecc47cf0-61e2-4ab1-97b5-fc9cb4072372.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/ecc47cf0-61e2-4ab1-97b5-fc9cb4072372.jpg",
+                "upload_date": "2026-02-04T00:16:58.094172"
+            },
+            {
+                "filename": "ff265b4f-4b4a-41c1-9781-6d3292dad51b.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\MARIA_MARILDA_LOPES_LUCIO_6980eb67\\ff265b4f-4b4a-41c1-9781-6d3292dad51b.jpg",
+                "bytescale_path": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/ff265b4f-4b4a-41c1-9781-6d3292dad51b.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67/ff265b4f-4b4a-41c1-9781-6d3292dad51b.jpg",
+                "upload_date": "2026-02-04T00:16:58.473808"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/MARIA_MARILDA_LOPES_LUCIO_6980eb67",
+        "patient_name": "MARIA MARILDA LOPES LUCIO",
+        "exam_id": "6980eb67",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "RICARDO_JOSE_DA_SILVA_6980eb64": {
+        "images": [
+            {
+                "filename": "0c409bca-5726-4300-896b-868d4ac576a0.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\0c409bca-5726-4300-896b-868d4ac576a0.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/0c409bca-5726-4300-896b-868d4ac576a0.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/0c409bca-5726-4300-896b-868d4ac576a0.jpg",
+                "upload_date": "2026-02-04T00:17:07.120093"
+            },
+            {
+                "filename": "1fb4de91-f206-4405-967f-06cc694ca961.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\1fb4de91-f206-4405-967f-06cc694ca961.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/1fb4de91-f206-4405-967f-06cc694ca961.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/1fb4de91-f206-4405-967f-06cc694ca961.jpg",
+                "upload_date": "2026-02-04T00:17:07.578202"
+            },
+            {
+                "filename": "229528b2-19cc-4c7c-9305-bedda05fb8f9.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\229528b2-19cc-4c7c-9305-bedda05fb8f9.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/229528b2-19cc-4c7c-9305-bedda05fb8f9.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/229528b2-19cc-4c7c-9305-bedda05fb8f9.jpg",
+                "upload_date": "2026-02-04T00:17:08.027599"
+            },
+            {
+                "filename": "23b4e48b-20f5-46b8-a9cd-182dc8e639a5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\23b4e48b-20f5-46b8-a9cd-182dc8e639a5.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/23b4e48b-20f5-46b8-a9cd-182dc8e639a5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/23b4e48b-20f5-46b8-a9cd-182dc8e639a5.jpg",
+                "upload_date": "2026-02-04T00:17:08.597259"
+            },
+            {
+                "filename": "315a5b8b-4294-4f59-8be4-7296d8b60bb4.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\315a5b8b-4294-4f59-8be4-7296d8b60bb4.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/315a5b8b-4294-4f59-8be4-7296d8b60bb4.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/315a5b8b-4294-4f59-8be4-7296d8b60bb4.jpg",
+                "upload_date": "2026-02-04T00:17:09.007114"
+            },
+            {
+                "filename": "32d10d5e-2c44-4e75-8a6d-97752e0065f5.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\32d10d5e-2c44-4e75-8a6d-97752e0065f5.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/32d10d5e-2c44-4e75-8a6d-97752e0065f5.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/32d10d5e-2c44-4e75-8a6d-97752e0065f5.jpg",
+                "upload_date": "2026-02-04T00:17:09.382605"
+            },
+            {
+                "filename": "3d6a7670-40c1-46ef-a98b-fdd032ef1e0e.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\3d6a7670-40c1-46ef-a98b-fdd032ef1e0e.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/3d6a7670-40c1-46ef-a98b-fdd032ef1e0e.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/3d6a7670-40c1-46ef-a98b-fdd032ef1e0e.jpg",
+                "upload_date": "2026-02-04T00:17:09.880928"
+            },
+            {
+                "filename": "4a8fce0b-6832-4ba1-8ab1-be810ed6acff.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\4a8fce0b-6832-4ba1-8ab1-be810ed6acff.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/4a8fce0b-6832-4ba1-8ab1-be810ed6acff.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/4a8fce0b-6832-4ba1-8ab1-be810ed6acff.jpg",
+                "upload_date": "2026-02-04T00:17:10.311479"
+            },
+            {
+                "filename": "7a8ac202-4359-4b4d-90fd-d9aebafe6a2f.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\7a8ac202-4359-4b4d-90fd-d9aebafe6a2f.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/7a8ac202-4359-4b4d-90fd-d9aebafe6a2f.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/7a8ac202-4359-4b4d-90fd-d9aebafe6a2f.jpg",
+                "upload_date": "2026-02-04T00:17:10.776769"
+            },
+            {
+                "filename": "d26dba7f-2839-4a95-bf00-689afc95607f.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\d26dba7f-2839-4a95-bf00-689afc95607f.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/d26dba7f-2839-4a95-bf00-689afc95607f.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/d26dba7f-2839-4a95-bf00-689afc95607f.jpg",
+                "upload_date": "2026-02-04T00:17:11.209683"
+            },
+            {
+                "filename": "e799cf35-ac3d-403d-8908-80993d4f1592.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\e799cf35-ac3d-403d-8908-80993d4f1592.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/e799cf35-ac3d-403d-8908-80993d4f1592.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/e799cf35-ac3d-403d-8908-80993d4f1592.jpg",
+                "upload_date": "2026-02-04T00:17:11.638370"
+            },
+            {
+                "filename": "ef9b21ec-c15e-430e-8937-f9689d11cc20.jpg",
+                "type": "UNKNOWN",
+                "local_path": "E:\\GitHub\\NeuroApp\\downloads\\RICARDO_JOSE_DA_SILVA_6980eb64\\ef9b21ec-c15e-430e-8937-f9689d11cc20.jpg",
+                "bytescale_path": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/ef9b21ec-c15e-430e-8937-f9689d11cc20.jpg",
+                "bytescale_url": "https://upcdn.io/W142icY/raw/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64/ef9b21ec-c15e-430e-8937-f9689d11cc20.jpg",
+                "upload_date": "2026-02-04T00:17:12.049187"
+            }
+        ],
+        "bytescale_folder": "/neuroapp/patients/RICARDO_JOSE_DA_SILVA_6980eb64",
+        "patient_name": "RICARDO JOSE DA SILVA",
+        "exam_id": "6980eb64",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "SEBASTIÃO_MANSUETO_DOS_SANTOS_6980eb66": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/SEBASTIÃO_MANSUETO_DOS_SANTOS_6980eb66",
+        "patient_name": "SEBASTIÃO MANSUETO DOS SANTOS",
+        "exam_id": "6980eb66",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "SIMONE_PEREIRA_DA_SILVA_6980eb66": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/SIMONE_PEREIRA_DA_SILVA_6980eb66",
+        "patient_name": "SIMONE PEREIRA DA SILVA",
+        "exam_id": "6980eb66",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "SUELI_PEREIRA_ALVES_6980eb67": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/SUELI_PEREIRA_ALVES_6980eb67",
+        "patient_name": "SUELI PEREIRA ALVES",
+        "exam_id": "6980eb67",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "VALMIR_FAVIN_6980efeb": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/VALMIR_FAVIN_6980efeb",
+        "patient_name": "VALMIR FAVIN",
+        "exam_id": "6980efeb",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "VALMIR_FERREIRA_6980eb68": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/VALMIR_FERREIRA_6980eb68",
+        "patient_name": "VALMIR FERREIRA",
+        "exam_id": "6980eb68",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "VANDERCI_VELASCO_NUNES_6980f3fd": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/VANDERCI_VELASCO_NUNES_6980f3fd",
+        "patient_name": "VANDERCI VELASCO NUNES",
+        "exam_id": "6980f3fd",
+        "clinic_name": "Phelcom EyeR Cloud"
+    },
+    "VERA_PINTO_6980eb66": {
+        "images": [],
+        "bytescale_folder": "/neuroapp/patients/VERA_PINTO_6980eb66",
+        "patient_name": "VERA PINTO",
+        "exam_id": "6980eb66",
+        "clinic_name": "Phelcom EyeR Cloud"
     }
 }
