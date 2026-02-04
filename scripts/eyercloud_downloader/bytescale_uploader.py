@@ -198,6 +198,10 @@ def main():
             is_color = True # Default to COLOR if metadata is missing to avoid empty results
             found_metadata = False
             
+            # Default: Se não temos metadata, permitimos a imagem
+            is_allowed_type = True
+            found_metadata = False
+            
             if downloader_state_path.exists():
                 try:
                     with open(downloader_state_path, 'r', encoding='utf-8') as f:
