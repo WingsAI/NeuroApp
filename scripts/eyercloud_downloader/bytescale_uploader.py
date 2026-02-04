@@ -163,6 +163,7 @@ def main():
                             'birthday': details.get('birthday'),
                             'gender': details.get('gender'),
                             'cpf': details.get('cpf'),
+                            'exam_date': details.get('exam_date'),
                             'underlying_diseases': details.get('underlying_diseases'),
                             'ophthalmic_diseases': details.get('ophthalmic_diseases'),
                             'otherDisease': details.get('otherDisease')

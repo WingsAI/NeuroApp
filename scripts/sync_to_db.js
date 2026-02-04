@@ -45,6 +45,34 @@ async function sync() {
                 finalCpf = `CONFLICT-${id}-${Math.random().toString(36).slice(2, 7)}`;
             }
 
+            // Determine exam date and location
+            const rawExamDate = patientData.exam_date || patientData.images?.[0]?.upload_date;
+            const examDate = new Date(rawExamDate || new Date());
+
+            let finalLocation = patientData.clinic_name || 'Phelcom EyeR Cloud';
+
+            // Location assignment based on date (Mission logic)
+            // Até 15/01/2026 = Tauá-CE
+            // 27 a 30/01/2026 = Jaci-SP
+            // 02-05/02/2026 = Campos do Jordão
+            const day = examDate.getDate();
+            const month = examDate.getMonth() + 1; // 1-indexed
+            const year = examDate.getFullYear();
+
+            if (year === 2026) {
+                if (month === 1) {
+                    if (day <= 15) {
+                        finalLocation = 'Tauá-CE';
+                    } else if (day >= 27 && day <= 31) {
+                        finalLocation = 'Jaci-SP';
+                    }
+                } else if (month === 2) {
+                    if (day >= 2 && day <= 5) {
+                        finalLocation = 'Campos do Jordão';
+                    }
+                }
+            }
+
             // We use upsert to create or update
             await prisma.patient.upsert({
                 where: { id: id },
@@ -52,8 +80,8 @@ async function sync() {
                     name: patientData.patient_name,
                     cpf: finalCpf,
                     birthDate: new Date(patientData.birthday || new Date()),
-                    examDate: new Date(patientData.images?.[0]?.upload_date || new Date()),
-                    location: patientData.clinic_name || 'Phelcom EyeR Cloud',
+                    examDate: examDate,
+                    location: finalLocation,
                     gender: patientData.gender || '',
                     technicianName: 'EyerCloud Sync',
                     underlyingDiseases: patientData.underlying_diseases || {},
@@ -64,8 +92,8 @@ async function sync() {
                     name: patientData.patient_name,
                     cpf: finalCpf,
                     birthDate: new Date(patientData.birthday || new Date()),
-                    examDate: new Date(patientData.images?.[0]?.upload_date || new Date()),
-                    location: patientData.clinic_name || 'Phelcom EyeR Cloud',
+                    examDate: examDate,
+                    location: finalLocation,
                     gender: patientData.gender || '',
                     technicianName: 'EyerCloud Sync',
                     underlyingDiseases: patientData.underlying_diseases || {},

@@ -71,7 +71,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANA_CASSIA_FERREIRA_FIRMO_695e63c328b781ee6000edc7": {
         "images": [
@@ -169,7 +170,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANA_FERREIRA_BELIZARIO_697001b9029f1e6981546a73": {
         "images": [
@@ -259,7 +261,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_ALVES_DA_SILVA_695e9f6828b781ee60010fe7": {
         "images": [
@@ -349,7 +352,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_ANTENORA_RODRIGUES_RAMOS_697001b9fa6df75200cfe279": {
         "images": [
@@ -439,7 +443,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_ELIDETE_RODRIGUES_VIEIRA_697001c4fa6df75200cfe285": {
         "images": [
@@ -513,7 +518,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_ELIZIMARIA_DE_QUEIROZ_697001be4e429636ed944bfb": {
         "images": [
@@ -595,7 +601,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_FERNANDES_DE_SOUSA_697001bffa6df75200cfe280": {
         "images": [
@@ -669,7 +676,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_FERREIRA_DE_MORAIS_MACIEK_697001bf4e429636ed944bfd": {
         "images": [
@@ -767,7 +775,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_FERREIRA_DE_SOUSA_697001c526260539c16a9607": {
         "images": [
@@ -849,7 +858,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "Antonia_Guilherme_da_Silva_695e7b4dfa6df75200cbdd05": {
         "images": [
@@ -947,7 +957,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_HELENA_ALVES_697001bd029f1e6981546a77": {
         "images": [
@@ -1029,7 +1040,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_HONORATO_BARBOSA_697001c84e429636ed944c08": {
         "images": [
@@ -1119,7 +1131,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_ISABEL_MORAIS_BRAGA_697001cd26260539c16a9610": {
         "images": [
@@ -1209,7 +1222,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_PAULA_PEREIRA_DE_OLIVEIRA_697001c1029f1e6981546a7d": {
         "images": [
@@ -1251,7 +1265,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_PAULA_PEREIRA_DE_OLIVEIRA_697001c126260539c16a9603": {
         "images": [
@@ -1357,7 +1372,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIA_SOUSA_DO_NASCIMENTO_697001c5fa6df75200cfe286": {
         "images": [
@@ -1431,7 +1447,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_BENEDITO_SOARES_697d03f68bc8fc9984f742ca": {
         "images": [
@@ -1505,7 +1522,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_BENTO_DO_NASCIMENTO_697001c926260539c16a960c": {
         "images": [
@@ -1595,7 +1613,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_CARLOS_TEIXEIRA_697001bd029f1e6981546a76": {
         "images": [
@@ -1669,7 +1688,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_FERREIRA_FIRMO_695e612d26260539c1667cce": {
         "images": [
@@ -1831,7 +1851,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_GONCALVES_FERREIRA_697001c64e429636ed944c05": {
         "images": [
@@ -1913,7 +1934,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTONIO_VITAL_FILHO_697001c8fa6df75200cfe28a": {
         "images": [
@@ -1995,7 +2017,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ANTÔNIO_AFONSO_DE_OLIVEIRA_697001cdfa6df75200cfe28f": {
         "images": [
@@ -2101,7 +2124,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "BASILIA_LINO_DA_SILVA_697001bf26260539c16a9601": {
         "images": [
@@ -2175,7 +2199,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "CAMILA_MARIA_FERREIRA_CITO_695e8a8c26260539c166954f": {
         "images": [
@@ -2265,7 +2290,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "CICERO_ERASMO_FERREIRA_DO_NASCIMENTO_697001c526260539c16a9606": {
         "images": [
@@ -2339,7 +2365,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "CIDELVANIA_GONCALVES_DE_BRITO_697001cafa6df75200cfe28b": {
         "images": [
@@ -2413,7 +2440,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "CLÓVIS_ALVES_TORQUATO_697001cc26260539c16a960f": {
         "images": [
@@ -2519,7 +2547,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "COSMO_XAVIER_DE_OLIVEIRA_697001bafa6df75200cfe27a": {
         "images": [
@@ -2593,7 +2622,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "CRISTINA_CANDIDO_DA_FRANCA_695e9ddefa6df75200cbee86": {
         "images": [
@@ -2667,7 +2697,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "DAVINA_VALE_RODRIGUES_697001c826260539c16a960a": {
         "images": [
@@ -2773,7 +2804,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "DELMIRA_ROBEIRO_LIMA_697001c026260539c16a9602": {
         "images": [
@@ -2855,7 +2887,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "DOMINGAS_FERNANDES_DA_CONCEICAO_697001be26260539c16a9600": {
         "images": [
@@ -2945,7 +2978,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "EDILONEIDE_PEREIRA_FERNANDES_697001ce26260539c16a9611": {
         "images": [
@@ -3083,7 +3117,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "EMILIA_VIEIRA_DA_SILVA_695e79f328b781ee6000fd5f": {
         "images": [
@@ -3181,7 +3216,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ERNISLANDIA_RIBEIRO_XAVIER_697001bcfa6df75200cfe27d": {
         "images": [
@@ -3255,7 +3291,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "EUDOCIANA_CAVALCANTE_MACEDO_697001cb4e429636ed944c0d": {
         "images": [
@@ -3385,7 +3422,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FABIANA_LEANDRO_DA_SILVA_697001c4029f1e6981546a80": {
         "images": [
@@ -3467,7 +3505,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCINALDA_ALVES_DA_SILVA_TEIXEIRA_697001ba26260539c16a95fc": {
         "images": [
@@ -3541,7 +3580,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISA_ONELIA_BEZERRA_697001c74e429636ed944c07": {
         "images": [
@@ -3631,7 +3671,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_ALVES_CAVALCANTE_DA_FRANCA_697001c5029f1e6981546a81": {
         "images": [
@@ -3705,7 +3746,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_ALVES_DA_FRANCA_VERISSIMO_697001c24e429636ed944c00": {
         "images": [
@@ -3787,7 +3829,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_ALVES_DE_SOUZA_697001ba029f1e6981546a74": {
         "images": [
@@ -3837,7 +3880,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_ANTONIA_PEREIRA_DA_SILVA_697001c426260539c16a9605": {
         "images": [
@@ -3911,7 +3955,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_KELLIANE_ARAÚJO_DE_SOUSA_697001ce26260539c16a9612": {
         "images": [
@@ -3985,7 +4030,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_MARIA_FERREIRA_DE_SOUSA_695e69854b0e754dac367640": {
         "images": [
@@ -4083,7 +4129,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_RODRIGUES_BIZERRA_CAVALCANTE_697001cc4e429636ed944c0e": {
         "images": [
@@ -4205,7 +4252,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_SANDRA_De_Sousa_695ea2b84b0e754dac369600": {
         "images": [
@@ -4319,7 +4367,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_SARAIVA_DE_MELO_697001ca029f1e6981546a86": {
         "images": [
@@ -4401,7 +4450,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "Francisca_Torquato_Barbosa_695e8168fa6df75200cbdf5f": {
         "images": [
@@ -4507,7 +4557,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCA_VIEIRA_DE_LIMA_SOUZA_695e857328b781ee600101af": {
         "images": [
@@ -4621,7 +4672,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_ALVES_DE_MACEDO_697001bb26260539c16a95fd": {
         "images": [
@@ -4695,7 +4747,8 @@
             "pterygium": true,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_CAMILO_DE_SOUSA_697001bd26260539c16a95ff": {
         "images": [
@@ -4769,7 +4822,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_CHAGAS_DA_costa_695ea6734b0e754dac36990b": {
         "images": [
@@ -4851,7 +4905,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_CHAGAS_LOIOLA_697001c2029f1e6981546a7e": {
         "images": [
@@ -4933,7 +4988,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_DAS_CHAGAS_PEREIRA_NETO_695e8bd24b0e754dac368772": {
         "images": [
@@ -5015,7 +5071,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_ELIVAN_DE_SOUSA_697001c626260539c16a9608": {
         "images": [
@@ -5049,7 +5106,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_ELIVAN_DE_SOUSA_697001c64e429636ed944c06": {
         "images": [
@@ -5123,7 +5181,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_FEIJO_DA_SILVA_697001c3fa6df75200cfe283": {
         "images": [
@@ -5197,7 +5256,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_FRANCINE_DE_OLIVEIRA_697001cb029f1e6981546a88": {
         "images": [
@@ -5295,7 +5355,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_OLIVEIRA_LOIOLA_695e77fbfa6df75200cbdb99": {
         "images": [
@@ -5433,7 +5494,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_RODRIGUES_BEZERRA_697001ba26260539c16a95fb": {
         "images": [
@@ -5539,7 +5601,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_ROSENDO_MUNDA_697001c0029f1e6981546a7b": {
         "images": [
@@ -5597,7 +5660,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_SERGIO_OLIVEIRA_697001ce4e429636ed944c10": {
         "images": [
@@ -5687,7 +5751,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISCO_TEOBALDO_CIDRÃO_SOUTO_JUNIOR_697001cf029f1e6981546a8c": {
         "images": [
@@ -5777,7 +5842,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "FRANCISDALVA_ALVES_DA_SILVA_697001bafa6df75200cfe27b": {
         "images": [
@@ -5859,7 +5925,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "GERALDA_ESTEVAO_DA_SILVA_697001c3fa6df75200cfe284": {
         "images": [
@@ -5941,7 +6008,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "GERALDO_ALVES_MOTA_695e6d1d26260539c16686c9": {
         "images": [
@@ -6047,7 +6115,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "HERBET_HONORATO_FEITOSA_697001c926260539c16a960b": {
         "images": [
@@ -6121,7 +6190,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "IOLANDA_JUVENAL_DE_OLIVEIRA_697001c44e429636ed944c03": {
         "images": [
@@ -6203,7 +6273,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "IRANI_LOURENCO_RODRIGUES_697001cb029f1e6981546a87": {
         "images": [
@@ -6285,7 +6356,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ISAMAR_INACIO_DA_FRANCA_695e88ae28b781ee600102d1": {
         "images": [
@@ -6431,7 +6503,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "IVNA_LUZIA_ALVES_DE_SOUSA_697001c9029f1e6981546a85": {
         "images": [
@@ -6521,7 +6594,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JACQUELINE_FERREIRA_DA_SILVA_697001cefa6df75200cfe291": {
         "images": [
@@ -6611,7 +6685,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JANAINA_ALENE_CARDOSO_CIDRÃO_697001cd4e429636ed944c0f": {
         "images": [
@@ -6741,7 +6816,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOANA_DARC_FERREIRA_MONTE_697001cf26260539c16a9613": {
         "images": [
@@ -6847,7 +6923,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOAQUIM_FERNANDES_DO_NASCIMENTO_697001ccfa6df75200cfe28e": {
         "images": [
@@ -6961,7 +7038,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOAQUIM_RODRIGUES_SOUSA_697001c0029f1e6981546a7a": {
         "images": [
@@ -7035,7 +7113,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSE_ADECIO_LIMA_DOS_REIS_697001ca4e429636ed944c0b": {
         "images": [
@@ -7117,7 +7196,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSE_AFONSO_FILHO_697001c54e429636ed944c04": {
         "images": [
@@ -7207,7 +7287,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSE_ALVES_DE_SOUZA_FILHO_697001c04e429636ed944bfe": {
         "images": [
@@ -7297,7 +7378,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSE_OLAVO_GOMES_PEREIRA_695ea48b4b0e754dac369791": {
         "images": [
@@ -7395,7 +7477,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSE_RODRIGUES_TORQUATO_JUNIOR_697001c7029f1e6981546a83": {
         "images": [
@@ -7469,7 +7552,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOSELIA_ROSENA_DA_COSTA_SILVA_697001c84e429636ed944c09": {
         "images": [
@@ -7551,7 +7635,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JOÃO_JOSIAS_DA_SILVA_697001cd029f1e6981546a8a": {
         "images": [
@@ -7673,7 +7758,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "JULIA_PEREIRA_DE_SOUZA_697001ca26260539c16a960d": {
         "images": [
@@ -7771,7 +7857,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LEONILIA_JUVENAL_OLIVEIRA_SILVA_697001bb029f1e6981546a75": {
         "images": [
@@ -7845,7 +7932,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LEONOR_DO_NASCIMENTO_SILVA_697001be4e429636ed944bfc": {
         "images": [
@@ -7919,7 +8007,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LUCIA_DE_FATIMA_SILVA_GOMES_697001c0fa6df75200cfe281": {
         "images": [
@@ -7993,7 +8082,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LUIZ_CRISTINA_RODRIGUES_695e7285fa6df75200cbd89c": {
         "images": [
@@ -8107,7 +8197,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LUIZ_SERAFIM_FA_SILA_697001b926260539c16a95fa": {
         "images": [
@@ -8205,7 +8296,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LUIZA_ANA_BEZERRA_DE_SOUSA_697001bdfa6df75200cfe27f": {
         "images": [
@@ -8287,7 +8379,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "LUIZA_MARIA_FERREIRA_VIANA_695e87464b0e754dac368575": {
         "images": [
@@ -8377,7 +8470,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MANOEL_RODRIGUEs_DO_NASCIMENTO_697001be029f1e6981546a78": {
         "images": [
@@ -8451,7 +8545,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_ALVES_DE_OLIVEIRA_697001b94e429636ed944bf6": {
         "images": [
@@ -8525,7 +8620,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_ALVES_GONCALVES_697001bcfa6df75200cfe27e": {
         "images": [
@@ -8607,7 +8703,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_AMELIA_BEZERRA_DA_SILVA_697001c3029f1e6981546a7f": {
         "images": [
@@ -8681,7 +8778,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_APARECIDA_AMORIM_VIANA_697d03e28bc8fc9984f742af": {
         "images": [
@@ -8771,7 +8869,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_APARECIDA_PEREIRA_697d03f5565494aed21c07e0": {
         "images": [
@@ -8861,7 +8960,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_BARBARA_COIMBRA_ESTEFANIR_697d03e4565494aed21c07cd": {
         "images": [
@@ -8951,7 +9051,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_CAVALCANTE_DA_SILVA_695eabf8fa6df75200cbf953": {
         "images": [
@@ -9033,7 +9134,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_CELIA_MELCHIORI_PEREIRA_697d03df565494aed21c07c8": {
         "images": [
@@ -9107,7 +9209,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_CLAUDENE_VERISSIMO_DA_FRANCA_697001c2fa6df75200cfe282": {
         "images": [
@@ -9189,7 +9292,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DA_CONCEICAO_CAVALCANTE_ROSENDO_697001bc26260539c16a95fe": {
         "images": [
@@ -9279,7 +9383,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DA_CONCEICAO_PINENTEL_DOS_SANTOS_697001bb4e429636ed944bf8": {
         "images": [
@@ -9353,7 +9458,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DA_CONCEICAO_SOUSA_E_SILVA_697001c6029f1e6981546a82": {
         "images": [
@@ -9427,7 +9533,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DAS_GRACAS_ALVES_VENANCIO_697001c8fa6df75200cfe289": {
         "images": [
@@ -9509,7 +9616,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DAS_GRACAS_DA_SILVA_697001ca4e429636ed944c0c": {
         "images": [
@@ -9583,7 +9691,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DAS_GRACAS_PEREIRA_LIMA_697001c726260539c16a9609": {
         "images": [
@@ -9657,7 +9766,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DE_FATIMA_DO_NASCIMENTO_697001c14e429636ed944bff": {
         "images": [
@@ -9739,7 +9849,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DE_LOURDES_VIEIRA_CREMONIN_697d03de7927d48de9d88c50": {
         "images": [
@@ -9813,7 +9924,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DIOMAR_LIMA_DOS_REIS_695e5bfa26260539c16678c0": {
         "images": [
@@ -9951,7 +10063,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DIVA_DA_SILVA_DE_SOUZA_697001bb4e429636ed944bf7": {
         "images": [
@@ -10081,7 +10194,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DO_CARMO_TORQUATO_DE_SOUSA_697001cbfa6df75200cfe28c": {
         "images": [
@@ -10163,7 +10277,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DO_ROSARIO_DAMIAO_OPLIVEIRA_695e976426260539c1669cdd": {
         "images": [
@@ -10253,7 +10368,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_DO_ROSARIO_FERREIRA_SOUSA_695e9bc228b781ee60010d96": {
         "images": [
@@ -10335,7 +10451,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_ERLIENE_DE_LIMA_697001c34e429636ed944c01": {
         "images": [
@@ -10409,7 +10526,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_EUDOCIA_BENEVIDES_CAVALCANTE_697001bc4e429636ed944bf9": {
         "images": [
@@ -10491,7 +10609,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_FELIX_DE_ASSIS_CAVALCANTE_695e8319fa6df75200cbdfe5": {
         "images": [
@@ -10541,7 +10660,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_FERREIRA_FIRMO_697001cf029f1e6981546a8e": {
         "images": [
@@ -10647,7 +10767,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_FRANCINEIDE_CHAVES_DE_MACEDO_697001bbfa6df75200cfe27c": {
         "images": [
@@ -10721,7 +10842,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_GRACI_DE_LIMA_MARCELINO_697001c7fa6df75200cfe288": {
         "images": [
@@ -10795,7 +10917,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_HELENA_IDE_SECATO_697d03f48bc8fc9984f742c9": {
         "images": [
@@ -10869,7 +10992,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_HOLANDA_DOS_Santos_695e8d12fa6df75200cbe3f3": {
         "images": [
@@ -10943,7 +11067,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_ISA_FERREIRA_CITO_697001c94e429636ed944c0a": {
         "images": [
@@ -11017,7 +11142,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_JOSÉ_TORQUARTO_BARBOSA_DA_SILVA_697001ce029f1e6981546a8b": {
         "images": [
@@ -11123,7 +11249,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_JULIA_ZInzin_de_Assis_697001cb26260539c16a960e": {
         "images": [
@@ -11213,7 +11340,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_LIDIANE_SILVA_ANDRADE_697001c226260539c16a9604": {
         "images": [
@@ -11287,7 +11415,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_LUIZA_FERREIRA_FIRMO_695e6fc0fa6df75200cbd6c9": {
         "images": [
@@ -11393,7 +11522,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_LUIZA_FERREIRA_MONTE_695e55504b0e754dac3666c4": {
         "images": [
@@ -11627,7 +11757,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_MAFALDA_FERREIRA_CITO_695e841e28b781ee6001011b": {
         "images": [
@@ -11709,7 +11840,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_PAIVA_ALVES_SANTANA_697001bf029f1e6981546a79": {
         "images": [
@@ -11791,7 +11923,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_PEREIRA_DA_SILVA_697001cc029f1e6981546a89": {
         "images": [
@@ -11897,7 +12030,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_PINHO_GOMES_DOS_SANTOS_695e7cd326260539c1668ffe": {
         "images": [
@@ -12003,7 +12137,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_REGINA_VERISSIMO_697001c34e429636ed944c02": {
         "images": [
@@ -12085,7 +12220,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_SELMA_JOSE_DOS_SANTOS_697d03e47927d48de9d88c5c": {
         "images": [
@@ -12159,7 +12295,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_VANUSA_ALMEIDA_697001c1029f1e6981546a7c": {
         "images": [
@@ -12241,7 +12378,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARIA_VERISSIMO_DO_NASCIMENTO_697001bd4e429636ed944bfa": {
         "images": [
@@ -12323,7 +12461,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARILIA_CAVALCANTE_ROSENDO_69700546029f1e6981546b9b": {
         "images": [
@@ -12405,7 +12544,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARINALVA_ALVES_DA_SILVA_69700545fa6df75200cfe39f": {
         "images": [
@@ -12479,7 +12619,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARINEI_LULIO_RODRIGUES_697d03dd565494aed21c07c4": {
         "images": [
@@ -12553,7 +12694,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MARLY_MARTINELI_DEROID_697d03e2565494aed21c07cb": {
         "images": [
@@ -12627,7 +12769,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MAURICIO_ZANIBONI_697d03e11fa8062e17d37738": {
         "images": [
@@ -12709,7 +12852,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "MILTON_DE_SOUSA_695e5f4f4b0e754dac366e74": {
         "images": [
@@ -12839,7 +12983,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "NAIANA_CRISTINA_RODRIGUES_DOS_SANTOS_6970067426260539c16a97a8": {
         "images": [
@@ -12929,7 +13074,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "NATALINA_DA_SILVA_DAMASCENO_697d03dd8bc8fc9984f742aa": {
         "images": [
@@ -12971,7 +13117,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "Nayara_petrola_695e5b3026260539c1667810": {
         "images": [
@@ -13037,7 +13184,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "NEIDE_BASSO_697d03f48bc8fc9984f742c7": {
         "images": [
@@ -13111,7 +13259,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "NILSON_HELIO_LEAO_6978b718f4537704f083d41e": {
         "images": [
@@ -13185,7 +13334,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "NIVALDO_BASSO_697d03e5565494aed21c07cf": {
         "images": [
@@ -13267,7 +13417,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ODAIR_BRAZ_697d03e07927d48de9d88c53": {
         "images": [
@@ -13349,7 +13500,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "PEDRO_ARAUJO_DOS_SANTIS_695e7f3d26260539c16690ee": {
         "images": [
@@ -13471,7 +13623,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RAIMUNDA_LUCIA_PEREIRA_OLIVEIRA_69700547029f1e6981546b9c": {
         "images": [
@@ -13561,7 +13714,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RAIMUNDA_NONATA_DA_SILVA_69700546fa6df75200cfe3a0": {
         "images": [
@@ -13643,7 +13797,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RAIMUNDA_SOARES_DE_ARAUJO_69700544029f1e6981546b9a": {
         "images": [
@@ -13717,7 +13872,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "REGIANE_MARQUES_DOS_REIS_697005474e429636ed944d50": {
         "images": [
@@ -13799,7 +13955,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "REGINA_SELIA_DE_OLIVEIRA_6970054526260539c16a972b": {
         "images": [
@@ -13873,7 +14030,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "REGINALDO_ALVES_DE_JESUS_ALMEIDA_697d03de565494aed21c07c6": {
         "images": [
@@ -13979,7 +14137,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RENATO_LUIZ_VIANA_697d03e37927d48de9d88c58": {
         "images": [
@@ -14021,7 +14180,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RITA_SIMONE_PASTEGA_LISBOA_697d03df7927d48de9d88c52": {
         "images": [
@@ -14087,7 +14247,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ROBSON_TRIDICO_697d03f61fa8062e17d3774c": {
         "images": [
@@ -14169,7 +14330,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "RONALDO_ARAUJO_DE_LIMA_695ea0b4fa6df75200cbf05a": {
         "images": [
@@ -14251,7 +14413,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ROSANA_CRISTINA_MONTEVERDE_GINO_697d03dc8bc8fc9984f742a8": {
         "images": [
@@ -14333,7 +14496,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "ROZINEIDE_OLANDA_DE_SOUSA_69700673029f1e6981546bf8": {
         "images": [
@@ -14423,7 +14587,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SEBASTIANA_ELZA_BARBOZA_PIOBELLO_697d03e17927d48de9d88c56": {
         "images": [
@@ -14497,7 +14662,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SEBASTIANA_SOARES_DE_SOUSA_697005444e429636ed944d4e": {
         "images": [
@@ -14571,7 +14737,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SENHORA_RODRIGUES_DE_ARAÚJO_697006724e429636ed944dce": {
         "images": [
@@ -14685,7 +14852,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SOLANGE_MARIA_LIMA_LACERDA_E_SILVA_695ea8d628b781ee6001172e": {
         "images": [
@@ -14759,7 +14927,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SOTELINA_CARDOSO_CIDRÃO_6970067326260539c16a97a7": {
         "images": [
@@ -14881,7 +15050,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "SUELITA_ALVES_TORQUATO_69700673fa6df75200cfe40b": {
         "images": [
@@ -15003,7 +15173,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TANIA_MARIA_FEIJO_DA_SILVA_ARAUJO_697005464e429636ed944d4f": {
         "images": [
@@ -15077,7 +15248,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TANIA_SOUZA_DOMINGUEZ_697d03da7927d48de9d88c4d": {
         "images": [
@@ -15183,7 +15355,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TATIANE_FEIJÓ_DA_SILVA_69700672fa6df75200cfe40a": {
         "images": [
@@ -15281,7 +15454,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TATIANE_TRAVAGIM_DE_OLIVEIRA_6978b57626260539c16c8a02": {
         "images": [
@@ -15355,7 +15529,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TAYVONE_FEIJÓ_DA_SILVA_69700548fa6df75200cfe3a1": {
         "images": [
@@ -15493,7 +15668,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TERESA_BRIGUENTI_CESARE_697d03dd565494aed21c07c3": {
         "images": [
@@ -15583,7 +15759,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TEREZA_ALVES_SANTANA_ARAUJO_6970054426260539c16a972a": {
         "images": [
@@ -15697,7 +15874,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TEREZINHA_HONORATO_DA_SILVA_6970054726260539c16a972c": {
         "images": [
@@ -15771,7 +15949,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "TEREZINHA_RODRIGUES_DOS_SANTOS_697006734e429636ed944dcf": {
         "images": [
@@ -15917,7 +16096,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "VALDELIRIO_OLIVEIRA_COSTA_697d03de565494aed21c07c5": {
         "images": [
@@ -15959,7 +16139,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "VALDIR_GORDONI_6978b80c26260539c16c8c9c": {
         "images": [
@@ -16057,7 +16238,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "VANESSA_CARLA_LOURENCO_697d03e07927d48de9d88c54": {
         "images": [
@@ -16115,7 +16297,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "VANIA_FERREIRA_MONTE_695e665228b781ee6000efc0": {
         "images": [
@@ -16213,7 +16396,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "YASMIN_GABRIELLA_DOS_SANTOS_FREITAS_697d03e48bc8fc9984f742b0": {
         "images": [
@@ -16287,7 +16471,8 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     },
     "YOLANDA_REALE_GOMES_697d03e31fa8062e17d37739": {
         "images": [
@@ -16369,6 +16554,7 @@
             "pterygium": false,
             "lowVisualAcuity": false
         },
-        "otherDisease": null
+        "otherDisease": null,
+        "exam_date": null
     }
 }

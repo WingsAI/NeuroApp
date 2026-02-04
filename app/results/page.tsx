@@ -38,8 +38,10 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
   };
 
   return (
-    <div className="bg-white p-16 w-[1000px] mx-auto min-h-[1400px]">
-      <div className="max-w-4xl mx-auto space-y-12">
+  return (
+    <div className="bg-white w-[1000px] mx-auto">
+      {/* PAGE 1: Identificação e Imagens */}
+      <div id="report-page-1" className="p-16 min-h-[1400px] space-y-12 border-b border-dashed border-sandstone-200 print:border-0">
         {/* Document Subheader */}
         <div className="text-center space-y-4 border-b-2 border-cardinal-700 pb-8">
           <h1 className="text-3xl font-serif font-bold text-charcoal uppercase">Relatório Oftalmológico</h1>
@@ -121,11 +123,19 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
           </div>
         </div>
 
+        {/* Footer da Página 1 */}
+        <div className="pt-20 text-center text-[10px] text-sandstone-300 uppercase tracking-[0.3em]">
+          Continua na próxima página
+        </div>
+      </div>
+
+      {/* PAGE 2: Conclusões e Assinatura */}
+      <div id="report-page-2" className="p-16 min-h-[1400px] space-y-12 print:break-before-page">
         {/* Report Findings & Diagnosis */}
-        <div className="space-y-14 py-14 border-t border-sandstone-100">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-            <div className="lg:col-span-1">
-              <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-6">Condições Clínicas</h3>
+        <div className="space-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="lg:col-span-3">
+              <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-sandstone-400 mb-6 underline decoration-cardinal-700 decoration-2 underline-offset-8">Condições Clínicas Detectadas</h3>
               {patient.report.diagnosticConditions && (
                 <div className="flex flex-wrap gap-2.5">
                   {Object.entries(patient.report.diagnosticConditions || {}).map(([key, value]) => {
@@ -164,10 +174,10 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
               )}
             </div>
 
-            <div className="lg:col-span-2 space-y-12">
+            <div className="lg:col-span-3 space-y-12">
               <section>
                 <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
-                  <span>Achados Clínicos</span>
+                  <span>Achados de Biomicroscopia de Fundo</span>
                   <div className="flex-1 h-px bg-sandstone-100 ml-4" />
                 </h4>
                 <div className="space-y-8">
@@ -208,35 +218,35 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
                 </div>
               </section>
 
-              <section>
-                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
-                  <span>Conclusão Diagnóstica</span>
-                  <div className="flex-1 h-px bg-sandstone-100 ml-4" />
-                </h4>
-                <div className="p-8 bg-sandstone-50 border-l-8 border-cardinal-700 rounded-r-3xl">
-                  <p className="text-xl text-charcoal font-serif font-bold italic leading-relaxed text-justify">
-                    {patient.report.diagnosis || 'Sem diagnóstico especificado.'}
-                  </p>
-                </div>
-              </section>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <section>
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
+                    <span>Conclusão Diagnóstica</span>
+                  </h4>
+                  <div className="p-8 bg-sandstone-50 border-l-8 border-cardinal-700 rounded-r-3xl h-full">
+                    <p className="text-xl text-charcoal font-serif font-bold italic leading-relaxed text-justify">
+                      {patient.report.diagnosis || 'Sem diagnóstico especificado.'}
+                    </p>
+                  </div>
+                </section>
 
-              <section>
-                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
-                  <span>Conduta Sugerida</span>
-                  <div className="flex-1 h-px bg-sandstone-100 ml-4" />
-                </h4>
-                <div className="p-6 bg-sandstone-50/50 rounded-2xl border border-sandstone-100">
-                  <p className="text-base text-sandstone-600 font-serif leading-relaxed italic text-justify">
-                    {patient.report.suggestedConduct || patient.report.recommendations || 'Manter acompanhamento periódico.'}
-                  </p>
-                </div>
-              </section>
+                <section>
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sandstone-400 mb-6 flex items-center">
+                    <span>Conduta Sugerida</span>
+                  </h4>
+                  <div className="p-6 bg-sandstone-50/50 rounded-2xl border border-sandstone-100 h-full">
+                    <p className="text-base text-sandstone-600 font-serif leading-relaxed italic text-justify">
+                      {patient.report.suggestedConduct || patient.report.recommendations || 'Manter acompanhamento periódico.'}
+                    </p>
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Signature Block */}
-        <div className="pt-24 pb-12 border-t border-sandstone-100 flex flex-col items-center text-center">
+        <div className="pt-20 pb-12 border-t border-sandstone-100 flex flex-col items-center text-center">
           <div className="text-charcoal font-serif text-3xl font-bold mb-2 italic">
             {patient.report.doctorName}
           </div>
@@ -340,28 +350,41 @@ export default function Results() {
         // Wait for rendering and images to load
         await new Promise(resolve => setTimeout(resolve, 1200));
 
-        const captureArea = document.getElementById('report-capture-area');
-        if (!captureArea) {
+        const page1 = document.getElementById('report-page-1');
+        const page2 = document.getElementById('report-page-2');
+
+        if (!page1 || !page2) {
           count++;
           setExportProgress({ current: count, total: filteredPatients.length });
           continue;
         }
 
-        const canvas = await html2canvas(captureArea, {
-          // @ts-ignore
-          scale: 2, // High resolution
+        const doc = new jsPDF('p', 'mm', 'a4');
+
+        // Page 1
+        const canvas1 = await html2canvas(page1, {
+          scale: 2,
           useCORS: true,
           logging: false,
           backgroundColor: '#ffffff',
           width: 1000,
           windowWidth: 1000
         });
+        const imgData1 = canvas1.toDataURL('image/jpeg', 0.95);
+        doc.addImage(imgData1, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
-        const doc = new jsPDF('p', 'mm', 'a4');
-
-        // Add image to cover the whole A4 page (210x297mm)
-        doc.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+        // Page 2
+        doc.addPage();
+        const canvas2 = await html2canvas(page2, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff',
+          width: 1000,
+          windowWidth: 1000
+        });
+        const imgData2 = canvas2.toDataURL('image/jpeg', 0.95);
+        doc.addImage(imgData2, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
 
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;

@@ -90,7 +90,11 @@ def generate_report(state):
         
         report_data.append({
             'Paciente': patient_name,
-            'ID Exame': exam_id[:12] + '...',
+            'CPF': details.get('cpf', ''),
+            'Nascimento': details.get('birthday', ''),
+            'Clínica': details.get('clinic_name', ''),
+            'Data Exame': details.get('exam_date', ''),
+            'ID Exame': exam_id,
             'Imagens Esperadas': expected_count,
             'Imagens Baixadas': downloaded_count,
             'Status': status,
@@ -106,6 +110,10 @@ def generate_report(state):
                 downloaded_count = count_downloaded_images(folder)
                 report_data.append({
                     'Paciente': folder_name.rsplit('_', 1)[0].replace('_', ' '),
+                    'CPF': '',
+                    'Nascimento': '',
+                    'Clínica': '',
+                    'Data Exame': '',
                     'ID Exame': folder_name.rsplit('_', 1)[-1] if '_' in folder_name else 'N/A',
                     'Imagens Esperadas': '?',
                     'Imagens Baixadas': downloaded_count,
@@ -122,12 +130,12 @@ def generate_report(state):
     
     # Gera CSV (sempre funciona)
     with open(CSV_REPORT_FILE, 'w', encoding='utf-8-sig') as f:
-        headers = ['Paciente', 'ID Exame', 'Imagens Esperadas', 'Imagens Baixadas', 'Status', 'Pasta']
+        headers = ['Paciente', 'CPF', 'Nascimento', 'Clínica', 'Data Exame', 'ID Exame', 'Imagens Esperadas', 'Imagens Baixadas', 'Status', 'Pasta']
         f.write(';'.join(headers) + '\n')
         for row in report_data:
-            f.write(';'.join(str(row[h]) for h in headers) + '\n')
+            f.write(';'.join(str(row.get(h, '')) for h in headers) + '\n')
         f.write('\n')
-        f.write(f'TOTAL;;{total_expected};{total_downloaded};;\n')
+        f.write(f'TOTAL;;;;;;{total_expected};{total_downloaded};;\n')
     
     print(f"   📄 CSV salvo em: {CSV_REPORT_FILE.absolute()}")
     
@@ -141,7 +149,7 @@ def generate_report(state):
         ws.title = "Relatório de Downloads"
         
         # Cabeçalho
-        headers = ['Paciente', 'ID Exame', 'Imagens Esperadas', 'Imagens Baixadas', 'Status', 'Pasta']
+        headers = ['Paciente', 'CPF', 'Nascimento', 'Clínica', 'Data Exame', 'ID Exame', 'Imagens Esperadas', 'Imagens Baixadas', 'Status', 'Pasta']
         header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
         header_font = Font(bold=True, color="FFFFFF")
         
@@ -154,7 +162,7 @@ def generate_report(state):
         # Dados
         for row_idx, row_data in enumerate(report_data, 2):
             for col, header in enumerate(headers, 1):
-                cell = ws.cell(row=row_idx, column=col, value=row_data[header])
+                cell = ws.cell(row=row_idx, column=col, value=row_data.get(header, ''))
                 if header == 'Status':
                     if '✅' in str(row_data[header]):
                         cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
@@ -164,16 +172,16 @@ def generate_report(state):
         # Linha de totais
         total_row = len(report_data) + 2
         ws.cell(row=total_row, column=1, value="TOTAL").font = Font(bold=True)
-        ws.cell(row=total_row, column=3, value=total_expected).font = Font(bold=True)
-        ws.cell(row=total_row, column=4, value=total_downloaded).font = Font(bold=True)
+        ws.cell(row=total_row, column=7, value=total_expected).font = Font(bold=True)
+        ws.cell(row=total_row, column=8, value=total_downloaded).font = Font(bold=True)
         
         # Ajusta largura das colunas
-        ws.column_dimensions['A'].width = 45
-        ws.column_dimensions['B'].width = 15
-        ws.column_dimensions['C'].width = 18
-        ws.column_dimensions['D'].width = 18
-        ws.column_dimensions['E'].width = 15
-        ws.column_dimensions['F'].width = 50
+        column_widths = {
+            'A': 40, 'B': 15, 'C': 15, 'D': 25, 'E': 25, 
+            'F': 15, 'G': 18, 'H': 18, 'I': 15, 'J': 40
+        }
+        for col, width in column_widths.items():
+            ws.column_dimensions[col].width = width
         
         wb.save(REPORT_FILE)
         print(f"   📊 Excel salvo em: {REPORT_FILE.absolute()}")
@@ -471,6 +479,7 @@ async def main():
                             'patient_name': patient_name,
                             'expected_images': expected_count,
                             'folder_name': folder_name,
+                            'exam_date': details.get('exam', {}).get('date'),
                             'download_date': datetime.now().isoformat()
                         }
                         save_state(state)
@@ -568,6 +577,7 @@ async def main():
                         'patient_name': patient_name,
                         'expected_images': expected_count,
                         'folder_name': folder_name,
+                        'exam_date': details.get('exam', {}).get('date'),
                         'download_date': datetime.now().isoformat()
                     }
                     save_state(state)

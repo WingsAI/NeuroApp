@@ -154,14 +154,31 @@ function MedicalContent() {
             patientsToSync.push({ id: patientId, data: data });
           }
 
+          const rawExamDate = data.exam_date || (data.images && data.images.length > 0 ? data.images[0].upload_date : new Date().toISOString());
+          const examDateObj = new Date(rawExamDate);
+
+          let finalLocation = data.clinic_name || 'Phelcom EyeR Cloud';
+          const day = examDateObj.getDate();
+          const month = examDateObj.getMonth() + 1;
+          const year = examDateObj.getFullYear();
+
+          if (year === 2026) {
+            if (month === 1) {
+              if (day <= 15) finalLocation = 'Tauá-CE';
+              else if (day >= 27 && day <= 31) finalLocation = 'Jaci-SP';
+            } else if (month === 2) {
+              if (day >= 2 && day <= 5) finalLocation = 'Campos do Jordão';
+            }
+          }
+
           return {
             id: patientId,
             name: data.patient_name,
             cpf: isAlreadyInDb ? existingDbPatient.cpf : (data.cpf && data.cpf !== '' ? data.cpf : 'PENDENTE'),
             phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
             birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
-            examDate: data.images ? data.images[0]?.upload_date : new Date().toISOString(),
-            location: data.clinic_name || 'Phelcom EyeR Cloud',
+            examDate: rawExamDate,
+            location: finalLocation,
             gender: data.gender || '',
             technicianName: 'EyerCloud Sync',
             underlyingDiseases: data.underlying_diseases,
@@ -603,6 +620,9 @@ function MedicalContent() {
         'Condição: RH Moderada': (conditions as any).hrModerate ? 'Sim' : 'Não',
         'Condição: RH Grave': (conditions as any).hrSevere ? 'Sim' : 'Não',
         'Condição: Tumor': (conditions as any).tumor ? 'Sim' : 'Não',
+        'Condição: Re-Convocar': (conditions as any).reconvocar ? 'Sim' : 'Não',
+        'Condição: Re-Convocar Prioridade': (conditions as any).reconvocarUrgente ? 'Sim' : 'Não',
+        'Condição: Encaminhar': (conditions as any).encaminhar ? 'Sim' : 'Não',
         'Condição: Outros': (conditions as any).others ? 'Sim' : 'Não',
       };
     });
