@@ -475,11 +475,18 @@ async def main():
                         
                         folder_name = f"{safe_name}_{exam_id[:8]}"
                         
+                        # Extrai dados do paciente do exame
+                        exam_obj = details.get('exam', {})
+                        patient_obj = exam_obj.get('patient', {})
+                        
                         state['exam_details'][exam_id] = {
                             'patient_name': patient_name,
                             'expected_images': expected_count,
                             'folder_name': folder_name,
-                            'exam_date': details.get('exam', {}).get('date'),
+                            'exam_date': exam_obj.get('date'),
+                            'cpf': patient_obj.get('cpf', ''),
+                            'birthday': patient_obj.get('birthday', ''),
+                            'clinic_name': exam_obj.get('clinic', {}).get('name', '') or patient_obj.get('place', ''),
                             'download_date': datetime.now().isoformat()
                         }
                         save_state(state)
@@ -572,12 +579,24 @@ async def main():
                     
                     folder_name = f"{safe_name}_{exam_id[:8]}"
                     
+                    # Extrai dados do paciente do exame
+                    exam_obj = details.get('exam', {})
+                    patient_obj = exam_obj.get('patient', {})
+                    
+                    # Também tenta pegar dados do objeto exam original da lista
+                    clinic_name = exam_obj.get('clinic', {}).get('name', '')
+                    if not clinic_name:
+                        clinic_name = exam.get('clinicName', '') or exam.get('clinic', {}).get('name', '')
+                    
                     # Salva detalhes para o relatório
                     state['exam_details'][exam_id] = {
                         'patient_name': patient_name,
                         'expected_images': expected_count,
                         'folder_name': folder_name,
-                        'exam_date': details.get('exam', {}).get('date'),
+                        'exam_date': exam_obj.get('date'),
+                        'cpf': patient_obj.get('cpf', '') or exam.get('patient', {}).get('cpf', ''),
+                        'birthday': patient_obj.get('birthday', '') or exam.get('patient', {}).get('birthday', ''),
+                        'clinic_name': clinic_name,
                         'download_date': datetime.now().isoformat()
                     }
                     save_state(state)
