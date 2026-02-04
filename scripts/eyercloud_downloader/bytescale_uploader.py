@@ -28,8 +28,8 @@ CDN_BASE_URL = f"https://upcdn.io/{ACCOUNT_ID}/raw"
 
 # --- CONFIGURAÇÃO LOCAL ---
 DOWNLOAD_DIR = Path("downloads")
-STATE_FILE = Path("bytescale_upload_state.json")
-MAPPING_FILE = Path("bytescale_mapping.json")
+STATE_FILE = Path("bytescale_upload_progress.json")
+MAPPING_FILE = Path("bytescale_mapping_v2.json")
 
 
 def load_state():
@@ -125,8 +125,21 @@ def main():
     patient_folders = [f for f in DOWNLOAD_DIR.iterdir() if f.is_dir()]
     
     print(f"📁 Encontradas {len(patient_folders)} pastas de pacientes\n")
-    
+
+    # Carrega metadados do downloader uma única vez para performance
+    downloader_state = {}
+    downloader_state_path = Path("download_state.json")
+    if downloader_state_path.exists():
+        try:
+            with open(downloader_state_path, 'r', encoding='utf-8') as f:
+                downloader_state = json.load(f).get('exam_details', {})
+                print(f"📊 Metadados de {len(downloader_state)} exames carregados")
+        except Exception as e:
+            print(f"   ⚠️ Erro ao carregar metadados do downloader: {e}")
+        
+    patient_count = 0
     for patient_folder in sorted(patient_folders):
+        patient_count += 1
         patient_name = patient_folder.name
         
         # Extrai nome limpo do paciente (remove o ID do exame)
@@ -201,29 +214,28 @@ def main():
             # Default: Se não temos metadata, permitimos a imagem
             is_allowed_type = True
             found_metadata = False
+        for image in images:
+            total_images += 1
+            image_path = str(image.absolute())
             
-            if downloader_state_path.exists():
-                try:
-                    with open(downloader_state_path, 'r', encoding='utf-8') as f:
-                        d_state = json.load(f)
-                        
-                        # Use the exam_id extracted from folder name as the primary key
-                        # The folder name is NAME_FULLID
-                        details = d_state.get('exam_details', {}).get(exam_id)
-                        
-                        if details:
-                            img_list = details.get('image_list', [])
-                            if img_list:
-                                found_metadata = True
-                                is_allowed_type = False # Reset default to be strict
-                                for img_data in img_list:
-                                    if img_data['uuid'] == image_uuid:
-                                        img_type = img_data.get('type')
-                                        if img_type in ['COLOR', 'ANTERIOR']:
-                                            is_allowed_type = True
-                                        break
-                except Exception:
-                    pass
+            # Metadata cross-reference for filtering
+            image_uuid = image.stem
+            is_allowed_type = True
+            found_metadata = False
+            img_type = 'UNKNOWN'
+            
+            details = downloader_state.get(exam_id)
+            if details:
+                img_list = details.get('image_list', [])
+                if img_list:
+                    found_metadata = True
+                    is_allowed_type = False
+                    for img_data in img_list:
+                        if img_data['uuid'] == image_uuid:
+                            img_type = img_data.get('type')
+                            if img_type in ['COLOR', 'ANTERIOR']:
+                                is_allowed_type = True
+                            break
 
             # If we explicitly found metadata and it's NOT an allowed type, skip it
             if not is_allowed_type:
@@ -250,7 +262,7 @@ def main():
                 # Adiciona ao mapeamento
                 patient_data['images'].append({
                     'filename': image.name,
-                    'type': img_type if found_metadata else 'UNKNOWN',
+                    'type': img_type,
                     'local_path': image_path,
                     'bytescale_path': result.get('filePath'),
                     'bytescale_url': result.get('fileUrl'),
@@ -258,10 +270,16 @@ def main():
                 })
                 
                 total_uploaded += 1
-                save_state(state)
             else:
                 total_errors += 1
         
+        # Salva o estado após cada paciente (menos frequente que por imagem)
+        if not args.dry_run:
+            save_state(state)
+            
+            # Salva o mapping periodicamente para não perder tudo se cair
+            if patient_count % 20 == 0:
+                save_mapping(state)
         print()
     
     # Salva mapeamento final

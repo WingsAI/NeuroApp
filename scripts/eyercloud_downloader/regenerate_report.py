@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Arquivos
-BYTESCALE_MAPPING = Path("bytescale_mapping.json")
+BYTESCALE_MAPPING = Path("bytescale_mapping_final.json")
 CSV_REPORT_FILE = Path("relatorio_downloads.csv")
 XLSX_REPORT_FILE = Path("relatorio_downloads.xlsx")
 DOWNLOAD_DIR = Path("downloads")

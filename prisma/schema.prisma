@@ -84,7 +84,7 @@ model PatientReferral {
 
 model HealthUnit {
   id          String   @id @default(cuid())
-  name        String
+  name        String   @unique
   address     String
   email       String
   phone       String
