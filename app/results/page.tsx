@@ -38,7 +38,6 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
   };
 
   return (
-  return (
     <div className="bg-white w-[1000px] mx-auto">
       {/* PAGE 1: Identificação e Imagens */}
       <div id="report-page-1" className="p-16 min-h-[1400px] space-y-12 border-b border-dashed border-sandstone-200 print:border-0">
