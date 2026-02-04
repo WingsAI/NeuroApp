@@ -576,13 +576,34 @@ function MedicalContent() {
 
       const conditions = p.report?.diagnosticConditions || {};
 
+      // Formatar CPF para exibição
+      const formatCpfForExport = (cpf: string) => {
+        if (!cpf || cpf.startsWith('AUTO-') || cpf.startsWith('CONFLICT-') || cpf === 'PENDENTE' || cpf.trim() === '') {
+          return 'Não informado';
+        }
+        const numeric = cpf.replace(/\D/g, '');
+        if (numeric.length === 11) {
+          return numeric.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        }
+        return cpf;
+      };
+
+      // Formatar clínica/localização
+      const formatClinicForExport = (location: string) => {
+        if (!location || location.trim() === '' || location === 'Phelcom EyeR Cloud') {
+          return 'Não informado';
+        }
+        return location.trim();
+      };
+
       return {
         // Dados do Paciente
         'Nome do Paciente': p.name,
-        'CPF': p.cpf,
+        'CPF': formatCpfForExport(p.cpf),
+        'Data de Nascimento': p.birthDate ? formatDate(p.birthDate) : 'Não informado',
         'Telefone': p.phone || 'N/A',
         'Data do Exame': formatDate(p.examDate),
-        'Unidade/Localização': p.location,
+        'Unidade/Localização': formatClinicForExport(p.location),
         'Status': p.status === 'pending' ? 'Pendente' : p.status === 'in_analysis' ? 'Em Análise' : 'Concluído',
 
         // Dados do Médico e Laudo
