@@ -1,0 +1,1 @@
+ALTER TABLE "PatientReferral" ADD COLUMN IF NOT EXISTS "examId" TEXT;

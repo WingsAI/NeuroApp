@@ -1,0 +1,2 @@
+ALTER TABLE "ExamImage" ADD CONSTRAINT "ExamImage_examId_fkey" 
+    FOREIGN KEY ("examId") REFERENCES "Exam"("id") ON DELETE CASCADE ON UPDATE CASCADE;

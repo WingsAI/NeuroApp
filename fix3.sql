@@ -1,0 +1,1 @@
+ALTER TABLE "MedicalReport" ADD COLUMN IF NOT EXISTS "examId" TEXT;

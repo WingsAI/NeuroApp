@@ -210,49 +210,62 @@ export async function createPatient(formData: FormData) {
 
 export async function getPatientsAction() {
     await checkAuth();
+
+    // Busca todos os pacientes com seus exames
     const patients = await prisma.patient.findMany({
         include: {
-            images: true,
-            report: true,
-            referral: true,
+            exams: {
+                include: {
+                    images: true,
+                    report: true,
+                    referral: true,
+                },
+                orderBy: { examDate: 'desc' },
+            },
         },
         orderBy: { createdAt: 'desc' },
     });
 
     const mappedPatients = await Promise.all(patients.map(async (p: any) => {
         try {
-            const imagesWithUrls = await Promise.all(p.images.map(async (img: any) => ({
-                ...img,
-                data: await getSignedFileUrl(img.url),
-                uploadedAt: img.uploadedAt?.toISOString?.() || new Date(img.uploadedAt || Date.now()).toISOString(),
-            })));
+            // Mapeia cada exame do paciente
+            const examsWithImages = await Promise.all(p.exams.map(async (exam: any) => {
+                const imagesWithUrls = await Promise.all((exam.images || []).map(async (img: any) => ({
+                    ...img,
+                    data: await getSignedFileUrl(img.url),
+                    uploadedAt: img.uploadedAt?.toISOString?.() || new Date(img.uploadedAt || Date.now()).toISOString(),
+                })));
+
+                return {
+                    ...exam,
+                    examDate: exam.examDate?.toISOString?.() || new Date(exam.examDate || Date.now()).toISOString(),
+                    createdAt: exam.createdAt?.toISOString?.() || new Date(exam.createdAt || Date.now()).toISOString(),
+                    images: imagesWithUrls,
+                    report: exam.report ? {
+                        ...exam.report,
+                        diagnosticConditions: exam.report.diagnosticConditions as any,
+                        completedAt: exam.report.completedAt?.toISOString?.() || new Date(exam.report.completedAt || Date.now()).toISOString(),
+                    } : undefined,
+                    referral: exam.referral ? {
+                        ...exam.referral,
+                        referralDate: exam.referral.referralDate?.toISOString?.() || new Date(exam.referral.referralDate || Date.now()).toISOString(),
+                    } : undefined,
+                };
+            }));
 
             return {
                 ...p,
-                birthDate: p.birthDate?.toISOString?.() || new Date(p.birthDate || Date.now()).toISOString(),
-                examDate: p.examDate?.toISOString?.() || new Date(p.examDate || Date.now()).toISOString(),
+                birthDate: p.birthDate?.toISOString?.() || null,
                 createdAt: p.createdAt?.toISOString?.() || new Date(p.createdAt || Date.now()).toISOString(),
-                images: imagesWithUrls,
-                report: p.report ? {
-                    ...p.report,
-                    doctorCRM: p.report.doctorCRM,
-                    diagnosticConditions: p.report.diagnosticConditions as any,
-                    completedAt: p.report.completedAt?.toISOString?.() || new Date(p.report.completedAt || Date.now()).toISOString(),
-                } : undefined,
-                referral: p.referral ? {
-                    ...p.referral,
-                    referralDate: p.referral.referralDate?.toISOString?.() || new Date(p.referral.referralDate || Date.now()).toISOString(),
-                } : undefined,
+                exams: examsWithImages,
             } as any;
         } catch (e) {
             console.error('Error mapping patient:', p.id, e);
-            // Return a minimally mapped patient object if mapping fails for one
             return {
                 ...p,
-                birthDate: String(p.birthDate),
-                examDate: String(p.examDate),
+                birthDate: String(p.birthDate || ''),
                 createdAt: String(p.createdAt),
-                images: [],
+                exams: [],
             } as any;
         }
     }));
@@ -260,12 +273,14 @@ export async function getPatientsAction() {
     return mappedPatients;
 }
 
-export async function updatePatientAction(id: string, updates: any) {
+// Atualiza um exame específico (por examId) - usado para laudos e encaminhamentos
+export async function updateExamAction(examId: string, updates: any) {
     await checkAuth();
-    // Handle specific updates like report or referral
+
+    // Handle report update
     if (updates.report) {
         await prisma.medicalReport.upsert({
-            where: { patientId: id },
+            where: { examId: examId },
             update: {
                 doctorName: updates.report.doctorName,
                 doctorCRM: updates.report.doctorCRM,
@@ -286,16 +301,17 @@ export async function updatePatientAction(id: string, updates: any) {
                 suggestedConduct: updates.report.suggestedConduct,
                 diagnosticConditions: updates.report.diagnosticConditions,
                 selectedImages: updates.report.selectedImages,
-                patientId: id,
+                examId: examId,
                 completedAt: new Date(updates.report.completedAt || undefined),
             }
         });
         delete updates.report;
     }
 
+    // Handle referral update
     if (updates.referral) {
         await prisma.patientReferral.upsert({
-            where: { patientId: id },
+            where: { examId: examId },
             update: {
                 referredBy: updates.referral.referredBy,
                 specialty: updates.referral.specialty,
@@ -317,16 +333,19 @@ export async function updatePatientAction(id: string, updates: any) {
                 outcomeDate: updates.referral.outcomeDate ? new Date(updates.referral.outcomeDate) : undefined,
                 scheduledDate: updates.referral.scheduledDate ? new Date(updates.referral.scheduledDate) : undefined,
                 status: updates.referral.status,
-                patientId: id,
+                examId: examId,
             }
         });
         delete updates.referral;
     }
 
-    await prisma.patient.update({
-        where: { id },
-        data: updates,
-    });
+    // Update exam status if provided
+    if (updates.status) {
+        await prisma.exam.update({
+            where: { id: examId },
+            data: { status: updates.status },
+        });
+    }
 
     revalidatePath('/');
     revalidatePath('/results');
@@ -335,48 +354,61 @@ export async function updatePatientAction(id: string, updates: any) {
     revalidatePath('/analytics');
 }
 
+// Mantém compatibilidade com código antigo - redireciona para updateExamAction
+export async function updatePatientAction(id: string, updates: any) {
+    // O id passado é na verdade o examId no novo modelo
+    return updateExamAction(id, updates);
+}
+
 export async function getAnalyticsAction(): Promise<AnalyticsData> {
     await checkAuth();
-    const patients = await prisma.patient.findMany({
+
+    // Busca todos os exames com imagens e reports
+    const exams = await prisma.exam.findMany({
         include: {
             images: true,
             report: true,
+            patient: true,
         }
     });
 
+    // Conta pacientes únicos
+    const uniquePatientIds = new Set(exams.map((e: any) => e.patientId));
+
     const todayStr = new Date().toISOString().split('T')[0];
 
-    const totalPatients = patients.length;
-    const totalImages = patients.reduce((sum: number, p: any) => sum + p.images.length, 0);
-    const pendingReports = patients.filter((p: any) => p.status === 'pending').length;
-    const completedReports = patients.filter((p: any) => p.status === 'completed').length;
+    const totalPatients = uniquePatientIds.size;
+    const totalExams = exams.length;
+    const totalImages = exams.reduce((sum: number, e: any) => sum + e.images.length, 0);
+    const pendingReports = exams.filter((e: any) => e.status === 'pending').length;
+    const completedReports = exams.filter((e: any) => e.status === 'completed').length;
 
-    const patientsToday = patients.filter((p: any) => p.createdAt.toISOString().split('T')[0] === todayStr).length;
-    const imagesToday = patients
-        .filter((p: any) => p.createdAt.toISOString().split('T')[0] === todayStr)
-        .reduce((sum: number, p: any) => sum + p.images.length, 0);
+    const examsToday = exams.filter((e: any) => e.createdAt.toISOString().split('T')[0] === todayStr).length;
+    const imagesToday = exams
+        .filter((e: any) => e.createdAt.toISOString().split('T')[0] === todayStr)
+        .reduce((sum: number, e: any) => sum + e.images.length, 0);
 
     // Time calculation
-    const completedPatients = patients.filter((p: any) => p.status === 'completed' && p.report);
-    const averageProcessingTime = completedPatients.length > 0
-        ? completedPatients.reduce((sum: number, p: any) => {
-            const created = p.createdAt.getTime();
-            const completed = p.report!.completedAt.getTime();
+    const completedExams = exams.filter((e: any) => e.status === 'completed' && e.report);
+    const averageProcessingTime = completedExams.length > 0
+        ? completedExams.reduce((sum: number, e: any) => {
+            const created = e.createdAt.getTime();
+            const completed = e.report!.completedAt.getTime();
             return sum + (completed - created) / (1000 * 60 * 60);
-        }, 0) / completedPatients.length
+        }, 0) / completedExams.length
         : 0;
 
     // Productivity by region (location)
-    const productivityByRegion = patients.reduce((acc: any, p: any) => {
-        const region = p.location || 'Não Informado';
+    const productivityByRegion = exams.reduce((acc: any, e: any) => {
+        const region = e.location || 'Não Informado';
         acc[region] = (acc[region] || 0) + 1;
         return acc;
     }, {});
 
     // Productivity by professional (doctor who completed the report)
-    const productivityByProfessional = patients.reduce((acc: any, p: any) => {
-        if (p.status === 'completed' && p.report) {
-            const doctor = p.report.doctorName;
+    const productivityByProfessional = exams.reduce((acc: any, e: any) => {
+        if (e.status === 'completed' && e.report) {
+            const doctor = e.report.doctorName;
             acc[doctor] = (acc[doctor] || 0) + 1;
         }
         return acc;
@@ -384,10 +416,12 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
 
     return {
         totalPatients,
+        totalExams,
         totalImages,
         pendingReports,
         completedReports,
-        patientsToday,
+        patientsToday: 0, // Seria necessário contar pacientes criados hoje
+        examsToday,
         imagesToday,
         averageProcessingTime: Math.round(averageProcessingTime * 10) / 10,
         productivityByRegion,

@@ -1,0 +1,2 @@
+ALTER TABLE "Exam" ADD CONSTRAINT "Exam_patientId_fkey" 
+    FOREIGN KEY ("patientId") REFERENCES "Patient"("id") ON DELETE CASCADE ON UPDATE CASCADE;

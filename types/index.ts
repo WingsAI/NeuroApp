@@ -1,35 +1,62 @@
+// Representa a pessoa física (paciente único)
 export interface Patient {
   id: string;
   name: string;
-  cpf: string;
-  birthDate: string;
-  examDate: string;
-  location: string;
-  technicianName: string;
+  cpf?: string;
+  birthDate?: string;
   gender?: string;
   ethnicity?: string;
   education?: string;
   occupation?: string;
   phone?: string;
-  images: PatientImage[];
-  status: 'pending' | 'in_analysis' | 'completed';
-  report?: MedicalReport;
-  referral?: PatientReferral;
   underlyingDiseases?: any;
   ophthalmicDiseases?: any;
   createdAt: string;
+
+  // Múltiplos exames/visitas do paciente
+  exams: Exam[];
 }
 
+// Representa cada visita/exame do paciente
+export interface Exam {
+  id: string;
+  examDate: string;
+  location: string;
+  technicianName: string;
+  status: 'pending' | 'in_analysis' | 'completed';
+  eyerCloudId?: string;
+  createdAt: string;
+
+  patientId: string;
+  patient?: Patient;
+
+  images: ExamImage[];
+  report?: MedicalReport;
+  referral?: PatientReferral;
+}
+
+export interface ExamImage {
+  id: string;
+  url: string;
+  data?: string; // URL assinada ou base64 para exibição
+  fileName: string;
+  type?: string; // COLOR ou ANTERIOR
+  uploadedAt: string;
+  examId: string;
+}
+
+// Mantido para retrocompatibilidade durante a transição
 export interface PatientImage {
   id: string;
-  data: string; // base64
+  data: string;
   fileName: string;
   uploadedAt: string;
+  type?: string;
 }
 
 export interface MedicalReport {
   id: string;
-  patientId: string;
+  examId: string;
   doctorName: string;
   doctorCRM?: string;
   findings: string;
@@ -58,11 +85,14 @@ export interface DiagnosticConditions {
   reconvocar: boolean;
   encaminhar: boolean;
   others: boolean;
+  // Novos campos para limitação de qualidade
+  odLimitationReason?: string;
+  oeLimitationReason?: string;
 }
 
 export interface PatientReferral {
   id: string;
-  patientId: string;
+  examId: string;
   referredBy: string;
   referralDate: string;
   specialty: string;
@@ -77,15 +107,18 @@ export interface PatientReferral {
 
 export interface AnalyticsData {
   totalPatients: number;
+  totalExams: number;
   totalImages: number;
   pendingReports: number;
   completedReports: number;
   patientsToday: number;
+  examsToday: number;
   imagesToday: number;
   averageProcessingTime: number;
   productivityByRegion?: Record<string, number>;
   productivityByProfessional?: Record<string, number>;
 }
+
 export interface HealthUnit {
   id: string;
   name: string;
@@ -95,4 +128,10 @@ export interface HealthUnit {
   responsible: string;
   createdAt: string;
   updatedAt: string;
+}
+
+// Helper type para exibição de paciente com exame selecionado
+export interface PatientWithSelectedExam extends Patient {
+  selectedExam?: Exam;
+  totalExams: number;
 }

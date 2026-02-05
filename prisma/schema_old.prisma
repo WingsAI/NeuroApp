@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id             String           @id @default(cuid())
+  name           String
+  cpf            String           @unique
+  birthDate      DateTime
+  examDate       DateTime
+  location       String
+  technicianName String
+  gender         String?
+  ethnicity      String?
+  education      String?
+  occupation     String?
+  phone          String?
+  status         String           @default("pending") // pending, in_analysis, completed
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  
+  underlyingDiseases Json?
+  ophthalmicDiseases Json?
+  
+  images         PatientImage[]
+  report         MedicalReport?
+  referral       PatientReferral?
+}
+
+model PatientImage {
+  id         String   @id @default(cuid())
+  url        String   // URL to S3 bucket
+  fileName   String
+  type       String?  // COLOR or ANTERIOR
+  uploadedAt DateTime @default(now())
+  
+  patientId  String
+  patient    Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model MedicalReport {
+  id                   String   @id @default(cuid())
+  doctorName           String
+  doctorCRM            String?  // New field for doctor's CRM
+  findings             String
+  diagnosis            String
+  recommendations      String
+  suggestedConduct     String?  // New field for suggested conduct
+  diagnosticConditions Json     // Store the DiagnosticConditions object
+  selectedImages       Json?    // Store the selectedImages object {od, oe}
+  completedAt          DateTime @default(now())
+  
+  syncedToDrive        Boolean  @default(false)
+  driveFileId          String?
+  
+  patientId            String   @unique
+  patient              Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model PatientReferral {
+  id           String   @id @default(cuid())
+  referredBy   String
+  referralDate DateTime @default(now())
+  specialty          String
+  urgency            String   // routine, urgent, emergency
+  notes              String
+  specializedService String?  // Service in Atenção Especializada
+  outcome            String?  // Outcome/Desfecho
+  outcomeDate        DateTime?
+  scheduledDate      DateTime?
+  status             String   @default("pending") // pending, scheduled, completed, outcome_defined
+  
+  patientId    String   @unique
+  patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model HealthUnit {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  address     String
+  email       String
+  phone       String
+  responsible String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
