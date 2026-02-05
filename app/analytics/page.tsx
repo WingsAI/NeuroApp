@@ -206,7 +206,7 @@ export default function Analytics() {
                   </div>
                   <h4 className="text-4xl font-serif font-bold mb-2">{stats.totalImages}</h4>
                   <p className="text-sm font-medium text-white/70 leading-relaxed uppercase tracking-wider">
-                    Média de {avgImagesPerPatient} imagens por paciente
+                    Média de {avgImagesPerExam} imagens por exame
                   </p>
                 </div>
               </div>
