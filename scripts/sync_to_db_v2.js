@@ -19,7 +19,7 @@ async function sync() {
     console.log('🚀 Sincronização para Novo Modelo Patient/Exam\n');
 
     // 1. Carrega o arquivo de mapeamento
-    const mappingPath = path.join(process.cwd(), 'bytescale_mapping.json');
+    const mappingPath = path.join(process.cwd(), 'scripts', 'eyercloud_downloader', 'bytescale_mapping_cleaned.json');
     if (!fs.existsSync(mappingPath)) {
         console.error('❌ bytescale_mapping.json não encontrado!');
         return;
@@ -128,7 +128,7 @@ async function sync() {
             // Cria/atualiza cada exame do paciente
             for (const examData of patientData.exams) {
                 // Verifica se o exame já existe pelo eyerCloudId
-                let exam = await prisma.exam.findUnique({
+                let exam = await prisma.exam.findFirst({
                     where: { eyerCloudId: examData.eyerCloudId }
                 });
 
