@@ -19,9 +19,8 @@ EyerCloud (site) → downloader_playwright.py → downloads/ → bytescale_uploa
 |---------|-------------|-----------|
 | `downloader_playwright.py` | `scripts/eyercloud_downloader/` | Baixa imagens do EyerCloud |
 | `bytescale_uploader.py` | `scripts/eyercloud_downloader/` | Faz upload para o Bytescale |
-| `sync_to_db.js` | `scripts/` | Sincroniza bytescale_mapping.json para o DB |
-| `download_state.json` | `scripts/eyercloud_downloader/` | Estado dos downloads (exames baixados) |
-| `bytescale_mapping.json` | `scripts/eyercloud_downloader/` | Mapeamento de pacientes e URLs no Bytescale |
+| `bytescale_mapping_cleaned.json` | `scripts/eyercloud_downloader/` | Mapeamento limpo (sem duplicatas de IDs curtos) |
+| `sync_to_db_v2.js` | `scripts/` | Sincroniza usando o novo modelo Patient/Exam |
 | `auth_state.json` | `scripts/eyercloud_downloader/` | Cookies de autenticação do EyerCloud |
 
 ## Problemas Comuns e Soluções
@@ -85,18 +84,37 @@ copy scripts\eyercloud_downloader\bytescale_mapping.json bytescale_mapping.json
 node scripts/sync_to_db.js
 ```
 
-### 6. Discrepância na Contagem de Pacientes
+### 6. Discrepância na Contagem de Pacientes (Duplicatas)
 
-**Diagnóstico:**
+**Causa:** O EyerCloud às vezes gera dois IDs para o mesmo exame (um curto de ~8 chars e um longo). O uploader acaba registrando ambos.
+
+**Solução (Limpeza de Duplicatas):**
 ```powershell
-# Contar no EyerCloud (via relatório)
-python downloader_playwright.py --report
+cd scripts/eyercloud_downloader
+python ../clean_mapping.py  # Gera o bytescale_mapping_cleaned.json
+python regenerate_report.py  # Atualiza as planilhas xlsx/csv
+```
 
-# Contar no bytescale_mapping.json
-python -c "import json; d=json.load(open('bytescale_mapping.json')); print('Pacientes:', len(d))"
+### 7. Registros "Fantasma" ou Órfãos no Banco
 
-# Contar no banco de dados (via Prisma)
-node -e "const {PrismaClient}=require('@prisma/client'); new PrismaClient().patient.count().then(c=>console.log('DB:',c))"
+**Causa:** Restos de sincronizações antigas ou falhas durante a migração de modelos de dados.
+
+**Solução (Limpeza de Banco):**
+```powershell
+node scripts/real_cleanup_v2.js
+```
+Este script remove exames que não estão no mapping limpo e pacientes que ficaram sem nenhum exame vinculado.
+
+### 8. Analytics com Números Errados
+
+**Solução:** Sempre rode a sequência: Limpeza de Mapping -> Limpeza de Banco -> Novo Sync.
+```powershell
+# 1. Limpa mapping
+python scripts/clean_mapping.py
+# 2. Limpa banco
+node scripts/real_cleanup_v2.js
+# 3. Sincroniza
+node scripts/sync_to_db_v2.js --execute
 ```
 
 ## Workflow Completo de Sincronização
@@ -124,16 +142,21 @@ python downloader_playwright.py --retry
 python bytescale_uploader.py
 ```
 
-### Passo 4: Sincronizar com Banco de Dados
+### Passo 4: Limpar Duplicatas e Sincronizar
 ```powershell
+# 4.1 Limpar duplicatas de IDs curtos
+cd scripts/eyercloud_downloader
+python ../clean_mapping.py
+
+# 4.2 Sincronizar com o banco usando o novo modelo
 cd ../..
-copy scripts\eyercloud_downloader\bytescale_mapping.json bytescale_mapping.json
-node scripts/sync_to_db.js
+node scripts/sync_to_db_v2.js --execute
 ```
 
-### Passo 5: Verificar Resultado
+### Passo 5: Atualizar Planilhas e Relatórios
 ```powershell
-python scripts/eyercloud_downloader/downloader_playwright.py --report
+cd scripts/eyercloud_downloader
+python regenerate_report.py
 ```
 
 ## Lista de Pacientes com Problemas Atuais

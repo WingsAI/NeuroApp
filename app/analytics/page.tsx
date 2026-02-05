@@ -50,18 +50,18 @@ export default function Analytics() {
   };
 
   // Calculate completion rate
-  const completionRate = stats.totalPatients > 0
-    ? Math.round((stats.completedReports / stats.totalPatients) * 100)
+  const completionRate = stats.totalExams > 0
+    ? Math.round((stats.completedReports / stats.totalExams) * 100)
     : 0;
 
   // Calculate pending rate
-  const pendingRate = stats.totalPatients > 0
-    ? Math.round((stats.pendingReports / stats.totalPatients) * 100)
+  const pendingRate = stats.totalExams > 0
+    ? Math.round((stats.pendingReports / stats.totalExams) * 100)
     : 0;
 
   // Average images per patient
-  const avgImagesPerPatient = stats.totalPatients > 0
-    ? (stats.totalImages / stats.totalPatients).toFixed(1)
+  const avgImagesPerExam = stats.totalExams > 0
+    ? (stats.totalImages / stats.totalExams).toFixed(1)
     : '0';
 
   return (
@@ -95,17 +95,17 @@ export default function Analytics() {
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <StatCard
-              title="Total de Pacientes"
-              value={stats.totalPatients}
-              icon={Users}
-              subtitle={`${stats.patientsToday} registrados hoje`}
+              title="Total de Exames"
+              value={stats.totalExams}
+              icon={Activity}
+              subtitle={`${stats.totalPatients} pacientes únicos`}
               color="cardinal"
             />
             <StatCard
               title="Total de Imagens"
               value={stats.totalImages}
               icon={LucideImage}
-              subtitle={`~${avgImagesPerPatient} por paciente`}
+              subtitle={`~${avgImagesPerExam} por exame`}
               color="blue"
             />
             <StatCard
