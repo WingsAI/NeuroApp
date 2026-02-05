@@ -12,10 +12,10 @@ import { getPatientsAction, updatePatientAction } from '@/app/actions/patients';
 import { Patient } from '@/types';
 
 export default function Referrals() {
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
+  const [patients, setPatients] = useState<any[]>([]);
+  const [filteredPatients, setFilteredPatients] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<any | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [referralForm, setReferralForm] = useState({
@@ -38,12 +38,27 @@ export default function Referrals() {
   }, [searchTerm, patients]);
 
   const loadPatients = async () => {
-    const allPatients = await getPatientsAction();
-    // Only show patients that are completed (by doctor) but either have no referral 
-    // OR have a referral that hasn't been scheduled yet.
-    const pendingScheduling = (allPatients as any).filter(
-      (p: Patient) => p.status === 'completed' && p.report && (!p.referral || !p.referral.scheduledDate)
-    );
+    const allPatients = await getPatientsAction() as any[];
+
+    // In the new model, we want to find EXAMS that are completed but not yet scheduled.
+    // We flatten the list so each row in this table is a visit (Exam).
+    const pendingScheduling: any[] = [];
+
+    allPatients.forEach(patient => {
+      patient.exams.forEach((exam: any) => {
+        if (exam.status === 'completed' && exam.report && (!exam.referral || !exam.referral.scheduledDate)) {
+          pendingScheduling.push({
+            ...patient, // Patient demograhics
+            ...exam,    // Exam details (id, status, referral, report, location, examDate)
+            patientName: patient.name,
+            patientCpf: patient.cpf,
+            examId: exam.id,
+            patientId: patient.id
+          });
+        }
+      });
+    });
+
     setPatients(pendingScheduling);
   };
 
@@ -55,9 +70,9 @@ export default function Referrals() {
 
     const term = searchTerm.toLowerCase();
     const filtered = patients.filter(
-      (p: Patient) =>
+      (p: any) =>
         p.name.toLowerCase().includes(term) ||
-        p.cpf.includes(term) ||
+        (p.cpf && p.cpf.includes(term)) ||
         p.location.toLowerCase().includes(term)
     );
     setFilteredPatients(filtered);
@@ -82,11 +97,11 @@ export default function Referrals() {
     if (selectedIds.length === filteredPatients.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(filteredPatients.map(p => p.id));
+      setSelectedIds(filteredPatients.map(p => p.examId));
     }
   };
 
-  const handleOpenReferral = (patient: Patient) => {
+  const handleOpenReferral = (patient: any) => {
     setSelectedPatient(patient);
     // Pre-fill form if referral already exists
     if (patient.referral) {
@@ -132,7 +147,10 @@ export default function Referrals() {
       status: referralForm.scheduledDate ? 'scheduled' : 'pending',
     };
 
-    await updatePatientAction(selectedPatient.id, {
+    // Use updateExamAction instead of updatePatientAction
+    const { updateExamAction } = await import('@/app/actions/patients');
+
+    await updateExamAction(selectedPatient.examId, {
       referral: referralData,
     });
 
@@ -170,7 +188,8 @@ export default function Referrals() {
         status: 'scheduled',
       };
 
-      await updatePatientAction(id, { referral: referralData });
+      const { updateExamAction } = await import('@/app/actions/patients');
+      await updateExamAction(patient.examId, { referral: referralData });
     }
 
     setSuccess(true);

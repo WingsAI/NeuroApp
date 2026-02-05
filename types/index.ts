@@ -15,6 +15,15 @@ export interface Patient {
 
   // Múltiplos exames/visitas do paciente
   exams: Exam[];
+
+  // Campos para retrocompatibilidade (achatam o último exame)
+  status?: 'pending' | 'in_analysis' | 'completed';
+  examDate?: string;
+  location?: string;
+  technicianName?: string;
+  images?: any[];
+  report?: MedicalReport;
+  referral?: PatientReferral;
 }
 
 // Representa cada visita/exame do paciente
@@ -56,7 +65,8 @@ export interface PatientImage {
 
 export interface MedicalReport {
   id: string;
-  examId: string;
+  examId?: string;
+  patientId?: string;
   doctorName: string;
   doctorCRM?: string;
   findings: string;
@@ -92,7 +102,8 @@ export interface DiagnosticConditions {
 
 export interface PatientReferral {
   id: string;
-  examId: string;
+  examId?: string;
+  patientId?: string;
   referredBy: string;
   referralDate: string;
   specialty: string;

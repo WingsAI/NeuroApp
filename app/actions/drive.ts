@@ -21,7 +21,11 @@ export async function syncReportsToDriveAction() {
                 syncedToDrive: false,
             },
             include: {
-                patient: true,
+                exam: {
+                    include: {
+                        patient: true,
+                    },
+                },
             },
         });
 
@@ -59,13 +63,16 @@ export async function syncReportsToDriveAction() {
 
         for (const report of reports) {
             try {
-                console.log(`[DRIVE] Processando PDF para: ${report.patient.name}`);
+                const patientName = report.exam?.patient?.name || 'Paciente';
+                const examId = report.examId;
+
+                console.log(`[DRIVE] Processando PDF para: ${patientName}`);
 
                 const page = await browser.newPage();
 
                 // Use a URL base do app (precisa estar configurada no env)
                 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-                await page.goto(`${baseUrl}/api/print/${report.patient.id}`, {
+                await page.goto(`${baseUrl}/api/print/${examId}`, {
                     waitUntil: 'networkidle0',
                 });
 
@@ -79,7 +86,7 @@ export async function syncReportsToDriveAction() {
                 await page.close();
 
                 // 4. Upload to Google Drive
-                const fileName = `LAUDO_${report.patient.name.toUpperCase().replace(/\s+/g, '_')}_${report.id.slice(-6)}.pdf`;
+                const fileName = `LAUDO_${patientName.toUpperCase().replace(/\s+/g, '_')}_${report.id.slice(-6)}.pdf`;
 
                 const response = await drive.files.create({
                     requestBody: {
@@ -107,7 +114,8 @@ export async function syncReportsToDriveAction() {
                 syncedCount++;
                 console.log(`[DRIVE] ✅ Sucesso: ${fileName}`);
             } catch (error) {
-                console.error(`[DRIVE] ❌ Falha ao processar ${report.patient.name}:`, error);
+                const patientName = report.exam?.patient?.name || 'Paciente';
+                console.error(`[DRIVE] ❌ Falha ao processar ${patientName}:`, error);
             }
         }
 

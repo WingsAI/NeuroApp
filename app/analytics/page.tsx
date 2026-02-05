@@ -9,10 +9,12 @@ import { AnalyticsData } from '@/types';
 export default function Analytics() {
   const [stats, setStats] = useState<AnalyticsData>({
     totalPatients: 0,
+    totalExams: 0,
     totalImages: 0,
     pendingReports: 0,
     completedReports: 0,
     patientsToday: 0,
+    examsToday: 0,
     imagesToday: 0,
     averageProcessingTime: 0,
   });

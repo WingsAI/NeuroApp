@@ -25,6 +25,7 @@ export const mockPatients: Patient[] = [
     technicianName: 'Carlos Mendes',
     status: 'pending',
     createdAt: '2024-11-15T09:30:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-1-1',
@@ -56,6 +57,7 @@ export const mockPatients: Patient[] = [
     technicianName: 'Ana Paula Costa',
     status: 'pending',
     createdAt: '2024-11-16T10:15:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-2-1',
@@ -87,6 +89,7 @@ export const mockPatients: Patient[] = [
     technicianName: 'Roberto Lima',
     status: 'pending',
     createdAt: '2024-11-17T14:20:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-3-1',
@@ -118,6 +121,7 @@ export const mockPatients: Patient[] = [
     technicianName: 'Fernanda Souza',
     status: 'pending',
     createdAt: '2024-11-18T08:45:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-4-1',
@@ -153,6 +157,7 @@ export const mockPatientsForReferrals: Patient[] = [
     technicianName: 'Juliana Martins',
     status: 'completed',
     createdAt: '2024-11-10T10:30:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-ref-1-1',
@@ -209,6 +214,7 @@ export const mockPatientsForReferrals: Patient[] = [
     technicianName: 'Marcos Pereira',
     status: 'completed',
     createdAt: '2024-11-12T08:15:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-ref-2-1',
@@ -265,6 +271,7 @@ export const mockPatientsForReferrals: Patient[] = [
     technicianName: 'Sandra Oliveira',
     status: 'completed',
     createdAt: '2024-11-14T15:20:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-ref-3-1',
@@ -325,6 +332,7 @@ export const mockPatientsWithReferrals: Patient[] = [
     technicianName: 'Ricardo Santos',
     status: 'completed',
     createdAt: '2024-11-05T09:00:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-result-1-1',
@@ -391,6 +399,7 @@ export const mockPatientsWithReferrals: Patient[] = [
     technicianName: 'Carla Mendes',
     status: 'completed',
     createdAt: '2024-11-08T11:30:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-result-2-1',
@@ -457,6 +466,7 @@ export const mockPatientsWithReferrals: Patient[] = [
     technicianName: 'Felipe Barbosa',
     status: 'completed',
     createdAt: '2024-11-09T10:00:00.000Z',
+    exams: [],
     images: [
       {
         id: 'img-result-3-1',

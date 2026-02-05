@@ -7,20 +7,25 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const patient = await prisma.patient.findUnique({
+  // O id agora é o examId
+  const exam = await prisma.exam.findUnique({
     where: { id: params.id },
     include: {
+      patient: true,
       images: true,
       report: true,
       referral: true,
     },
   });
 
-  if (!patient || !patient.report) {
+  if (!exam || !exam.report) {
     return new NextResponse('Report not found', { status: 404 });
   }
 
-  const formatCPF = (cpf: string) => {
+  const patient = exam.patient;
+
+  const formatCPF = (cpf: string | null) => {
+    if (!cpf) return '---';
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   };
 
@@ -29,8 +34,8 @@ export async function GET(
     return format(new Date(date), 'dd/MM/yyyy', { locale: ptBR });
   };
 
-  const findings = JSON.parse(patient.report.findings || '{}');
-  const conditions = patient.report.diagnosticConditions as any;
+  const findings = JSON.parse(exam.report.findings || '{}');
+  const conditions = exam.report.diagnosticConditions as any;
 
   // Standalone HTML for Puppeteer
   const html = `
@@ -55,7 +60,7 @@ export async function GET(
         <!-- Header -->
         <div class="text-center space-y-3 border-b-4 border-[#8B0000] pb-6">
           <h1 class="text-3xl font-serif font-bold text-gray-900 uppercase tracking-tight">Relatório Oftalmológico</h1>
-          <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Certificação Digital NeuroApp #${patient.report.id.slice(-8).toUpperCase()}</p>
+          <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Certificação Digital NeuroApp #${exam.report.id.slice(-8).toUpperCase()}</p>
         </div>
 
         <!-- Meta -->
@@ -74,28 +79,28 @@ export async function GET(
           </div>
           <div>
             <p class="text-[9px] font-bold text-gray-400 uppercase">Data do Exame</p>
-            <p class="text-sm font-bold text-gray-900">${formatDate(patient.examDate)}</p>
+            <p class="text-sm font-bold text-gray-900">${formatDate(exam.examDate)}</p>
           </div>
           <div class="col-span-2">
             <p class="text-[9px] font-bold text-gray-400 uppercase">Localidade</p>
-            <p class="text-sm font-bold text-gray-900">${patient.location}</p>
+            <p class="text-sm font-bold text-gray-900">${exam.location}</p>
           </div>
           <div class="col-span-2 text-right">
             <p class="text-[9px] font-bold text-gray-400 uppercase">Assinado em</p>
-            <p class="text-sm font-serif font-bold italic text-gray-900">${formatDate(patient.report.completedAt)}</p>
+            <p class="text-sm font-serif font-bold italic text-gray-900">${formatDate(exam.report.completedAt)}</p>
           </div>
         </div>
 
         <!-- Images -->
         <div class="grid grid-cols-2 gap-4">
-          ${params.id && patient.images.filter(img => img.id === (patient.report as any).selectedImages?.od || img.id === (patient.report as any).selectedImages?.oe).length > 0
-      ? patient.images.filter(img => img.id === (patient.report as any).selectedImages?.od || img.id === (patient.report as any).selectedImages?.oe).map(img => `
+          ${params.id && exam.images.filter(img => img.id === (exam.report as any).selectedImages?.od || img.id === (exam.report as any).selectedImages?.oe).length > 0
+      ? exam.images.filter(img => img.id === (exam.report as any).selectedImages?.od || img.id === (exam.report as any).selectedImages?.oe).map(img => `
               <div class="border rounded-lg overflow-hidden p-2 bg-gray-50">
                 <img src="${img.url}" class="w-full aspect-[4/3] object-cover rounded shadow-inner" />
-                <p class="text-[8px] font-bold text-gray-400 uppercase mt-2 text-center">${img.id === (patient.report as any).selectedImages?.od ? 'Olho Direito (OD)' : 'Olho Esquerdo (OE)'}</p>
+                <p class="text-[8px] font-bold text-gray-400 uppercase mt-2 text-center">${img.id === (exam.report as any).selectedImages?.od ? 'Olho Direito (OD)' : 'Olho Esquerdo (OE)'}</p>
               </div>
             `).join('')
-      : patient.images.slice(0, 2).map((img, i) => `
+      : exam.images.slice(0, 2).map((img, i) => `
               <div class="border rounded-lg overflow-hidden p-2 bg-gray-50">
                 <img src="${img.url}" class="w-full aspect-[4/3] object-cover rounded shadow-inner" />
                 <p class="text-[8px] font-bold text-gray-400 uppercase mt-2 text-center">Captura ${i + 1}</p>
@@ -146,9 +151,9 @@ export async function GET(
              </section>
              <section>
                <h4 class="text-[9px] font-bold text-gray-400 uppercase border-b mb-3 pb-1">Conclusão & Conduta</h4>
-               <p class="text-sm font-serif font-bold italic text-gray-900 leading-relaxed mb-4">${patient.report.diagnosis}</p>
+               <p class="text-sm font-serif font-bold italic text-gray-900 leading-relaxed mb-4">${exam.report.diagnosis}</p>
                <div class="bg-gray-50 p-4 rounded-lg border italic text-xs text-gray-600">
-                 <strong>Conduta:</strong> ${patient.report.suggestedConduct || '-'}
+                 <strong>Conduta:</strong> ${exam.report.suggestedConduct || '-'}
                </div>
              </section>
           </div>
@@ -160,8 +165,8 @@ export async function GET(
              <p>Acesse o portal para validação via QR Code.</p>
           </div>
           <div class="text-right">
-             <p class="text-xs font-serif font-bold italic text-gray-900 underline decoration-[#8B0000]">${patient.report.doctorName}</p>
-             <p class="text-[9px] font-bold text-gray-400 uppercase">CRM: ${patient.report.doctorCRM || 'CRM-SP 177.943'}</p>
+             <p class="text-xs font-serif font-bold italic text-gray-900 underline decoration-[#8B0000]">${exam.report.doctorName}</p>
+             <p class="text-[9px] font-bold text-gray-400 uppercase">CRM: ${exam.report.doctorCRM || 'CRM-SP 177.943'}</p>
           </div>
         </div>
       </div>

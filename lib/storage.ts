@@ -52,10 +52,12 @@ export const getAnalytics = (): AnalyticsData => {
   if (typeof window === 'undefined') {
     return {
       totalPatients: 0,
+      totalExams: 0,
       totalImages: 0,
       pendingReports: 0,
       completedReports: 0,
       patientsToday: 0,
+      examsToday: 0,
       imagesToday: 0,
       averageProcessingTime: 0,
     };
@@ -74,7 +76,7 @@ const calculateAnalytics = (): AnalyticsData => {
   const patients = getPatients();
   const today = new Date().toISOString().split('T')[0];
 
-  const totalImages = patients.reduce((sum, p) => sum + p.images.length, 0);
+  const totalImages = patients.reduce((sum, p) => sum + (p.images?.length || 0), 0);
   const pendingReports = patients.filter(p => p.status === 'pending').length;
   const completedReports = patients.filter(p => p.status === 'completed').length;
 
@@ -84,24 +86,26 @@ const calculateAnalytics = (): AnalyticsData => {
 
   const imagesToday = patients
     .filter(p => p.createdAt.split('T')[0] === today)
-    .reduce((sum, p) => sum + p.images.length, 0);
+    .reduce((sum, p) => sum + (p.images?.length || 0), 0);
 
   // Calcular tempo médio de processamento (em horas)
   const completedPatients = patients.filter(p => p.status === 'completed' && p.report);
   const averageProcessingTime = completedPatients.length > 0
     ? completedPatients.reduce((sum, p) => {
-        const created = new Date(p.createdAt).getTime();
-        const completed = new Date(p.report!.completedAt).getTime();
-        return sum + (completed - created) / (1000 * 60 * 60); // converter para horas
-      }, 0) / completedPatients.length
+      const created = new Date(p.createdAt || Date.now()).getTime();
+      const completed = new Date(p.report?.completedAt || Date.now()).getTime();
+      return sum + (completed - created) / (1000 * 60 * 60); // converter para horas
+    }, 0) / completedPatients.length
     : 0;
 
   return {
     totalPatients: patients.length,
+    totalExams: patients.length, // Fallback simplificado
     totalImages,
     pendingReports,
     completedReports,
     patientsToday,
+    examsToday: patientsToday, // Fallback simplificado
     imagesToday,
     averageProcessingTime: Math.round(averageProcessingTime * 10) / 10,
   };

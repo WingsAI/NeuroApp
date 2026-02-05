@@ -23,7 +23,8 @@ export async function createPatient(formData: FormData) {
     const id = formData.get('id') as string;
     const name = formData.get('name') as string;
     const cpf = formData.get('cpf') as string;
-    const birthDate = new Date(formData.get('birthDate') as string);
+    const birthDateStr = formData.get('birthDate') as string;
+    const birthDate = birthDateStr ? new Date(birthDateStr) : null;
     const examDate = new Date(formData.get('examDate') as string);
     const location = formData.get('location') as string;
     const technicianName = formData.get('technicianName') as string;
@@ -36,60 +37,63 @@ export async function createPatient(formData: FormData) {
     const underlyingDiseases = formData.get('underlyingDiseases') ? JSON.parse(formData.get('underlyingDiseases') as string) : undefined;
     const ophthalmicDiseases = formData.get('ophthalmicDiseases') ? JSON.parse(formData.get('ophthalmicDiseases') as string) : undefined;
 
-    // Generate a unique CPF if it's missing or duplicate
-    let finalCpf = cpf;
-    if (!finalCpf || finalCpf === 'PENDENTE' || finalCpf.trim() === '' || finalCpf === 'null') {
-        finalCpf = `AUTO-${id || Math.random().toString(36).slice(2, 11)}`;
-    }
-
-    // Check if another patient (with different ID) already has this CPF
-    // We check this BEFORE the upsert to avoid the Unique Constraint error
-    const conflict = await prisma.patient.findFirst({
+    // 1. Primeiro, tenta encontrar ou criar o Patient (pessoa física)
+    // Busca por nome + data nascimento ou cria novo
+    let patient = await prisma.patient.findFirst({
         where: {
-            cpf: finalCpf,
-            id: { not: id || 'new-patient' }
+            name: name,
+            ...(birthDate ? { birthDate: birthDate } : {}),
         }
     });
 
-    if (conflict) {
-        // If there's a conflict, generate a purely unique dummy CPF
-        finalCpf = `CONFLICT-${id || ''}-${Math.random().toString(36).slice(2, 7)}`;
+    if (!patient) {
+        // Cria novo paciente
+        patient = await prisma.patient.create({
+            data: {
+                name,
+                cpf: cpf || null,
+                birthDate,
+                gender,
+                ethnicity,
+                education,
+                occupation,
+                phone,
+                underlyingDiseases,
+                ophthalmicDiseases,
+            },
+        });
+    } else {
+        // Atualiza dados do paciente existente se necessário
+        patient = await prisma.patient.update({
+            where: { id: patient.id },
+            data: {
+                cpf: cpf || patient.cpf,
+                gender: gender || patient.gender,
+                ethnicity: ethnicity || patient.ethnicity,
+                education: education || patient.education,
+                occupation: occupation || patient.occupation,
+                phone: phone || patient.phone,
+                underlyingDiseases: underlyingDiseases || patient.underlyingDiseases,
+                ophthalmicDiseases: ophthalmicDiseases || patient.ophthalmicDiseases,
+            }
+        });
     }
 
-    // Upsert patient in DB
-    const patient = await prisma.patient.upsert({
-        where: { id: id || 'new-patient' },
+    // 2. Cria o Exam (visita/exame)
+    const exam = await prisma.exam.upsert({
+        where: { id: id || 'new-exam-placeholder' },
         update: {
-            name,
-            cpf: finalCpf,
-            birthDate,
             examDate,
             location,
             technicianName,
-            gender,
-            ethnicity,
-            education,
-            occupation,
-            phone,
-            underlyingDiseases,
-            ophthalmicDiseases,
         },
         create: {
             id: id || undefined,
-            name,
-            cpf: finalCpf,
-            birthDate,
             examDate,
             location,
             technicianName,
-            gender,
-            ethnicity,
-            education,
-            occupation,
-            phone,
-            underlyingDiseases,
-            ophthalmicDiseases,
             status: 'pending',
+            patientId: patient.id,
         },
     });
 
@@ -113,16 +117,14 @@ export async function createPatient(formData: FormData) {
                 imageUrl = s3Key;
             } else {
                 console.warn('[SERVER] AWS not configured, skipping S3 upload for local file');
-                // In a real app we'd need a local storage fallback, 
-                // but for now we just log it and potentially skip
                 continue;
             }
 
-            await prisma.patientImage.create({
+            await prisma.examImage.create({
                 data: {
                     url: imageUrl,
                     fileName: fileName,
-                    patientId: patient.id,
+                    examId: exam.id,
                 },
             });
         }
@@ -140,18 +142,18 @@ export async function createPatient(formData: FormData) {
                     const contentType = mimeMatch ? mimeMatch[1] : 'image/jpeg';
                     const s3Key = await uploadFileToS3(buffer, `eyer-${i}.jpg`, contentType);
 
-                    await prisma.patientImage.create({
+                    await prisma.examImage.create({
                         data: {
                             url: s3Key,
                             fileName: `eyer-image-${i + 1}.jpg`,
-                            patientId: patient.id,
+                            examId: exam.id,
                         },
                     });
                 } else {
                     console.warn('[SERVER] AWS not configured, skipping S3 upload for base64 image');
                 }
             } else if (dataUrl.startsWith('http')) {
-                // Handle Cloud URL
+                // Handle Cloud URL (Bytescale, etc)
                 if (isAwsConfigured) {
                     try {
                         const response = await fetch(dataUrl);
@@ -163,35 +165,34 @@ export async function createPatient(formData: FormData) {
 
                             const s3Key = await uploadFileToS3(buffer, fileName, contentType);
 
-                            await prisma.patientImage.create({
+                            await prisma.examImage.create({
                                 data: {
                                     url: s3Key,
                                     fileName: fileName,
-                                    patientId: patient.id,
+                                    examId: exam.id,
                                 },
                             });
                         } else {
-                            // If S3 configured but fetch failed, we can still store the direct URL
                             throw new Error('Fetch failed');
                         }
                     } catch (fetchErr) {
                         console.error(`[SERVER] Failed to sync to S3, storing direct URL: ${dataUrl}`);
-                        await prisma.patientImage.create({
+                        await prisma.examImage.create({
                             data: {
                                 url: dataUrl,
                                 fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
-                                patientId: patient.id,
+                                examId: exam.id,
                             },
                         });
                     }
                 } else {
-                    // AWS NOT CONFIGURED: Save the Bytescale URL directly in the DB!
+                    // AWS NOT CONFIGURED: Save the Bytescale URL directly
                     console.log(`[SERVER] AWS not configured, storing direct Bytescale URL: ${dataUrl}`);
-                    await prisma.patientImage.create({
+                    await prisma.examImage.create({
                         data: {
                             url: dataUrl,
                             fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
-                            patientId: patient.id,
+                            examId: exam.id,
                         },
                     });
                 }
@@ -205,7 +206,7 @@ export async function createPatient(formData: FormData) {
     revalidatePath('/referrals');
     revalidatePath('/analytics');
 
-    return { success: true, id: patient.id };
+    return { success: true, id: exam.id, patientId: patient.id };
 }
 
 export async function getPatientsAction() {
@@ -253,19 +254,31 @@ export async function getPatientsAction() {
                 };
             }));
 
+            const latestExam = examsWithImages.length > 0 ? examsWithImages[0] : null;
+
             return {
                 ...p,
-                birthDate: p.birthDate?.toISOString?.() || null,
+                birthDate: p.birthDate?.toISOString?.() || (p.birthDate ? new Date(p.birthDate).toISOString() : null),
                 createdAt: p.createdAt?.toISOString?.() || new Date(p.createdAt || Date.now()).toISOString(),
                 exams: examsWithImages,
+                // Retrocompatibilidade: promove dados do último exame para o nível do paciente
+                status: latestExam?.status || 'pending',
+                examDate: latestExam?.examDate || null,
+                location: latestExam?.location || 'Não informado',
+                technicianName: latestExam?.technicianName || '',
+                images: latestExam?.images || [],
+                report: latestExam?.report || null,
+                referral: latestExam?.referral || null,
             } as any;
         } catch (e) {
             console.error('Error mapping patient:', p.id, e);
             return {
                 ...p,
-                birthDate: String(p.birthDate || ''),
+                birthDate: p.birthDate ? String(p.birthDate) : '',
                 createdAt: String(p.createdAt),
                 exams: [],
+                status: 'pending',
+                images: [],
             } as any;
         }
     }));
@@ -450,7 +463,7 @@ export async function getCloudMappingAction() {
             path.join(rootPath, '..', 'bytescale_mapping.json')
         ];
 
-        let foundPath = null;
+        let foundPath: string | null = null;
         for (const p of pathsToTry) {
             try {
                 if (fs.existsSync(p)) {

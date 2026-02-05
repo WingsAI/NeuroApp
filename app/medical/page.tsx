@@ -9,10 +9,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
 
 function MedicalContent() {
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
+  const [patients, setPatients] = useState<any[]>([]);
+  const [filteredPatients, setFilteredPatients] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<any | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get('id');
@@ -131,7 +131,7 @@ function MedicalContent() {
         console.log(`[DEBUG] Found ${cloudEntries.length} entries in cloud mapping`);
         const patientsToSync: any[] = [];
 
-        const cloudPatients: Patient[] = cloudEntries.map(([key, data]: [string, any]) => {
+        const cloudPatients: any[] = cloudEntries.map(([key, data]: [string, any]) => {
           const patientId = data.exam_id || key;
           const existingDbPatient = dbPatients.find(p => p.id === patientId);
           const isAlreadyInDb = !!existingDbPatient;
@@ -239,7 +239,7 @@ function MedicalContent() {
 
       // Filtrar por status baseado no toggle
       const filteredByStatus = finalPatients.filter(
-        (p: Patient) => showCompleted ? p.status === 'completed' : p.status !== 'completed'
+        (p: any) => showCompleted ? p.status === 'completed' : p.status !== 'completed'
       );
 
       // Ordenar alfabeticamente por nome
@@ -262,10 +262,10 @@ function MedicalContent() {
 
     const term = searchTerm.toLowerCase();
     const filtered = patients.filter(
-      (p: Patient) =>
-        p.name.toLowerCase().includes(term) ||
-        p.cpf.includes(term) ||
-        p.location.toLowerCase().includes(term)
+      (p: any) =>
+        p.name?.toLowerCase().includes(term) ||
+        (p.cpf && p.cpf.includes(term)) ||
+        (p.location && p.location.toLowerCase().includes(term))
     );
     // Already sorted from source, but ensure consistency
     filtered.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
@@ -946,7 +946,7 @@ function MedicalContent() {
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    {selectedPatient.images.map((image, index) => (
+                    {selectedPatient.images.map((image: any, index: number) => (
                       <div key={image.id} className={`premium-card p-1 group transition-all ${selectedReportImages.od === image.id || selectedReportImages.oe === image.id ? 'ring-2 ring-cardinal-700 bg-cardinal-50' : 'bg-white'}`}>
                         <div className="relative aspect-square overflow-hidden rounded-lg mb-2">
                           <img src={image.data} className="w-full h-full object-cover" />

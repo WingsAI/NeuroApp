@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import html2canvas from 'html2canvas';
 
 // Helper component for high-fidelity printing/exporting
-function ReportPrintTemplate({ patient }: { patient: Patient }) {
+function ReportPrintTemplate({ patient }: { patient: any }) {
   if (!patient || !patient.report) return null;
 
   const formatDate = (dateString: string) => {
@@ -263,15 +263,15 @@ function ReportPrintTemplate({ patient }: { patient: Patient }) {
 }
 
 export default function Results() {
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
+  const [patients, setPatients] = useState<any[]>([]);
+  const [filteredPatients, setFilteredPatients] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<any | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [filterTab, setFilterTab] = useState<'all' | 'completed' | 're_exam' | 'urgent'>('all');
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
-  const [renderPatient, setRenderPatient] = useState<Patient | null>(null);
+  const [renderPatient, setRenderPatient] = useState<any | null>(null);
   const [exportProgress, setExportProgress] = useState<{ current: number, total: number } | null>(null);
   const router = useRouter();
 
@@ -408,12 +408,28 @@ export default function Results() {
 
 
   const loadPatients = async () => {
-    const allPatients = await getPatientsAction();
-    // Only show patients with completed reports
-    const completedPatients = (allPatients as Patient[]).filter(
-      (p) => p.status === 'completed' && p.report
-    );
-    setPatients(completedPatients);
+    const allPatients = await getPatientsAction() as any[];
+
+    // In the new model, we want to find EXAMS that are completed.
+    // We flatten the list so each row in this table is a visit (Exam).
+    const completedResults: any[] = [];
+
+    allPatients.forEach(patient => {
+      patient.exams.forEach((exam: any) => {
+        if (exam.status === 'completed' && exam.report) {
+          completedResults.push({
+            ...patient, // Patient demograhics
+            ...exam,    // Exam details (id, status, referral, report, location, examDate)
+            patientName: patient.name,
+            patientCpf: patient.cpf,
+            examId: exam.id,
+            patientId: patient.id
+          });
+        }
+      });
+    });
+
+    setPatients(completedResults);
   };
 
   const filterPatients = () => {
@@ -447,9 +463,9 @@ export default function Results() {
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(
-        (p: Patient) =>
+        (p: any) =>
           p.name.toLowerCase().includes(term) ||
-          p.cpf.includes(term) ||
+          (p.cpf && p.cpf.includes(term)) ||
           p.report?.doctorName?.toLowerCase().includes(term) ||
           p.location.toLowerCase().includes(term)
       );
@@ -458,7 +474,7 @@ export default function Results() {
     setFilteredPatients(filtered);
   };
 
-  const handleViewReport = (patient: Patient) => {
+  const handleViewReport = (patient: any) => {
     setSelectedPatient(patient);
     setShowModal(true);
   };
@@ -1184,7 +1200,7 @@ export default function Results() {
                           <div className="space-y-4">
                             {(() => {
                               const diagnosis = selectedPatient.report.diagnosis || '';
-                              const phrases = [];
+                              const phrases: string[] = [];
 
                               // 1. Check for split from diagnosis
                               if (diagnosis.includes(' - ')) {
