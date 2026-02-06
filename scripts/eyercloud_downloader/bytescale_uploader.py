@@ -168,8 +168,18 @@ def main():
             try:
                 with open(downloader_state_path, 'r', encoding='utf-8') as f:
                     d_state = json.load(f)
-                    exam_id_full = patient_folder.name.split('_')[-1]
-                    details = d_state.get('exam_details', {}).get(exam_id_full)
+                    exam_id_short = patient_folder.name.split('_')[-1]
+                    
+                    # Tenta buscar diretamente pelo ID curto
+                    details = d_state.get('exam_details', {}).get(exam_id_short)
+                    
+                    # Se não encontrar, busca por ID que começa com o curto
+                    if not details:
+                        for full_id, exam_details in d_state.get('exam_details', {}).items():
+                            if full_id.startswith(exam_id_short) or exam_id_short in full_id:
+                                details = exam_details
+                                break
+                    
                     if details:
                         clinic_name = details.get('clinic_name', clinic_name)
                         patient_metadata = {

@@ -114,7 +114,32 @@ python scripts/clean_mapping.py
 # 2. Limpa banco
 node scripts/real_cleanup_v2.js
 # 3. Sincroniza
-node scripts/sync_to_db_v2.js --execute
+node scripts/sync_to_db_v3.js --execute
+```
+
+### 9. Dados Faltando (CPF, Data Nascimento, Sexo, Doenças)
+
+**Causa:** Os metadados não foram extraídos corretamente da API do EyerCloud durante o download.
+
+**Solução 1 (Atualizar metadados do EyerCloud):**
+```powershell
+cd scripts
+python fix_metadata.py              # Atualiza metadados no download_state e mapping
+python fix_metadata.py --dry-run    # Mostra o que seria atualizado
+python fix_metadata.py --patient "NOME"  # Atualiza apenas um paciente
+```
+
+**Solução 2 (Após atualizar metadados, sincronizar com o banco):**
+```powershell
+node scripts/sync_to_db_v3.js --execute
+```
+
+### 10. Validar Dados Após Update
+
+**Sempre execute após grandes atualizações:**
+```powershell
+node scripts/validate_data.js                    # Valida todos os pacientes
+node scripts/validate_data.js --patient "NOME"   # Valida um paciente específico
 ```
 
 ## Workflow Completo de Sincronização

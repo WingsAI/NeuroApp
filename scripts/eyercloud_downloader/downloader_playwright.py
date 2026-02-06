@@ -478,6 +478,25 @@ async def main():
                         # Extrai dados do paciente do exame
                         exam_obj = details.get('exam', {})
                         patient_obj = exam_obj.get('patient', {})
+                        anamnesis = patient_obj.get('anamnesis', {}) or {}
+                        
+                        # Extrai doenças de base
+                        underlying_diseases = {
+                            "diabetes": anamnesis.get('diabetes', patient_obj.get('diabetes', False)),
+                            "hypertension": anamnesis.get('hypertension', patient_obj.get('hypertension', False)),
+                            "cholesterol": anamnesis.get('cholesterol', patient_obj.get('cholesterol', False)),
+                            "smoker": anamnesis.get('smoker', patient_obj.get('smoker', False))
+                        }
+                        
+                        # Extrai doenças oftalmológicas
+                        ophthalmic_diseases = {
+                            "diabeticRetinopathy": anamnesis.get('diabeticRetinopathy', patient_obj.get('diabeticRetinopathy', False)),
+                            "dmri": anamnesis.get('dmri', patient_obj.get('dmri', False)),
+                            "glaucoma": anamnesis.get('glaucoma', patient_obj.get('glaucoma', False)),
+                            "cataract": anamnesis.get('cataract', patient_obj.get('cataract', False)),
+                            "pterygium": anamnesis.get('pterygium', patient_obj.get('pterygium', False)),
+                            "lowVisualAcuity": anamnesis.get('lowVisualAcuity', patient_obj.get('lowVisualAcuity', False))
+                        }
                         
                         state['exam_details'][exam_id] = {
                             'patient_name': patient_name,
@@ -486,7 +505,11 @@ async def main():
                             'exam_date': exam_obj.get('date'),
                             'cpf': patient_obj.get('cpf', ''),
                             'birthday': patient_obj.get('birthday', ''),
+                            'gender': patient_obj.get('gender', ''),
                             'clinic_name': exam_obj.get('clinic', {}).get('name', '') or patient_obj.get('place', ''),
+                            'underlying_diseases': underlying_diseases,
+                            'ophthalmic_diseases': ophthalmic_diseases,
+                            'otherDisease': patient_obj.get('otherDisease') or anamnesis.get('otherDisease'),
                             'download_date': datetime.now().isoformat()
                         }
                         save_state(state)
@@ -582,11 +605,30 @@ async def main():
                     # Extrai dados do paciente do exame
                     exam_obj = details.get('exam', {})
                     patient_obj = exam_obj.get('patient', {})
+                    anamnesis = patient_obj.get('anamnesis', {}) or {}
                     
                     # Também tenta pegar dados do objeto exam original da lista
                     clinic_name = exam_obj.get('clinic', {}).get('name', '')
                     if not clinic_name:
                         clinic_name = exam.get('clinicName', '') or exam.get('clinic', {}).get('name', '')
+                    
+                    # Extrai doenças de base
+                    underlying_diseases = {
+                        "diabetes": anamnesis.get('diabetes', patient_obj.get('diabetes', False)),
+                        "hypertension": anamnesis.get('hypertension', patient_obj.get('hypertension', False)),
+                        "cholesterol": anamnesis.get('cholesterol', patient_obj.get('cholesterol', False)),
+                        "smoker": anamnesis.get('smoker', patient_obj.get('smoker', False))
+                    }
+                    
+                    # Extrai doenças oftalmológicas
+                    ophthalmic_diseases = {
+                        "diabeticRetinopathy": anamnesis.get('diabeticRetinopathy', patient_obj.get('diabeticRetinopathy', False)),
+                        "dmri": anamnesis.get('dmri', patient_obj.get('dmri', False)),
+                        "glaucoma": anamnesis.get('glaucoma', patient_obj.get('glaucoma', False)),
+                        "cataract": anamnesis.get('cataract', patient_obj.get('cataract', False)),
+                        "pterygium": anamnesis.get('pterygium', patient_obj.get('pterygium', False)),
+                        "lowVisualAcuity": anamnesis.get('lowVisualAcuity', patient_obj.get('lowVisualAcuity', False))
+                    }
                     
                     # Salva detalhes para o relatório
                     state['exam_details'][exam_id] = {
@@ -596,7 +638,11 @@ async def main():
                         'exam_date': exam_obj.get('date'),
                         'cpf': patient_obj.get('cpf', '') or exam.get('patient', {}).get('cpf', ''),
                         'birthday': patient_obj.get('birthday', '') or exam.get('patient', {}).get('birthday', ''),
+                        'gender': patient_obj.get('gender', '') or exam.get('patient', {}).get('gender', ''),
                         'clinic_name': clinic_name,
+                        'underlying_diseases': underlying_diseases,
+                        'ophthalmic_diseases': ophthalmic_diseases,
+                        'otherDisease': patient_obj.get('otherDisease') or anamnesis.get('otherDisease'),
                         'download_date': datetime.now().isoformat()
                     }
                     save_state(state)
