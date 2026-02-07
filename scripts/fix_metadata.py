@@ -131,9 +131,19 @@ async def main():
             # Busca detalhes completos (CPF, etc)
             details_resp = await fetch_exam_details(request_context, exam_id)
             full_exam = details_resp.get('exam', {})
+            if not isinstance(full_exam, dict):
+                full_exam = {}
+            
             full_patient = full_exam.get('patient', {})
+            if not isinstance(full_patient, dict):
+                full_patient = {}
+            
             anamnesis = full_patient.get('anamnesis', {}) or {}
+            if not isinstance(anamnesis, dict):
+                anamnesis = {}
             clinic = full_exam.get('clinic', {})
+            if not isinstance(clinic, dict):
+                clinic = {}
             
             # Extrai metadados
             cpf = full_patient.get('cpf') or ''

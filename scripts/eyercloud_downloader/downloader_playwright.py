@@ -605,10 +605,20 @@ async def main():
                     # Extrai dados do paciente do exame
                     exam_obj = details.get('exam', {})
                     patient_obj = exam_obj.get('patient', {})
+                    if not isinstance(patient_obj, dict):
+                        patient_obj = {}
                     anamnesis = patient_obj.get('anamnesis', {}) or {}
+                    if not isinstance(anamnesis, dict):
+                        anamnesis = {}
                     
                     # Também tenta pegar dados do objeto exam original da lista
+                    if not isinstance(exam_obj, dict):
+                        exam_obj = {}
+                    
                     clinic_name = exam_obj.get('clinic', {}).get('name', '')
+                    if not isinstance(clinic_name, dict) and not isinstance(clinic_name, str):
+                        clinic_name = ''
+                    
                     if not clinic_name:
                         clinic_name = exam.get('clinicName', '') or exam.get('clinic', {}).get('name', '')
                     
