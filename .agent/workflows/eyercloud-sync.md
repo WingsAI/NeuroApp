@@ -57,7 +57,15 @@ cd e:\GitHub\NeuroApp
 node scripts/fix_all_data.js --execute
 ```
 
-### 6. Validar os dados (OBRIGATÓRIO)
+### 6. Corrigir integridade e duplicatas (NOVO)
+
+// turbo
+```powershell
+cd e:\GitHub\NeuroApp
+node scripts/integrity_check.js --execute
+```
+
+### 7. Validar os dados (OBRIGATÓRIO)
 
 // turbo
 ```powershell

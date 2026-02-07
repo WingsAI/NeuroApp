@@ -212,10 +212,22 @@ async function validatePatients(patientName = null) {
             }
         }
 
+        // Validação 9: Duplicidade Pendente/Concluido
+        const pendingCount = patient.exams.filter(e => e.status === 'pending').length;
+        const completedCount = patient.exams.filter(e => e.status === 'completed').length;
+        if (pendingCount > 0 && completedCount > 0) {
+            issues.push('DUPLICIDADE: Possui exames Pendentes e Concluídos');
+            results.errors.push(`${patient.name}: Duplicidade Pendente/Concluído`);
+        }
+
         // Log apenas pacientes com problemas graves
-        if (issues.length > 3) {
+        if (issues.length > 3 || (pendingCount > 0 && completedCount > 0)) {
             hasIssues = true;
-            warning(`${patient.name}: ${issues.join(', ')}`);
+            if (pendingCount > 0 && completedCount > 0) {
+                error(`${patient.name}: ${issues.join(', ')}`);
+            } else {
+                warning(`${patient.name}: ${issues.join(', ')}`);
+            }
         }
     }
 

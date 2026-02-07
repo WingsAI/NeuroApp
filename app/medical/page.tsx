@@ -167,7 +167,7 @@ function MedicalContent() {
               if (day <= 15) finalLocation = 'Tauá-CE';
               else if (day >= 27 && day <= 31) finalLocation = 'Jaci-SP';
             } else if (month === 2) {
-              if (day >= 2 && day <= 6) finalLocation = 'Campos do Jordão';
+              if (day >= 2 && day <= 6) finalLocation = 'Campos do Jordão-SP';
             }
           }
 
