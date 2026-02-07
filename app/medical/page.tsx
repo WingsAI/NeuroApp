@@ -167,9 +167,11 @@ function MedicalContent() {
               if (day <= 15) finalLocation = 'Tauá-CE';
               else if (day >= 27 && day <= 31) finalLocation = 'Jaci-SP';
             } else if (month === 2) {
-              if (day >= 2 && day <= 5) finalLocation = 'Campos do Jordão';
+              if (day >= 2 && day <= 6) finalLocation = 'Campos do Jordão';
             }
           }
+
+          const status = (isAlreadyInDb ? existingDbPatient.status : 'pending') as any;
 
           return {
             id: patientId,
@@ -178,26 +180,28 @@ function MedicalContent() {
             phone: isAlreadyInDb ? existingDbPatient.phone || '' : data.phone || '',
             birthDate: data.birthday ? new Date(data.birthday).toISOString() : new Date().toISOString(),
             examDate: rawExamDate,
-            location: finalLocation,
-            gender: data.gender || '',
-            technicianName: 'EyerCloud Sync',
-            underlyingDiseases: data.underlying_diseases,
-            ophthalmicDiseases: data.ophthalmic_diseases,
-            status: (isAlreadyInDb ? existingDbPatient.status : 'pending') as any,
-            createdAt: data.images ? data.images[0]?.upload_date : new Date().toISOString(),
-            images: images
+            location: isAlreadyInDb ? (existingDbPatient.location || finalLocation) : finalLocation,
+            gender: data.gender || (isAlreadyInDb ? existingDbPatient.gender : ''),
+            technicianName: isAlreadyInDb ? (existingDbPatient.technicianName || 'EyerCloud Sync') : 'EyerCloud Sync',
+            underlyingDiseases: isAlreadyInDb ? (existingDbPatient.underlyingDiseases || data.underlying_diseases) : data.underlying_diseases,
+            ophthalmicDiseases: isAlreadyInDb ? (existingDbPatient.ophthalmicDiseases || data.ophthalmic_diseases) : data.ophthalmic_diseases,
+            status: status,
+            createdAt: isAlreadyInDb ? existingDbPatient.createdAt : (data.images ? data.images[0]?.upload_date : new Date().toISOString()),
+            images: images,
+            report: isAlreadyInDb ? existingDbPatient.report : null
           };
         });
 
         console.log(`[DEBUG] Cloud Patients mapped: ${cloudPatients.length}, To sync: ${patientsToSync.length}`);
 
-        // Mesclar: Usar cloudPatients como base para os que estão na nuvem,
-        // e adicionar dbPatients que NÃO estão no mapeamento da nuvem
-        const cloudIds = new Set(cloudPatients.map(p => p.id));
-        const dbOnlyPatients = dbPatients.filter(p => !cloudIds.has(p.id)) as any;
+        // Mesclar: Usar DB como base de verdade para status.
+        // Se o paciente está no DB, usamos a versão do DB (que tem o status de laudo correto).
+        // Se não está, usamos a versão da nuvem.
+        const dbIds = new Set(dbPatients.map(p => p.id));
+        const cloudOnlyPatients = cloudPatients.filter(p => !dbIds.has(p.id));
 
-        combinedPatients = [...cloudPatients, ...dbOnlyPatients];
-        console.log(`[DEBUG] Combined patients: ${combinedPatients.length}`);
+        combinedPatients = [...(dbPatients as any[]), ...cloudOnlyPatients];
+        console.log(`[DEBUG] Combined patients: ${combinedPatients.length} (DB: ${dbPatients.length}, New Cloud: ${cloudOnlyPatients.length})`);
 
         // INICIAR SINCRONIZAÇÃO EM SEGUNDO PLANO - NÃO BLOQUEANTE
         if (patientsToSync.length > 0) {
