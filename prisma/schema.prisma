@@ -8,19 +8,19 @@ datasource db {
 }
 
 model Exam {
-  id              String           @id
-  examDate        DateTime
-  location        String
-  technicianName  String
-  status          String           @default("pending")
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime
-  eyerCloudId     String?
-  patientId       String
-  patient         Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  images          ExamImage[]
-  report          MedicalReport?
-  referral        PatientReferral?
+  id             String           @id
+  examDate       DateTime
+  location       String
+  technicianName String
+  status         String           @default("pending")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  eyerCloudId    String?
+  patientId      String
+  patient        Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  images         ExamImage[]
+  report         MedicalReport?
+  referral       PatientReferral?
 }
 
 model ExamImage {
