@@ -24,7 +24,11 @@ export async function getHealthUnitsAction(): Promise<HealthUnit[]> {
 export async function createHealthUnitAction(data: Omit<HealthUnit, 'id' | 'createdAt' | 'updatedAt'>) {
     try {
         const unit = await prisma.healthUnit.create({
-            data,
+            data: {
+                ...data,
+                id: Math.random().toString(36).substr(2, 9),
+                updatedAt: new Date(),
+            },
         });
 
         revalidatePath('/units');
@@ -39,7 +43,10 @@ export async function updateHealthUnitAction(id: string, data: Partial<Omit<Heal
     try {
         await prisma.healthUnit.update({
             where: { id },
-            data,
+            data: {
+                ...data,
+                updatedAt: new Date(),
+            },
         });
 
         revalidatePath('/units');

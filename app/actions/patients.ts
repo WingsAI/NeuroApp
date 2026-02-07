@@ -50,6 +50,7 @@ export async function createPatient(formData: FormData) {
         // Cria novo paciente
         patient = await prisma.patient.create({
             data: {
+                id: id || `manual-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                 name,
                 cpf: cpf || null,
                 birthDate,
@@ -60,6 +61,7 @@ export async function createPatient(formData: FormData) {
                 phone,
                 underlyingDiseases,
                 ophthalmicDiseases,
+                updatedAt: new Date(),
             },
         });
     } else {
@@ -75,6 +77,7 @@ export async function createPatient(formData: FormData) {
                 phone: phone || patient.phone,
                 underlyingDiseases: underlyingDiseases || patient.underlyingDiseases,
                 ophthalmicDiseases: ophthalmicDiseases || patient.ophthalmicDiseases,
+                updatedAt: new Date(),
             }
         });
     }
@@ -86,14 +89,16 @@ export async function createPatient(formData: FormData) {
             examDate,
             location,
             technicianName,
+            updatedAt: new Date(),
         },
         create: {
-            id: id || undefined,
+            id: id || `exam-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             examDate,
             location,
             technicianName,
             status: 'pending',
             patientId: patient.id,
+            updatedAt: new Date(),
         },
     });
 
@@ -122,6 +127,7 @@ export async function createPatient(formData: FormData) {
 
             await prisma.examImage.create({
                 data: {
+                    id: `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                     url: imageUrl,
                     fileName: fileName,
                     examId: exam.id,
@@ -144,6 +150,7 @@ export async function createPatient(formData: FormData) {
 
                     await prisma.examImage.create({
                         data: {
+                            id: `img-b64-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                             url: s3Key,
                             fileName: `eyer-image-${i + 1}.jpg`,
                             examId: exam.id,
@@ -167,6 +174,7 @@ export async function createPatient(formData: FormData) {
 
                             await prisma.examImage.create({
                                 data: {
+                                    id: `img-cl-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                                     url: s3Key,
                                     fileName: fileName,
                                     examId: exam.id,
@@ -179,6 +187,7 @@ export async function createPatient(formData: FormData) {
                         console.error(`[SERVER] Failed to sync to S3, storing direct URL: ${dataUrl}`);
                         await prisma.examImage.create({
                             data: {
+                                id: `img-dir-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                                 url: dataUrl,
                                 fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
                                 examId: exam.id,
@@ -190,6 +199,7 @@ export async function createPatient(formData: FormData) {
                     console.log(`[SERVER] AWS not configured, storing direct Bytescale URL: ${dataUrl}`);
                     await prisma.examImage.create({
                         data: {
+                            id: `img-byte-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                             url: dataUrl,
                             fileName: dataUrl.split('/').pop() || `cloud-image-${i}.jpg`,
                             examId: exam.id,
@@ -306,6 +316,7 @@ export async function updateExamAction(examId: string, updates: any) {
                 completedAt: new Date(updates.report.completedAt || undefined),
             },
             create: {
+                id: `report-${examId}`,
                 doctorName: updates.report.doctorName,
                 doctorCRM: updates.report.doctorCRM,
                 findings: updates.report.findings,
@@ -337,6 +348,7 @@ export async function updateExamAction(examId: string, updates: any) {
                 status: updates.referral.status,
             },
             create: {
+                id: `ref-${examId}`,
                 referredBy: updates.referral.referredBy,
                 specialty: updates.referral.specialty,
                 urgency: updates.referral.urgency,
@@ -356,7 +368,10 @@ export async function updateExamAction(examId: string, updates: any) {
     if (updates.status) {
         await prisma.exam.update({
             where: { id: examId },
-            data: { status: updates.status },
+            data: {
+                status: updates.status,
+                updatedAt: new Date(),
+            },
         });
     }
 
