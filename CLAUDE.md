@@ -8,7 +8,9 @@ NeuroApp is a medical ophthalmology platform for retinal exam screening. Built w
 
 **Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale (legacy) and AWS S3 (primary).
 
-**Current DB state (2026-02-07):** 402 patients, 470 exams (406 EyerCloud + 64 manual cml*), 4330 images (3011 COLOR + 1319 ANTERIOR), 186 reports. Snapshot at `scripts/db_snapshots/snapshot_2026-02-07_1352.json`.
+**Current DB state (2026-02-07):** 449 patients, 518 exams (454 EyerCloud + 64 manual cml*), 4726 images (3296 COLOR + 1430 ANTERIOR), 186 reports. Post-import snapshot at `scripts/db_snapshots/snapshot_2026-02-07_1610.json`. Pre-import snapshot at `scripts/db_snapshots/snapshot_2026-02-07_1538.json`.
+
+**EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
 
 ## Critical Data Rules
 
@@ -156,13 +158,19 @@ prisma/
   schema.prisma          # Database schema
 scripts/
   eyercloud_downloader/  # Python scripts for EyerCloud data
-    bytescale_mapping_cleaned.json  # Image URLs (557 entries, type field unreliable)
-    download_state.json             # Exam metadata from EyerCloud API (433 exams)
+    bytescale_mapping_cleaned.json  # Image URLs for first 402 patients (557 entries, type field unreliable)
+    bytescale_mapping_v2.json       # Image URLs for ALL patients including 48 new (605 entries, has image type)
+    download_state.json             # Exam metadata from EyerCloud API (455 exams, 449 unique patients)
     image_types.json                # Real image types from API (UUID -> COLOR/ANTERIOR/REDFREE)
     fetch_image_types.py            # Fetches real image types from EyerCloud API
-    downloader_playwright.py        # Downloads exam images from EyerCloud
+    downloader_playwright.py        # Downloads exam images from EyerCloud (all pages)
+    download_missing_48.py          # Downloads the 48 missing exams by ID (targeted)
     bytescale_uploader.py           # Uploads downloaded images to Bytescale (interactive)
-  sync_eyercloud_full.js # Full sync: resolve IDs, import patients/exams/images
+  missing_47_patients.json  # 47 patients (48 exams) found on EyerCloud but not in DB
+  eyercloud_site_patients.json  # All 451 patient names from EyerCloud site
+  compare_site_vs_db.js    # Compare EyerCloud site patients vs state vs DB
+  fix_desconhecido.js      # Fix 26 "Desconhecido" patient names in download_state
+  sync_eyercloud_full.js   # Full sync: resolve IDs, import patients/exams/images
   fix_all_data.js        # Legacy sync (has bugs, see Known Issues below)
   fix_image_types.js     # Remove REDFREE images, fix ANTERIOR labels using image_types.json
   diagnose_db.js         # Database diagnostic
@@ -240,6 +248,33 @@ This script has several issues that caused the data corruption:
 5. Does not look up existing patients by name, always upserts by ID (creates duplicates)
 
 **Use `sync_eyercloud_full.js` instead** - it fixes all of these issues.
+
+### Feb 2026 - Missing 47 Patients Discovery
+
+6. **26 "Desconhecido" exams were real patients** (fixed with fix_desconhecido.js)
+   - **Cause:** `downloader_playwright.py` downloaded some exams without patient names (patient field was a string or missing), registering them as "Desconhecido" in download_state.json
+   - **Fix:** Fetched all 451 patient names and 456 exam IDs from EyerCloud via browser API (`POST {page: N}`). Matched 26 Desconhecido exams to real patient names.
+   - **Prevention:** When patient_obj is not a dict, handle gracefully. Always add `isinstance()` guards before `.get()`.
+
+7. **47 patients never downloaded** (fixed with download_missing_48.py)
+   - **Cause:** The downloader runs page by page through the exam list. 47 patients (48 exams) were on EyerCloud pages that were never reached or skipped.
+   - **Discovery:** Compared 451 site patient names vs 402 state patient names using `compare_site_vs_db.js`.
+   - **Fix:** Created targeted `download_missing_48.py` that downloads only the 48 specific exam IDs. Downloads only COLOR+ANTERIOR (no REDFREE).
+   - **Note:** 26 of the 48 overlapped with the Desconhecido exams (same exam ID), but those only had metadata, no images.
+
+8. **EyerCloud API pagination quirk**
+   - The exam list API uses `{page: N}` NOT `{examCurrentPage: N}` for real pagination
+   - `{examCurrentPage: N}` always returns the same first page regardless of value
+   - The patient list API also uses `{page: N}` - confirmed via XHR interception
+   - Both APIs are POST to `https://eyercloud.com/api/v2/eyercloud/{exam|patient}/list`
+   - `fetch()` with `credentials: 'include'` works from the browser context, but `XMLHttpRequest` without `withCredentials` does not (returns `notAuthenticated`)
+
+### Mapping Files
+
+- **`bytescale_mapping_cleaned.json`** (557 entries): First 402 patients. Image type field is UNRELIABLE (all UNKNOWN). Used by `sync_eyercloud_full.js`.
+- **`bytescale_mapping_v2.json`** (605 entries): ALL patients including 48 new. Generated by `bytescale_uploader.py`. Image type field is also UNKNOWN. Use `image_types.json` or `download_state.json` `image_details` for real types.
+- When importing new patients, prefer `bytescale_mapping_v2.json` as it has all entries.
+- The 48 new exams have `image_details` in `download_state.json` with correct types (COLOR/ANTERIOR only, no REDFREE).
 
 ## Language
 
