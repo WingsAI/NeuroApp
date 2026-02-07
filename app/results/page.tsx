@@ -807,7 +807,7 @@ export default function Results() {
                 </div>
                 <div className="flex space-x-3">
                   <button
-                    onClick={() => router.push(`/medical?id=${selectedPatient.id}`)}
+                    onClick={() => router.push(`/medical?id=${selectedPatient.id}&from=results`)}
                     className="p-3 bg-white text-sandstone-600 hover:text-blue-700 border border-sandstone-200 rounded-xl hover:shadow-md transition-all flex items-center space-x-2"
                   >
                     <Pencil className="h-5 w-5" />

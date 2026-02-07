@@ -565,6 +565,12 @@ function MedicalContent() {
     setSelectedPatient(null);
     setSelectedReportImages({ od: null, oe: null });
     resetForm();
+
+    // Se veio da página de resultados, volta para lá
+    const fromParam = searchParams.get('from');
+    if (fromParam === 'results') {
+      router.push('/results');
+    }
   };
 
   const handleExportExcel = () => {
