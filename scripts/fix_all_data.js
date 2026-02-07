@@ -158,7 +158,7 @@ async function main() {
                 exams: []
             };
         } else {
-            // Atualiza dados se vieram vazios antes
+            // Atualiza dados se vieram vazios antes (preferir mapping melhor)
             if (!patientGroups[uniqueKey].cpf && examData.cpf) {
                 patientGroups[uniqueKey].cpf = examData.cpf;
             }
@@ -167,6 +167,9 @@ async function main() {
             }
             if (!patientGroups[uniqueKey].underlyingDiseases && examData.underlying_diseases) {
                 patientGroups[uniqueKey].underlyingDiseases = examData.underlying_diseases;
+            }
+            if (!patientGroups[uniqueKey].ophthalmicDiseases && examData.ophthalmic_diseases) {
+                patientGroups[uniqueKey].ophthalmicDiseases = examData.ophthalmic_diseases;
             }
         }
 
@@ -208,107 +211,101 @@ async function main() {
     let updatedExams = 0;
     let createdImages = 0;
 
+    console.log(`   🚀 Iniciando loop de sincronização para ${uniquePatients.length} pacientes...`);
+    let count = 0;
     for (const patientData of uniquePatients) {
+        count++;
+        if (count % 20 === 0) console.log(`   ⏳ Processados: ${count}/${uniquePatients.length}...`);
         try {
-            // Busca paciente existente
-            let patient = await prisma.patient.findFirst({
-                where: {
-                    name: { equals: patientData.name, mode: 'insensitive' }
+            // ID do paciente baseado no primeiro exame ou gerado
+            const patientId = patientData.exams[0]?.eyerCloudId || `pat-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+
+            let patient = await prisma.patient.upsert({
+                where: { id: patientId },
+                update: {
+                    name: patientData.name,
+                    cpf: patientData.cpf || undefined,
+                    birthDate: patientData.birthDate || undefined,
+                    gender: patientData.gender || undefined,
+                    underlyingDiseases: patientData.underlyingDiseases || undefined,
+                    ophthalmicDiseases: patientData.ophthalmicDiseases || undefined,
+                    updatedAt: new Date(),
+                },
+                create: {
+                    id: patientId,
+                    name: patientData.name,
+                    cpf: patientData.cpf,
+                    birthDate: patientData.birthDate,
+                    gender: patientData.gender,
+                    underlyingDiseases: patientData.underlyingDiseases,
+                    ophthalmicDiseases: patientData.ophthalmicDiseases,
+                    updatedAt: new Date(),
                 }
             });
 
-            if (!patient) {
-                patient = await prisma.patient.create({
-                    data: {
-                        name: patientData.name,
-                        cpf: patientData.cpf,
-                        birthDate: patientData.birthDate,
-                        gender: patientData.gender,
-                        underlyingDiseases: patientData.underlyingDiseases,
-                        ophthalmicDiseases: patientData.ophthalmicDiseases,
-                    }
-                });
+            if (patient.createdAt && (new Date() - new Date(patient.createdAt)) < 5000) {
                 createdPatients++;
-                console.log(`   ✅ Criado: ${patientData.name}`);
+                console.log(`   ✅ Paciente: ${patientData.name}`);
             } else {
-                // Atualiza paciente existente
-                const updateData = {};
-                if (!patient.cpf && patientData.cpf) updateData.cpf = patientData.cpf;
-                if (!patient.birthDate && patientData.birthDate) updateData.birthDate = patientData.birthDate;
-                if (!patient.gender && patientData.gender) updateData.gender = patientData.gender;
-                if (!patient.underlyingDiseases && patientData.underlyingDiseases) {
-                    updateData.underlyingDiseases = patientData.underlyingDiseases;
-                }
-                if (!patient.ophthalmicDiseases && patientData.ophthalmicDiseases) {
-                    updateData.ophthalmicDiseases = patientData.ophthalmicDiseases;
-                }
-
-                if (Object.keys(updateData).length > 0) {
-                    patient = await prisma.patient.update({
-                        where: { id: patient.id },
-                        data: updateData
-                    });
-                    updatedPatients++;
-                    console.log(`   🔄 Atualizado: ${patientData.name} (${Object.keys(updateData).join(', ')})`);
-                }
+                updatedPatients++;
             }
 
             // Sincroniza exames
             for (const examData of patientData.exams) {
-                let exam = await prisma.exam.findFirst({
-                    where: { eyerCloudId: examData.eyerCloudId }
+                let exam = await prisma.exam.upsert({
+                    where: { id: examData.eyerCloudId },
+                    update: {
+                        examDate: examData.examDate,
+                        location: examData.location !== 'Phelcom EyeR Cloud' ? examData.location : undefined,
+                        technicianName: examData.technicianName,
+                        patientId: patient.id,
+                        updatedAt: new Date(),
+                    },
+                    create: {
+                        id: examData.eyerCloudId,
+                        eyerCloudId: examData.eyerCloudId,
+                        examDate: examData.examDate,
+                        location: examData.location,
+                        technicianName: examData.technicianName,
+                        status: 'pending',
+                        patientId: patient.id,
+                        updatedAt: new Date(),
+                    }
                 });
 
-                if (!exam) {
-                    exam = await prisma.exam.create({
-                        data: {
-                            eyerCloudId: examData.eyerCloudId,
-                            examDate: examData.examDate,
-                            location: examData.location,
-                            technicianName: examData.technicianName,
-                            status: 'pending',
-                            patientId: patient.id
-                        }
-                    });
+                if (exam.createdAt && (new Date() - new Date(exam.createdAt)) < 5000) {
                     createdExams++;
                 } else {
-                    // Atualiza exame se necessário
-                    const examUpdate = {};
-                    if (exam.patientId !== patient.id) examUpdate.patientId = patient.id;
-                    if (exam.location !== examData.location && examData.location !== 'Phelcom EyeR Cloud') {
-                        examUpdate.location = examData.location;
-                    }
-                    if (Object.keys(examUpdate).length > 0) {
-                        exam = await prisma.exam.update({
-                            where: { id: exam.id },
-                            data: examUpdate
-                        });
-                        updatedExams++;
-                    }
+                    updatedExams++;
                 }
 
                 // Sincroniza imagens
                 for (const img of examData.images) {
                     if (!img.bytescale_url) continue;
 
-                    const existingImage = await prisma.examImage.findFirst({
-                        where: { url: img.bytescale_url }
-                    });
+                    const imgId = `img-${img.bytescale_url.split('/').pop().split('?')[0]}`;
 
-                    if (!existingImage) {
-                        try {
-                            await prisma.examImage.create({
-                                data: {
-                                    url: img.bytescale_url,
-                                    fileName: img.filename || 'image.jpg',
-                                    type: img.type || 'COLOR',
-                                    examId: exam.id
-                                }
-                            });
-                            createdImages++;
-                        } catch (err) {
-                            // Ignora erros de duplicação
-                        }
+                    try {
+                        await prisma.examImage.upsert({
+                            where: { id: imgId },
+                            update: {
+                                url: img.bytescale_url,
+                                fileName: img.filename || 'image.jpg',
+                                type: img.type || 'COLOR',
+                                examId: exam.id,
+                            },
+                            create: {
+                                id: imgId,
+                                url: img.bytescale_url,
+                                fileName: img.filename || 'image.jpg',
+                                type: img.type || 'COLOR',
+                                examId: exam.id,
+                                uploadedAt: img.upload_date ? new Date(img.upload_date) : new Date(),
+                            }
+                        });
+                        createdImages++;
+                    } catch (imageErr) {
+                        // Ignora
                     }
                 }
             }
@@ -320,11 +317,10 @@ async function main() {
     console.log('\n' + '='.repeat(70));
     console.log('✅ CONCLUÍDO!');
     console.log('='.repeat(70));
-    console.log(`   Pacientes criados: ${createdPatients}`);
-    console.log(`   Pacientes atualizados: ${updatedPatients}`);
-    console.log(`   Exames criados: ${createdExams}`);
-    console.log(`   Exames atualizados: ${updatedExams}`);
-    console.log(`   Imagens criadas: ${createdImages}`);
+    console.log(`   Pacientes processados: ${uniquePatients.length}`);
+    console.log(`   Pacientes novos/atualizados: ${createdPatients}/${updatedPatients}`);
+    console.log(`   Exames novos/atualizados: ${createdExams}/${updatedExams}`);
+    console.log(`   Imagens processadas: ${createdImages}`);
     console.log('='.repeat(70) + '\n');
 
     await prisma.$disconnect();

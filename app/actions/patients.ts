@@ -384,8 +384,52 @@ export async function updateExamAction(examId: string, updates: any) {
 
 // Mantém compatibilidade com código antigo - redireciona para updateExamAction
 export async function updatePatientAction(id: string, updates: any) {
-    // O id passado é na verdade o examId no novo modelo
-    return updateExamAction(id, updates);
+    await checkAuth();
+
+    // Tenta ver se o ID é de um exame
+    let exam = await prisma.exam.findUnique({ where: { id } });
+
+    // Se não for, busca o exame mais recente desse paciente
+    if (!exam) {
+        exam = await prisma.exam.findFirst({
+            where: { patientId: id },
+            orderBy: { examDate: 'desc' }
+        });
+    }
+
+    if (!exam) {
+        // Fallback: se ainda assim não encontrar, talvez o ID seja um eyerCloudId que ainda não foi sincronizado perfeitamente como ID do banco
+        exam = await prisma.exam.findFirst({
+            where: { eyerCloudId: id },
+            orderBy: { examDate: 'desc' }
+        });
+    }
+
+    if (!exam) {
+        throw new Error(`Exame não encontrado para o ID fornecido: ${id}`);
+    }
+
+    // Update Patient-level fields (cpf, phone) if provided
+    const patientData: Record<string, any> = {};
+    if (updates.cpf !== undefined) {
+        patientData.cpf = updates.cpf;
+        delete updates.cpf;
+    }
+    if (updates.phone !== undefined) {
+        patientData.phone = updates.phone;
+        delete updates.phone;
+    }
+    if (Object.keys(patientData).length > 0) {
+        await prisma.patient.update({
+            where: { id: exam.patientId },
+            data: {
+                ...patientData,
+                updatedAt: new Date(),
+            },
+        });
+    }
+
+    return updateExamAction(exam.id, updates);
 }
 
 export async function getAnalyticsAction(): Promise<AnalyticsData> {

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(node scripts/diagnose_db.js:*)",
+      "Bash(node -e:*)",
+      "Bash(node -c:*)",
+      "Bash(node scripts/cleanup_and_fix.js:*)",
+      "Bash(node scripts/backup_snapshot.js:*)",
+      "Bash(powershell:*)",
+      "Bash(dir:*)"
+    ]
+  }
+}

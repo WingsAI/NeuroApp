@@ -49,43 +49,43 @@ $env:PYTHONIOENCODING='utf-8'; python scripts/fix_metadata.py
 
 Se a sessão expirou, delete `auth_state.json` e refaça o login no passo 1.
 
-### 5. Sincronizar com o banco de dados
+### 5. BACKUP antes de sincronizar (OBRIGATÓRIO)
 
-// turbo
 ```powershell
 cd e:\GitHub\NeuroApp
+node scripts/backup_snapshot.js
+```
+
+### 6. Sincronizar com o banco de dados
+
+```powershell
+cd e:\GitHub\NeuroApp
+node scripts/fix_all_data.js              # Preview primeiro!
 node scripts/fix_all_data.js --execute
 ```
 
-### 6. Corrigir integridade e duplicatas (NOVO)
+### 7. Corrigir integridade e duplicatas
 
-// turbo
 ```powershell
 cd e:\GitHub\NeuroApp
-node scripts/integrity_check.js --execute
+node scripts/cleanup_and_fix.js              # Preview primeiro!
+node scripts/cleanup_and_fix.js --execute
 ```
 
-### 7. Validar os dados (OBRIGATÓRIO)
-
-// turbo
-```powershell
-cd e:\GitHub\NeuroApp
-node scripts/validate_data.js
-```
-
-### 7. Validar paciente específico (opcional)
+### 8. Validar os dados (OBRIGATÓRIO)
 
 ```powershell
 cd e:\GitHub\NeuroApp
-node scripts/validate_data.js --patient "NOME DO PACIENTE"
+node scripts/diagnose_db.js
 ```
 
 ## Critérios de Sucesso
 
-A validação deve passar com:
-- ≥95% dos pacientes com exames associados
-- ≥95% dos pacientes com imagens associadas
-- 0 erros críticos (datas no futuro, dados corrompidos)
+- 0 pacientes com ID curto (8 chars hex)
+- 0 duplicatas por nome
+- 0 exames vazios sem laudo
+- Todos os laudos preservados (nunca deve diminuir)
+- 0 erros críticos
 
 ## Troubleshooting
 

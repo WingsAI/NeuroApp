@@ -291,39 +291,58 @@ async def download_image(page, url, filepath):
     if filepath.exists():
         return False
     
+    import requests
     try:
-        response = await page.evaluate('''async (url) => {
+        # Pega cookies do navegador para autenticar o request
+        context = page.context
+        cookies_list = await context.cookies()
+        cookies = {c['name']: c['value'] for c in cookies_list}
+        
+        # Headers para parecer um request legítimo do navegador
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+            'Referer': 'https://ec2.eyercloud.com/',
+            'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+        }
+        
+        # Tenta baixar com a sessão do navegador
+        resp = requests.get(url, cookies=cookies, headers=headers, timeout=30)
+        
+        if resp.status_code == 200:
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+            with open(filepath, 'wb') as f:
+                f.write(resp.content)
+            return True
+        else:
+            print(f"    ❌ Erro HTTP {resp.status_code} ao baixar: {url}")
+    except Exception as e:
+        print(f"    ❌ Erro via requests (cookies): {e}")
+    
+    # Fallback final via automação pura (mais lento)
+    try:
+        await page.goto(url, wait_until="load")
+        # Captura o screenshot da página que agora contém apenas a imagem ou usa evaluate
+        # Mas o melhor é tentar via evaluate que já está logado
+        image_data = await page.evaluate('''async (url) => {
             const response = await fetch(url);
-            if (!response.ok) {
-                return { error: response.status };
-            }
             const blob = await response.blob();
-            const reader = new FileReader();
-            return new Promise((resolve) => {
-                reader.onloadend = () => resolve({ data: reader.result });
+            return new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
                 reader.readAsDataURL(blob);
             });
         }''', url)
         
-        if 'error' in response:
-            print(f"    ❌ Erro {response['error']} ao baixar: {url}")
-            return False
-        
-        data_url = response['data']
-        base64_data = data_url.split(',', 1)[1]
-        
-        import base64
-        image_data = base64.b64decode(base64_data)
-        
-        filepath.parent.mkdir(parents=True, exist_ok=True)
-        with open(filepath, 'wb') as f:
-            f.write(image_data)
-        
-        return True
-        
-    except Exception as e:
-        print(f"    ❌ Exceção ao baixar {url}: {e}")
-        return False
+        if image_data and 'base64,' in image_data:
+            import base64
+            base64_str = image_data.split('base64,')[1]
+            with open(filepath, 'wb') as f:
+                f.write(base64.b64decode(base64_str))
+            return True
+    except Exception as fallback_e:
+        pass
+    
+    return False
 
 
 async def main():
@@ -381,15 +400,24 @@ async def main():
         
         page = await context.new_page()
         
-        await page.goto(f"{BASE_URL}/exam", wait_until="networkidle")
-        await asyncio.sleep(3)
+        print("🔗 Acessando EyerCloud...")
+        try:
+            await page.goto(f"{BASE_URL}/exam", wait_until="load", timeout=60000)
+        except Exception as e:
+            print(f"⚠️ Aviso de navegação: {e}")
+        await asyncio.sleep(5)
         
-        page_content = await page.content()
-        is_logged_in = "Acessar exame" in page_content or "exam-card" in page_content or "patient" in page_content.lower()
+        is_logged_in = False
+        try:
+            page_content = await page.content()
+            is_logged_in = "Acessar exame" in page_content or "exam-card" in page_content or "patient" in page_content.lower()
+        except:
+            # Se der erro de navegação, provavelmente está redirecionando para login
+            is_logged_in = False
         
         if not is_logged_in or "login" in page.url.lower():
             print("\n" + "=" * 60)
-            print("🔐 FAÇA LOGIN NO NAVEGADOR QUE ABRIU")
+            print("🔐 FAÇA LOGIN NO NAVEGADOR")
             print("   1. Complete o login com seu email e senha")
             print("   2. Aguarde a lista de exames carregar")
             print("   3. Volte aqui e pressione ENTER para continuar")
@@ -457,9 +485,10 @@ async def main():
                         exam_id = exam['id']
                         patient_name = exam['name']
                         
-                        if exam_id in state['downloaded_exams']:
-                            print(f"  ⏭️ Já baixado: {exam_id[:8]}...")
-                            continue
+                        # No modo interativo, permitimos re-baixar para garantir que pegamos tudo
+                        # if exam_id in state['downloaded_exams']:
+                        #     print(f"  ⏭️ Já baixado: {exam_id[:8]}...")
+                        #     continue
                         
                         # Busca detalhes do exame via API
                         details = await fetch_exam_details(page, exam_id)
@@ -477,8 +506,25 @@ async def main():
                         
                         # Extrai dados do paciente do exame
                         exam_obj = details.get('exam', {})
+                        if not isinstance(exam_obj, dict):
+                            exam_obj = {}
+                        
                         patient_obj = exam_obj.get('patient', {})
+                        if not isinstance(patient_obj, dict):
+                            patient_obj = {}
+                            
                         anamnesis = patient_obj.get('anamnesis', {}) or {}
+                        if not isinstance(anamnesis, dict):
+                            anamnesis = {}
+                        
+                        # Tenta pegar o nome da clínica com segurança
+                        clinic = exam_obj.get('clinic', {})
+                        if isinstance(clinic, dict):
+                            clinic_name = clinic.get('name', '')
+                        elif isinstance(clinic, str):
+                            clinic_name = clinic
+                        else:
+                            clinic_name = ''
                         
                         # Extrai doenças de base
                         underlying_diseases = {
@@ -502,14 +548,14 @@ async def main():
                             'patient_name': patient_name,
                             'expected_images': expected_count,
                             'folder_name': folder_name,
-                            'exam_date': exam_obj.get('date'),
-                            'cpf': patient_obj.get('cpf', ''),
-                            'birthday': patient_obj.get('birthday', ''),
-                            'gender': patient_obj.get('gender', ''),
-                            'clinic_name': exam_obj.get('clinic', {}).get('name', '') or patient_obj.get('place', ''),
+                            'exam_date': exam_obj.get('date') if isinstance(exam_obj, dict) else None,
+                            'cpf': patient_obj.get('cpf', '') if isinstance(patient_obj, dict) else '',
+                            'birthday': patient_obj.get('birthday', '') if isinstance(patient_obj, dict) else '',
+                            'gender': patient_obj.get('gender', '') if isinstance(patient_obj, dict) else '',
+                            'clinic_name': clinic_name,
                             'underlying_diseases': underlying_diseases,
                             'ophthalmic_diseases': ophthalmic_diseases,
-                            'otherDisease': patient_obj.get('otherDisease') or anamnesis.get('otherDisease'),
+                            'otherDisease': (patient_obj.get('otherDisease') or anamnesis.get('otherDisease')) if isinstance(patient_obj, dict) else anamnesis.get('otherDisease'),
                             'download_date': datetime.now().isoformat()
                         }
                         save_state(state)
@@ -604,19 +650,24 @@ async def main():
                     
                     # Extrai dados do paciente do exame
                     exam_obj = details.get('exam', {})
+                    if not isinstance(exam_obj, dict):
+                        exam_obj = {}
+                        
                     patient_obj = exam_obj.get('patient', {})
                     if not isinstance(patient_obj, dict):
                         patient_obj = {}
+                    
                     anamnesis = patient_obj.get('anamnesis', {}) or {}
                     if not isinstance(anamnesis, dict):
                         anamnesis = {}
                     
-                    # Também tenta pegar dados do objeto exam original da lista
-                    if not isinstance(exam_obj, dict):
-                        exam_obj = {}
-                    
-                    clinic_name = exam_obj.get('clinic', {}).get('name', '')
-                    if not isinstance(clinic_name, dict) and not isinstance(clinic_name, str):
+                    # Tenta pegar o nome da clínica com segurança
+                    clinic = exam_obj.get('clinic', {})
+                    if isinstance(clinic, dict):
+                        clinic_name = clinic.get('name', '')
+                    elif isinstance(clinic, str):
+                        clinic_name = clinic
+                    else:
                         clinic_name = ''
                     
                     if not clinic_name:

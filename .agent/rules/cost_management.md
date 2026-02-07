@@ -15,3 +15,6 @@ As an AI assistant, you must be extremely mindful of API costs, usage limits, an
 ## 💾 Database Operations
 - **Bulk Updates**: Use `upsertMany` or `updateMany` (if supported) instead of individual calls in a loop for large datasets.
 - **Cleanup**: Do not leave temporary large files or database records after processing.
+- **Backups**: Always run `node scripts/backup_snapshot.js` before destructive operations.
+- **Transaction Timeout**: Use `{ timeout: 60000 }` or higher for transactions with many operations (e.g., moving/deleting 50+ images).
+- **Preview First**: All scripts must support `--preview` mode. ALWAYS preview before `--execute`.

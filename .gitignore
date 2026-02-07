@@ -48,3 +48,6 @@ scripts/eyercloud_downloader/download_state.json
 scripts/eyercloud_downloader/*.xlsx
 scripts/eyercloud_downloader/*.csv
 /exemplo_outro_projeto
+
+# Database backups / snapshots
+backups/*.json
