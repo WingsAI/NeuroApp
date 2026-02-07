@@ -17,10 +17,10 @@ model Exam {
   updatedAt       DateTime
   eyerCloudId     String?
   patientId       String
-  Patient         Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  ExamImage       ExamImage[]
-  MedicalReport   MedicalReport?
-  PatientReferral PatientReferral?
+  patient         Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  images          ExamImage[]
+  report          MedicalReport?
+  referral        PatientReferral?
 }
 
 model ExamImage {
@@ -58,7 +58,7 @@ model MedicalReport {
   driveFileId          String?
   syncedToDrive        Boolean  @default(false)
   examId               String   @unique
-  Exam                 Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  exam                 Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
 }
 
 model Patient {
@@ -75,7 +75,7 @@ model Patient {
   phone              String?
   ophthalmicDiseases Json?
   underlyingDiseases Json?
-  Exam               Exam[]
+  exams              Exam[]
 }
 
 model PatientReferral {
