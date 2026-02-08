@@ -133,7 +133,9 @@ function MedicalContent() {
 
         const cloudPatients: any[] = cloudEntries.map(([key, data]: [string, any]) => {
           const patientId = data.exam_id || key;
-          const existingDbPatient = dbPatients.find(p => p.id === patientId);
+          const existingDbPatient = dbPatients.find(p =>
+            p.id === patientId || p.name?.toUpperCase().trim() === data.patient_name?.toUpperCase().trim()
+          );
           const isAlreadyInDb = !!existingDbPatient;
 
           // Priority: Cloud images > DB images
@@ -195,10 +197,13 @@ function MedicalContent() {
         console.log(`[DEBUG] Cloud Patients mapped: ${cloudPatients.length}, To sync: ${patientsToSync.length}`);
 
         // Mesclar: Usar DB como base de verdade para status.
-        // Se o paciente está no DB, usamos a versão do DB (que tem o status de laudo correto).
-        // Se não está, usamos a versão da nuvem.
+        // Se o paciente está no DB (por ID ou por nome), usamos a versão do DB.
+        // Cloud-only = pacientes que NÃO existem no DB por nenhum critério.
         const dbIds = new Set(dbPatients.map(p => p.id));
-        const cloudOnlyPatients = cloudPatients.filter(p => !dbIds.has(p.id));
+        const dbNames = new Set(dbPatients.map(p => p.name?.toUpperCase().trim()));
+        const cloudOnlyPatients = cloudPatients.filter(p =>
+          !dbIds.has(p.id) && !dbNames.has(p.name?.toUpperCase().trim())
+        );
 
         combinedPatients = [...(dbPatients as any[]), ...cloudOnlyPatients];
         console.log(`[DEBUG] Combined patients: ${combinedPatients.length} (DB: ${dbPatients.length}, New Cloud: ${cloudOnlyPatients.length})`);
