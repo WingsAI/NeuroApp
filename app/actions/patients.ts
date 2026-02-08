@@ -409,7 +409,7 @@ export async function updatePatientAction(id: string, updates: any) {
         throw new Error(`Exame não encontrado para o ID fornecido: ${id}`);
     }
 
-    // Update Patient-level fields (cpf, phone) if provided
+    // Update Patient-level fields if provided
     const patientData: Record<string, any> = {};
     if (updates.cpf !== undefined) {
         patientData.cpf = updates.cpf;
@@ -418,6 +418,14 @@ export async function updatePatientAction(id: string, updates: any) {
     if (updates.phone !== undefined) {
         patientData.phone = updates.phone;
         delete updates.phone;
+    }
+    if (updates.underlyingDiseases !== undefined) {
+        patientData.underlyingDiseases = updates.underlyingDiseases;
+        delete updates.underlyingDiseases;
+    }
+    if (updates.ophthalmicDiseases !== undefined) {
+        patientData.ophthalmicDiseases = updates.ophthalmicDiseases;
+        delete updates.ophthalmicDiseases;
     }
     if (Object.keys(patientData).length > 0) {
         await prisma.patient.update({
