@@ -497,8 +497,8 @@ function MedicalContent() {
         setSelectedPatient(null);
         resetForm();
         setSuccess(false);
-        loadPatients();
-        // Permanecer na tela de laudo conforme solicitado
+        // Navegar para a tela de resultados após salvar o laudo
+        router.push('/results');
       }, 1500);
     } catch (err) {
       console.error('Erro ao salvar laudo:', err);
