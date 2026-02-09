@@ -8,9 +8,14 @@ NeuroApp is a medical ophthalmology platform for retinal exam screening. Built w
 
 **Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale.
 
-**Current DB state (2026-02-09):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 6340 images, 381 reports, 415 patients with diseases. All 83 duplicate exams consolidated. Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
+**Current DB state (2026-02-09):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 6340 images, 381 reports, 415 patients with diseases. All 83 duplicate exams consolidated. 448 patients with birth dates (99.8%). All exam locations corrected (204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE). Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
 
 **EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
+
+**Exam periods by location:**
+- Until 15/01: Tauá-CE (156 exams)
+- 27-30/01: Jaci-SP (204 exams)
+- 02-05/02: Campos do Jordão-SP (95 exams, including 67 that had clinic ID `695e434f28b781ee6000d862` corrected)
 
 ## Critical Data Rules
 
@@ -328,12 +333,21 @@ This script has several issues that caused the data corruption:
     - **Result:** 63 exams deleted (518 → 455 exams).
     - **Prevention:** Deduplicate by eyerCloudId before import. Check for existing exams when importing from new sources.
 
-16. **Manual birth date corrections** (fix_ivan_birth_date.js)
-    - **Issue:** Some patients have incorrect birth dates in DB vs EyerCloud UI, but `download_state.json` has `undefined` for those dates.
-    - **Example:** Ivan Lúcio de Lima had 1965-08-23 in DB but EyerCloud shows 1980-06-26.
-    - **Cause:** `download_state.json` doesn't capture all patient metadata. Some fields are only visible in EyerCloud UI.
-    - **Fix:** Manual correction script for specific cases.
-    - **Prevention:** When importing new patients, verify critical fields (name, birthDate, CPF) against EyerCloud UI if data seems suspicious.
+16. **131 patients with null birth dates** (fixed with fetch_birth_dates.py + fix_null_birth_dates.js)
+    - **Issue:** 131 patients (29% of total) had `birthDate: null` in DB. `download_state.json` had empty `birthday: ""` field for all affected patients.
+    - **Cause:** The `downloader_playwright.py` script doesn't fetch the `birthday` field from EyerCloud API. The field exists in `POST /patient/list` response but wasn't being captured.
+    - **Affected:** Margarida Inácio Santos do Prado (06/07/1955), Ivan Lúcio de Lima (26/06/1980), and 129 others.
+    - **Fix:** Created `fetch_birth_dates.py` using `POST /patient/list` API to fetch birth dates from EyerCloud, then `fix_null_birth_dates.js` to sync to DB.
+    - **Result:** 130 patients updated with birth dates. Only 1 patient (Nayara Petrola) has no birth date in EyerCloud.
+    - **Prevention:** Run `fetch_birth_dates.py` after downloading new patients to populate birth dates.
+
+17. **67 exams with clinic ID instead of name** (fixed with fix_strange_locations.js + correct_jaci_to_cdjordao.js)
+    - **Issue:** 67 exams had `location: "695e434f28b781ee6000d862"` (clinic_id) instead of city name.
+    - **Cause:** EyerCloud API returned clinic ID instead of `clinic_name` for some exams during download. The `download_state.json` stored the ID as-is.
+    - **Affected:** 67 exams from 03-05/02 (Campos do Jordão-SP period).
+    - **Fix:** Created mapping `695e434f28b781ee6000d862 -> Campos do Jordão-SP` based on exam dates (03-05/02). Script corrects all occurrences.
+    - **Result:** All 67 exams corrected to `location: "Campos do Jordão-SP"`. Final distribution: 204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE.
+    - **Prevention:** Add clinic ID-to-name mapping in future imports. Validate location field is not a 24-char hex ID.
 
 ### EyerCloud API Reference
 
