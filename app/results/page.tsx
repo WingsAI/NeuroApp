@@ -10,6 +10,25 @@ import { useRouter } from 'next/navigation';
 
 import html2canvas from 'html2canvas';
 
+// Resolve selected image: try exact ID match, then search across all patient exams, then fallback by index
+function resolveImage(patient: any, selectedId: string | null) {
+  if (!selectedId) return null;
+  const exact = patient.images?.find((img: any) => img.id === selectedId);
+  if (exact) return exact;
+  if (patient.exams) {
+    for (const exam of patient.exams) {
+      const found = exam.images?.find((img: any) => img.id === selectedId);
+      if (found) return found;
+    }
+  }
+  const match = selectedId.match(/-(\d+)$/);
+  if (match && patient.images?.length > 0) {
+    const idx = parseInt(match[1]);
+    if (idx < patient.images.length) return patient.images[idx];
+  }
+  return null;
+}
+
 // Helper component for high-fidelity printing/exporting
 function ReportPrintTemplate({ patient }: { patient: any }) {
   if (!patient || !patient.report) return null;
@@ -95,7 +114,7 @@ function ReportPrintTemplate({ patient }: { patient: any }) {
               <div className="premium-card p-3 overflow-hidden bg-sandstone-50/30">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden bg-sandstone-100">
                   <img
-                    src={patient.images.find(img => img.id === patient.report?.selectedImages?.od)?.data || ''}
+                    src={resolveImage(patient, patient.report?.selectedImages?.od)?.data || ''}
                     alt="Olho Direito"
                     className="w-full h-full object-cover"
                   />
@@ -109,7 +128,7 @@ function ReportPrintTemplate({ patient }: { patient: any }) {
               <div className="premium-card p-3 overflow-hidden bg-sandstone-50/30">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden bg-sandstone-100">
                   <img
-                    src={patient.images.find(img => img.id === patient.report?.selectedImages?.oe)?.data || ''}
+                    src={resolveImage(patient, patient.report?.selectedImages?.oe)?.data || ''}
                     alt="Olho Esquerdo"
                     className="w-full h-full object-cover"
                   />
@@ -951,11 +970,11 @@ export default function Results() {
                         <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                           <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
                             <img
-                              src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data || ''}
+                              src={resolveImage(selectedPatient, selectedPatient.report?.selectedImages?.od)?.data || ''}
                               alt="Olho Direito"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                               onClick={() => {
-                                const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.od)?.data;
+                                const url = resolveImage(selectedPatient, selectedPatient.report?.selectedImages?.od)?.data;
                                 if (url) window.open(url, '_blank');
                               }}
                             />
@@ -969,11 +988,11 @@ export default function Results() {
                         <div className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                           <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
                             <img
-                              src={selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data || ''}
+                              src={resolveImage(selectedPatient, selectedPatient.report?.selectedImages?.oe)?.data || ''}
                               alt="Olho Esquerdo"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                               onClick={() => {
-                                const url = selectedPatient.images.find(img => img.id === selectedPatient.report?.selectedImages?.oe)?.data;
+                                const url = resolveImage(selectedPatient, selectedPatient.report?.selectedImages?.oe)?.data;
                                 if (url) window.open(url, '_blank');
                               }}
                             />
