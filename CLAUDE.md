@@ -4,11 +4,11 @@
 
 NeuroApp is a medical ophthalmology platform for retinal exam screening. Built with Next.js 14 (App Router), Prisma ORM, PostgreSQL (Supabase), and deployed on Railway.
 
-**Stack:** Next.js 14, React 18, TypeScript, Prisma, PostgreSQL, Supabase Auth, AWS S3, TailwindCSS
+**Stack:** Next.js 14, React 18, TypeScript, Prisma, PostgreSQL, Supabase Auth, Bytescale, TailwindCSS
 
-**Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale (legacy) and AWS S3 (primary).
+**Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale.
 
-**Current DB state (2026-02-08):** 449 patients, 518 exams (454 EyerCloud + 64 manual CML), 4726 images (3296 COLOR + 1430 ANTERIOR), 330 reports, 415 patients with diseases. Exam status: 364 completed, 154 pending. Snapshot at `scripts/db_snapshots/snapshot_2026-02-08_2316.json`.
+**Current DB state (2026-02-09):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 6340 images, 381 reports, 415 patients with diseases. All 83 duplicate exams consolidated. Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
 
 **EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
 
@@ -311,6 +311,29 @@ This script has several issues that caused the data corruption:
 13. **Report save navigation** (fixed in medical/page.tsx)
     - **Cause:** After saving a report, the page reloaded the patient list instead of navigating away, keeping the patient in the pending list view.
     - **Fix:** Changed to `router.push('/results')` after successful save.
+
+### Feb 2026 - Missing Images & Duplicate Cleanup (2026-02-09)
+
+14. **895 images uploaded to Bytescale but missing from DB** (fixed with fix_missing_mapped_images.js)
+    - **Cause:** Images were uploaded to Bytescale and recorded in `bytescale_mapping_v2.json`, but never imported to DB or were deleted during cleanup operations.
+    - **Affected:** 156 exams had partial or missing images. Francisco Elivan had 0 images despite 3 being uploaded.
+    - **Fix:** Script compares DB images vs mapping by URL, adds missing images with UUID-based IDs.
+    - **Result:** 895 images restored (4726 → 5621 → 5175 after dedup consolidation).
+    - **Prevention:** Always verify DB import after Bytescale upload. Check `bytescale_mapping_v2.json` vs DB regularly.
+
+15. **63 duplicate exams (same eyerCloudId)** (fixed with fix_duplicate_exams.js)
+    - **Cause:** Cloud mapping and CML imports created duplicate exams for the same eyerCloudId within a patient.
+    - **Affected:** 63 patients had 2 exams with identical eyerCloudId and images.
+    - **Fix:** Script keeps the "best" exam (has report > more images > completed status > oldest), deletes duplicates.
+    - **Result:** 63 exams deleted (518 → 455 exams).
+    - **Prevention:** Deduplicate by eyerCloudId before import. Check for existing exams when importing from new sources.
+
+16. **Manual birth date corrections** (fix_ivan_birth_date.js)
+    - **Issue:** Some patients have incorrect birth dates in DB vs EyerCloud UI, but `download_state.json` has `undefined` for those dates.
+    - **Example:** Ivan Lúcio de Lima had 1965-08-23 in DB but EyerCloud shows 1980-06-26.
+    - **Cause:** `download_state.json` doesn't capture all patient metadata. Some fields are only visible in EyerCloud UI.
+    - **Fix:** Manual correction script for specific cases.
+    - **Prevention:** When importing new patients, verify critical fields (name, birthDate, CPF) against EyerCloud UI if data seems suspicious.
 
 ### EyerCloud API Reference
 
