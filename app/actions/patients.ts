@@ -277,6 +277,16 @@ export async function getPatientsAction() {
                 location: latestExam?.location || 'Não informado',
                 technicianName: latestExam?.technicianName || '',
                 images: latestExam?.images || [],
+                // Imagens unificadas de todos os exames (sem duplicatas por URL)
+                allImages: (() => {
+                    const allImgs = examsWithImages.flatMap((exam: any) => exam.images || []);
+                    const seenUrls = new Set<string>();
+                    return allImgs.filter((img: any) => {
+                        if (seenUrls.has(img.url)) return false;
+                        seenUrls.add(img.url);
+                        return true;
+                    });
+                })(),
                 report: latestExam?.report || null,
                 referral: latestExam?.referral || null,
             } as any;

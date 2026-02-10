@@ -795,7 +795,7 @@ function MedicalContent() {
                         </div>
                         <div className="flex items-center text-sm font-medium text-sandstone-600">
                           <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
-                          {patient.images.length} capturas integradas
+                          {(patient.allImages || patient.images).length} capturas integradas
                         </div>
                         {patient.phone && (
                           <div className="flex items-center text-sm font-medium text-cardinal-700">
@@ -961,7 +961,7 @@ function MedicalContent() {
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    {selectedPatient.images.map((image: any, index: number) => (
+                    {(selectedPatient.allImages || selectedPatient.images).map((image: any, index: number) => (
                       <div key={image.id} className={`premium-card p-1 group transition-all ${selectedReportImages.od === image.id || selectedReportImages.oe === image.id ? 'ring-2 ring-cardinal-700 bg-cardinal-50' : 'bg-white'}`}>
                         <div className="relative aspect-square overflow-hidden rounded-lg mb-2">
                           <img src={image.data} className="w-full h-full object-cover" />
@@ -998,7 +998,7 @@ function MedicalContent() {
                       <div className="premium-card p-4 bg-white min-h-[500px] space-y-6 shadow-xl border-t-4 border-t-cardinal-700">
                         {selectedReportImages.od ? (
                           <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-inner border border-sandstone-100">
-                            <img src={selectedPatient.images.find(i => i.id === selectedReportImages.od)?.data} className="w-full h-full object-cover" />
+                            <img src={(selectedPatient.allImages || selectedPatient.images).find((i: any) => i.id === selectedReportImages.od)?.data} className="w-full h-full object-cover" />
                           </div>
                         ) : (
                           <div className="aspect-[4/3] rounded-xl bg-sandstone-50 border-2 border-dashed border-sandstone-200 flex flex-col items-center justify-center text-sandstone-300">
@@ -1089,7 +1089,7 @@ function MedicalContent() {
                       <div className="premium-card p-4 bg-white min-h-[500px] space-y-6 shadow-xl border-t-4 border-t-cardinal-700">
                         {selectedReportImages.oe ? (
                           <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-inner border border-sandstone-100">
-                            <img src={selectedPatient.images.find(i => i.id === selectedReportImages.oe)?.data} className="w-full h-full object-cover" />
+                            <img src={(selectedPatient.allImages || selectedPatient.images).find((i: any) => i.id === selectedReportImages.oe)?.data} className="w-full h-full object-cover" />
                           </div>
                         ) : (
                           <div className="aspect-[4/3] rounded-xl bg-sandstone-50 border-2 border-dashed border-sandstone-200 flex flex-col items-center justify-center text-sandstone-300">

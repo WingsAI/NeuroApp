@@ -10,21 +10,25 @@ import { useRouter } from 'next/navigation';
 
 import html2canvas from 'html2canvas';
 
-// Resolve selected image: try exact ID match, then search across all patient exams, then fallback by index
+// Resolve selected image: try allImages first, then exact ID match, then search across all patient exams, then fallback by index
 function resolveImage(patient: any, selectedId: string | null) {
   if (!selectedId) return null;
-  const exact = patient.images?.find((img: any) => img.id === selectedId);
-  if (exact) return exact;
+  // Try unified allImages first
+  const allImages = patient.allImages || patient.images;
+  const fromAll = allImages?.find((img: any) => img.id === selectedId);
+  if (fromAll) return fromAll;
+  // Search across all exams
   if (patient.exams) {
     for (const exam of patient.exams) {
       const found = exam.images?.find((img: any) => img.id === selectedId);
       if (found) return found;
     }
   }
+  // Fallback by index suffix
   const match = selectedId.match(/-(\d+)$/);
-  if (match && patient.images?.length > 0) {
+  if (match && allImages?.length > 0) {
     const idx = parseInt(match[1]);
-    if (idx < patient.images.length) return patient.images[idx];
+    if (idx < allImages.length) return allImages[idx];
   }
   return null;
 }
@@ -1003,7 +1007,7 @@ export default function Results() {
                         </div>
                       ) : null}
                       {(!selectedPatient.report.selectedImages?.od && !selectedPatient.report.selectedImages?.oe) && (
-                        selectedPatient.images.slice(0, 2).map((image, index) => (
+                        (selectedPatient.allImages || selectedPatient.images).slice(0, 2).map((image: any, index: number) => (
                           <div key={image.id} className="premium-card p-2 group hover:border-cardinal-200 transition-all cursor-pointer overflow-hidden">
                             <div className="aspect-[4/3] rounded-lg overflow-hidden bg-sandstone-100">
                               <img
