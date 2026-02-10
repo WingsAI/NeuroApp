@@ -188,8 +188,13 @@ async function importMissingData(mapping, state, execute) {
   }
 
   const groups = Object.values(patientGroups);
-  console.log(`  Pacientes únicos no mapping (com ID longo): ${groups.length}`);
-  console.log(`  Exames únicos no mapping: ${groups.reduce((s, g) => s + g.exams.length, 0)}`);
+  const totalMappingEntries = Object.keys(mapping).length;
+  const skippedShortId = Object.values(mapping).filter(e => !e.exam_id || e.exam_id.length !== 24).length;
+  console.log(`  Total entries no mapping: ${totalMappingEntries}`);
+  console.log(`  Entries com ID longo (24 chars): ${totalMappingEntries - skippedShortId}`);
+  console.log(`  Entries ignoradas (ID curto): ${skippedShortId}`);
+  console.log(`  Pacientes únicos processados: ${groups.length}`);
+  console.log(`  Exames únicos processados: ${groups.reduce((s, g) => s + g.exams.length, 0)}`);
 
   // Build DB lookup: normalized name → patient record
   const existingPatients = await prisma.patient.findMany({
@@ -771,10 +776,18 @@ async function main() {
   const finalImages = await prisma.examImage.count();
   const finalReports = await prisma.medicalReport.count();
 
+  // Target: download_state has 455 exams and 449 unique patients
+  const stateExamCount = Object.keys(state.exam_details || {}).length;
+  const statePatientNames = new Set();
+  for (const data of Object.values(state.exam_details || {})) {
+    statePatientNames.add(normalizeName(data.patient_name || ''));
+  }
+  const statePatientCount = statePatientNames.size;
+
   console.log(`  Antes:  ${dbPatients} pacientes, ${dbExams} exames, ${dbImages} imagens, ${dbReports} laudos`);
   console.log(`  Depois: ${finalPatients} pacientes, ${finalExams} exames, ${finalImages} imagens, ${finalReports} laudos`);
-  console.log(`  Target: 451 pacientes, 456 exames`);
-  console.log(`  Delta:  ${451 - finalPatients} pacientes, ${456 - finalExams} exames faltando`);
+  console.log(`  Target (download_state): ${statePatientCount} pacientes, ${stateExamCount} exames`);
+  console.log(`  Delta:  ${statePatientCount - finalPatients} pacientes, ${stateExamCount - finalExams} exames faltando`);
 
   if (finalReports !== dbReports) {
     console.log(`  ALERTA: Laudos mudaram de ${dbReports} para ${finalReports}!`);
