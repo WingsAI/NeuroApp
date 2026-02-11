@@ -886,7 +886,7 @@ function MedicalContent() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Sexo</p>
-                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{selectedPatient.gender === 'F' ? 'Feminino' : selectedPatient.gender === 'M' ? 'Masculino' : 'Outro'}</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{['female', 'f', 'Feminino', 'feminino'].includes(selectedPatient.gender) ? 'Feminino' : ['male', 'm', 'Masculino', 'masculino'].includes(selectedPatient.gender) ? 'Masculino' : selectedPatient.gender || 'Não informado'}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Exame</p>

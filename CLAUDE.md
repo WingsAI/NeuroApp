@@ -169,6 +169,8 @@ scripts/
     image_types.json                # Real image types from API (UUID -> COLOR/ANTERIOR/REDFREE)
     fetch_image_types.py            # Fetches real image types from EyerCloud API
     fetch_anamnesis.py              # Fetches patient disease/anamnesis data from EyerCloud patient/list API
+    fetch_patient_details.py        # Fetches CPF, gender, birthday from EyerCloud patient/list API (creates patient_details.json)
+    patient_details.json            # Full patient details from EyerCloud (CPF, gender, birthday, anamnesis)
     anamnesis_data.json             # Raw anamnesis data from EyerCloud (451 patients)
     downloader_playwright.py        # Downloads exam images from EyerCloud (all pages)
     download_missing_48.py          # Downloads the 48 missing exams by ID (targeted)
@@ -181,6 +183,7 @@ scripts/
   fix_all_data.js        # Legacy sync (has bugs, see Known Issues below)
   fix_image_types.js     # Remove REDFREE images, fix ANTERIOR labels using image_types.json
   fix_diseases.js        # Sync disease data from download_state.json anamnesis to DB
+  fix_cpf_gender.js      # Sync CPF/gender from patient_details.json, normalize gender to Portuguese
   fix_duplicate_cml_status.js  # Mark duplicate CML exams as completed
   diagnose_db.js         # Database diagnostic
   db_snapshot.js         # Create JSON backup of all DB tables
@@ -198,11 +201,13 @@ types/
 2. Upload images to Bytescale: `python bytescale_uploader.py` (interactive)
 3. Fetch image types: `python fetch_image_types.py` (creates image_types.json)
 4. Fetch disease data: `python fetch_anamnesis.py` (requires manual login, updates download_state.json)
-5. Create DB snapshot: `node scripts/db_snapshot.js`
-6. Sync to database: `node scripts/sync_eyercloud_full.js` (preview first, then `--execute`)
-7. Fix image types: `node scripts/fix_image_types.js` (preview first, then `--execute`)
-8. Sync diseases: `node scripts/fix_diseases.js` (preview first, then `--execute`)
-9. Verify: `node scripts/test_data_integrity.js`
+5. Fetch patient details (CPF, gender): `python fetch_patient_details.py` (requires manual login, creates patient_details.json)
+6. Create DB snapshot: `node scripts/db_snapshot.js`
+7. Sync to database: `node scripts/sync_eyercloud_full.js` (preview first, then `--execute`)
+8. Fix image types: `node scripts/fix_image_types.js` (preview first, then `--execute`)
+9. Sync diseases: `node scripts/fix_diseases.js` (preview first, then `--execute`)
+10. Sync CPF/gender: `node scripts/fix_cpf_gender.js` (preview first, then `--execute`)
+11. Verify: `node scripts/test_data_integrity.js`
 
 ### Fixing data issues
 
@@ -349,13 +354,26 @@ This script has several issues that caused the data corruption:
     - **Result:** All 67 exams corrected to `location: "Campos do Jordão-SP"`. Final distribution: 204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE.
     - **Prevention:** Add clinic ID-to-name mapping in future imports. Validate location field is not a 24-char hex ID.
 
+18. **CPF and gender missing for most patients** (fixed with fetch_patient_details.py + fix_cpf_gender.js)
+    - **Cause:** The exam endpoint (`/examData/list?id=EXAM_ID`) does NOT reliably return CPF and gender. The patient endpoint (`/patient/list`) has the complete data, but the existing scripts (`fetch_anamnesis.py`, `fetch_birth_dates.py`) only extracted disease and birthday fields — not CPF or gender.
+    - **Affected:** 143 patients with null gender, all 306 with gender had `"male"`/`"female"` (English, from EyerCloud) instead of `"Masculino"`/`"Feminino"` (Portuguese, expected by UI). CPF missing for patients where exam endpoint didn't return it.
+    - **Fix:** Created `fetch_patient_details.py` to fetch ALL patient fields (CPF, gender, birthday, anamnesis) from patient endpoint. Created `fix_cpf_gender.js` to sync to DB and normalize gender values to Portuguese (`male`->`Masculino`, `female`->`Feminino`).
+    - **CPF field discovery:** The EyerCloud API does NOT have a `cpf` field. CPF is stored in `document2`. The field `document0`=RG, `document1`=certidão nascimento, `document2`=CPF, `document3`=outro documento. 362 of 451 patients have CPF in `document2`.
+    - **Gender format:** The API returns `"M"`/`"F"` (not `"male"`/`"female"` as previously assumed from the mapping file). The fix script handles all formats.
+    - **Gender display bug:** `medical/page.tsx` line 889 compared `gender === 'F'` / `'M'` but DB had `'female'` / `'male'`, causing ALL patients to show as "Outro". Fixed to handle all formats.
+    - **Result:** 429 patients updated with normalized gender (`Masculino`/`Feminino`), 122 patients updated with CPF from `document2`.
+    - **Prevention:** Always use the PATIENT endpoint (`/patient/list`) for patient demographics (CPF, gender, birthday). The EXAM endpoint is only reliable for exam data (images, dates). When storing gender, always normalize to Portuguese values used by the UI. CPF is in `document2`, not `cpf`.
+
 ### EyerCloud API Reference
 
 - **Patient list:** `POST https://eyercloud.com/api/v2/eyercloud/patient/list` with body `{page: N}` (20 per page)
-  - Returns patient objects with `anamnesis` field containing disease flags
+  - Returns patient objects with: `id`, `fullName`, `cpf`, `gender` (`"male"`/`"female"`), `birthday`, `anamnesis`, `otherDisease`
   - `anamnesis` fields: `diabetes`, `hipertensaoArterial`, `hipercolesterolemia`, `tabagismo`, `catarata`, `retinopatia`, `glaucoma`
+  - **This is the ONLY reliable source for CPF and gender.** The exam endpoint does NOT return these fields consistently.
+  - **CPF is in `document2`**, NOT in a `cpf` field. Documents: `document0`=RG, `document1`=certidão nascimento, `document2`=CPF, `document3`=outro documento.
+  - **Gender** uses `"M"`/`"F"` format (not `"male"`/`"female"`).
 - **Exam list:** `POST https://eyercloud.com/api/v2/eyercloud/exam/list` with body `{page: N}`
-- **Exam data:** `POST https://eyercloud.com/api/v2/eyercloud/examData/list?id=EXAM_ID` - returns images, NOT patient data
+- **Exam data:** `POST https://eyercloud.com/api/v2/eyercloud/examData/list?id=EXAM_ID` - returns images, NOT patient data. Does NOT reliably include CPF or gender.
 - **Auth:** Requires browser session cookies. Use Playwright with `headless=False` and manual login (15s delay)
 - **Pagination:** Always use `{page: N}`, NOT `{examCurrentPage: N}` (the latter is broken)
 

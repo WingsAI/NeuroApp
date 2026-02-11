@@ -1,0 +1,4894 @@
+{
+  "69809d708bc8fc9984f7796d": {
+    "name": "ADEMILSON ROGERIO GIRIOLI",
+    "cpf": "13351569840",
+    "gender": "M",
+    "birthday": "1974-03-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d71379c4e1a51cbd039": {
+    "name": "ADRIANA CARVALHO FERNANDES",
+    "cpf": "18460774864",
+    "gender": "F",
+    "birthday": "1973-01-17T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d708bc8fc9984f7796e": {
+    "name": "ADRIANA MARTIMIANO",
+    "cpf": "12157973893",
+    "gender": "F",
+    "birthday": "1974-01-24T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7151ffa0242a2cdd89": {
+    "name": "ADRIANA PERPETUA DA SILVA",
+    "cpf": "21794188843",
+    "gender": "F",
+    "birthday": "1977-04-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001a5029f1e6981546a59": {
+    "name": "AILA CRISTINA ALVES DE LIMA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1984-07-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983824f4af51fbb614f6619": {
+    "name": "AILTON MARCONDES",
+    "cpf": "19920640832",
+    "gender": "M",
+    "birthday": "1974-06-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d711fa8062e17d3ad94": {
+    "name": "AIRTON DE OLIVEIRA SANTOS",
+    "cpf": "06312808807",
+    "gender": "",
+    "birthday": "1964-10-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d711fa8062e17d3ad96": {
+    "name": "ALEX RISSATO BARBOSA",
+    "cpf": "27922525885",
+    "gender": "M",
+    "birthday": "1980-11-26T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980af1251ffa0242a2ceef8": {
+    "name": "ALICE ALVES",
+    "cpf": "22840993864",
+    "gender": "M",
+    "birthday": "1963-08-15T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983824f6c333284694510af": {
+    "name": "AMARO BENTO SOARES FILHO",
+    "cpf": "76578232400",
+    "gender": "M",
+    "birthday": "1966-12-26T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e456526260539c1666ae0": {
+    "name": "ANA CASSIA FERREIRA FIRMO",
+    "cpf": "80048463353",
+    "gender": "",
+    "birthday": "1946-07-05T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001a64e429636ed944bd9": {
+    "name": "ANA FERREIRA BELIZARIO",
+    "cpf": "",
+    "gender": "",
+    "birthday": "1951-01-03T00:00:00-02:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980acbc379c4e1a51cbdfa2": {
+    "name": "ANA MARIA DOS SANTOS",
+    "cpf": "26793047809",
+    "gender": "M",
+    "birthday": "1965-09-27T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983824f6c333284694510b0": {
+    "name": "ANDRÉA APARECIDA GONÇALVES DA SILVA ROSA",
+    "cpf": "40021226890",
+    "gender": "F",
+    "birthday": "1986-08-29T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d728bc8fc9984f77972": {
+    "name": "ANDREA LUZIA VIEIRA",
+    "cpf": "32347686844",
+    "gender": "F",
+    "birthday": "1981-12-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "69809d728bc8fc9984f77973": {
+    "name": "ANIZIO RIBEIRO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1950-08-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d728bc8fc9984f77974": {
+    "name": "ANNA JULIA ESCOBAR SOARES",
+    "cpf": "57499263894",
+    "gender": "F",
+    "birthday": "2007-12-30T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "695e9f4c4b0e754dac36938a": {
+    "name": "ANTONIA ALVES DA SILVA",
+    "cpf": "33042616304",
+    "gender": "F",
+    "birthday": "1948-11-02T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cataract": true
+    },
+    "otherDisease": ""
+  },
+  "697001a6fa6df75200cfe260": {
+    "name": "ANTONIA ANTENORA RODRIGUES RAMOS",
+    "cpf": "00471596345",
+    "gender": "F",
+    "birthday": "1958-02-05T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001a626260539c16a95df": {
+    "name": "ANTONIA ELIDETE RODRIGUES VIEIRA",
+    "cpf": "01442069350",
+    "gender": "F",
+    "birthday": "1976-09-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001a6029f1e6981546a5a": {
+    "name": "ANTONIA ELIZIMARIA DE QUEIROZ",
+    "cpf": "63713985391",
+    "gender": "F",
+    "birthday": "1958-01-20T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7251ffa0242a2cdd8d": {
+    "name": "ANTONIA FERNANDES CANEIRA",
+    "cpf": "05226140860",
+    "gender": "F",
+    "birthday": "1959-06-13T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a64e429636ed944bdb": {
+    "name": "ANTONIA FERNANDES DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1950-11-04T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a7fa6df75200cfe261": {
+    "name": "ANTONIA FERREIRA DE MORAIS MACIEK",
+    "cpf": "25926314372",
+    "gender": "F",
+    "birthday": "1951-05-02T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697001a726260539c16a95e0": {
+    "name": "ANTONIA FERREIRA DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1961-12-31T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e7b354b0e754dac368176": {
+    "name": "Antonia Guilherme da Silva",
+    "cpf": "20485794349",
+    "gender": "",
+    "birthday": "1949-11-03T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a7029f1e6981546a5b": {
+    "name": "ANTONIA HELENA ALVES",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1960-06-01T00:00:00-03:00",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001a74e429636ed944bdc": {
+    "name": "ANTONIA HONORATO BARBOSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1967-03-11T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001a7fa6df75200cfe262": {
+    "name": "ANTONIA ISABEL MORAIS BRAGA",
+    "cpf": "40079317391",
+    "gender": "F",
+    "birthday": "1996-02-20T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7251ffa0242a2cdd8e": {
+    "name": "ANTONIA LAJUDE CAMACHO MUNHOZ",
+    "cpf": "24578911837",
+    "gender": "F",
+    "birthday": "1957-08-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001a826260539c16a95e1": {
+    "name": "ANTONIA PAULA PEREIRA DE OLIVEIRA",
+    "cpf": "93568878372",
+    "gender": "F",
+    "birthday": "1967-05-30T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a8029f1e6981546a5c": {
+    "name": "ANTONIA SOUSA DO NASCIMENTO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1945-01-17T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a9fa6df75200cfe264": {
+    "name": "ANTÔNIO AFONSO DE OLIVEIRA",
+    "cpf": "76532518387",
+    "gender": "M",
+    "birthday": "1948-03-20T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69838250d5cd128782c985f0": {
+    "name": "ANTÔNIO BENEDITO SANTOS",
+    "cpf": "03863696824",
+    "gender": "M",
+    "birthday": "1954-05-21T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697d03d8565494aed21c07be": {
+    "name": "ANTONIO BENEDITO SOARES",
+    "cpf": "00252868897",
+    "gender": "M",
+    "birthday": "1957-05-13T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001a84e429636ed944bdd": {
+    "name": "ANTONIO BENTO DO NASCIMENTO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1961-03-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": false,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001a8fa6df75200cfe263": {
+    "name": "ANTONIO CARLOS TEIXEIRA",
+    "cpf": "",
+    "gender": "",
+    "birthday": "1954-07-02T00:00:00-03:00",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d73379c4e1a51cbd03b": {
+    "name": "ANTONIO CUSTODIO PERREIRA",
+    "cpf": "73492183891",
+    "gender": "M",
+    "birthday": "1950-05-30T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983824f4af51fbb614f661d": {
+    "name": "ANTONIO DIONÍSIO PEREIRA PRADO",
+    "cpf": "03242236840",
+    "gender": "M",
+    "birthday": "1956-10-05T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d738bc8fc9984f77978": {
+    "name": "ANTONIO FERNANDES CAMARA",
+    "cpf": "58967524820",
+    "gender": "M",
+    "birthday": "1954-04-17T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e444f28b781ee6000d8d5": {
+    "name": "ANTONIO FERREIRA FIRMO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1941-08-04T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001a8029f1e6981546a5d": {
+    "name": "ANTONIO GONCALVES FERREIRA",
+    "cpf": "00118278312",
+    "gender": "M",
+    "birthday": "1957-10-22T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d738bc8fc9984f77976": {
+    "name": "ANTONIO RIBEIRO ROCHA",
+    "cpf": "07792217884",
+    "gender": "M",
+    "birthday": "1954-09-08T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a94e429636ed944bde": {
+    "name": "ANTONIO VITAL FILHO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1952-02-26T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d7451ffa0242a2cdd92": {
+    "name": "APARECIDA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "69809d758bc8fc9984f7797c": {
+    "name": "APARECIDA DE FATIMA BRUNINI MANFRE",
+    "cpf": "13336367840",
+    "gender": "F",
+    "birthday": "1956-10-04T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "698382506c333284694510b5": {
+    "name": "APARECIDA DE FÁTIMA MARCONDES",
+    "cpf": "09155097847",
+    "gender": "F",
+    "birthday": "1957-09-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d758bc8fc9984f7797b": {
+    "name": "APARECIDA DE FATIMA PEREIRA FAVARAN",
+    "cpf": "38798053850",
+    "gender": "F",
+    "birthday": "1970-07-13T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d758bc8fc9984f7797d": {
+    "name": "APARECIDA DE FATIMA PERENCINE SOARES",
+    "cpf": "18152931870",
+    "gender": "F",
+    "birthday": "1962-01-20T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d74379c4e1a51cbd03e": {
+    "name": "APARECIDA DONNIZETI BEZERRA DE SOUZA",
+    "cpf": "10633437808",
+    "gender": "F",
+    "birthday": "1959-12-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "69809d74379c4e1a51cbd03c": {
+    "name": "APARECIDA ELIETE RODRIGUES REIS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1957-12-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d74379c4e1a51cbd03d": {
+    "name": "APARECIDA IRACELIA MANFRE MARTINS",
+    "cpf": "30867394870",
+    "gender": "F",
+    "birthday": "1955-01-25T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "698382504af51fbb614f661f": {
+    "name": "APARECIDA MARIA DOS SANTOS",
+    "cpf": "23258663866",
+    "gender": "F",
+    "birthday": "1959-01-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "698382506c333284694510b4": {
+    "name": "APARECIDA MARIA DOS SANTOS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1959-01-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d731fa8062e17d3ad99": {
+    "name": "APARECIDA ORTIS FEDOCI",
+    "cpf": "08238736846",
+    "gender": "F",
+    "birthday": "1957-09-25T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d751fa8062e17d3ad9b": {
+    "name": "APARECIDO PIVARO",
+    "cpf": "00258586885",
+    "gender": "M",
+    "birthday": "1950-09-08T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7651ffa0242a2cdd96": {
+    "name": "APARECIDO ROBERTO LOCAISE",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1962-06-06T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "69809d75379c4e1a51cbd040": {
+    "name": "APARECIDO TERUEL MARTINS",
+    "cpf": "90347080804",
+    "gender": "M",
+    "birthday": "1956-02-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d76379c4e1a51cbd041": {
+    "name": "ARLINDO BATISTA DA SILVA",
+    "cpf": "78490855820",
+    "gender": "M",
+    "birthday": "1950-06-08T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7651ffa0242a2cdd97": {
+    "name": "ARLINDO PEDRO DE CARVALHO",
+    "cpf": "01887022880",
+    "gender": "M",
+    "birthday": "1955-03-03T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7651ffa0242a2cdd98": {
+    "name": "AUXILIADORA REGINA DO NASCIMENTO",
+    "cpf": "27862478886",
+    "gender": "F",
+    "birthday": "1975-03-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001a926260539c16a95e2": {
+    "name": "BASILIA LINO DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1955-12-15T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "698382514af51fbb614f6621": {
+    "name": "BENEDITA APARECIDA VELASCO DE LIMA",
+    "cpf": "10984803840",
+    "gender": "F",
+    "birthday": "1969-09-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb96e1ff5209198cf9a7": {
+    "name": "BENEDITA BRASÍLIA MELLo SANTOS",
+    "cpf": "23441425847",
+    "gender": "F",
+    "birthday": "1971-03-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9693afdfe62c6fa7ed": {
+    "name": "BENEDITA MARIA DE PAULA LIMA",
+    "cpf": "11189234807",
+    "gender": "F",
+    "birthday": "1950-08-09T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb966c333284694598c0": {
+    "name": "BENEDITO MARCONDES",
+    "cpf": "78892392891",
+    "gender": "M",
+    "birthday": "1955-09-05T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "diabeticRetinopathy": true
+    },
+    "otherDisease": ""
+  },
+  "6980f144379c4e1a51cc0dae": {
+    "name": "BRAZ MUNIZ",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1957-02-08T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d76379c4e1a51cbd042": {
+    "name": "CACILDA SONEMBERG",
+    "cpf": "37666189893",
+    "gender": "F",
+    "birthday": "1978-02-19T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e8a74fa6df75200cbe2c4": {
+    "name": "CAMILA MARIA FERREIRA CITO",
+    "cpf": "01105454355",
+    "gender": "F",
+    "birthday": "1982-07-14T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980ec4a51ffa0242a2d1bd3": {
+    "name": "CAMILA SAMANTA DOS SANTOS LOURENÇO",
+    "cpf": "36491239837",
+    "gender": "F",
+    "birthday": "1988-03-13T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980adc5379c4e1a51cbe07b": {
+    "name": "CANDIDA MARIA DE LIMA",
+    "cpf": "44862733468",
+    "gender": "F",
+    "birthday": "1956-04-09T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d77379c4e1a51cbd044": {
+    "name": "CARMEM TEREZINHA LAVALL BORSATTO",
+    "cpf": "25068983870",
+    "gender": "F",
+    "birthday": "1960-05-03T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d771fa8062e17d3ad9d": {
+    "name": "CARMEN LUCIA PAVAO DE CAMPOS",
+    "cpf": "97508918800",
+    "gender": "F",
+    "birthday": "1947-12-16T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7751ffa0242a2cdd9a": {
+    "name": "CASSIA ESCOBAR GATTO",
+    "cpf": "28346834845",
+    "gender": "F",
+    "birthday": "1963-05-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d77379c4e1a51cbd045": {
+    "name": "CATARINA BERNARDO NALIM",
+    "cpf": "08783585877",
+    "gender": "",
+    "birthday": "1963-02-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d771fa8062e17d3ad9e": {
+    "name": "CELESTINO ESTEVANI",
+    "cpf": "97385140882",
+    "gender": "M",
+    "birthday": "1951-09-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d78379c4e1a51cbd046": {
+    "name": "CELIA CORREIA DE MELO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1955-07-30T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6984cb97e1ff5209198cf9a8": {
+    "name": "CÉLIA DE LIMA SANTOS",
+    "cpf": "31242919805",
+    "gender": "F",
+    "birthday": "1971-11-06T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6980ec4a51ffa0242a2d1bd4": {
+    "name": "CELIA HELENA DA SILVA",
+    "cpf": "10668949813",
+    "gender": "F",
+    "birthday": "1968-08-03T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d781fa8062e17d3ad9f": {
+    "name": "CESAR LUIZ GONCALVES CANEIRA",
+    "cpf": "00256035822",
+    "gender": "M",
+    "birthday": "1957-09-30T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001a9029f1e6981546a5e": {
+    "name": "CICERO ERASMO FERREIRA DO NASCIMENTO",
+    "cpf": "39250784368",
+    "gender": "M",
+    "birthday": "1970-08-25T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001a94e429636ed944bdf": {
+    "name": "CIDELVANIA GONCALVES DE BRITO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1989-12-14T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d7851ffa0242a2cdd9c": {
+    "name": "CILENE APARECIDA FERREIRA FREITAS",
+    "cpf": "10247927813",
+    "gender": "F",
+    "birthday": "1967-04-09T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb601fa8062e17d3e4c0": {
+    "name": "CLARICE JERÔNIMO",
+    "cpf": "15280843814",
+    "gender": "F",
+    "birthday": "1954-06-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb966c333284694598c1": {
+    "name": "CLAUDETE APARECIDA DA SILVA",
+    "cpf": "29328042860",
+    "gender": "F",
+    "birthday": "1972-06-28T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838251a0e9c8adf6826e2f": {
+    "name": "CLAUDINEIA SANTOS DA SILVA",
+    "cpf": "20187008809",
+    "gender": "F",
+    "birthday": "1973-05-16T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d788bc8fc9984f77981": {
+    "name": "CLAUDINOR THOMEY",
+    "cpf": "08638811810",
+    "gender": "M",
+    "birthday": "1965-09-16T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7851ffa0242a2cdd9d": {
+    "name": "CLAUDIO DONIZETE CARVICHIO",
+    "cpf": "06581216852",
+    "gender": "M",
+    "birthday": "1965-10-02T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d798bc8fc9984f77982": {
+    "name": "CLAUDIONOR RODRIGUES SOBRINHO",
+    "cpf": "13341941819",
+    "gender": "M",
+    "birthday": "1970-01-28T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d791fa8062e17d3ada0": {
+    "name": "CLAUDOMIRO SPINELI",
+    "cpf": "11468591800",
+    "gender": "M",
+    "birthday": "1969-11-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d791fa8062e17d3ada1": {
+    "name": "CLEMENTE ISMAEL ROCHI GALLE",
+    "cpf": "08467690852",
+    "gender": "M",
+    "birthday": "1953-12-05T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838578a0e9c8adf68271c6": {
+    "name": "CLEUSA APARECIDA MENINO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1961-05-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001aa4e429636ed944be0": {
+    "name": "CLÓVIS ALVES TORQUATO",
+    "cpf": "05685718357",
+    "gender": "M",
+    "birthday": "1993-01-03T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001aa26260539c16a95e3": {
+    "name": "COSMO XAVIER DE OLIVEIRA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1956-05-12T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7951ffa0242a2cdd9e": {
+    "name": "CREUZA DE OLIVEIRA AMARO",
+    "cpf": "29669338875",
+    "gender": "F",
+    "birthday": "1959-02-14T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980b0361fa8062e17d3c06e": {
+    "name": "CRISTIANE JERÔNIMO DA COSTA",
+    "cpf": "33695963859",
+    "gender": "F",
+    "birthday": "1978-09-19T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e9dc7fa6df75200cbee7e": {
+    "name": "CRISTINA CANDIDO DA FRANCA",
+    "cpf": "78156440315",
+    "gender": "F",
+    "birthday": "1962-11-20T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001aa4e429636ed944be1": {
+    "name": "DAVINA VALE RODRIGUES",
+    "cpf": "34853090363",
+    "gender": "F",
+    "birthday": "1958-01-24T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001aafa6df75200cfe265": {
+    "name": "DELMIRA ROBEIRO LIMA",
+    "cpf": "25613160848",
+    "gender": "F",
+    "birthday": "1967-12-08T00:00:00-02:00",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6980eb6051ffa0242a2d1ae0": {
+    "name": "DIOMARA DE SOUZA MUNIZ",
+    "cpf": "62829521820",
+    "gender": "F",
+    "birthday": "1952-11-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "698385784af51fbb614f69d0": {
+    "name": "DJALMA APARECIDO LOURENÇO",
+    "cpf": "24557261850",
+    "gender": "M",
+    "birthday": "1975-05-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001aa26260539c16a95e4": {
+    "name": "DOMINGAS FERNANDES DA CONCEICAO",
+    "cpf": "03749602328",
+    "gender": "F",
+    "birthday": "1953-06-10T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d79379c4e1a51cbd049": {
+    "name": "DORLINDA CRIPA FERREIRA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1943-05-30T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7a8bc8fc9984f77984": {
+    "name": "DRAUSIO TEDESQUI",
+    "cpf": "03771366895",
+    "gender": "M",
+    "birthday": "1941-03-28T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001aa029f1e6981546a5f": {
+    "name": "EDILONEIDE PEREIRA FERNANDES",
+    "cpf": "02129259383",
+    "gender": "F",
+    "birthday": "1981-11-27T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d7a1fa8062e17d3ada4": {
+    "name": "EDNA RODRIGUES OLIVEIRA",
+    "cpf": "51565426894",
+    "gender": "F",
+    "birthday": "1955-09-27T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7a379c4e1a51cbd04a": {
+    "name": "EDVAR PERREIRA DA COSTA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1953-05-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7b379c4e1a51cbd04b": {
+    "name": "ELAINE APARECIDA SOARES SOLDATTI",
+    "cpf": "20277958806",
+    "gender": "F",
+    "birthday": "1967-10-16T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7b51ffa0242a2cdd9f": {
+    "name": "ELAINE DOS SANTOS PEREIRA VERA",
+    "cpf": "26631569818",
+    "gender": "F",
+    "birthday": "1972-08-19T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838578d5cd128782c989b9": {
+    "name": "ELENA RAIMUNDA DA SILVA",
+    "cpf": "30374064881",
+    "gender": "F",
+    "birthday": "1958-08-20T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7b8bc8fc9984f77987": {
+    "name": "ELIANE DOS SANTOS CARDOSO",
+    "cpf": "09812465839",
+    "gender": "F",
+    "birthday": "1969-05-20T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7b1fa8062e17d3ada6": {
+    "name": "ELISA DE LOURDES VIEIRA DUARTE",
+    "cpf": "27898901886",
+    "gender": "F",
+    "birthday": "1966-12-25T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7b8bc8fc9984f77988": {
+    "name": "ELSO AUGUSTO DOS SANTOS",
+    "cpf": "02293589854",
+    "gender": "M",
+    "birthday": "1963-10-29T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7c51ffa0242a2cdda1": {
+    "name": "ELUZIA PERPUTO NOGUEIRA DALOLEO",
+    "cpf": "13351002882",
+    "gender": "F",
+    "birthday": "1975-03-29T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9793afdfe62c6fa7f0": {
+    "name": "ELZA DE PAULA LIMA DE ARAÚJO",
+    "cpf": "33180382880",
+    "gender": "F",
+    "birthday": "1973-09-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7c1fa8062e17d3ada7": {
+    "name": "EMERSON DALOLEO",
+    "cpf": "07033261802",
+    "gender": "M",
+    "birthday": "1970-12-25T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e79cffa6df75200cbdc70": {
+    "name": "EMILIA VIEIRA DA SILVA",
+    "cpf": "00233301399",
+    "gender": "F",
+    "birthday": "1953-07-26T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7c8bc8fc9984f7798b": {
+    "name": "EMILIO MUNHOZ FILHO",
+    "cpf": "01899225838",
+    "gender": "M",
+    "birthday": "1953-03-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7c8bc8fc9984f7798c": {
+    "name": "ERMELINDA DA ROCHA BRAZ",
+    "cpf": "25833381886",
+    "gender": "F",
+    "birthday": "1948-03-18T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001abfa6df75200cfe266": {
+    "name": "ERNISLANDIA RIBEIRO XAVIER",
+    "cpf": "01940109370",
+    "gender": "F",
+    "birthday": "1982-05-09T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001ab26260539c16a95e5": {
+    "name": "EUDOCIANA CAVALCANTE MACEDO",
+    "cpf": "86899880253",
+    "gender": "M",
+    "birthday": "1985-05-22T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001ab029f1e6981546a61": {
+    "name": "FABIANA LEANDRO DA SILVA",
+    "cpf": "01607180316",
+    "gender": "F",
+    "birthday": "1983-07-15T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7d379c4e1a51cbd04f": {
+    "name": "FABIO ALESSANDRO MOREIRA",
+    "cpf": "26312386805",
+    "gender": "M",
+    "birthday": "1974-11-28T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7d8bc8fc9984f7798d": {
+    "name": "FLAUZINA APARECIDA COIMBRA DE OLIVEIRA",
+    "cpf": "37512694873",
+    "gender": "F",
+    "birthday": "1954-08-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7d1fa8062e17d3ada9": {
+    "name": "FLAVIO JORDAO",
+    "cpf": "09820431808",
+    "gender": "M",
+    "birthday": "1969-02-16T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7d1fa8062e17d3ada8": {
+    "name": "FLAVIO OLIVEIRA DOS PASSOS",
+    "cpf": "35917010846",
+    "gender": "M",
+    "birthday": "1987-10-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7d379c4e1a51cbd051": {
+    "name": "FLORIZA TEODORO MATIAZZI",
+    "cpf": "85423181291",
+    "gender": "F",
+    "birthday": "1968-09-11T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001ab4e429636ed944be3": {
+    "name": "FRANCINALDA ALVES DA SILVA TEIXEIRA",
+    "cpf": "92543715304",
+    "gender": "F",
+    "birthday": "1981-04-06T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001abfa6df75200cfe267": {
+    "name": "FRANCISA ONELIA BEZERRA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1967-07-20T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001ac26260539c16a95e7": {
+    "name": "FRANCISCA ALVES CAVALCANTE DA FRANCA",
+    "cpf": "34676929315",
+    "gender": "F",
+    "birthday": "1948-06-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001acfa6df75200cfe268": {
+    "name": "FRANCISCA ALVES DA FRANCA VERISSIMO",
+    "cpf": "82815259320",
+    "gender": "F",
+    "birthday": "1953-04-28T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001ac4e429636ed944be4": {
+    "name": "FRANCISCA ALVES DE SOUZA",
+    "cpf": "66555736372",
+    "gender": "F",
+    "birthday": "1952-10-05T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001ad029f1e6981546a63": {
+    "name": "FRANCISCA ANTONIA PEREIRA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1961-12-24T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001ac26260539c16a95e6": {
+    "name": "FRANCISCA KELLIANE ARAÚJO DE SOUSA",
+    "cpf": "03435658380",
+    "gender": "F",
+    "birthday": "1992-02-22T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e46d426260539c1666b92": {
+    "name": "FRANCISCA MARIA FERREIRA DE SOUSA",
+    "cpf": "63731525372",
+    "gender": "F",
+    "birthday": "1967-10-28T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001ac029f1e6981546a62": {
+    "name": "FRANCISCA RODRIGUES BIZERRA CAVALCANTE",
+    "cpf": "30933838387",
+    "gender": "F",
+    "birthday": "1949-11-24T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695ea2a528b781ee60011237": {
+    "name": "FRANCISCA SANDRA De Sousa",
+    "cpf": "02489417398",
+    "gender": "F",
+    "birthday": "1984-09-08T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001ad4e429636ed944be5": {
+    "name": "FRANCISCA SARAIVA DE MELO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1983-02-05T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "glaucoma": true
+    },
+    "otherDisease": ""
+  },
+  "695e815528b781ee60010031": {
+    "name": "Francisca Torquato Barbosa",
+    "cpf": "51854864300",
+    "gender": "F",
+    "birthday": "1975-12-17T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e855228b781ee600101a3": {
+    "name": "FRANCISCA VIEIRA DE LIMA SOUZA",
+    "cpf": "00249099390",
+    "gender": "F",
+    "birthday": "1965-06-22T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001ad26260539c16a95e8": {
+    "name": "FRANCISCO ALVES DE MACEDO",
+    "cpf": "82116768187",
+    "gender": "M",
+    "birthday": "1949-06-27T00:00:00-03:00",
+    "anamnesis": {
+      "cholesterol": true,
+      "cataract": true,
+      "pterygium": true
+    },
+    "otherDisease": ""
+  },
+  "697001ad029f1e6981546a64": {
+    "name": "FRANCISCO CAMILO DE SOUSA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1940-11-28T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695ea6564b0e754dac3698f0": {
+    "name": "FRANCISCO CHAGAS DA costa",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1953-10-09T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001ae4e429636ed944be6": {
+    "name": "FRANCISCO CHAGAS LOIOLA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1966-08-30T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e8bb828b781ee6001040a": {
+    "name": "FRANCISCO DAS CHAGAS PEREIRA NETO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1958-09-11T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001aefa6df75200cfe26a": {
+    "name": "FRANCISCO ELIVAN DE SOUSA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1970-11-07T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697001ae26260539c16a95ea": {
+    "name": "FRANCISCO FEIJO DA SILVA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1950-10-07T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001adfa6df75200cfe269": {
+    "name": "FRANCISCO FRANCINE DE OLIVEIRA",
+    "cpf": "40075508320",
+    "gender": "M",
+    "birthday": "1951-08-17T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e77e426260539c1668db0": {
+    "name": "FRANCISCO OLIVEIRA LOIOLA",
+    "cpf": "01911482378",
+    "gender": "M",
+    "birthday": "1949-06-06T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001ae029f1e6981546a65": {
+    "name": "FRANCISCO RODRIGUES BEZERRA",
+    "cpf": "00233300317",
+    "gender": "M",
+    "birthday": "1969-04-14T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001ae4e429636ed944be7": {
+    "name": "FRANCISCO ROSENDO MUNDA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1954-07-13T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001aefa6df75200cfe26b": {
+    "name": "FRANCISCO SERGIO OLIVEIRA",
+    "cpf": "45457611353",
+    "gender": "M",
+    "birthday": "1964-08-14T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001af26260539c16a95eb": {
+    "name": "FRANCISCO TEOBALDO CIDRÃO SOUTO JUNIOR",
+    "cpf": "93029497372",
+    "gender": "M",
+    "birthday": "1981-05-12T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001af029f1e6981546a66": {
+    "name": "FRANCISDALVA ALVES DA SILVA",
+    "cpf": "02988778302",
+    "gender": "F",
+    "birthday": "1985-02-21T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838579d5cd128782c989ba": {
+    "name": "GABRIEL ALVES DA SILVA ROSA",
+    "cpf": "49168391889",
+    "gender": "M",
+    "birthday": "2000-08-18T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001af4e429636ed944be8": {
+    "name": "GERALDA ESTEVAO DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1965-04-11T00:00:00-03:00",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "695e6cf826260539c16686b2": {
+    "name": "GERALDO ALVES MOTA",
+    "cpf": "36953318368",
+    "gender": "M",
+    "birthday": "1961-04-16T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9793afdfe62c6fa7f2": {
+    "name": "GESSICA TRONI DOS SANTOS",
+    "cpf": "29831331842",
+    "gender": "F",
+    "birthday": "1981-07-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7e1fa8062e17d3adaa": {
+    "name": "GILBERTO TERUEL",
+    "cpf": "01464269831",
+    "gender": "M",
+    "birthday": "1965-05-27T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb60379c4e1a51cc07d5": {
+    "name": "GLÓRIA ALVES SOUZA",
+    "cpf": "25608141881",
+    "gender": "F",
+    "birthday": "1965-03-10T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "69809d7e379c4e1a51cbd052": {
+    "name": "GUILHERME CONSTATINO BORGES DA SILVA",
+    "cpf": "15939401813",
+    "gender": "M",
+    "birthday": "1974-03-21T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb98e1ff5209198cf9a9": {
+    "name": "HELENA CORREIA DA SILVA",
+    "cpf": "01913618870",
+    "gender": "",
+    "birthday": "1950-03-15T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838579a0e9c8adf68271c8": {
+    "name": "HELENA GABRIELA DE MELO",
+    "cpf": "29693631862",
+    "gender": "F",
+    "birthday": "1951-01-19T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7e51ffa0242a2cdda2": {
+    "name": "HELENA MARIA SOUZA DOMINGUEZ",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1959-08-24T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7e8bc8fc9984f7798f": {
+    "name": "HELENA PEREIRA GUIMARAES DA COSTA",
+    "cpf": "57187100582",
+    "gender": "F",
+    "birthday": "1966-12-27T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7e379c4e1a51cbd053": {
+    "name": "HELENICE APARECIDA MAXIMO DINIZ BISTAFA",
+    "cpf": "28836824889",
+    "gender": "F",
+    "birthday": "1972-10-07T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7f1fa8062e17d3adab": {
+    "name": "HELIO PEROMINGO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1949-09-26T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": false,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001affa6df75200cfe26c": {
+    "name": "HERBET HONORATO FEITOSA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "2002-03-11T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001af4e429636ed944bea": {
+    "name": "IOLANDA JUVENAL DE OLIVEIRA",
+    "cpf": "53231511372",
+    "gender": "F",
+    "birthday": "1937-03-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b0fa6df75200cfe26d": {
+    "name": "IRANI LOURENCO RODRIGUES",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1976-03-03T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7f1fa8062e17d3adac": {
+    "name": "IRINEU TEDESCO",
+    "cpf": "03192298820",
+    "gender": "M",
+    "birthday": "1946-04-03T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7f379c4e1a51cbd054": {
+    "name": "IRMA ANTONIA PERREIRA ROSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1964-08-19T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb61379c4e1a51cc07d7": {
+    "name": "ISABEL CRISTINA PEREIRA ARAÚJO",
+    "cpf": "14463220840",
+    "gender": "F",
+    "birthday": "1967-03-01T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69838579d5cd128782c989bb": {
+    "name": "ISABEL SANTOS DO PRADO",
+    "cpf": "05791317859",
+    "gender": "F",
+    "birthday": "1951-10-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e88724b0e754dac368603": {
+    "name": "ISAMAR INACIO DA FRANCA",
+    "cpf": "53840429315",
+    "gender": "F",
+    "birthday": "1967-04-24T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb618bc8fc9984f7b000": {
+    "name": "IVAN LÚCIO DE LIMA",
+    "cpf": "28961230832",
+    "gender": "M",
+    "birthday": "1980-06-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001b0029f1e6981546a67": {
+    "name": "IVNA LUZIA ALVES DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "2003-07-28T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d7f51ffa0242a2cdda4": {
+    "name": "IVO DE SOUZA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1956-11-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d7f379c4e1a51cbd055": {
+    "name": "IVONE DE OLIVEIRA CAZELOTO",
+    "cpf": "29862813890",
+    "gender": "F",
+    "birthday": "1978-01-07T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d80379c4e1a51cbd056": {
+    "name": "IZABETE MARIA ALVES TERUEL",
+    "cpf": "09161743879",
+    "gender": "F",
+    "birthday": "1964-11-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "69809d808bc8fc9984f77990": {
+    "name": "IZILDINHA APARECIDA DA SILVA GORGATTO",
+    "cpf": "29562565807",
+    "gender": "F",
+    "birthday": "1963-03-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983857a6c33328469451458": {
+    "name": "JACINTA EUGENIO DOS SANTOS",
+    "cpf": "03170145878",
+    "gender": "F",
+    "birthday": "1959-09-15T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b04e429636ed944beb": {
+    "name": "JACQUELINE FERREIRA DA SILVA",
+    "cpf": "07928032309",
+    "gender": "F",
+    "birthday": "1999-07-30T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d8051ffa0242a2cdda7": {
+    "name": "JAIR APARECIDO GORGATTO",
+    "cpf": "07651357876",
+    "gender": "M",
+    "birthday": "1958-11-19T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8051ffa0242a2cdda6": {
+    "name": "JAIR EMIDIO DE TOLEDO",
+    "cpf": "64944247834",
+    "gender": "M",
+    "birthday": "1951-03-11T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "6983857b6c33328469451459": {
+    "name": "JAIR GONÇALVES DA SILVA",
+    "cpf": "27929195821",
+    "gender": "M",
+    "birthday": "1957-04-25T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b0fa6df75200cfe26e": {
+    "name": "JANAINA ALENE CARDOSO CIDRÃO",
+    "cpf": "78125650334",
+    "gender": "F",
+    "birthday": "1975-06-03T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6983857bd5cd128782c989bd": {
+    "name": "JANDIRA APARECIDA DOS SANTOS REGINALDO",
+    "cpf": "39982622889",
+    "gender": "F",
+    "birthday": "1972-12-16T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d811fa8062e17d3adad": {
+    "name": "JANETE MARIA FLAUZINA DE PAULA",
+    "cpf": "18441844801",
+    "gender": "F",
+    "birthday": "1977-07-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "69809d81379c4e1a51cbd059": {
+    "name": "JESUS MIGUEL DA SILVA",
+    "cpf": "54135869815",
+    "gender": "M",
+    "birthday": "1948-01-29T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d818bc8fc9984f77991": {
+    "name": "JESUS VENANCIO DE OLIVEIRA",
+    "cpf": "88820068834",
+    "gender": "M",
+    "birthday": "1955-10-02T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d828bc8fc9984f77993": {
+    "name": "JOANA BENEDITA MARTINS",
+    "cpf": "30768309883",
+    "gender": "F",
+    "birthday": "1958-10-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b026260539c16a95ed": {
+    "name": "JOANA DARC FERREIRA MONTE",
+    "cpf": "84318074315",
+    "gender": "F",
+    "birthday": "1977-08-22T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8151ffa0242a2cdda8": {
+    "name": "JOANA NASCIMENTO TEIXEIRA BUONOMO",
+    "cpf": "27312509843",
+    "gender": "F",
+    "birthday": "1961-02-06T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb6151ffa0242a2d1ae1": {
+    "name": "JOÃO BATISTA JERÔNIMO",
+    "cpf": "76201309691",
+    "gender": "M",
+    "birthday": "1951-03-03T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b226260539c16a95ef": {
+    "name": "JOÃO JOSIAS DA SILVA",
+    "cpf": "06073989300",
+    "gender": "M",
+    "birthday": "1984-01-18T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d82379c4e1a51cbd05c": {
+    "name": "JOAO LUIZ FORTUNATO CAZALOTO",
+    "cpf": "07040157810",
+    "gender": "",
+    "birthday": "1970-10-05T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb99e1ff5209198cf9aa": {
+    "name": "JOÃO PAULA DE LIMA",
+    "cpf": "37716425820",
+    "gender": "M",
+    "birthday": "1946-06-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d82379c4e1a51cbd05b": {
+    "name": "JOAO PEDRO DE OLIVEIRA",
+    "cpf": "88893740800",
+    "gender": "M",
+    "birthday": "1953-02-12T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8251ffa0242a2cdda9": {
+    "name": "JOAO TRAVAGIM",
+    "cpf": "00259999822",
+    "gender": "M",
+    "birthday": "1950-06-18T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b1029f1e6981546a68": {
+    "name": "JOAQUIM FERNANDES DO NASCIMENTO",
+    "cpf": "03109010305",
+    "gender": "M",
+    "birthday": "1956-09-11T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b14e429636ed944bec": {
+    "name": "JOAQUIM RODRIGUES SOUSA",
+    "cpf": "21890501387",
+    "gender": "M",
+    "birthday": "1952-01-21T00:00:00-02:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b1fa6df75200cfe26f": {
+    "name": "JOSE ADECIO LIMA DOS REIS",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1985-12-09T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001b126260539c16a95ee": {
+    "name": "JOSE AFONSO FILHO",
+    "cpf": "31657796191",
+    "gender": "M",
+    "birthday": "1953-03-30T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8351ffa0242a2cddaa": {
+    "name": "JOSE ALDO GOMES DOS SANTOS",
+    "cpf": "29718938800",
+    "gender": "M",
+    "birthday": "1983-05-28T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001b1fa6df75200cfe270": {
+    "name": "JOSE ALVES DE SOUZA FILHO",
+    "cpf": "04352098841",
+    "gender": "M",
+    "birthday": "1951-10-24T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d838bc8fc9984f77995": {
+    "name": "JOSE ANGELO DE OLIVEIRA",
+    "cpf": "08480445840",
+    "gender": "M",
+    "birthday": "1962-10-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8451ffa0242a2cddae": {
+    "name": "JOSÉ ANTONIO MANFRE",
+    "cpf": "01870213840",
+    "gender": "M",
+    "birthday": "1953-06-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983857b6c3332846945145a": {
+    "name": "JOSÉ APARECIDO MENINO",
+    "cpf": "88648176891",
+    "gender": "M",
+    "birthday": "1956-01-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838255d5cd128782c985f5": {
+    "name": "JOSÉ CANDIDO",
+    "cpf": "69911142868",
+    "gender": "",
+    "birthday": "1950-05-06T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8351ffa0242a2cddac": {
+    "name": "JOSE CARLOS FAVARAN",
+    "cpf": "10509565832",
+    "gender": "M",
+    "birthday": "1958-03-11T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8451ffa0242a2cddad": {
+    "name": "JOSE CARLOS MORAES",
+    "cpf": "10092796885",
+    "gender": "M",
+    "birthday": "1967-10-30T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d848bc8fc9984f77997": {
+    "name": "JOSE EDUARDO CRIPPA",
+    "cpf": "00255968884",
+    "gender": "M",
+    "birthday": "1950-12-15T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980b1e18bc8fc9984f78cf2": {
+    "name": "JOSÉ FERREIRA",
+    "cpf": "88650456804",
+    "gender": "M",
+    "birthday": "1957-03-18T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d82379c4e1a51cbd05d": {
+    "name": "JOSE MARIA DE OLIVEIRA",
+    "cpf": "97450928868",
+    "gender": "M",
+    "birthday": "1958-06-28T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "695ea47126260539c166a668": {
+    "name": "JOSE OLAVO GOMES PEREIRA",
+    "cpf": "11300583878",
+    "gender": "M",
+    "birthday": "1966-07-29T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69838254a0e9c8adf6826e36": {
+    "name": "JOSÉ RAIMUNDO DOS SANTOS",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1957-07-14T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9893afdfe62c6fa7f5": {
+    "name": "JOSÉ RAIMUNDO DOS SANTOS",
+    "cpf": "06564050828",
+    "gender": "M",
+    "birthday": "1965-07-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d821fa8062e17d3adae": {
+    "name": "JOSE ROBERTO DE LIMA",
+    "cpf": "08757489882",
+    "gender": "M",
+    "birthday": "1966-11-24T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b1029f1e6981546a69": {
+    "name": "JOSE RODRIGUES TORQUATO JUNIOR",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1991-04-30T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d838bc8fc9984f77996": {
+    "name": "JOSE VALDENIR GOMES",
+    "cpf": "99653060872",
+    "gender": "M",
+    "birthday": "1950-10-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "69809d848bc8fc9984f77998": {
+    "name": "JOSEFA GONCALVES MARTINS TEIXEIRA",
+    "cpf": "92796028887",
+    "gender": "F",
+    "birthday": "1951-11-14T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b2fa6df75200cfe271": {
+    "name": "JOSELIA ROSENA DA COSTA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1967-07-18T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9993afdfe62c6fa7f6": {
+    "name": "JOVELINO APARECIDO DE MELLO",
+    "cpf": "30019994893",
+    "gender": "M",
+    "birthday": "1976-08-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69809d84379c4e1a51cbd05f": {
+    "name": "JULIA OLIVEIRA PERREIRA",
+    "cpf": "27904282801",
+    "gender": "M",
+    "birthday": "1945-09-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b2029f1e6981546a6a": {
+    "name": "JULIA PEREIRA DE SOUZA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1938-02-28T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d858bc8fc9984f7799a": {
+    "name": "JULIANA ESCOBAR DIAS",
+    "cpf": "33702404830",
+    "gender": "F",
+    "birthday": "1986-05-28T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "69809d851fa8062e17d3adb3": {
+    "name": "JUVINA GINO PEREIRA",
+    "cpf": "02580915842",
+    "gender": "F",
+    "birthday": "1958-12-09T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69809d851fa8062e17d3adb4": {
+    "name": "LAURA LORENCO GONCALVES",
+    "cpf": "54284935852",
+    "gender": "F",
+    "birthday": "2008-08-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d85379c4e1a51cbd062": {
+    "name": "LEONELDA VASCONCELOS GAIOTO",
+    "cpf": "27173168848",
+    "gender": "F",
+    "birthday": "1944-10-03T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69809d8551ffa0242a2cddb0": {
+    "name": "LEONILDA APARECIDA MARCELE",
+    "cpf": "18185432813",
+    "gender": "F",
+    "birthday": "1961-06-14T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b24e429636ed944bed": {
+    "name": "LEONILIA JUVENAL OLIVEIRA SILVA",
+    "cpf": "51283182300",
+    "gender": "F",
+    "birthday": "1935-01-08T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "cataract": true
+    },
+    "otherDisease": ""
+  },
+  "69809d861fa8062e17d3adb6": {
+    "name": "LEONIZA ANTONIA DA CRUZ REALE",
+    "cpf": "30102819866",
+    "gender": "",
+    "birthday": "1940-11-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b2fa6df75200cfe272": {
+    "name": "LEONOR DO NASCIMENTO SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1959-06-06T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a33251ffa0242a2ce3a1": {
+    "name": "LEUDOVINIA DONIZETE MENDONCA MARTINELLI",
+    "cpf": "26348901840",
+    "gender": "F",
+    "birthday": "1960-06-15T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb99e1ff5209198cf9ab": {
+    "name": "LIDIA RODRIGUES GONÇALVES",
+    "cpf": "35908231860",
+    "gender": "F",
+    "birthday": "1953-10-28T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb996c333284694598c7": {
+    "name": "LIEGE MARCONDES",
+    "cpf": "38004684840",
+    "gender": "F",
+    "birthday": "1991-10-17T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9ae1ff5209198cf9ac": {
+    "name": "LINDNALVA SIQUEIRA",
+    "cpf": "11384619895",
+    "gender": "",
+    "birthday": "1966-06-12T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001b326260539c16a95f0": {
+    "name": "LUCIA DE FATIMA SILVA GOMES",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1962-09-24T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a33251ffa0242a2ce3a2": {
+    "name": "LUCIANA APARECIDA DE OLIVEIRA FRANCO",
+    "cpf": "25624613806",
+    "gender": "",
+    "birthday": "1978-05-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3328bc8fc9984f77f80": {
+    "name": "LUCIANA CRISTINA ALVES RIBEIRO",
+    "cpf": "31611026814",
+    "gender": "F",
+    "birthday": "1983-05-12T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838255a0e9c8adf6826e37": {
+    "name": "LUCIANA DOS SANTOS",
+    "cpf": "24820437860",
+    "gender": "",
+    "birthday": "1971-09-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3338bc8fc9984f77f81": {
+    "name": "LUCIMARA RODRIGUES JOIA",
+    "cpf": "10934085889",
+    "gender": "F",
+    "birthday": "1971-05-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838255d5cd128782c985f6": {
+    "name": "LUCINDA FÁTIMA SANTOS SILVA",
+    "cpf": "33013075821",
+    "gender": "F",
+    "birthday": "1963-09-22T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6980a333379c4e1a51cbd68f": {
+    "name": "LUIZ CARLOS BONNOMO",
+    "cpf": "01889705845",
+    "gender": "M",
+    "birthday": "1953-11-21T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9a93afdfe62c6fa7f9": {
+    "name": "LUIZ CARLOS VIANA",
+    "cpf": "01944585800",
+    "gender": "",
+    "birthday": "1953-09-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "695e72694b0e754dac367ce2": {
+    "name": "LUIZ CRISTINA RODRIGUES",
+    "cpf": "01178153304",
+    "gender": "F",
+    "birthday": "1982-10-13T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9ae1ff5209198cf9ae": {
+    "name": "LUIZ OSVALDO SIQUEIRA",
+    "cpf": "03184492850",
+    "gender": "M",
+    "birthday": "1960-11-19T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b3029f1e6981546a6b": {
+    "name": "LUIZ SERAFIM FA SILA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1958-09-19T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b34e429636ed944bee": {
+    "name": "LUIZA ANA BEZERRA DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1953-01-14T00:00:00-02:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e872526260539c16693de": {
+    "name": "LUIZA MARIA FERREIRA VIANA",
+    "cpf": "36101583368",
+    "gender": "F",
+    "birthday": "1963-10-06T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a334379c4e1a51cbd691": {
+    "name": "LUZIA APARECIDA PARPINELI ARONI",
+    "cpf": "02584870894",
+    "gender": "F",
+    "birthday": "1964-12-11T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3331fa8062e17d3b3e4": {
+    "name": "LUZIA FATIMA COIMBRA GORDONI",
+    "cpf": "25674094837",
+    "gender": "F",
+    "birthday": "1958-02-03T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b326260539c16a95f1": {
+    "name": "MANOEL RODRIGUEs DO NASCIMENTO",
+    "cpf": "67491090397",
+    "gender": "M",
+    "birthday": "1940-07-15T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a33451ffa0242a2ce3a4": {
+    "name": "MARCELA ALVES SEBASTIAO",
+    "cpf": "23269807864",
+    "gender": "F",
+    "birthday": "1987-09-27T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a334379c4e1a51cbd692": {
+    "name": "MARCIA APARECIDA DEROED CRIALEZI",
+    "cpf": "12174111861",
+    "gender": "M",
+    "birthday": "1973-03-31T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3348bc8fc9984f77f83": {
+    "name": "MARCIA TONIOL CRIALEZI",
+    "cpf": "27978436810",
+    "gender": "F",
+    "birthday": "1978-09-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9b6c333284694598c8": {
+    "name": "MARCOS ANTÔNIO BARRETO DE SOUZA",
+    "cpf": "08523884890",
+    "gender": "M",
+    "birthday": "1964-11-18T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a335379c4e1a51cbd693": {
+    "name": "MARCOS ANTONIO FORLA",
+    "cpf": "10950202851",
+    "gender": "M",
+    "birthday": "1968-09-21T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9b93afdfe62c6fa7fb": {
+    "name": "MARGARIDA APARECIDA DE LIMA",
+    "cpf": "04513723874",
+    "gender": "F",
+    "birthday": "1961-10-05T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838255a0e9c8adf6826e39": {
+    "name": "MARGARIDA INÁCIO SANTOS DO PRADO",
+    "cpf": "10069709831",
+    "gender": "F",
+    "birthday": "1955-07-06T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b4fa6df75200cfe273": {
+    "name": "MARIA ALVES DE OLIVEIRA",
+    "cpf": "88066959320",
+    "gender": "F",
+    "birthday": "1960-06-13T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001b426260539c16a95f2": {
+    "name": "MARIA ALVES GONCALVES",
+    "cpf": "63699478300",
+    "gender": "F",
+    "birthday": "1959-05-15T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b44e429636ed944bf0": {
+    "name": "MARIA AMELIA BEZERRA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1955-12-02T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb611fa8062e17d3e4c6": {
+    "name": "MARIA APARECIDA ALVES DA SILVA",
+    "cpf": "06389097670",
+    "gender": "F",
+    "birthday": "1977-08-15T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd587927d48de9d8885d": {
+    "name": "MARIA APARECIDA ALVES RIBEIRO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1955-05-14T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd5a565494aed21c03de": {
+    "name": "MARIA APARECIDA AMORIM VIANA",
+    "cpf": "11746566892",
+    "gender": "F",
+    "birthday": "1955-07-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb6251ffa0242a2d1ae2": {
+    "name": "MARIA APARECIDA DA SILVA",
+    "cpf": "23133159836",
+    "gender": "F",
+    "birthday": "1946-09-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a335379c4e1a51cbd695": {
+    "name": "MARIA APARECIDA EUZEBIO",
+    "cpf": "06217467895",
+    "gender": "F",
+    "birthday": "1956-08-17T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "697cfd5a7927d48de9d8885e": {
+    "name": "MARIA APARECIDA MELLO PETROCELLI",
+    "cpf": "07470957871",
+    "gender": "F",
+    "birthday": "1963-03-09T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd598bc8fc9984f73ec7": {
+    "name": "MARIA APARECIDA PEREIRA",
+    "cpf": "68944985987",
+    "gender": "F",
+    "birthday": "1948-12-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd5a1fa8062e17d37360": {
+    "name": "MARIA APARECIDA PIBELLI CAMARA DOS SANTOS",
+    "cpf": "16970611841",
+    "gender": "F",
+    "birthday": "1951-12-10T00:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": false,
+      "cholesterol": true,
+      "smoker": false,
+      "nwn_underlying": false,
+      "diabeticRetinopathy": false,
+      "dmri": false,
+      "glaucoma": false,
+      "cataract": false,
+      "pterygium": false,
+      "lowVisualAcuity": false,
+      "nwn_ophthalmic": false
+    },
+    "otherDisease": ""
+  },
+  "6984cb9be1ff5209198cf9af": {
+    "name": "MARIA APARECIDA TRONI DA SILVA",
+    "cpf": "09842005844",
+    "gender": "F",
+    "birthday": "1956-04-30T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6980a336379c4e1a51cbd696": {
+    "name": "MARIA AUZELI ALVES DA SILVA DURAN",
+    "cpf": "35950622804",
+    "gender": "F",
+    "birthday": "1971-10-27T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd5a7927d48de9d8885f": {
+    "name": "MARIA BARBARA COIMBRA ESTEFANIR",
+    "cpf": "18143817830",
+    "gender": "F",
+    "birthday": "1953-04-25T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a337379c4e1a51cbd699": {
+    "name": "MARIA CARDOSO SÁ",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1950-06-26T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "695eabc628b781ee600119b1": {
+    "name": "MARIA CAVALCANTE DA SILVA",
+    "cpf": "63735156304",
+    "gender": "F",
+    "birthday": "1959-04-21T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd598bc8fc9984f73ec6": {
+    "name": "MARIA CELIA GORDONI CREALEZ",
+    "cpf": "18444125806",
+    "gender": "F",
+    "birthday": "1959-12-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd5b8bc8fc9984f73ec8": {
+    "name": "MARIA CELIA MELCHIORI PEREIRA",
+    "cpf": "73493457804",
+    "gender": "F",
+    "birthday": "1951-10-02T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a336379c4e1a51cbd697": {
+    "name": "MARIA CIPIONATO DEROID",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1939-09-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b4fa6df75200cfe274": {
+    "name": "MARIA CLAUDENE VERISSIMO DA FRANCA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1986-02-07T00:00:00-02:00",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b5029f1e6981546a6d": {
+    "name": "MARIA DA CONCEICAO CAVALCANTE ROSENDO",
+    "cpf": "24559806349",
+    "gender": "F",
+    "birthday": "1961-09-14T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b526260539c16a95f3": {
+    "name": "MARIA DA CONCEICAO PINENTEL DOS SANTOS",
+    "cpf": "01871295335",
+    "gender": "F",
+    "birthday": "1958-04-18T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b54e429636ed944bf1": {
+    "name": "MARIA DA CONCEICAO SOUSA E SILVA",
+    "cpf": "17129796391",
+    "gender": "F",
+    "birthday": "1960-10-29T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb6251ffa0242a2d1ae3": {
+    "name": "MARIA DA GLORIA SOUZA LIMA NUNES",
+    "cpf": "56522037815",
+    "gender": "",
+    "birthday": "1946-01-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd59565494aed21c03dd": {
+    "name": "MARIA DALVA DA SILVA GOMES",
+    "cpf": "16970541886",
+    "gender": "F",
+    "birthday": "1959-01-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b5029f1e6981546a6e": {
+    "name": "MARIA DAS GRACAS ALVES VENANCIO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1947-12-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b54e429636ed944bf2": {
+    "name": "MARIA DAS GRACAS DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1973-09-11T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b526260539c16a95f4": {
+    "name": "MARIA DAS GRACAS PEREIRA LIMA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1958-12-20T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd5b7927d48de9d88861": {
+    "name": "MARIA DE FATIMA ANIZIO PAMPOLIM",
+    "cpf": "18143909875",
+    "gender": "F",
+    "birthday": "1969-10-17T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a33651ffa0242a2ce3a8": {
+    "name": "MARIA DE FATIMA AUGUSTO",
+    "cpf": "31834950821",
+    "gender": "F",
+    "birthday": "1963-03-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b6fa6df75200cfe275": {
+    "name": "MARIA DE FATIMA DO NASCIMENTO",
+    "cpf": "11132299349",
+    "gender": "F",
+    "birthday": "1955-01-28T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd48565494aed21c03b6": {
+    "name": "MARIA DE FATIMA GRACIANO DA SILVA RIBEIRO",
+    "cpf": "20282253866",
+    "gender": "F",
+    "birthday": "1967-10-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd477927d48de9d88842": {
+    "name": "MARIA DE FATIMA ROSARIO SIMPIONATO",
+    "cpf": "35789629881",
+    "gender": "F",
+    "birthday": "1955-08-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd588bc8fc9984f73ec5": {
+    "name": "MARIA DE JESUS GOLDINI",
+    "cpf": "13336579864",
+    "gender": "F",
+    "birthday": "1970-10-13T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd487927d48de9d88843": {
+    "name": "MARIA DE LOURDES BETINELLI",
+    "cpf": "11840618825",
+    "gender": "F",
+    "birthday": "1967-06-14T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3371fa8062e17d3b3f1": {
+    "name": "MARIA DE LOURDES MUNHOZ DE OLIVEIRA",
+    "cpf": "02947582837",
+    "gender": "F",
+    "birthday": "1959-02-14T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd48565494aed21c03b7": {
+    "name": "MARIA DE LOURDES VIEIRA CREMONIN",
+    "cpf": "18458245809",
+    "gender": "F",
+    "birthday": "1959-03-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e462328b781ee6000d993": {
+    "name": "MARIA DIOMAR LIMA DOS REIS",
+    "cpf": "33067341368",
+    "gender": "",
+    "birthday": "1951-11-09T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b626260539c16a95f5": {
+    "name": "MARIA DIVA DA SILVA DE SOUZA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1951-06-17T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "697001b6029f1e6981546a6f": {
+    "name": "MARIA DO CARMO TORQUATO DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1960-02-18T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e9749fa6df75200cbe9ff": {
+    "name": "MARIA DO ROSARIO DAMIAO OPLIVEIRA",
+    "cpf": "94351279320",
+    "gender": "F",
+    "birthday": "1969-06-18T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e9ba428b781ee60010d82": {
+    "name": "MARIA DO ROSARIO FERREIRA SOUSA",
+    "cpf": "44320825349",
+    "gender": "F",
+    "birthday": "1958-04-27T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd587927d48de9d8885c": {
+    "name": "MARIA DO SOCORRO BENEDITO",
+    "cpf": "72636459472",
+    "gender": "M",
+    "birthday": "1963-07-31T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b64e429636ed944bf3": {
+    "name": "MARIA ERLIENE DE LIMA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1962-03-02T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b7fa6df75200cfe276": {
+    "name": "MARIA EUDOCIA BENEVIDES CAVALCANTE",
+    "cpf": "36952613315",
+    "gender": "F",
+    "birthday": "1965-01-30T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9ce1ff5209198cf9b2": {
+    "name": "MARIA FÁTIMA CORRÊA DA SILVA",
+    "cpf": "28948439847",
+    "gender": "F",
+    "birthday": "1971-01-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e83194b0e754dac368400": {
+    "name": "MARIA FELIX DE ASSIS CAVALCANTE",
+    "cpf": "63691302300",
+    "gender": "F",
+    "birthday": "1969-07-28T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838256d5cd128782c985f9": {
+    "name": "MARIA FERREIRA",
+    "cpf": "29388784863",
+    "gender": "F",
+    "birthday": "1965-07-24T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b3029f1e6981546a6c": {
+    "name": "MARIA FERREIRA FIRMO",
+    "cpf": "45454868353",
+    "gender": "F",
+    "birthday": "1953-01-02T02:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697001b726260539c16a95f7": {
+    "name": "MARIA FRANCINEIDE CHAVES DE MACEDO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1972-09-13T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "697cfd487927d48de9d88844": {
+    "name": "MARIA FRANCISCA DA CRUZ SILVA",
+    "cpf": "20447001825",
+    "gender": "",
+    "birthday": "1959-07-08T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b7029f1e6981546a70": {
+    "name": "MARIA GRACI DE LIMA MARCELINO",
+    "cpf": "",
+    "gender": "",
+    "birthday": "1949-11-19T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cataract": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd591fa8062e17d3735e": {
+    "name": "MARIA HELENA ALVES DE GERVASIO",
+    "cpf": "83747133134",
+    "gender": "F",
+    "birthday": "1978-01-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd498bc8fc9984f73eb0": {
+    "name": "MARIA HELENA IDE SECATO",
+    "cpf": "30131976842",
+    "gender": "F",
+    "birthday": "1955-06-11T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e8cf54b0e754dac3687fe": {
+    "name": "MARIA HOLANDA DOS Santos",
+    "cpf": "02063037345",
+    "gender": "F",
+    "birthday": "1960-01-30T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b74e429636ed944bf4": {
+    "name": "MARIA ISA FERREIRA CITO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1965-03-25T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd498bc8fc9984f73eb1": {
+    "name": "MARIA IZABEL FERREIRA DE SOUZA",
+    "cpf": "49484044549",
+    "gender": "F",
+    "birthday": "1962-01-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3358bc8fc9984f77f84": {
+    "name": "MARIA JOSÉ PAULINO CAMARA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1954-11-24T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980a3361fa8062e17d3b3ef": {
+    "name": "MARIA JOSÉ PORFIRIO CRISPIM",
+    "cpf": "13594126897",
+    "gender": "F",
+    "birthday": "1961-08-26T00:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": false,
+      "smoker": false,
+      "nwn_underlying": false,
+      "diabeticRetinopathy": false,
+      "dmri": false,
+      "glaucoma": false,
+      "cataract": false,
+      "pterygium": false,
+      "lowVisualAcuity": false,
+      "nwn_ophthalmic": false
+    },
+    "otherDisease": ""
+  },
+  "697001b7fa6df75200cfe277": {
+    "name": "MARIA JOSÉ TORQUARTO BARBOSA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1961-11-19T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b726260539c16a95f8": {
+    "name": "MARIA JULIA ZInzin de Assis",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1950-01-15T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "6980a3351fa8062e17d3b3ed": {
+    "name": "MARIA LAURA ZANETI PEROMINGO",
+    "cpf": "30179692828",
+    "gender": "F",
+    "birthday": "1949-09-14T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b8029f1e6981546a71": {
+    "name": "MARIA LIDIANE SILVA ANDRADE",
+    "cpf": "78861489320",
+    "gender": "F",
+    "birthday": "1977-09-18T00:00:00-03:00",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e6f9d28b781ee6000f75a": {
+    "name": "MARIA LUIZA FERREIRA FIRMO",
+    "cpf": "04593023378",
+    "gender": "",
+    "birthday": "1984-10-24T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e45cafa6df75200cbb95b": {
+    "name": "MARIA LUIZA FERREIRA MONTE",
+    "cpf": "",
+    "gender": "",
+    "birthday": "1947-10-13T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "698382564af51fbb614f6627": {
+    "name": "MARIA MADALENA DA SILVA",
+    "cpf": "30179751859",
+    "gender": "F",
+    "birthday": "1936-08-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e83f2fa6df75200cbe03c": {
+    "name": "MARIA MAFALDA FERREIRA CITO",
+    "cpf": "39953718334",
+    "gender": "F",
+    "birthday": "1963-05-02T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6980a336379c4e1a51cbd698": {
+    "name": "MARIA MARGARIDA SILVA",
+    "cpf": "74852515972",
+    "gender": "F",
+    "birthday": "1956-09-03T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb628bc8fc9984f7b002": {
+    "name": "MARIA MARILDA LOPES LUCIO",
+    "cpf": "10956493882",
+    "gender": "M",
+    "birthday": "1977-01-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "6980a33551ffa0242a2ce3a6": {
+    "name": "MARIA MOURA",
+    "cpf": "31511453885",
+    "gender": "F",
+    "birthday": "1961-11-07T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9c93afdfe62c6fa7ff": {
+    "name": "MARIA NEUSA FARIA DA SILVA",
+    "cpf": "09061531829",
+    "gender": "F",
+    "birthday": "1953-10-09T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b84e429636ed944bf5": {
+    "name": "MARIA PAIVA ALVES SANTANA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1961-04-10T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697001b44e429636ed944bef": {
+    "name": "MARIA PEREIRA DA SILVA",
+    "cpf": "05315324370",
+    "gender": "F",
+    "birthday": "1983-08-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e7cb526260539c1668ff7": {
+    "name": "MARIA PINHO GOMES DOS SANTOS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1959-09-12T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697001b8fa6df75200cfe278": {
+    "name": "MARIA REGINA VERISSIMO",
+    "cpf": "95949860349",
+    "gender": "F",
+    "birthday": "1975-11-24T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd59565494aed21c03db": {
+    "name": "MARIA RODRIGUES BUENO",
+    "cpf": "01890194840",
+    "gender": "F",
+    "birthday": "1959-02-02T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd498bc8fc9984f73eb2": {
+    "name": "MARIA SELMA JOSE DOS SANTOS",
+    "cpf": "05348119652",
+    "gender": "F",
+    "birthday": "1980-10-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980a33651ffa0242a2ce3a7": {
+    "name": "MARIA TEREZINHA ROCHIGALLE",
+    "cpf": "25059538800",
+    "gender": "F",
+    "birthday": "1961-05-04T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b826260539c16a95f9": {
+    "name": "MARIA VANUSA ALMEIDA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1974-02-11T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697001b8029f1e6981546a72": {
+    "name": "MARIA VERISSIMO DO NASCIMENTO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1956-01-01T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "smoker": false
+    },
+    "otherDisease": ""
+  },
+  "69700540fa6df75200cfe39a": {
+    "name": "MARILIA CAVALCANTE ROSENDO",
+    "cpf": "03976922340",
+    "gender": "F",
+    "birthday": "1987-08-04T00:00:00-03:00",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd4a1fa8062e17d37345": {
+    "name": "MARILIA EUZEBIO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1944-06-22T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4a1fa8062e17d37346": {
+    "name": "MARINA FERREIRA LIMA DO NASCIMENTO",
+    "cpf": "06719951890",
+    "gender": "F",
+    "birthday": "1962-05-05T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4a565494aed21c03ba": {
+    "name": "MARINA LUCIA PINONTTE DIAS",
+    "cpf": "97432571872",
+    "gender": "F",
+    "birthday": "1957-05-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6970054026260539c16a9725": {
+    "name": "MARINALVA ALVES DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1980-04-06T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4a1fa8062e17d37347": {
+    "name": "MARINEI LULIO RODRIGUES",
+    "cpf": "25610159806",
+    "gender": "F",
+    "birthday": "1975-11-14T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4a7927d48de9d88848": {
+    "name": "MARINITA ROSA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1958-08-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838256a0e9c8adf6826e3a": {
+    "name": "MARIO LUIZ DE LIMA",
+    "cpf": "10982451806",
+    "gender": "M",
+    "birthday": "1964-02-06T02:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4b8bc8fc9984f73eb3": {
+    "name": "MARIO LUIZ DIAS",
+    "cpf": "00262699885",
+    "gender": "M",
+    "birthday": "1953-04-26T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4b565494aed21c03bd": {
+    "name": "MARLY CONSTATINO DA SILVA",
+    "cpf": "31605352829",
+    "gender": "F",
+    "birthday": "1942-11-25T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4b1fa8062e17d37348": {
+    "name": "MARLY MARTINELI DEROID",
+    "cpf": "24966319870",
+    "gender": "F",
+    "birthday": "1966-01-16T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4b7927d48de9d8884a": {
+    "name": "MAURICIO ZANIBONI",
+    "cpf": "10933103832",
+    "gender": "M",
+    "birthday": "1969-01-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9c93afdfe62c6fa800": {
+    "name": "MAURO VELOSO PEREIRA",
+    "cpf": "27194426668",
+    "gender": "M",
+    "birthday": "1959-10-08T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4b1fa8062e17d37349": {
+    "name": "MERCEDEZ GORDONI TANCINI",
+    "cpf": "18143840816",
+    "gender": "F",
+    "birthday": "1953-10-20T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838257a0e9c8adf6826e3b": {
+    "name": "MICHELLE CAROLINE GOMES BELISARIO",
+    "cpf": "40896750817",
+    "gender": "F",
+    "birthday": "1990-10-31T02:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838257a0e9c8adf6826e3c": {
+    "name": "MIGUELINA DE FÁTIMA SILVA SIQUEIRA",
+    "cpf": "30180469860",
+    "gender": "F",
+    "birthday": "1963-09-29T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "695e44fe28b781ee6000d915": {
+    "name": "MILTON DE SOUSA",
+    "cpf": "34678379304",
+    "gender": "M",
+    "birthday": "1981-01-22T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697005404e429636ed944d49": {
+    "name": "NAIANA CRISTINA RODRIGUES DOS SANTOS",
+    "cpf": "63704854387",
+    "gender": "M",
+    "birthday": "1981-06-01T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838257d5cd128782c985fa": {
+    "name": "NARCIZA DOS SANTOS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1954-04-05T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4c565494aed21c03c0": {
+    "name": "NATALINA DA SILVA DAMASCENO",
+    "cpf": "37018609801",
+    "gender": "F",
+    "birthday": "1987-12-03T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980b0ea379c4e1a51cbe3b6": {
+    "name": "NAURA DE LIMA BOARQUE PRESOTO",
+    "cpf": "89254015415",
+    "gender": "F",
+    "birthday": "1978-08-28T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "695e5b2228b781ee6000e6d3": {
+    "name": "Nayara petrola",
+    "cpf": "",
+    "gender": "",
+    "birthday": "",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd4c7927d48de9d8884b": {
+    "name": "NEIDE BASSO",
+    "cpf": "15931095802",
+    "gender": "F",
+    "birthday": "1975-10-10T03:00:00Z",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4d565494aed21c03c1": {
+    "name": "NELSON ESTEVAO BATISTA JUNIOR",
+    "cpf": "18853305886",
+    "gender": "M",
+    "birthday": "1974-05-18T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4e1fa8062e17d3734b": {
+    "name": "NILCEIA APARECIDA GAIOTO PERREIRA",
+    "cpf": "06662799858",
+    "gender": "F",
+    "birthday": "1966-02-05T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6978b710d9020f4a0a79834a": {
+    "name": "NILSON HELIO LEAO",
+    "cpf": "01434673871",
+    "gender": "M",
+    "birthday": "1959-12-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4e565494aed21c03c3": {
+    "name": "NILTON FERREIRA DIAS",
+    "cpf": "04200630800",
+    "gender": "",
+    "birthday": "1951-12-25T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4e7927d48de9d8884c": {
+    "name": "NIVALDO BASSO",
+    "cpf": "05935668823",
+    "gender": "",
+    "birthday": "1964-08-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4e8bc8fc9984f73eb6": {
+    "name": "ODAIR BRAZ",
+    "cpf": "04349156887",
+    "gender": "M",
+    "birthday": "1945-02-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4f8bc8fc9984f73eb7": {
+    "name": "OLIVIO DOS SANTOS",
+    "cpf": "58967540868",
+    "gender": "F",
+    "birthday": "1948-04-01T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd4f8bc8fc9984f73eb9": {
+    "name": "ONOFRE GERVASIO DA SILVA",
+    "cpf": "05526209717",
+    "gender": "M",
+    "birthday": "1972-03-14T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "697cfd4f7927d48de9d8884d": {
+    "name": "ONOFRE SIMPIONATO",
+    "cpf": "01870824806",
+    "gender": "M",
+    "birthday": "1952-11-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838257a0e9c8adf6826e3d": {
+    "name": "ORLANDO BERNARDES DE FARIAS",
+    "cpf": "01914410823",
+    "gender": "M",
+    "birthday": "1955-08-02T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "698382584af51fbb614f662a": {
+    "name": "PALOMA CRISTIANE SANTOS DA SILVA MELLO",
+    "cpf": "40467117870",
+    "gender": "F",
+    "birthday": "1990-07-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": false
+    },
+    "otherDisease": ""
+  },
+  "69838258d5cd128782c985fb": {
+    "name": "PAMELA CRISTINA SANTOS DA SILVA",
+    "cpf": "37782837820",
+    "gender": "F",
+    "birthday": "1989-07-17T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "695e7f21fa6df75200cbde60": {
+    "name": "PEDRO ARAUJO DOS SANTIS",
+    "cpf": "95046399334",
+    "gender": "M",
+    "birthday": "1958-10-17T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6970054126260539c16a9726": {
+    "name": "RAIMUNDA LUCIA PEREIRA OLIVEIRA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1951-08-30T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69700541029f1e6981546b96": {
+    "name": "RAIMUNDA NONATA DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1966-03-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "69700541fa6df75200cfe39b": {
+    "name": "RAIMUNDA SOARES DE ARAUJO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1948-05-18T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd501fa8062e17d3734e": {
+    "name": "RAIMUNDO MACHADO REIS",
+    "cpf": "14384396953",
+    "gender": "M",
+    "birthday": "1948-03-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd508bc8fc9984f73ebb": {
+    "name": "RAQUEL VIEIRA SANTOS",
+    "cpf": "01594947538",
+    "gender": "F",
+    "birthday": "1981-09-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697005414e429636ed944d4a": {
+    "name": "REGIANE MARQUES DOS REIS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1981-09-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd50565494aed21c03c7": {
+    "name": "REGINA CELIA ESCOBAR",
+    "cpf": "13021527850",
+    "gender": "F",
+    "birthday": "1962-01-15T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69700541fa6df75200cfe39c": {
+    "name": "REGINA SELIA DE OLIVEIRA",
+    "cpf": "04478973300",
+    "gender": "F",
+    "birthday": "1977-05-07T00:00:00-03:00",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd501fa8062e17d3734f": {
+    "name": "REGINALDO ALVES DE JESUS ALMEIDA",
+    "cpf": "12174204878",
+    "gender": "M",
+    "birthday": "1975-04-09T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838258a0e9c8adf6826e3e": {
+    "name": "RENATO JOSÉ DOS SANTOS",
+    "cpf": "03184491889",
+    "gender": "M",
+    "birthday": "1961-04-20T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd50565494aed21c03c9": {
+    "name": "RENATO LUIZ VIANA",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1955-10-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb628bc8fc9984f7b003": {
+    "name": "RICARDO JOSE DA SILVA",
+    "cpf": "25005599800",
+    "gender": "M",
+    "birthday": "1972-09-11T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd511fa8062e17d37351": {
+    "name": "RITA SIMONE PASTEGA LISBOA",
+    "cpf": "26251631864",
+    "gender": "F",
+    "birthday": "1977-06-27T03:00:00Z",
+    "anamnesis": {
+      "hypertension": false,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd518bc8fc9984f73ebd": {
+    "name": "ROBSON TRIDICO",
+    "cpf": "26070269896",
+    "gender": "M",
+    "birthday": "1977-03-05T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "695ea09a4b0e754dac369475": {
+    "name": "RONALDO ARAUJO DE LIMA",
+    "cpf": "26600547898",
+    "gender": "M",
+    "birthday": "1972-05-17T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd51565494aed21c03cb": {
+    "name": "ROSA CORREA DE OLIVEIRA",
+    "cpf": "22630138810",
+    "gender": "F",
+    "birthday": "1967-08-15T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd518bc8fc9984f73ebe": {
+    "name": "ROSANA CRISTINA MONTEVERDE GINO",
+    "cpf": "09361037870",
+    "gender": "F",
+    "birthday": "1966-02-08T02:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd511fa8062e17d37352": {
+    "name": "ROSANGELA TEIXEIRA MORAES",
+    "cpf": "14196954871",
+    "gender": "F",
+    "birthday": "1969-09-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6970054126260539c16a9727": {
+    "name": "ROZINEIDE OLANDA DE SOUSA",
+    "cpf": "84148934300",
+    "gender": "F",
+    "birthday": "1978-12-22T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd52565494aed21c03cc": {
+    "name": "SAMYRA SOUSA SILVA ROSA",
+    "cpf": "36891842824",
+    "gender": "F",
+    "birthday": "1987-08-25T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838258a0e9c8adf6826e3f": {
+    "name": "SANDRA APARECIDA DOS SANTOS",
+    "cpf": "26644529836",
+    "gender": "F",
+    "birthday": "1978-03-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69838259a0e9c8adf6826e40": {
+    "name": "SANDRA MARIA GOMES",
+    "cpf": "13460289821",
+    "gender": "F",
+    "birthday": "1970-09-13T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd521fa8062e17d37353": {
+    "name": "SEBASTIANA ELZA BARBOZA PIOBELLO",
+    "cpf": "29785513807",
+    "gender": "F",
+    "birthday": "1961-09-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69700542029f1e6981546b97": {
+    "name": "SEBASTIANA SOARES DE SOUSA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1960-02-19T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9de1ff5209198cf9b4": {
+    "name": "SEBASTIÃO DE PAULA LIMA",
+    "cpf": "25120112838",
+    "gender": "M",
+    "birthday": "1949-04-18T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb63379c4e1a51cc07d9": {
+    "name": "SEBASTIÃO MANSUETO DOS SANTOS",
+    "cpf": "88646670830",
+    "gender": "M",
+    "birthday": "1953-09-04T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697005424e429636ed944d4b": {
+    "name": "SENHORA RODRIGUES DE ARAÚJO",
+    "cpf": "71153896320",
+    "gender": "F",
+    "birthday": "1960-04-22T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd527927d48de9d88854": {
+    "name": "SERGIO EDUARDO DOS REIS",
+    "cpf": "06042121863",
+    "gender": "M",
+    "birthday": "1963-04-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69838259a0e9c8adf6826e41": {
+    "name": "SHEILA APARECIDA FERREIRA SANTOS ALBUQUERQUE",
+    "cpf": "31502224860",
+    "gender": "",
+    "birthday": "1975-06-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "698382596c333284694510c2": {
+    "name": "SIDNEY MENINO",
+    "cpf": "",
+    "gender": "M",
+    "birthday": "1978-11-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9d93afdfe62c6fa801": {
+    "name": "SILVIA APARECIDA DOS SANTOS BENEDITO",
+    "cpf": "24782503814",
+    "gender": "F",
+    "birthday": "1971-11-25T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd538bc8fc9984f73ebf": {
+    "name": "SILVIA MARIA DE LIMA PAULINO",
+    "cpf": "33843126860",
+    "gender": "F",
+    "birthday": "1958-06-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd53565494aed21c03cd": {
+    "name": "SILVIO ROBERTO PETROCELLI",
+    "cpf": "04616805806",
+    "gender": "M",
+    "birthday": "1962-11-01T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": false,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb638bc8fc9984f7b004": {
+    "name": "SIMONE PEREIRA DA SILVA",
+    "cpf": "31083697846",
+    "gender": "F",
+    "birthday": "1978-06-19T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd538bc8fc9984f73ec0": {
+    "name": "SIRLEI ANGELA CAMPOIO TRAVAGIM",
+    "cpf": "02592544879",
+    "gender": "F",
+    "birthday": "1965-10-20T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "695ea8af26260539c166a9a2": {
+    "name": "SOLANGE MARIA LIMA LACERDA E SILVA",
+    "cpf": "32269374304",
+    "gender": "F",
+    "birthday": "1965-08-26T00:00:00-03:00",
+    "anamnesis": {
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd53565494aed21c03ce": {
+    "name": "SONIA MARIA DUARTE FERNANDES",
+    "cpf": "07065885844",
+    "gender": "F",
+    "birthday": "1961-01-01T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "69700542fa6df75200cfe39d": {
+    "name": "SOTELINA CARDOSO CIDRÃO",
+    "cpf": "45457310310",
+    "gender": "F",
+    "birthday": "1952-03-11T02:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd53565494aed21c03cf": {
+    "name": "SUELI FATIMA DA CUNHA DE SOUZA",
+    "cpf": "18143834840",
+    "gender": "F",
+    "birthday": "1966-10-13T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb6351ffa0242a2d1ae4": {
+    "name": "SUELI PEREIRA ALVES",
+    "cpf": "09842096890",
+    "gender": "F",
+    "birthday": "1970-12-10T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6970054226260539c16a9728": {
+    "name": "SUELITA ALVES TORQUATO",
+    "cpf": "01937085317",
+    "gender": "F",
+    "birthday": "1983-01-17T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6983825a4af51fbb614f662e": {
+    "name": "SUZANA PEREIRA DO NASCIMENTO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1960-12-23T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69700542029f1e6981546b98": {
+    "name": "TANIA MARIA FEIJO DA SILVA ARAUJO",
+    "cpf": "63713284334",
+    "gender": "F",
+    "birthday": "1979-10-12T00:00:00-03:00",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd541fa8062e17d37355": {
+    "name": "TANIA SOUZA DOMINGUEZ",
+    "cpf": "36160783858",
+    "gender": "F",
+    "birthday": "1989-01-27T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697005434e429636ed944d4c": {
+    "name": "TATIANE FEIJÓ DA SILVA",
+    "cpf": "01817549324",
+    "gender": "F",
+    "birthday": "1981-03-27T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "6978b575f4537704f083d26e": {
+    "name": "TATIANE TRAVAGIM DE OLIVEIRA",
+    "cpf": "37341420839",
+    "gender": "F",
+    "birthday": "1988-06-10T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69700543fa6df75200cfe39e": {
+    "name": "TAYVONE FEIJÓ DA SILVA",
+    "cpf": "01817548352",
+    "gender": "F",
+    "birthday": "1985-01-23T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd547927d48de9d88856": {
+    "name": "TERESA BRIGUENTI CESARE",
+    "cpf": "13594102874",
+    "gender": "F",
+    "birthday": "1953-10-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "6970054326260539c16a9729": {
+    "name": "TEREZA ALVES SANTANA ARAUJO",
+    "cpf": "03115596383",
+    "gender": "F",
+    "birthday": "1957-07-17T00:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": false,
+      "cholesterol": false,
+      "smoker": true,
+      "nwn_underlying": false,
+      "diabeticRetinopathy": false,
+      "dmri": false,
+      "glaucoma": false,
+      "cataract": false,
+      "pterygium": false,
+      "lowVisualAcuity": false,
+      "nwn_ophthalmic": false
+    },
+    "otherDisease": ""
+  },
+  "6983825aa0e9c8adf6826e44": {
+    "name": "TEREZINHA DE SOUZA",
+    "cpf": "35493779838",
+    "gender": "F",
+    "birthday": "1952-11-07T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6983825a4af51fbb614f662f": {
+    "name": "TEREZINHA FÁTIMA DA SILVA",
+    "cpf": "41314458833",
+    "gender": "F",
+    "birthday": "1972-02-26T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697005434e429636ed944d4d": {
+    "name": "TEREZINHA HONORATO DA SILVA",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1964-04-07T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "69700543029f1e6981546b99": {
+    "name": "TEREZINHA RODRIGUES DOS SANTOS",
+    "cpf": "63704781304",
+    "gender": "F",
+    "birthday": "1958-12-05T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd541fa8062e17d37356": {
+    "name": "THIAGO PETROCELLI",
+    "cpf": "33843117870",
+    "gender": "",
+    "birthday": "1985-12-20T02:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd541fa8062e17d37357": {
+    "name": "VALDELIRIO OLIVEIRA COSTA",
+    "cpf": "11857559851",
+    "gender": "M",
+    "birthday": "1956-08-18T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd55565494aed21c03d2": {
+    "name": "VALDICLER SUELI LEAO",
+    "cpf": "05832121821",
+    "gender": "F",
+    "birthday": "1965-03-04T02:00:00Z",
+    "anamnesis": {
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6978b71026260539c16c8b87": {
+    "name": "VALDIR GORDONI",
+    "cpf": "01870667875",
+    "gender": "M",
+    "birthday": "1954-11-30T03:00:00Z",
+    "anamnesis": {
+      "diabetes": false,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980efea51ffa0242a2d1f24": {
+    "name": "VALMIR FAVIN",
+    "cpf": "10982592892",
+    "gender": "M",
+    "birthday": "1968-08-31T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true,
+      "smoker": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb631fa8062e17d3e4c7": {
+    "name": "VALMIR FERREIRA",
+    "cpf": "32193915830",
+    "gender": "M",
+    "birthday": "1976-12-03T03:00:00Z",
+    "anamnesis": {},
+    "otherDisease": ""
+  },
+  "697cfd558bc8fc9984f73ec2": {
+    "name": "VANDA ALVES GUNDIM DE SOUSA",
+    "cpf": "14506527860",
+    "gender": "F",
+    "birthday": "1974-08-17T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6980f3f2379c4e1a51cc1057": {
+    "name": "VANDERCI VELASCO NUNES",
+    "cpf": "36000507887",
+    "gender": "M",
+    "birthday": "1950-12-20T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd551fa8062e17d37358": {
+    "name": "VANDERLEI PERREIRA",
+    "cpf": "05643358867",
+    "gender": "M",
+    "birthday": "1964-09-12T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": false
+    },
+    "otherDisease": ""
+  },
+  "697cfd56565494aed21c03d6": {
+    "name": "VANESSA CARLA LOURENCO",
+    "cpf": "18144177886",
+    "gender": "F",
+    "birthday": "1976-12-11T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "695e470e26260539c1666bab": {
+    "name": "VANIA FERREIRA MONTE",
+    "cpf": "00548104344",
+    "gender": "F",
+    "birthday": "1976-06-27T00:00:00-03:00",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd561fa8062e17d37359": {
+    "name": "VANIA REGINA MONTORO BRITO",
+    "cpf": "34997919861",
+    "gender": "F",
+    "birthday": "1961-09-08T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd577927d48de9d8885a": {
+    "name": "VANILDO GOMES",
+    "cpf": "00260007846",
+    "gender": "M",
+    "birthday": "1951-08-15T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd57565494aed21c03d8": {
+    "name": "VERA LUCIA DA COSTA MUNIZ DA SILVA",
+    "cpf": "29226266875",
+    "gender": "F",
+    "birthday": "1972-07-12T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6980eb5f379c4e1a51cc07d4": {
+    "name": "VERA PINTO",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "1965-08-23T03:00:00Z",
+    "anamnesis": {
+      "diabetes": true,
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "6983825a4af51fbb614f6630": {
+    "name": "VICENTINA SILVA DE FARIAS",
+    "cpf": "15969930814",
+    "gender": "F",
+    "birthday": "1958-01-23T03:00:00Z",
+    "anamnesis": {
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd57565494aed21c03d9": {
+    "name": "WALDOMIRO GAIOTO",
+    "cpf": "73568449820",
+    "gender": "M",
+    "birthday": "1943-06-11T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  },
+  "6984cb9e6c333284694598cb": {
+    "name": "WANDA BENEDITA LUCIANO",
+    "cpf": "30108789829",
+    "gender": "M",
+    "birthday": "1958-01-03T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd571fa8062e17d3735b": {
+    "name": "YAGO OLIVEIRA FREITAS CAVALCANTE",
+    "cpf": "42399546814",
+    "gender": "M",
+    "birthday": "1994-07-22T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd581fa8062e17d3735c": {
+    "name": "YASMIN GABRIELLA DOS SANTOS FREITAS",
+    "cpf": "",
+    "gender": "F",
+    "birthday": "2010-12-28T02:00:00Z",
+    "anamnesis": {
+      "diabetes": true
+    },
+    "otherDisease": ""
+  },
+  "697cfd588bc8fc9984f73ec4": {
+    "name": "YOLANDA REALE GOMES",
+    "cpf": "18143910881",
+    "gender": "F",
+    "birthday": "1965-10-02T03:00:00Z",
+    "anamnesis": {
+      "hypertension": true,
+      "cholesterol": true
+    },
+    "otherDisease": ""
+  }
+}
