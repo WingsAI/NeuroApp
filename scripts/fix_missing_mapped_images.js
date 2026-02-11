@@ -54,13 +54,22 @@ async function fixMissingImages() {
 
     // Build mapping by exam_id - handle both short and full IDs
     const mappingByExamId = {};
-    const mappingByShortId = {};
+    const mappingByShortId = {}; // short ID -> array of entries (can collide!)
+    const mappingByName = {}; // normalized patient name -> array of entries
     Object.values(mapping).forEach(entry => {
       if (entry.exam_id && entry.images) {
         mappingByExamId[entry.exam_id] = entry;
-        // Also index by first 8 chars for short ID matching
+        // Index by first 8 chars (may have collisions)
         if (entry.exam_id.length >= 8) {
-          mappingByShortId[entry.exam_id.substring(0, 8)] = entry;
+          const short = entry.exam_id.substring(0, 8);
+          if (!mappingByShortId[short]) mappingByShortId[short] = [];
+          mappingByShortId[short].push(entry);
+        }
+        // Index by normalized patient name
+        if (entry.patient_name) {
+          const normName = entry.patient_name.toUpperCase().trim();
+          if (!mappingByName[normName]) mappingByName[normName] = [];
+          mappingByName[normName].push(entry);
         }
       }
     });
@@ -78,10 +87,27 @@ async function fixMissingImages() {
 
         totalExamsChecked++;
 
-        // Try to find mapping entry by full ID, then short ID
+        // Try to find mapping entry by full ID, then short ID (with name disambiguation), then name
         let mappingEntry = mappingByExamId[exam.eyerCloudId];
         if (!mappingEntry) {
-          mappingEntry = mappingByShortId[exam.eyerCloudId.substring(0, 8)];
+          const shortEntries = mappingByShortId[exam.eyerCloudId.substring(0, 8)] || [];
+          if (shortEntries.length === 1) {
+            mappingEntry = shortEntries[0];
+          } else if (shortEntries.length > 1) {
+            // Multiple entries with same short ID - disambiguate by patient name
+            const normPatientName = patient.name.toUpperCase().trim();
+            mappingEntry = shortEntries.find(e =>
+              e.patient_name && e.patient_name.toUpperCase().trim() === normPatientName
+            );
+          }
+        }
+        if (!mappingEntry) {
+          // Fallback: match by patient name
+          const normPatientName = patient.name.toUpperCase().trim();
+          const nameEntries = mappingByName[normPatientName] || [];
+          if (nameEntries.length === 1) {
+            mappingEntry = nameEntries[0];
+          }
         }
         if (!mappingEntry) continue;
 
