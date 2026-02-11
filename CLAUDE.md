@@ -358,11 +358,8 @@ This script has several issues that caused the data corruption:
     - **Cause:** The exam endpoint (`/examData/list?id=EXAM_ID`) does NOT reliably return CPF and gender. The patient endpoint (`/patient/list`) has the complete data, but the existing scripts (`fetch_anamnesis.py`, `fetch_birth_dates.py`) only extracted disease and birthday fields — not CPF or gender.
     - **Affected:** 143 patients with null gender, all 306 with gender had `"male"`/`"female"` (English, from EyerCloud) instead of `"Masculino"`/`"Feminino"` (Portuguese, expected by UI). CPF missing for patients where exam endpoint didn't return it.
     - **Fix:** Created `fetch_patient_details.py` to fetch ALL patient fields (CPF, gender, birthday, anamnesis) from patient endpoint. Created `fix_cpf_gender.js` to sync to DB and normalize gender values to Portuguese (`male`->`Masculino`, `female`->`Feminino`).
-    - **CPF field discovery:** The EyerCloud API does NOT have a `cpf` field. CPF is stored in `document2`. The field `document0`=RG, `document1`=certidão nascimento, `document2`=CPF, `document3`=outro documento. 362 of 451 patients have CPF in `document2`.
-    - **Gender format:** The API returns `"M"`/`"F"` (not `"male"`/`"female"` as previously assumed from the mapping file). The fix script handles all formats.
     - **Gender display bug:** `medical/page.tsx` line 889 compared `gender === 'F'` / `'M'` but DB had `'female'` / `'male'`, causing ALL patients to show as "Outro". Fixed to handle all formats.
-    - **Result:** 429 patients updated with normalized gender (`Masculino`/`Feminino`), 122 patients updated with CPF from `document2`.
-    - **Prevention:** Always use the PATIENT endpoint (`/patient/list`) for patient demographics (CPF, gender, birthday). The EXAM endpoint is only reliable for exam data (images, dates). When storing gender, always normalize to Portuguese values used by the UI. CPF is in `document2`, not `cpf`.
+    - **Prevention:** Always use the PATIENT endpoint (`/patient/list`) for patient demographics (CPF, gender, birthday). The EXAM endpoint is only reliable for exam data (images, dates). When storing gender, always normalize to Portuguese values used by the UI.
 
 ### EyerCloud API Reference
 
@@ -370,8 +367,6 @@ This script has several issues that caused the data corruption:
   - Returns patient objects with: `id`, `fullName`, `cpf`, `gender` (`"male"`/`"female"`), `birthday`, `anamnesis`, `otherDisease`
   - `anamnesis` fields: `diabetes`, `hipertensaoArterial`, `hipercolesterolemia`, `tabagismo`, `catarata`, `retinopatia`, `glaucoma`
   - **This is the ONLY reliable source for CPF and gender.** The exam endpoint does NOT return these fields consistently.
-  - **CPF is in `document2`**, NOT in a `cpf` field. Documents: `document0`=RG, `document1`=certidão nascimento, `document2`=CPF, `document3`=outro documento.
-  - **Gender** uses `"M"`/`"F"` format (not `"male"`/`"female"`).
 - **Exam list:** `POST https://eyercloud.com/api/v2/eyercloud/exam/list` with body `{page: N}`
 - **Exam data:** `POST https://eyercloud.com/api/v2/eyercloud/examData/list?id=EXAM_ID` - returns images, NOT patient data. Does NOT reliably include CPF or gender.
 - **Auth:** Requires browser session cookies. Use Playwright with `headless=False` and manual login (15s delay)

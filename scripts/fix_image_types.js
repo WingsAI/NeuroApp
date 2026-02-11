@@ -21,18 +21,31 @@ async function main() {
   console.log(execute ? 'MODO EXECUCAO' : 'MODO PREVIEW');
 
   // Load image types from EyerCloud API
+  // Supports both formats:
+  //   New (flat): { uuid: type, ... }
+  //   Old (nested): { examId: { uuid: type, ... }, ... }
   const imageTypes = require('./eyercloud_downloader/image_types.json');
 
-  // Build a map: uuid -> type (across all exams)
   const uuidToType = {};
   let totalMapped = 0;
-  for (const [examId, types] of Object.entries(imageTypes)) {
-    for (const [uuid, type] of Object.entries(types)) {
+  const firstValue = Object.values(imageTypes)[0];
+  if (typeof firstValue === 'string') {
+    // New flat format: { uuid: type }
+    for (const [uuid, type] of Object.entries(imageTypes)) {
       uuidToType[uuid] = type;
       totalMapped++;
     }
+    console.log(`Image types loaded (flat format): ${totalMapped} UUIDs`);
+  } else {
+    // Old nested format: { examId: { uuid: type } }
+    for (const [examId, types] of Object.entries(imageTypes)) {
+      for (const [uuid, type] of Object.entries(types)) {
+        uuidToType[uuid] = type;
+        totalMapped++;
+      }
+    }
+    console.log(`Image types loaded (nested format): ${totalMapped} UUIDs across ${Object.keys(imageTypes).length} exams`);
   }
-  console.log(`Image types loaded: ${totalMapped} UUIDs across ${Object.keys(imageTypes).length} exams`);
 
   // Get all DB images
   const allImages = await prisma.examImage.findMany({
