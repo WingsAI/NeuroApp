@@ -312,6 +312,18 @@ export async function updateExamAction(examId: string, updates: any) {
 
     // Handle report update
     if (updates.report) {
+        // Fetch existing report to log history of selectedImages changes
+        const existingReport = await prisma.medicalReport.findUnique({
+            where: { examId: examId },
+            select: { id: true, selectedImages: true }
+        });
+
+        const newSelectedImages = updates.report.selectedImages;
+        const oldSelectedImages = existingReport?.selectedImages;
+
+        // Check if selectedImages actually changed
+        const selectedImagesChanged = JSON.stringify(oldSelectedImages) !== JSON.stringify(newSelectedImages);
+
         await prisma.medicalReport.upsert({
             where: { examId: examId },
             update: {
@@ -322,7 +334,7 @@ export async function updateExamAction(examId: string, updates: any) {
                 recommendations: updates.report.recommendations,
                 suggestedConduct: updates.report.suggestedConduct,
                 diagnosticConditions: updates.report.diagnosticConditions,
-                selectedImages: updates.report.selectedImages,
+                selectedImages: newSelectedImages,
                 completedAt: new Date(updates.report.completedAt || undefined),
             },
             create: {
@@ -334,11 +346,27 @@ export async function updateExamAction(examId: string, updates: any) {
                 recommendations: updates.report.recommendations,
                 suggestedConduct: updates.report.suggestedConduct,
                 diagnosticConditions: updates.report.diagnosticConditions,
-                selectedImages: updates.report.selectedImages,
+                selectedImages: newSelectedImages,
                 examId: examId,
                 completedAt: new Date(updates.report.completedAt || undefined),
             }
         });
+
+        // Log selectedImages change to history
+        if (selectedImagesChanged) {
+            const reportId = existingReport?.id || `report-${examId}`;
+            const doctorName = updates.report.doctorName || 'Unknown';
+            await prisma.selectedImagesHistory.create({
+                data: {
+                    reportId: reportId,
+                    previousImages: oldSelectedImages || null,
+                    newImages: newSelectedImages || null,
+                    changedBy: `doctor:${doctorName}`,
+                    reason: existingReport ? 'Manual selection update' : 'Initial selection',
+                }
+            });
+        }
+
         delete updates.report;
     }
 

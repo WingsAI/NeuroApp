@@ -8,7 +8,7 @@ NeuroApp is a medical ophthalmology platform for retinal exam screening. Built w
 
 **Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale.
 
-**Current DB state (2026-02-09):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 6340 images, 381 reports, 415 patients with diseases. All 83 duplicate exams consolidated. 448 patients with birth dates (99.8%). All exam locations corrected (204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE). Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
+**Current DB state (2026-02-13):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 3390 images, 451 reports, 415 patients with diseases, 134 selectedImages history entries. All 83 duplicate exams consolidated. 448 patients with birth dates (99.8%). All exam locations corrected (204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE). All 3390 image IDs migrated to `img-UUID.jpg` format (zero old-format remaining). 128 CML duplicate images removed during migration. Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
 
 **EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
 
@@ -82,6 +82,40 @@ Patient (person)
 
 - One Patient can have MULTIPLE Exams (different visits/dates)
 - A Patient is identified by their first exam's full EyerCloud ID
+
+### Image ID System
+
+Image IDs use the format `img-{UUID}.jpg` where UUID is the actual Bytescale filename. This format is immutable across reimports and globally unique.
+
+- **New format:** `img-fa3f5498-ad73-4bd8-a530-b758e9f50580.jpg` (all 3390 images)
+- **Old format (eliminated):** `697001ce4e429636ed944c10-5` (examId-N) and `cml8tzoi8003xvchg6k22k4sl-1` (CML) — all migrated
+
+**Why the old format was problematic:**
+1. Used numeric index from mapping file, but REDFREE images were intercalated (e.g., index 7 = REDFREE)
+2. String sort causes `-11` to sort before `-2`, so positional resolution by index is wrong
+3. No semantic meaning — can't trace back to original file
+4. When REDFREE images were deleted, old IDs became orphaned
+
+**Migration:** Run `node scripts/migrate_image_ids.js` (preview) then `--execute`. The script extracts UUID from the Bytescale URL and creates `img-{UUID}.jpg` IDs.
+
+### SelectedImages & History
+
+`MedicalReport.selectedImages` is a JSON field storing `{od: "imageId", oe: "imageId"}` — the two images the doctor selected for OD (right eye) and OE (left eye).
+
+**SelectedImagesHistory** tracks all changes to selectedImages:
+- `changedBy`: `"doctor:Dr. Gustavo"` for manual selections, `"script:migrate_image_ids.js"` for automated changes
+- `reason`: `"Manual selection update"`, `"Initial selection"`, `"ID format migration: examId-N → img-UUID.jpg"`
+- The `updateExamAction` in `patients.ts` automatically logs history entries when selectedImages change
+
+**resolveImage() fallback** (in `results/page.tsx`): When a selectedImage ID doesn't match any current exam image, it tries: (1) exact ID match in exam images, (2) search across all patient exams, (3) extract index from ID suffix `-N` and use positional match.
+
+### Patient Lock Mechanism
+
+Patients alphabetically before JOAQUIM FERNANDES (normalized, uppercase, accent-stripped) were **manually corrected** by the doctor. Scripts that modify patient data (images, selectedImages content, report data) should NOT touch these patients.
+
+- Image ID renaming (format-only, no data change) was safe and has been completed for all patients
+- Scripts that alter which image is selected, correct data, or modify patient info MUST check `isLocked()` before modifying locked patients
+- The lock does NOT apply to ID format migration (purely cosmetic rename, same image/URL)
 
 ### Server Actions (app/actions/patients.ts)
 
@@ -185,6 +219,12 @@ scripts/
   fix_diseases.js        # Sync disease data from download_state.json anamnesis to DB
   fix_cpf_gender.js      # Sync CPF/gender from patient_details.json, normalize gender to Portuguese
   fix_duplicate_cml_status.js  # Mark duplicate CML exams as completed
+  fix_cml_selected_images.js   # Null unresolvable CML IDs in selectedImages
+  migrate_image_ids.js         # Migrate examId-N → img-UUID.jpg (preview/execute, respects lock)
+  full_health_check.js         # Comprehensive DB health check (images, reports, CPFs, IDs)
+  check_suspicious_dates.js    # Check for epoch-0 birth dates (31/12/1969)
+  check_birth_1969.js          # Cross-reference 1969/1970 birthdates with EyerCloud data
+  count_old_ids.js             # Count old vs new format image IDs
   diagnose_db.js         # Database diagnostic
   db_snapshot.js         # Create JSON backup of all DB tables
   db_snapshots/          # JSON snapshots for restoration
@@ -360,6 +400,31 @@ This script has several issues that caused the data corruption:
     - **Fix:** Created `fetch_patient_details.py` to fetch ALL patient fields (CPF, gender, birthday, anamnesis) from patient endpoint. Created `fix_cpf_gender.js` to sync to DB and normalize gender values to Portuguese (`male`->`Masculino`, `female`->`Feminino`).
     - **Gender display bug:** `medical/page.tsx` line 889 compared `gender === 'F'` / `'M'` but DB had `'female'` / `'male'`, causing ALL patients to show as "Outro". Fixed to handle all formats.
     - **Prevention:** Always use the PATIENT endpoint (`/patient/list`) for patient demographics (CPF, gender, birthday). The EXAM endpoint is only reliable for exam data (images, dates). When storing gender, always normalize to Portuguese values used by the UI.
+
+### Feb 2026 - SelectedImages Fixes & Image ID Migration (2026-02-13)
+
+19. **28 CML selectedImages unresolvable** (fixed with fix_cml_selected_images.js)
+    - **Cause:** CML duplicate exams were consolidated (deleted), but some reports still referenced CML image IDs (`cmkv7...`, `cmlb6...`). These IDs can't be resolved because the original CML images no longer exist.
+    - **Affected:** 28 reports with CML-format selectedImages that couldn't be matched to any existing image.
+    - **Fix:** Nulled the unresolvable CML IDs in selectedImages. Doctor must re-select images for these 28 patients.
+    - **Prevention:** When consolidating duplicate exams, always update selectedImages references in reports before deleting.
+
+20. **REDFREE in selectedImages causing wrong image display** (root cause analysis on Francisco Sergio Oliveira)
+    - **Cause:** Doctor selected `examId-7` which was a REDFREE image (visually identical to COLOR in the UI). When `fix_image_types.js` deleted REDFREE images, `examId-7` became orphaned. A fix script (or Gemini session) resolved the orphaned ID by position [7] in string-sorted list, which mapped to ANTERIOR instead of COLOR.
+    - **Root issue:** String sort puts `-11` before `-2`, so position [7] in string-sorted IDs ≠ image at index 7 in the mapping file.
+    - **Prevention:** Image ID migration to UUID format eliminates the string-sort problem entirely.
+
+21. **Image ID migration: examId-N and CML → img-UUID.jpg** (executed with migrate_image_ids.js)
+    - **Cause:** Old-format IDs (`examId-N` and `cml...`) used numeric index from the mapping file, which was unreliable due to REDFREE intercalation and string sort issues.
+    - **Fix:** Created `migrate_image_ids.js` that extracts UUID from Bytescale URL and generates `img-{UUID}.jpg` IDs. Handles both `examId-N` and CML formats.
+    - **Result:** 701 images renamed (570 examId-N + 131 CML), 70 reports updated, 134 history entries created, 128 CML duplicate images removed (same UUID already existed). **Zero old-format IDs remaining.** All 3390 images now use `img-UUID.jpg`.
+    - **Prevention:** All new image imports should use `img-{UUID}.jpg` format from the start.
+
+22. **SelectedImagesHistory audit trail** (new feature)
+    - **Added:** `SelectedImagesHistory` model in Prisma schema to track all changes to `selectedImages`.
+    - **Server action:** `updateExamAction` in `patients.ts` now automatically logs history entries when selectedImages change, with `changedBy: "doctor:{doctorName}"`.
+    - **Scripts:** Migration and fix scripts log with `changedBy: "script:{scriptName}"`.
+    - **Schema change:** Used `prisma db push` (not `migrate dev`) due to migration history drift. The SelectedImagesHistory table has `onDelete: Cascade` from MedicalReport.
 
 ### EyerCloud API Reference
 

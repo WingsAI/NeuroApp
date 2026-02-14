@@ -59,6 +59,18 @@ model MedicalReport {
   syncedToDrive        Boolean  @default(false)
   examId               String   @unique
   exam                 Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  history              SelectedImagesHistory[]
+}
+
+model SelectedImagesHistory {
+  id              String        @id @default(cuid())
+  reportId        String
+  report          MedicalReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  previousImages  Json?
+  newImages       Json?
+  changedBy       String
+  reason          String?
+  createdAt       DateTime      @default(now())
 }
 
 model Patient {
