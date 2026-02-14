@@ -8,7 +8,7 @@ NeuroApp is a medical ophthalmology platform for retinal exam screening. Built w
 
 **Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale.
 
-**Current DB state (2026-02-13):** 449 patients, 455 exams (391 EyerCloud + 64 manual CML), 3390 images, 451 reports, 415 patients with diseases, 134 selectedImages history entries. All 83 duplicate exams consolidated. 448 patients with birth dates (99.8%). All exam locations corrected (204 Jaci-SP, 95 Campos do Jordão-SP, 156 Tauá-CE). All 3390 image IDs migrated to `img-UUID.jpg` format (zero old-format remaining). 128 CML duplicate images removed during migration. Snapshot at `scripts/db_snapshots/snapshot_2026-02-09_1626.json`.
+**Current DB state (2026-02-14):** 449 patients, 453 exams, 3393 images, 449 reports, 415 patients with diseases, 135 selectedImages history entries. All image IDs in `img-UUID.jpg` format. 6 missing images restored for 3 patients (Marinei, Rita Simone, Yasmin). 2 duplicate exams deleted (Francisco Elivan, Antonia Paula). Ivna's selectedImages restored after script corruption. `formatDate` now handles null birthDate as "Não-Informado". Snapshot at `scripts/db_snapshots/snapshot_2026-02-14_2019.json`.
 
 **EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
 
@@ -436,6 +436,32 @@ This script has several issues that caused the data corruption:
 - **Exam data:** `POST https://eyercloud.com/api/v2/eyercloud/examData/list?id=EXAM_ID` - returns images, NOT patient data. Does NOT reliably include CPF or gender.
 - **Auth:** Requires browser session cookies. Use Playwright with `headless=False` and manual login (15s delay)
 - **Pagination:** Always use `{page: N}`, NOT `{examCurrentPage: N}` (the latter is broken)
+
+### Feb 2026 - Missing Images & Duplicate Cleanup Round 2 (2026-02-14)
+
+23. **6 images missing from 3 patients** (fixed with upload_6_missing.py + import_6_missing_images.js)
+    - **Affected:** Marinei Lulio Rodrigues (1 COLOR L missing), Rita Simone Pastega Lisboa (2 COLOR R+L missing), Yasmin Gabriella dos Santos Freitas (3 COLOR L + ANTERIOR R + COLOR L missing)
+    - **Cause:** These exams (`697d03d*` IDs) were from the 48 newer exams. Some images existed on EyerCloud but were never downloaded/uploaded to Bytescale.
+    - **Fix:** Downloaded images manually from EyerCloud, uploaded to Bytescale via `upload_6_missing.py`, imported to DB via `import_6_missing_images.js`.
+    - **Result:** 6 images added. Each patient now has 6 images (4 COLOR + 2 ANTERIOR).
+
+24. **Ivna's selectedImages nullified by script** (fixed with restore_ivna_selected.js)
+    - **Cause:** Doctor selected images on 13/02/2026 21:42. The `fix_cml_selected_images.js` script ran later and nullified them because the old CML IDs (`cmkv7ck61...`) matched `id.startsWith('cm')`. Even though the doctor had already re-selected with new img-UUID IDs, the script may have been run against stale data.
+    - **Fix:** Identified correct images by visual comparison with doctor's PDF screenshot. OD=`img-3a5f78df...` (COLOR R), OE=`img-4380201e...` (COLOR L). Restored via script with history entry.
+    - **Prevention:** Scripts that modify selectedImages should check `changedBy` or `createdAt` to avoid overwriting recent doctor selections.
+
+25. **Francisco Elivan duplicate exam** (fixed with delete_elivan_duplicate.js)
+    - **Cause:** Patient had 2 exams — one with 6 images (correct), one with 1 image and broken selectedImages IDs.
+    - **Fix:** Deleted the 1-image exam (`697001c626260539c16a9608`), kept the 6-image exam (`697001c64e429636ed944c06`).
+
+26. **Antonia Paula duplicate exam** (fixed with delete_antonia_duplicate.js)
+    - **Cause:** Patient had 2 exams — one with 10 images (#6A9603, correct), one with 2 images and selectedImages pointing to non-existent IDs.
+    - **Fix:** Deleted the 2-image exam (`697001c1029f1e6981546a7d`), kept the 10-image exam (`697001c126260539c16a9603`).
+
+27. **Null birthDate displayed as epoch date** (fixed in medical/page.tsx and results/page.tsx)
+    - **Cause:** `formatDate(null)` called `new Date(null)` which returns epoch 0 (31/12/1969 in BR timezone). Age calculation `new Date().getFullYear() - new Date(null).getFullYear()` returned 56.
+    - **Affected:** APARECIDA DA SILVA (only patient with null birthDate) and any future patients without birthDate.
+    - **Fix:** Updated `formatDate()` in both `medical/page.tsx` and `results/page.tsx` to return "Não-Informado" for null/undefined/invalid dates. Added null check before age calculation.
 
 ## Language
 

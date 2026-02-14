@@ -37,10 +37,11 @@ function resolveImage(patient: any, selectedId: string | null) {
 function ReportPrintTemplate({ patient }: { patient: any }) {
   if (!patient || !patient.report) return null;
 
-  const formatDate = (dateString: string) => {
-    if (!dateString) return '---';
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return 'Não-Informado';
     try {
       const date = new Date(dateString);
+      if (isNaN(date.getTime())) return 'Não-Informado';
       return date.toLocaleDateString('pt-BR');
     } catch (e) { return dateString; }
   };
@@ -87,7 +88,7 @@ function ReportPrintTemplate({ patient }: { patient: any }) {
             <div className="flex flex-col border-b border-sandstone-200 pb-2">
               <span className="uppercase font-bold text-sandstone-400 mb-1">Nascimento / Idade</span>
               <span className="text-xs font-bold text-charcoal">
-                {formatDate(patient.birthDate)} ({new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} anos)
+                {patient.birthDate ? `${formatDate(patient.birthDate)} (${new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} anos)` : 'Não-Informado'}
               </span>
             </div>
             <div className="flex flex-col border-b border-sandstone-200 pb-2">
@@ -537,8 +538,11 @@ export default function Results() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR', {
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return 'Não-Informado';
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return 'Não-Informado';
+    return d.toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
@@ -878,7 +882,7 @@ export default function Results() {
                       <div className="flex flex-col border-b border-sandstone-200 pb-1">
                         <span className="uppercase font-bold text-sandstone-400 mb-0.5">Nascimento / Idade</span>
                         <span className="text-xs font-bold text-charcoal">
-                          {formatDate(selectedPatient.birthDate)} ({new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos)
+                          {selectedPatient.birthDate ? `${formatDate(selectedPatient.birthDate)} (${new Date().getFullYear() - new Date(selectedPatient.birthDate).getFullYear()} anos)` : 'Não-Informado'}
                         </span>
                       </div>
                       <div className="flex flex-col border-b border-sandstone-200 pb-1">

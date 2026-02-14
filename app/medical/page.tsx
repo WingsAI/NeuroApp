@@ -669,8 +669,11 @@ function MedicalContent() {
     XLSX.writeFile(wb, `TeleSight_Laudos_Completo_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR');
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return 'Não-Informado';
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return 'Não-Informado';
+    return d.toLocaleDateString('pt-BR');
   };
 
   return (
