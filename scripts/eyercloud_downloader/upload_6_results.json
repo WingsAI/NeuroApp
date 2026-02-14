@@ -1,0 +1,56 @@
+[
+  {
+    "uuid": "237e9fa8-045a-47e9-a570-d68a5a5c57a7",
+    "type": "COLOR",
+    "lat": "L",
+    "patient": "MARINEI_LULIO_RODRIGUES",
+    "exam_id": "697d03dd565494aed21c07c4",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03dd565494aed21c07c4/237e9fa8-045a-47e9-a570-d68a5a5c57a7.jpg",
+    "file_size": 365965
+  },
+  {
+    "uuid": "ceae2550-01b9-4484-ab71-427f2721659c",
+    "type": "COLOR",
+    "lat": "R",
+    "patient": "RITA_SIMONE_PASTEGA_LISBOA",
+    "exam_id": "697d03df7927d48de9d88c52",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03df7927d48de9d88c52/ceae2550-01b9-4484-ab71-427f2721659c.jpg",
+    "file_size": 360756
+  },
+  {
+    "uuid": "a4df9080-faa8-4892-add7-9ecb38ff763f",
+    "type": "COLOR",
+    "lat": "L",
+    "patient": "RITA_SIMONE_PASTEGA_LISBOA",
+    "exam_id": "697d03df7927d48de9d88c52",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03df7927d48de9d88c52/a4df9080-faa8-4892-add7-9ecb38ff763f.jpg",
+    "file_size": 348625
+  },
+  {
+    "uuid": "4f20575b-e5e1-41b6-841b-ec70c26c1d3c",
+    "type": "COLOR",
+    "lat": "L",
+    "patient": "YASMIN_GABRIELLA_DOS_SANTOS_FREITAS",
+    "exam_id": "697d03e48bc8fc9984f742b0",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03e48bc8fc9984f742b0/4f20575b-e5e1-41b6-841b-ec70c26c1d3c.jpg",
+    "file_size": 382298
+  },
+  {
+    "uuid": "176c4245-5afc-451c-9648-cf1217012837",
+    "type": "ANTERIOR",
+    "lat": "R",
+    "patient": "YASMIN_GABRIELLA_DOS_SANTOS_FREITAS",
+    "exam_id": "697d03e48bc8fc9984f742b0",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03e48bc8fc9984f742b0/176c4245-5afc-451c-9648-cf1217012837.jpg",
+    "file_size": 709429
+  },
+  {
+    "uuid": "b5c09b71-50ad-4a8f-a521-347daf065dc3",
+    "type": "COLOR",
+    "lat": "L",
+    "patient": "YASMIN_GABRIELLA_DOS_SANTOS_FREITAS",
+    "exam_id": "697d03e48bc8fc9984f742b0",
+    "bytescale_url": "https://upcdn.io/W142icY/raw/eyercloud/697d03e48bc8fc9984f742b0/b5c09b71-50ad-4a8f-a521-347daf065dc3.jpg",
+    "file_size": 348934
+  }
+]
