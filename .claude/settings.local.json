@@ -46,7 +46,9 @@
       "Bash(\"E:/GitHub/NeuroApp/scripts/check_francisco_sergio.js\" <<'ENDSCRIPT123'\nconst test = 'hello';\nprisma.$disconnect\\(\\);\nENDSCRIPT123)",
       "Bash(tee:*)",
       "Bash(npx prisma migrate dev:*)",
-      "Bash(npx prisma db push:*)"
+      "Bash(npx prisma db push:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

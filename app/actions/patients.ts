@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 import { uploadFileToS3, getSignedFileUrl } from '@/lib/s3';
 import { Patient, AnalyticsData, PatientImage } from '@/types';
 import { revalidatePath } from 'next/cache';
@@ -359,8 +360,8 @@ export async function updateExamAction(examId: string, updates: any) {
             await prisma.selectedImagesHistory.create({
                 data: {
                     reportId: reportId,
-                    previousImages: oldSelectedImages || null,
-                    newImages: newSelectedImages || null,
+                    previousImages: oldSelectedImages ?? Prisma.DbNull,
+                    newImages: newSelectedImages ?? Prisma.DbNull,
                     changedBy: `doctor:${doctorName}`,
                     reason: existingReport ? 'Manual selection update' : 'Initial selection',
                 }
