@@ -46,25 +46,51 @@ NeuroApp é uma solução completa para conectar técnicos em radiologia e médi
 - **PDF/Sync**: Puppeteer (headless) + Google Drive API
 - **Ícones**: Lucide React
 
+## Arquitetura de Dados
+
+O sistema utiliza **dois bancos de dados PostgreSQL**:
+
+- **Main DB** (Railway): Dados normalizados e revisados — 449 pacientes, 453 exames, 3.393 imagens
+- **Staging DB** (Railway): Dados brutos de novos logins EyerCloud em processo de normalização — 2.499 pacientes, 2.554 exames, ~21.924 imagens
+
+### Fontes de Dados (EyerCloud)
+
+| Login | Clínica | Pacientes | Exames | Imagens | Status |
+|-------|---------|-----------|--------|---------|--------|
+| Original | Tauá/Jaci/CdJ | 449 | 453 | 3.393 | Main DB (completo) |
+| Melina | Campos do Jordão | 537 | 556 | 6.725 | Staging (pendente) |
+| Mozania | Pós-Doutorado | 1.962 | 1.998 | 15.199 | Staging (pendente) |
+
+### Unidades de Saúde
+
+- Tauá - CE
+- Jaci - SP
+- Campos do Jordão
+- PD Campos do Jordão (Melina)
+- PD São Paulo (Mozania)
+
 ## Variáveis de Ambiente Necessárias
 
 ```env
-# Database
+# Database (Main)
 DATABASE_URL="postgresql://..."
+
+# Database (Staging - new EyerCloud logins)
+STAGING_DATABASE_URL="postgresql://..."
+
+# Supabase Auth
+NEXT_PUBLIC_SUPABASE_URL="https://..."
+NEXT_PUBLIC_SUPABASE_ANON_KEY="..."
+SUPABASE_SERVICE_ROLE_KEY="..."
 
 # Storage (AWS S3)
 AWS_ACCESS_KEY_ID="..."
 AWS_SECRET_ACCESS_KEY="..."
 AWS_BUCKET_NAME="..."
 AWS_REGION="..."
-
-# Google Drive Sync (OAuth2)
-GOOGLE_CLIENT_ID="seu_client_id"
-GOOGLE_CLIENT_SECRET="seu_client_secret"
-GOOGLE_REFRESH_TOKEN="token_gerado_no_oauth"
-NEXT_PUBLIC_APP_URL="https://seu-dominio.com"
-NEXT_PUBLIC_ENABLE_DRIVE_SYNC="true"
 ```
+
+> ⚠️ **NUNCA commitar o `.env` no git.** Todas as variáveis sensíveis devem ser configuradas via Railway/Vercel env vars em produção.
 
 ## Estrutura de Metadados de Diagnóstico
 
@@ -78,6 +104,6 @@ O sistema utiliza uma estrutura JSON para `diagnosticConditions` que inclui:
 ---
 
 © 2025-2026 NeuroApp. Todos os direitos reservados.
-**Versão**: 1.2.0
-**Status**: Produção / Em Evolução
+**Versão**: 1.3.0
+**Status**: Produção / Em Evolução (Staging DB ativo)
 

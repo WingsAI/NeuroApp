@@ -6,16 +6,28 @@ NeuroApp is a medical ophthalmology platform for retinal exam screening. Built w
 
 **Stack:** Next.js 14, React 18, TypeScript, Prisma, PostgreSQL, Supabase Auth, Bytescale, TailwindCSS
 
-**Data source:** EyerCloud (Phelcom) with 456 exams and 451 patients. Images stored on Bytescale.
+**Data source:** EyerCloud (Phelcom). Main DB: 456 exams, 451 patients. Staging DB: 2,554 exams, 2,499 patients. Images stored on Bytescale (main) and EyerCloud URLs (staging).
 
-**Current DB state (2026-02-14):** 449 patients, 453 exams, 3393 images, 449 reports, 415 patients with diseases, 135 selectedImages history entries. All image IDs in `img-UUID.jpg` format. 6 missing images restored for 3 patients (Marinei, Rita Simone, Yasmin). 2 duplicate exams deleted (Francisco Elivan, Antonia Paula). Ivna's selectedImages restored after script corruption. `formatDate` now handles null birthDate as "Não-Informado". Snapshot at `scripts/db_snapshots/snapshot_2026-02-14_2019.json`.
+**Current DB state (2026-02-22):**
+- **Main DB:** 449 patients, 453 exams, 3,393 images, 449 reports, 415 patients with diseases. All image IDs in `img-UUID.jpg` format.
+- **Staging DB:** 2,499 patients, 2,554 exams, 21,924 images across 2 EyerCloud logins (Melina: 537 patients/556 exams, Mozania: 1,962 patients/1,998 exams). All pending (not yet reviewed by doctor). Images are EyerCloud URLs (not yet uploaded to Bytescale/S3).
 
-**EyerCloud coverage:** 455 of 456 exam IDs accounted for (454 direct + 1 via CML exam eyerCloudId). 1 exam ID not yet captured in data sources. 64 CML exams are manual duplicates of EyerCloud exams (all have eyerCloudId set).
+**EyerCloud accounts:**
+- **Original** (main DB): 456 exams, 451 patients — fully imported and processed
+- **Melina** (staging): dramelinalannes.endocrino@gmail.com — "Campos do Jordão" clinic, 537 patients, 556 exams, 6,725 images
+- **Mozania** (staging): mozaniareis@usp.br — "Pós-Doutorado" clinic, 1,962 patients, 1,998 exams, 15,199 images
 
-**Exam periods by location:**
+**Exam periods by location (main DB):**
 - Until 15/01: Tauá-CE (156 exams)
 - 27-30/01: Jaci-SP (204 exams)
 - 02-05/02: Campos do Jordão-SP (95 exams, including 67 that had clinic ID `695e434f28b781ee6000d862` corrected)
+
+**Health Units:**
+- Tauá - CE
+- Jaci - SP
+- Campos do Jordão (original)
+- PD Campos do Jordão (Melina staging)
+- PD São Paulo (Mozania staging)
 
 ## Critical Data Rules
 
@@ -177,26 +189,104 @@ All database scripts MUST:
 - When importing data, use the mapping JSON files, not live API calls
 - The user uploads images to Bytescale manually using `bytescale_uploader.py` (interactive, press Enter per page)
 
+### Sensitive Files & Git Security
+
+**NEVER commit these files to git:**
+- `.env` — contains Supabase keys, DATABASE_URL, STAGING_DATABASE_URL, AWS keys
+- `prisma-staging/.env` — contains STAGING_DATABASE_URL
+- `auth_state_*.json` — contains EyerCloud browser session cookies
+- `staging_state_*.json` — large data files with patient metadata
+
+All are listed in `.gitignore`. If a new `.env` variable is added, verify it's not tracked with `git status`.
+
+**If credentials are accidentally committed:** They remain in git history even after `git rm --cached`. Rotate the compromised keys immediately (Supabase dashboard, Railway dashboard).
+
+## Staging Database Architecture
+
+### Overview
+
+The staging DB is a **separate PostgreSQL database** on Railway for importing raw data from new EyerCloud logins before normalizing and migrating to the main DB. It uses a separate Prisma schema and client.
+
+### Infrastructure
+
+- **Railway DB:** `STAGING_DATABASE_URL` env var (set in `.env` locally, Railway env vars in production)
+- **Prisma schema:** `prisma-staging/schema.prisma` (output: `.prisma/client-staging`)
+- **Prisma client singleton:** `lib/prisma-staging.ts`
+- **Server actions:** `app/actions/staging.ts` (`getStagingPatientsAction`, `getStagingStatsAction`)
+
+### Staging Models
+
+```
+SourceLogin (which EyerCloud account)
+  -> StagingPatient (raw patient data, with normalization tracking)
+    -> StagingExam (raw exam data)
+      -> StagingExamImage (image URLs from EyerCloud)
+NormalizationLog (audit trail of cleanup actions)
+```
+
+### Multi-DB Data Flow
+
+- `getPatientsAction()` — returns only main DB patients
+- `getAllPatientsAction()` — merges main + staging patients (deduped by normalized name)
+- `getAnalyticsAction()` — combines stats from both databases
+- `getStagingPatientsAction()` — returns staging patients mapped to main DB shape
+- Staging patients have `_source: 'staging'`, `_clinicName`, `_sourceEmail` metadata fields
+
+### EyerCloud WebSocket API (Sails.js)
+
+EyerCloud uses **Sails.js WebSocket** for data transport, NOT HTTP for paginated data. HTTP endpoints only return 20 results.
+
+**Working approach (via Playwright `page.evaluate()`):**
+```javascript
+io.socket.post('/api/v2/eyercloud/exam/filter-20-last-with-examdata-and-params', {
+  filter: {...}, page: N
+}, callback)
+```
+- `page: N` works via WebSocket (1-indexed)
+- `examCurrentPage: N` is IGNORED by backend — always returns page 1
+- Requires browser session cookies — use Playwright with manual login
+
+### Staging Data Pipeline
+
+1. Login to EyerCloud manually in Playwright browser
+2. Run `scripts/eyercloud_downloader/fetch_staging_data.py` — fetches via WebSocket
+3. Run `scripts/import_staging_data.js` — batch imports to staging DB (`createMany`, batches of 500)
+4. App reads from both DBs via `getAllPatientsAction()`
+
+### Import Script Notes
+
+- Use `createMany` with `skipDuplicates` in batches of 500 (NOT individual `upsert` — crashes Railway)
+- `--clean` flag deletes existing data before reimporting
+- State files saved to `scripts/eyercloud_downloader/staging_state_{email_safe}.json`
+
 ## File Structure
 
 ```
 app/
-  actions/patients.ts    # All server actions (CRUD)
+  actions/patients.ts    # All server actions (CRUD, analytics)
+  actions/staging.ts     # Staging DB server actions
+  actions/units.ts       # Health unit CRUD
   medical/page.tsx       # Doctor's analysis terminal (sign reports)
   results/page.tsx       # View signed reports & results
   referrals/page.tsx     # Patient referrals
-  analytics/page.tsx     # Dashboard analytics
+  analytics/page.tsx     # Dashboard analytics (includes staging stats)
   register/page.tsx      # New patient registration
+  units/page.tsx         # Health unit management
 components/
   Navbar.tsx             # Navigation
 lib/
-  prisma.ts              # Prisma client singleton
+  prisma.ts              # Prisma client singleton (main DB)
+  prisma-staging.ts      # Prisma client singleton (staging DB)
   s3.ts                  # AWS S3 upload/signed URLs
   supabase-*.ts          # Supabase auth clients
 prisma/
-  schema.prisma          # Database schema
+  schema.prisma          # Main database schema
+prisma-staging/
+  schema.prisma          # Staging database schema
 scripts/
   eyercloud_downloader/  # Python scripts for EyerCloud data
+    fetch_staging_data.py           # Fetches staging data via Sails WebSocket (Playwright)
+    staging_state_*.json            # Raw staging data per EyerCloud login (gitignored)
     bytescale_mapping_cleaned.json  # Image URLs for first 402 patients (557 entries, type field unreliable)
     bytescale_mapping_v2.json       # Image URLs for ALL patients including 48 new (605 entries, has image type)
     download_state.json             # Exam metadata from EyerCloud API (455 exams, 449 unique patients)
@@ -209,6 +299,7 @@ scripts/
     downloader_playwright.py        # Downloads exam images from EyerCloud (all pages)
     download_missing_48.py          # Downloads the 48 missing exams by ID (targeted)
     bytescale_uploader.py           # Uploads downloaded images to Bytescale (interactive)
+  import_staging_data.js   # Batch import staging data (createMany, batches of 500)
   missing_47_patients.json  # 47 patients (48 exams) found on EyerCloud but not in DB
   eyercloud_site_patients.json  # All 451 patient names from EyerCloud site
   compare_site_vs_db.js    # Compare EyerCloud site patients vs state vs DB
@@ -462,6 +553,31 @@ This script has several issues that caused the data corruption:
     - **Cause:** `formatDate(null)` called `new Date(null)` which returns epoch 0 (31/12/1969 in BR timezone). Age calculation `new Date().getFullYear() - new Date(null).getFullYear()` returned 56.
     - **Affected:** APARECIDA DA SILVA (only patient with null birthDate) and any future patients without birthDate.
     - **Fix:** Updated `formatDate()` in both `medical/page.tsx` and `results/page.tsx` to return "Não-Informado" for null/undefined/invalid dates. Added null check before age calculation.
+
+### Feb 2026 - Staging DB & New EyerCloud Logins (2026-02-22)
+
+28. **EyerCloud WebSocket discovery** (resolved via Sails.js socket)
+    - **Cause:** HTTP `fetch()` to EyerCloud exam/patient list APIs always returns only 20 results regardless of pagination params. Spent hours investigating XHR interception with no results.
+    - **Discovery:** EyerCloud frontend uses Vue 3 + Sails.js. Data is loaded via `io.socket.post()` WebSocket, not HTTP. The `examCurrentPage` param is ignored by backend — only `page` works.
+    - **Fix:** Rewrote `fetch_staging_data.py` to use Playwright's `page.evaluate()` to call `io.socket.post()` directly from browser context.
+    - **Prevention:** When scraping Sails.js apps, always check for WebSocket transport first.
+
+29. **Staging DB batch import crash** (fixed with createMany batches)
+    - **Cause:** Individual `upsert` calls for thousands of records overloaded Railway PostgreSQL connection ("Server has closed the connection").
+    - **Fix:** Rewrote `import_staging_data.js` to use `createMany` with `skipDuplicates` in batches of 500.
+    - **Prevention:** Always use batch operations for large imports. Never use individual upsert in loops.
+
+30. **Duplicate Tauá in HealthUnit table** (fixed 2026-02-22)
+    - **Cause:** "Tauá - CE" and "Tauá - Ceará" both existed as separate HealthUnit records. The HealthUnit table is disconnected from Exam.location (free text), so duplicates weren't caught.
+    - **Fix:** Deleted "Tauá - Ceará" (`cmkt3o9n50000vch42ko4zrs8`), kept "Tauá - CE".
+    - **Prevention:** HealthUnit.name has `@unique` constraint but different spellings bypass it. Always normalize names before creating.
+
+31. **.env committed to git** (fixed 2026-02-22)
+    - **Cause:** `.env` was in `.gitignore` but had been force-added to tracking in an earlier commit (`21b0e35`). Subsequent commits included Supabase keys, DB URLs, and staging credentials in git history.
+    - **Affected:** Supabase anon key, service role key, DATABASE_URL, STAGING_DATABASE_URL, auth_state cookies.
+    - **Fix:** `git rm --cached .env` + removed auth_state_*.json and staging_state_*.json from tracking. Updated `.gitignore`.
+    - **WARNING:** Keys remain in git history. If repo is shared/public, ALL credentials must be rotated.
+    - **Prevention:** Never `git add -A` or `git add .` — always add specific files. Check `git status` before committing.
 
 ## Language
 
