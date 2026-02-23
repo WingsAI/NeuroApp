@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client-staging"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("STAGING_DATABASE_URL")
+}
+
+// ============================================================
+// Staging DB for new EyerCloud logins (Mozania + Melina)
+// Purpose: Import raw data, normalize, then migrate to main DB
+// ============================================================
+
+/// Tracks which EyerCloud login/clinic the data came from
+model SourceLogin {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  clinicName  String
+  userName    String
+  totalExams  Int      @default(0)
+  totalPatients Int    @default(0)
+  fetchedAt   DateTime?
+  createdAt   DateTime @default(now())
+  patients    StagingPatient[]
+  exams       StagingExam[]
+}
+
+/// Raw patient data from EyerCloud - before normalization
+model StagingPatient {
+  id                 String    @id          // Full 24-char EyerCloud ID
+  rawName            String                 // Original name as-is from EyerCloud (may contain CPF, dates, numbers)
+  normalizedName     String?                // Cleaned name (uppercase, accent-stripped, no CPF/dates)
+  extractedCpf       String?                // CPF extracted from the name field, if found
+  cpf                String?                // CPF from the actual CPF field in EyerCloud
+  birthDate          DateTime?
+  gender             String?
+  phone              String?
+  prontuario         String?                // Prontuario/medical record number from EyerCloud
+  cns                String?                // CNS (Cartao Nacional de Saude)
+
+  // Normalization tracking
+  normalizationStatus String   @default("raw") // raw, normalized, reviewed, migrated
+  normalizationNotes  String?                  // Notes about what was cleaned/fixed
+  isDuplicate         Boolean  @default(false)  // Flagged as duplicate of another patient
+  duplicateOfId       String?                  // ID of the patient this is a duplicate of
+
+  // Disease data from anamnesis
+  ophthalmicDiseases Json?
+  underlyingDiseases Json?
+
+  // Source tracking
+  sourceLoginId String
+  sourceLogin   SourceLogin @relation(fields: [sourceLoginId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  exams     StagingExam[]
+
+  // Migration tracking
+  migratedToMainDb  Boolean  @default(false)
+  mainDbPatientId   String?  // ID in the main NeuroApp DB after migration
+  migratedAt        DateTime?
+
+  @@index([normalizedName])
+  @@index([sourceLoginId])
+  @@index([normalizationStatus])
+}
+
+/// Raw exam data from EyerCloud
+model StagingExam {
+  id             String   @id            // Full 24-char EyerCloud exam ID
+  eyerCloudId    String?                 // May differ from id for manually created exams
+  examDate       DateTime
+  location       String?
+  technicianName String?
+
+  patientId      String
+  patient        StagingPatient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  sourceLoginId  String
+  sourceLogin    SourceLogin    @relation(fields: [sourceLoginId], references: [id])
+
+  images         StagingExamImage[]
+
+  // Migration tracking
+  migratedToMainDb  Boolean  @default(false)
+  mainDbExamId      String?
+  migratedAt        DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([sourceLoginId])
+}
+
+/// Raw exam images from EyerCloud
+model StagingExamImage {
+  id         String   @id            // img-{UUID}.jpg format
+  url        String                  // Bytescale or EyerCloud URL
+  fileName   String
+  type       String?                 // COLOR, ANTERIOR, REDFREE (REDFREE should be filtered)
+  eyerUuid   String?                 // Original UUID from EyerCloud
+
+  examId     String
+  exam       StagingExam @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  uploadedAt DateTime @default(now())
+
+  @@index([examId])
+}
+
+/// Log of all normalization actions taken
+model NormalizationLog {
+  id          String   @id @default(cuid())
+  entityType  String                 // "patient", "exam", "image"
+  entityId    String
+  action      String                 // "name_cleaned", "cpf_extracted", "duplicate_flagged", "merged", etc.
+  oldValue    String?
+  newValue    String?
+  performedBy String   @default("system")  // "system", "manual", "script:name"
+  createdAt   DateTime @default(now())
+
+  @@index([entityId])
+  @@index([entityType])
+}

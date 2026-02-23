@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck, Download, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
+import { getPatientsAction, getAllPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
@@ -111,9 +111,9 @@ function MedicalContent() {
   const loadPatients = async () => {
     try {
       setIsSyncing(true);
-      // 1. Carregar pacientes do Banco de Dados (Supabase)
-      const dbPatients = await getPatientsAction();
-      console.log(`[DEBUG] DB Patients: ${dbPatients.length}`);
+      // 1. Carregar pacientes do Banco de Dados principal + staging (novas unidades)
+      const dbPatients = await getAllPatientsAction();
+      console.log(`[DEBUG] DB Patients (main + staging): ${dbPatients.length}`);
 
       // 2. Carregar pacientes do Arquivo de Mapeamento (Bytescale)
       let mappingData = null;

@@ -307,6 +307,41 @@ export async function getPatientsAction() {
     return mappedPatients;
 }
 
+/**
+ * Get patients from BOTH main and staging databases.
+ * Staging patients are marked with _source: 'staging' and status: 'pending'.
+ * Main DB patients retain their original status.
+ */
+export async function getAllPatientsAction() {
+    await checkAuth();
+
+    // Fetch from both databases in parallel
+    const { getStagingPatientsAction } = await import('./staging');
+    const [mainPatients, stagingPatients] = await Promise.all([
+        getPatientsAction(),
+        getStagingPatientsAction(),
+    ]);
+
+    // Combine: main patients first, then staging
+    // Deduplicate by normalized name (staging patient may already exist in main)
+    const mainNames = new Set(
+        mainPatients.map((p: any) =>
+            (p.name || '').toUpperCase().trim()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/\s+/g, ' ')
+        )
+    );
+
+    const uniqueStaging = stagingPatients.filter((sp: any) => {
+        const normName = (sp.name || '').toUpperCase().trim()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/\s+/g, ' ');
+        return !mainNames.has(normName);
+    });
+
+    return [...mainPatients, ...uniqueStaging];
+}
+
 // Atualiza um exame específico (por examId) - usado para laudos e encaminhamentos
 export async function updateExamAction(examId: string, updates: any) {
     await checkAuth();
@@ -482,7 +517,7 @@ export async function updatePatientAction(id: string, updates: any) {
 export async function getAnalyticsAction(): Promise<AnalyticsData> {
     await checkAuth();
 
-    // Busca todos os exames com imagens e reports
+    // Busca todos os exames do banco principal com imagens e reports
     const exams = await prisma.exam.findMany({
         include: {
             images: true,
@@ -491,14 +526,14 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         }
     });
 
-    // Conta pacientes únicos
+    // Conta pacientes únicos (main DB)
     const uniquePatientIds = new Set(exams.map((e: any) => e.patientId));
 
     const todayStr = new Date().toISOString().split('T')[0];
 
-    const totalPatients = uniquePatientIds.size;
-    const totalExams = exams.length;
-    const totalImages = exams.reduce((sum: number, e: any) => sum + e.images.length, 0);
+    const mainTotalPatients = uniquePatientIds.size;
+    const mainTotalExams = exams.length;
+    const mainTotalImages = exams.reduce((sum: number, e: any) => sum + e.images.length, 0);
     const pendingReports = exams.filter((e: any) => e.status === 'pending').length;
     const completedReports = exams.filter((e: any) => e.status === 'completed').length;
 
@@ -517,8 +552,8 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         }, 0) / completedExams.length
         : 0;
 
-    // Productivity by region (location)
-    const productivityByRegion = exams.reduce((acc: any, e: any) => {
+    // Productivity by region (location) - main DB
+    const productivityByRegion: Record<string, number> = exams.reduce((acc: any, e: any) => {
         const region = e.location || 'Não Informado';
         acc[region] = (acc[region] || 0) + 1;
         return acc;
@@ -533,13 +568,48 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         return acc;
     }, {});
 
+    // ========== Staging DB data ==========
+    let stagingPatients = 0;
+    let stagingExams = 0;
+    let stagingImages = 0;
+    let stagingPendingReports = 0;
+    try {
+        const { getStagingStatsAction } = await import('./staging');
+        const stagingStats = await getStagingStatsAction();
+
+        // Count unique staging patients (not in main DB) by querying staging directly
+        const prismaStaging = (await import('@/lib/prisma-staging')).default;
+        const stagingPatientCount = await prismaStaging.stagingPatient.count({
+            where: { isDuplicate: false },
+        });
+        const stagingExamCount = await prismaStaging.stagingExam.count();
+        const stagingImageCount = await prismaStaging.stagingExamImage.count();
+
+        stagingPatients = stagingPatientCount;
+        stagingExams = stagingExamCount;
+        stagingImages = stagingImageCount;
+        stagingPendingReports = stagingExamCount; // All staging exams are pending
+
+        // Add staging region data
+        for (const source of stagingStats.sources) {
+            const regionName = source.clinicName || 'Staging';
+            productivityByRegion[regionName] = (productivityByRegion[regionName] || 0) + source.exams;
+        }
+    } catch (e) {
+        console.error('Error fetching staging analytics:', e);
+    }
+
+    const totalPatients = mainTotalPatients + stagingPatients;
+    const totalExams = mainTotalExams + stagingExams;
+    const totalImages = mainTotalImages + stagingImages;
+
     return {
         totalPatients,
         totalExams,
         totalImages,
-        pendingReports,
+        pendingReports: pendingReports + stagingPendingReports,
         completedReports,
-        patientsToday: 0, // Seria necessário contar pacientes criados hoje
+        patientsToday: 0,
         examsToday,
         imagesToday,
         averageProcessingTime: Math.round(averageProcessingTime * 10) / 10,

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Users, Image as LucideImage, Clock, CheckCircle2, TrendingUp, AlertCircle, Activity, RefreshCw, FileText, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getAnalyticsAction, getPatientsAction } from '@/app/actions/patients';
+import { getAnalyticsAction, getAllPatientsAction } from '@/app/actions/patients';
 import { AnalyticsData } from '@/types';
 
 export default function Analytics() {
@@ -30,7 +30,7 @@ export default function Analytics() {
     try {
       const [analyticsData, patients] = await Promise.all([
         getAnalyticsAction(),
-        getPatientsAction()
+        getAllPatientsAction()
       ]);
       setStats(analyticsData);
 
@@ -227,7 +227,7 @@ export default function Analytics() {
                       <div>
                         <p className="text-sm font-bold text-charcoal group-hover:text-cardinal-700 transition-colors uppercase tracking-tight">{patient.name}</p>
                         <p className="text-[10px] font-medium text-sandstone-400 uppercase tracking-widest mb-1">
-                          {patient.location?.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location}
+                          {patient._clinicName || (patient.location?.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location)}
                         </p>
                         <div className="flex items-center text-[10px] font-bold text-sandstone-300">
                           <Clock className="w-3 h-3 mr-1" />

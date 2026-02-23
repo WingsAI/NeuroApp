@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, FileText, User, Calendar, MapPin, Printer, Eye, Image as ImageIcon, X, ShieldCheck, Clock, CheckCircle2, FileCheck, ArrowUpRight, AlertTriangle, UploadCloud, Loader2, Pencil, Download } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction } from '@/app/actions/patients';
+import { getPatientsAction, getAllPatientsAction } from '@/app/actions/patients';
 import { syncReportsToDriveAction } from '@/app/actions/drive';
 import { Patient } from '@/types';
 import { useRouter } from 'next/navigation';
@@ -432,7 +432,7 @@ export default function Results() {
 
 
   const loadPatients = async () => {
-    const allPatients = await getPatientsAction() as any[];
+    const allPatients = await getAllPatientsAction() as any[];
 
     // In the new model, we want to find EXAMS that are completed.
     // We flatten the list so each row in this table is a visit (Exam).

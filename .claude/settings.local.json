@@ -48,7 +48,25 @@
       "Bash(npx prisma migrate dev:*)",
       "Bash(npx prisma db push:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(railway:*)",
+      "Bash(brew install:*)",
+      "Bash(/opt/homebrew/bin/brew install:*)",
+      "Bash(/usr/local/bin/brew install:*)",
+      "Bash(npx --yes @railway/cli:*)",
+      "Bash(npm --version:*)",
+      "Bash(export NVM_DIR=\"$HOME/.nvm\")",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(STAGING_DATABASE_URL=\"postgresql://postgres:JwTnbNFzPTbbbXIRgbaHGyZXYwppgMDB@shuttle.proxy.rlwy.net:30007/railway\" npx prisma db push:*)",
+      "Bash(/usr/local/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/bin/python3.12:*)",
+      "Bash(/usr/local/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/bin/python3.13:*)",
+      "Bash(pip3 install:*)",
+      "Bash(/Users/jv/Library/Python/3.9/bin/playwright install:*)",
+      "Bash(/Users/jv/Library/Python/3.9/bin/python3:*)",
+      "Bash(/usr/bin/python3:*)",
+      "Bash(export PATH=\"/Users/jv/.nvm/versions/node/v22.22.0/bin:$PATH\")",
+      "Bash(export PATH:*)"
     ]
   }
 }
