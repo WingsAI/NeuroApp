@@ -44,10 +44,21 @@ next-env.d.ts
 /COMPARATIVO_MIGRACAO.csv
 scripts/eyercloud_downloader/downloads/
 scripts/eyercloud_downloader/auth_state.json
+scripts/eyercloud_downloader/auth_state_*.json
 scripts/eyercloud_downloader/download_state.json
+scripts/eyercloud_downloader/staging_state_*.json
 scripts/eyercloud_downloader/*.xlsx
 scripts/eyercloud_downloader/*.csv
 /exemplo_outro_projeto
+
+# Auth state files (session cookies - NEVER commit)
+auth_state_*.json
+
+# Staging state files (large JSON data)
+staging_state_*.json
+
+# Prisma staging env
+prisma-staging/.env
 
 # Database backups / snapshots
 backups/*.json
