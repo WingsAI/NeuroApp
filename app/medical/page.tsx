@@ -55,10 +55,19 @@ function MedicalContent() {
     hrModerate: false,
     hrSevere: false,
     tumor: false,
+    drusen: false,
+    vitreousDisorders: false,
+    papilEdema: false,
+    macularHole: false,
+    pigmentaryChanges: false,
+    retinalDystrophies: false,
+    priorUveitis: false,
+    externalLesion: false,
     reconvocarUrgente: false,
     reconvocar: false,
     encaminhar: false,
     others: false,
+    aiReady: false,
   });
   const [patientEditableData, setPatientEditableData] = useState({
     cpf: '',
@@ -312,7 +321,9 @@ function MedicalContent() {
         setDiagnosticConditions(patient.report.diagnosticConditions || {
           normal: false, drMild: false, drModerate: false, drSevere: false, drProliferative: false,
           glaucomaSuspect: false, hrMild: false, hrModerate: false, hrSevere: false,
-          tumor: false, reconvocarUrgente: false, reconvocar: false, encaminhar: false, others: false,
+          tumor: false, drusen: false, vitreousDisorders: false, papilEdema: false, macularHole: false,
+          pigmentaryChanges: false, retinalDystrophies: false, priorUveitis: false, externalLesion: false,
+          reconvocarUrgente: false, reconvocar: false, encaminhar: false, others: false, aiReady: false,
         });
         setSelectedReportImages(patient.report.selectedImages || { od: null, oe: null });
       } catch (e) {
@@ -551,10 +562,19 @@ function MedicalContent() {
       hrModerate: false,
       hrSevere: false,
       tumor: false,
+      drusen: false,
+      vitreousDisorders: false,
+      papilEdema: false,
+      macularHole: false,
+      pigmentaryChanges: false,
+      retinalDystrophies: false,
+      priorUveitis: false,
+      externalLesion: false,
       reconvocarUrgente: false,
       reconvocar: false,
       encaminhar: false,
       others: false,
+      aiReady: false,
     });
   };
 
@@ -656,10 +676,19 @@ function MedicalContent() {
         'Condição: RH Moderada': (conditions as any).hrModerate ? 'Sim' : 'Não',
         'Condição: RH Grave': (conditions as any).hrSevere ? 'Sim' : 'Não',
         'Condição: Tumor': (conditions as any).tumor ? 'Sim' : 'Não',
+        'Condição: Drusas': (conditions as any).drusen ? 'Sim' : 'Não',
+        'Condição: Distúrbios do Vítreo': (conditions as any).vitreousDisorders ? 'Sim' : 'Não',
+        'Condição: Edema de Papila': (conditions as any).papilEdema ? 'Sim' : 'Não',
+        'Condição: Buraco Macular / Membrana Epirret.': (conditions as any).macularHole ? 'Sim' : 'Não',
+        'Condição: Alterações Pigmentares': (conditions as any).pigmentaryChanges ? 'Sim' : 'Não',
+        'Condição: Distrofias Retinianas': (conditions as any).retinalDystrophies ? 'Sim' : 'Não',
+        'Condição: Uveíte Prévia': (conditions as any).priorUveitis ? 'Sim' : 'Não',
+        'Condição: Lesão Externa': (conditions as any).externalLesion ? 'Sim' : 'Não',
         'Condição: Re-Convocar': (conditions as any).reconvocar ? 'Sim' : 'Não',
         'Condição: Re-Convocar Prioridade': (conditions as any).reconvocarUrgente ? 'Sim' : 'Não',
         'Condição: Encaminhar': (conditions as any).encaminhar ? 'Sim' : 'Não',
         'Condição: Outros': (conditions as any).others ? 'Sim' : 'Não',
+        'AI Ready': (conditions as any).aiReady ? 'Sim' : 'Não',
       };
     });
 
@@ -1196,10 +1225,19 @@ function MedicalContent() {
                             { id: 'hrModerate', label: 'RH Moderada' },
                             { id: 'hrSevere', label: 'RH Grave' },
                             { id: 'tumor', label: 'Tumor / Massa' },
+                            { id: 'drusen', label: 'Drusas' },
+                            { id: 'vitreousDisorders', label: 'Distúrbios do Vítreo' },
+                            { id: 'papilEdema', label: 'Edema de Papila' },
+                            { id: 'macularHole', label: 'Buraco Macular / Membrana Epirret.' },
+                            { id: 'pigmentaryChanges', label: 'Alterações Pigmentares' },
+                            { id: 'retinalDystrophies', label: 'Distrofias Retinianas' },
+                            { id: 'priorUveitis', label: 'Uveíte Prévia' },
+                            { id: 'externalLesion', label: 'Lesão Externa (Pálpebra/Córnea)' },
                             { id: 'reconvocarUrgente', label: 'Re-convocar Prioridade' },
                             { id: 'reconvocar', label: 'Re-convocar' },
                             { id: 'encaminhar', label: 'Encaminhar' },
                             { id: 'others', label: 'Outros Achados' },
+                            { id: 'aiReady', label: 'AI Ready' },
                           ].map((condition) => (
                             <button
                               key={condition.id}

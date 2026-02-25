@@ -177,16 +177,27 @@ function ReportPrintTemplate({ patient }: { patient: any }) {
                       reconvocar: 'Re-convocar',
                       encaminhar: 'Encaminhar',
                       tumor: 'Tumor / Massa',
-                      others: 'Outros'
+                      drusen: 'Drusas',
+                      vitreousDisorders: 'Distúrbios do Vítreo',
+                      papilEdema: 'Edema de Papila',
+                      macularHole: 'Buraco Macular / Membrana Epirret.',
+                      pigmentaryChanges: 'Alterações Pigmentares',
+                      retinalDystrophies: 'Distrofias Retinianas',
+                      priorUveitis: 'Uveíte Prévia',
+                      externalLesion: 'Lesão Externa (Pálpebra/Córnea)',
+                      others: 'Outros',
+                      aiReady: 'AI Ready',
                     };
-                    const isRed = ['drMild', 'drModerate', 'drSevere', 'drProliferative', 'glaucomaSuspect', 'tumor'].includes(key);
+                    const isRed = ['drMild', 'drModerate', 'drSevere', 'drProliferative', 'glaucomaSuspect', 'tumor', 'papilEdema', 'macularHole'].includes(key);
                     const isOrange = ['reconvocar', 'reconvocarUrgente'].includes(key);
                     const isGreen = key === 'normal';
+                    const isAI = key === 'aiReady';
 
                     return (
                       <span key={key} className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm border ${isRed ? 'bg-cardinal-50 text-cardinal-700 border-cardinal-100' :
                         isOrange ? 'bg-orange-50 text-orange-700 border-orange-100' :
                           isGreen ? 'bg-green-50 text-green-700 border-green-100' :
+                            isAI ? 'bg-cyan-50 text-cyan-700 border-cyan-100' :
                             'bg-sandstone-100 text-sandstone-700 border-sandstone-200'
                         }`}>
                         {labels[key] || key}
@@ -1104,9 +1115,54 @@ export default function Results() {
                                   Tumor / Massa
                                 </span>
                               )}
+                              {selectedPatient.report.diagnosticConditions.drusen && (
+                                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Drusas
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.vitreousDisorders && (
+                                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Distúrbios do Vítreo
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.papilEdema && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Edema de Papila
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.macularHole && (
+                                <span className="px-3 py-1 bg-cardinal-50 text-cardinal-700 border border-cardinal-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Buraco Macular / Membrana Epirret.
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.pigmentaryChanges && (
+                                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Alterações Pigmentares
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.retinalDystrophies && (
+                                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Distrofias Retinianas
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.priorUveitis && (
+                                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Uveíte Prévia
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.externalLesion && (
+                                <span className="px-3 py-1 bg-sandstone-100 text-sandstone-700 border border-sandstone-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  Lesão Externa (Pálpebra/Córnea)
+                                </span>
+                              )}
                               {selectedPatient.report.diagnosticConditions.others && (
                                 <span className="px-3 py-1 bg-sandstone-100 text-sandstone-700 border border-sandstone-200 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
                                   Outros
+                                </span>
+                              )}
+                              {selectedPatient.report.diagnosticConditions.aiReady && (
+                                <span className="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-100 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                  AI Ready
                                 </span>
                               )}
                             </div>
