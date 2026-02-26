@@ -61,6 +61,9 @@ upload_melina.log
 upload_mozania.log
 download_mozania.log
 nul
+
+# Exports CSV
+laudados_*.csv
 /exemplo_outro_projeto
 
 # Auth state files (session cookies - NEVER commit)

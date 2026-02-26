@@ -76,7 +76,8 @@
       "Bash(findstr:*)",
       "Bash(tasklist:*)",
       "Bash(WMIC PROCESS WHERE \"name=''python.exe''\" GET ProcessId,CommandLine)",
-      "Bash(set PYTHONIOENCODING=utf-8)"
+      "Bash(set PYTHONIOENCODING=utf-8)",
+      "Bash(set \"DATABASE_URL=postgresql://postgres:AuVoFahQqqqkUlcbNkBsBeCZSXwfRPJe@interchange.proxy.rlwy.net:41809/railway\")"
     ]
   }
 }
