@@ -4,7 +4,7 @@ AutoMorph/
 # Generated image directories
 automorph_input/
 automorph_results/
-figures/
+# figures/ — mantido no git para referência
 
 # Generated data files
 matched_patients.csv
