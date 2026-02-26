@@ -1,0 +1,18 @@
+# AutoMorph cloned repo (large, has its own git)
+AutoMorph/
+
+# Generated image directories
+automorph_input/
+automorph_results/
+figures/
+
+# Generated data files
+matched_patients.csv
+image_manifest.csv
+final_dataset.csv
+
+# Large data files
+*.zip
+
+# Local execution logs
+automorph_local_log.txt
