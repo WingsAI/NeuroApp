@@ -11,6 +11,9 @@ matched_patients.csv
 image_manifest.csv
 final_dataset.csv
 
+# Temp extraction dirs
+automorph_results_v2_temp/
+
 # Large data files
 *.zip
 

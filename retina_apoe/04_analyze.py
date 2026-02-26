@@ -69,8 +69,13 @@ def load_and_merge(metrics_path, img_col=None):
             return None
     print(f"Coluna de imagem no metrics: {img_col}")
 
-    # Merge manifest + metrics
-    merged = manifest.merge(metrics, left_on='image_file', right_on=img_col, how='inner')
+    # Normalize extensions for merging (manifest has .jpg, metrics may have .png)
+    manifest['_merge_key'] = manifest['image_file'].str.replace(r'\.\w+$', '', regex=True)
+    metrics['_merge_key'] = metrics[img_col].str.replace(r'\.\w+$', '', regex=True)
+
+    # Merge manifest + metrics on stem (without extension)
+    merged = manifest.merge(metrics, on='_merge_key', how='inner')
+    merged.drop(columns=['_merge_key'], inplace=True)
     print(f"Imagens com métricas: {len(merged)}")
 
     # Merge with matched patients for confounders
@@ -302,27 +307,57 @@ def plot_bar_by_genotype(df, col, label, filename):
 
 
 def plot_boxplot_by_genotype(df, col, label, filename):
-    """Box plot with individual points by genotype."""
+    """Box plot with individual points by genotype (strip plot approach for compatibility)."""
     fig, ax = plt.subplots(figsize=(10, 7))
 
-    data_by_genotype = []
-    for g in GENOTYPE_ORDER:
-        subset = df[df['genotype'] == g][col].dropna()
-        data_by_genotype.append(subset.values)
+    # Use manual box stats to avoid numpy inhomogeneous array issue
+    positions = []
+    box_data = []
+    colors_used = []
+    labels_used = []
 
-    bp = ax.boxplot(data_by_genotype, patch_artist=True, showfliers=True)
-    for patch, color in zip(bp['boxes'], GENOTYPE_COLORS):
-        patch.set_facecolor(color)
-        patch.set_alpha(0.6)
+    for i, g in enumerate(GENOTYPE_ORDER):
+        subset = df[df['genotype'] == g][col].dropna().values
+        if len(subset) == 0:
+            continue
+        positions.append(i + 1)
+        box_data.append(subset)
+        colors_used.append(GENOTYPE_COLORS[i])
+        labels_used.append(GENOTYPE_LABELS.get(g, g))
 
-    # Overlay individual points
-    for i, (g, data) in enumerate(zip(GENOTYPE_ORDER, data_by_genotype)):
-        jitter = np.random.normal(0, 0.05, len(data))
-        ax.scatter(np.full_like(data, i + 1) + jitter, data,
+    if len(box_data) >= 2:
+        # Compute boxplot stats manually for old matplotlib compatibility
+        from matplotlib.cbook import boxplot_stats as _bps
+        bxp_stats = []
+        for d in box_data:
+            d_arr = np.array(d, dtype=float)
+            q1, med, q3 = np.percentile(d_arr, [25, 50, 75])
+            iqr = q3 - q1
+            whislo = d_arr[d_arr >= q1 - 1.5 * iqr].min() if len(d_arr) > 0 else q1
+            whishi = d_arr[d_arr <= q3 + 1.5 * iqr].max() if len(d_arr) > 0 else q3
+            fliers = d_arr[(d_arr < whislo) | (d_arr > whishi)]
+            bxp_stats.append({
+                'med': med, 'q1': q1, 'q3': q3,
+                'whislo': whislo, 'whishi': whishi,
+                'fliers': fliers, 'mean': d_arr.mean(),
+            })
+        bp = ax.bxp(bxp_stats, positions=positions, patch_artist=True, showfliers=True, widths=0.6)
+        for patch, color in zip(bp['boxes'], colors_used):
+            patch.set_facecolor(color)
+            patch.set_alpha(0.6)
+
+    # Overlay individual points (always, even for n=1)
+    for i, g in enumerate(GENOTYPE_ORDER):
+        subset = df[df['genotype'] == g][col].dropna().values
+        if len(subset) == 0:
+            continue
+        jitter = np.random.normal(0, 0.05, len(subset))
+        ax.scatter(np.full(len(subset), i + 1) + jitter, subset,
                    alpha=0.5, s=20, color='black', zorder=3)
 
-    labels = [GENOTYPE_LABELS.get(g, g) for g in GENOTYPE_ORDER]
-    ax.set_xticklabels(labels, fontsize=11)
+    all_labels = [GENOTYPE_LABELS.get(g, g) for g in GENOTYPE_ORDER]
+    ax.set_xticks(range(1, len(GENOTYPE_ORDER) + 1))
+    ax.set_xticklabels(all_labels, fontsize=11)
     ax.set_ylabel(label, fontsize=13)
     ax.set_title(f'{label} por Genótipo APOE', fontsize=14, fontweight='bold')
 
@@ -371,14 +406,33 @@ def main():
     descriptive_table(df, metric_cols)
     anova_results = test_anova_kw(df, metric_cols)
     trend_results = test_linear_trend(df, metric_cols)
-    regression_results = regression_analysis(df, metric_cols)
 
-    # Generate plots
+    # Generate plots (before regression, which may fail on old statsmodels)
     print("\n" + "=" * 80)
     print("  GERANDO GRÁFICOS")
     print("=" * 80)
 
-    for col in metric_cols:
+    # Plot key metrics + any significant ones
+    KEY_METRICS = [
+        'Fractal_dimension', 'Vessel_density', 'Average_width',
+        'Tortuosity_density', 'Distance_tortuosity',
+        'CRAE_Knudtson_zone_b', 'CRVE_Knudtson_zone_b', 'AVR_Knudtson_zone_b',
+        'CRAE_Knudtson_zone_c', 'CRVE_Knudtson_zone_c', 'AVR_Knudtson_zone_c',
+        'Artery_Fractal_dimension', 'Vein_Fractal_dimension',
+        'Artery_Vessel_density', 'Vein_Vessel_density',
+        'Artery_Average_width', 'Vein_Average_width',
+    ]
+    # Add any metrics that are significant (p < 0.10) in ANOVA or trend
+    sig_metrics = set()
+    if not anova_results.empty:
+        sig_metrics.update(anova_results[anova_results['p_KW'] < 0.10]['metric'].tolist())
+    if not trend_results.empty:
+        sig_metrics.update(trend_results[trend_results['p_pearson'] < 0.10]['metric'].tolist())
+
+    plot_cols = [c for c in metric_cols if c in KEY_METRICS or c in sig_metrics]
+    print(f"\nGerando gráficos para {len(plot_cols)} métricas (key + significativas)...")
+
+    for col in plot_cols:
         safe_name = col.lower().replace(' ', '_').replace('/', '_')
         label = col.replace('_', ' ').title()
         plot_bar_by_genotype(df, col, label, f'bar_{safe_name}.png')
@@ -388,6 +442,14 @@ def main():
     output_path = SCRIPT_DIR / 'final_dataset.csv'
     df.to_csv(output_path, index=False, encoding='utf-8-sig')
     print(f"\nDataset consolidado: {output_path}")
+
+    # Regression (may fail on older statsmodels/numpy combos)
+    regression_results = None
+    try:
+        regression_results = regression_analysis(df, metric_cols)
+    except Exception as e:
+        print(f"\n⚠ Regressão falhou: {e}")
+        print("  Instale versão mais recente: pip install --upgrade statsmodels numpy")
 
     # Summary
     print("\n" + "=" * 80)
