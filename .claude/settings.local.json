@@ -107,7 +107,8 @@
       "Bash(pip search colab-cli)",
       "Bash(pip install colab-cli)",
       "WebFetch(domain:pypi.org)",
-      "Bash(colab-cli --help)"
+      "Bash(colab-cli --help)",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }
