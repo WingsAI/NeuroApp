@@ -279,6 +279,98 @@ def _run_parallel_scripts(scripts_with_cwd, label="parallel"):
             log(f"  ✓ [{name}] concluído")
 
 
+def _robust_csv_merge(am):
+    """Merge M3 CSVs robustly — skips missing files instead of crashing.
+
+    Replicates csv_merge.py logic but handles missing CSVs gracefully.
+    csv_merge.py expects all 6 CSVs to exist; if any M3 script failed,
+    it crashes with FileNotFoundError. This fallback merges whatever exists.
+
+    Expected structure:
+      Results/M3/Disc_centred/Disc_Measurement.csv          (whole/disc_centred)
+      Results/M3/Disc_centred/Disc_Zone_B_Measurement.csv   (zone/disc_centred_B)
+      Results/M3/Disc_centred/Disc_Zone_C_Measurement.csv   (zone/disc_centred_C)
+      Results/M3/Macular_centred/Macular_Measurement.csv          (whole/macular_centred)
+      Results/M3/Macular_centred/Macular_Zone_B_Measurement.csv   (zone/macular_centred_B)
+      Results/M3/Macular_centred/Macular_Zone_C_Measurement.csv   (zone/macular_centred_C)
+    """
+    import pandas as pd
+
+    results_m3 = am / 'Results' / 'M3'
+
+    # ── Disc Features ──
+    disc_csvs = {
+        'base': results_m3 / 'Disc_centred' / 'Disc_Measurement.csv',
+        'zone_b': results_m3 / 'Disc_centred' / 'Disc_Zone_B_Measurement.csv',
+        'zone_c': results_m3 / 'Disc_centred' / 'Disc_Zone_C_Measurement.csv',
+    }
+    disc_dfs = {}
+    for key, path in disc_csvs.items():
+        if path.exists():
+            try:
+                disc_dfs[key] = pd.read_csv(path)
+                log(f"    Disc {key}: {len(disc_dfs[key])} rows")
+            except Exception as e:
+                log(f"    ⚠ Disc {key}: erro ao ler — {e}")
+        else:
+            log(f"    ⚠ Disc {key}: não existe (script M3 falhou?)")
+
+    if disc_dfs:
+        # Merge available disc CSVs
+        disc_merged = None
+        for key in ['base', 'zone_b', 'zone_c']:
+            if key in disc_dfs:
+                df = disc_dfs[key]
+                df = df.replace(-1, '')
+                if disc_merged is None:
+                    disc_merged = df
+                else:
+                    # Merge on image column (first column, typically image filename)
+                    img_col = df.columns[0]
+                    # Add suffix for duplicate column names
+                    disc_merged = disc_merged.merge(df, on=img_col, how='outer', suffixes=('', f'_{key}'))
+        if disc_merged is not None:
+            out = results_m3 / 'Disc_Features.csv'
+            disc_merged.to_csv(out, index=False)
+            log(f"    ✓ Disc_Features.csv: {len(disc_merged)} rows × {len(disc_merged.columns)} cols")
+
+    # ── Macular Features ──
+    mac_csvs = {
+        'base': results_m3 / 'Macular_centred' / 'Macular_Measurement.csv',
+        'zone_b': results_m3 / 'Macular_centred' / 'Macular_Zone_B_Measurement.csv',
+        'zone_c': results_m3 / 'Macular_centred' / 'Macular_Zone_C_Measurement.csv',
+    }
+    mac_dfs = {}
+    for key, path in mac_csvs.items():
+        if path.exists():
+            try:
+                mac_dfs[key] = pd.read_csv(path)
+                log(f"    Macular {key}: {len(mac_dfs[key])} rows")
+            except Exception as e:
+                log(f"    ⚠ Macular {key}: erro ao ler — {e}")
+        else:
+            log(f"    ⚠ Macular {key}: não existe (script M3 falhou?)")
+
+    if mac_dfs:
+        mac_merged = None
+        for key in ['base', 'zone_b', 'zone_c']:
+            if key in mac_dfs:
+                df = mac_dfs[key]
+                df = df.replace(-1, '')
+                if mac_merged is None:
+                    mac_merged = df
+                else:
+                    img_col = df.columns[0]
+                    mac_merged = mac_merged.merge(df, on=img_col, how='outer', suffixes=('', f'_{key}'))
+        if mac_merged is not None:
+            out = results_m3 / 'Macular_Features.csv'
+            mac_merged.to_csv(out, index=False)
+            log(f"    ✓ Macular_Features.csv: {len(mac_merged)} rows × {len(mac_merged.columns)} cols")
+
+    if not disc_dfs and not mac_dfs:
+        log("    ✗ Nenhum CSV M3 encontrado para merge")
+
+
 def step_run(batch, skip_quality):
     log("=" * 60)
     log(f"STEP 5: Executar AutoMorph ({len(batch)} imagens)")
@@ -289,33 +381,57 @@ def step_run(batch, skip_quality):
 
     run_cmd('chmod +x run.sh', cwd=am, check=False)
 
-    # ══════════════════════════════════════════════════════════════
-    # FASE 1: M0 + M1 + M2 via run.sh --no_feature
-    #   run.sh configura automorph_data.py, paths relativos, etc.
-    #   Rodar módulos individualmente FALHA (M0 produz 0 imagens).
-    #   --no_feature pula o M3 (que é CPU e queremos paralelizar).
-    # ══════════════════════════════════════════════════════════════
-    log("\n  ── FASE 1: M0→M1→M2 via run.sh --no_feature (GPU) ──")
-    t_phase1 = time.time()
-
-    run_sh_args = 'bash run.sh --no_feature'
     if skip_quality:
-        run_sh_args += ' --no_quality'
+        # ══════════════════════════════════════════════════════════
+        # MODO SKIP QUALITY: 3 fases
+        #   1. run.sh --no_feature --no_quality --no_segmentation → só M0
+        #   2. Copiar TODAS as M0 → Good_quality (bypass M1)
+        #   3. run.sh --no_feature --no_process --no_quality → só M2
+        #
+        # NÃO podemos usar --no_quality com M2 junto, porque:
+        #   - --no_quality pula M1 → Good_quality/ não é criada
+        #   - M2 precisa de Good_quality/ → FileNotFoundError
+        # ══════════════════════════════════════════════════════════
 
-    run_cmd(run_sh_args, cwd=am, check=False, stream=True)
+        # FASE 1a: Só M0 (preprocess)
+        log("\n  ── FASE 1a: M0 Preprocess (GPU) ──")
+        t_m0 = time.time()
+        run_cmd('bash run.sh --no_feature --no_quality --no_segmentation', cwd=am, check=False, stream=True)
+        log(f"  M0 duração: {(time.time()-t_m0)/60:.1f} min")
 
-    phase1_time = (time.time() - t_phase1) / 60
-    log(f"  FASE 1 duração: {phase1_time:.1f} min")
-
-    # Se skip_quality, copiar todas M0 para Good_quality
-    if skip_quality:
         m0_out = am / 'Results' / 'M0'
+        n_m0 = len(list(m0_out.glob('*.png'))) if m0_out.exists() else 0
+        log(f"  M0 output: {n_m0} imagens")
+
+        if n_m0 == 0:
+            log("  ✗ M0 não produziu imagens! Abortando.")
+            return
+
+        # FASE 1b: Copiar TODAS M0 → Good_quality (skip M1 filtering)
+        log("\n  ── FASE 1b: Skip M1 — copiando todas M0 → Good_quality ──")
         good_dir = am / 'Results' / 'M1' / 'Good_quality'
         good_dir.mkdir(parents=True, exist_ok=True)
         for f in m0_out.glob('*.png'):
             shutil.copy2(f, good_dir)
-        n = len(list(good_dir.glob('*.png')))
-        log(f"  skip_quality: {n} imagens copiadas para Good_quality")
+        n_good = len(list(good_dir.glob('*.png')))
+        log(f"  Good_quality: {n_good} imagens (TODAS, sem filtro M1)")
+
+        # FASE 1c: Só M2 (segmentação GPU)
+        log("\n  ── FASE 1c: M2 Segmentação (GPU) ──")
+        t_m2 = time.time()
+        run_cmd('bash run.sh --no_feature --no_process --no_quality', cwd=am, check=False, stream=True)
+        log(f"  M2 duração: {(time.time()-t_m2)/60:.1f} min")
+
+    else:
+        # ══════════════════════════════════════════════════════════
+        # MODO NORMAL: run.sh --no_feature faz M0+M1+M2 de uma vez
+        # ══════════════════════════════════════════════════════════
+        log("\n  ── FASE 1: M0→M1→M2 via run.sh --no_feature (GPU) ──")
+        t_phase1 = time.time()
+        run_cmd('bash run.sh --no_feature', cwd=am, check=False, stream=True)
+        log(f"  FASE 1 duração: {(time.time()-t_phase1)/60:.1f} min")
+
+    phase1_time = (time.time() - start) / 60
 
     # Report M0/M1 results
     for d in ['M0', 'M1/Good_quality', 'M1/Ungradable']:
@@ -382,19 +498,33 @@ def step_run(batch, skip_quality):
     phase2_time = (time.time() - t_phase2) / 60
     log(f"  FASE 2 (M3) duração: {phase2_time:.1f} min")
 
-    # ── csv_merge.py ──
+    # ── csv_merge.py (com fallback robusto) ──
     log("\n  ── CSV Merge ──")
+    merge_ok = False
     merge_py = am / 'csv_merge.py'
     if merge_py.exists():
-        run_cmd(f'{sys.executable} csv_merge.py', cwd=am, check=False, stream=True)
-    else:
-        log("  ⚠ csv_merge.py não encontrado")
+        r = run_cmd(f'{sys.executable} csv_merge.py', cwd=am, check=False, stream=True)
+        if r and r.returncode == 0:
+            merge_ok = True
+
+    if not merge_ok:
+        log("  csv_merge.py falhou ou não existe — rodando merge robusto (ignora CSVs faltantes)")
+        _robust_csv_merge(am)
+
+    # ── Aviso se M1 filtrou demais ──
+    good_dir = am / 'Results' / 'M1' / 'Good_quality'
+    n_good = len(list(good_dir.glob('*.png'))) if good_dir.exists() else 0
+    if n_good < len(batch) * 0.3 and not skip_quality:
+        pct = n_good / len(batch) * 100 if len(batch) > 0 else 0
+        log(f"\n  ⚠ M1 filtrou {len(batch) - n_good} imagens ({pct:.0f}% aprovadas)")
+        log(f"  Para processar TODAS as imagens, rode com --skip-quality:")
+        log(f"    python {Path(__file__).name} --run --skip-quality")
 
     # ── Sumário ──
     elapsed = time.time() - start
     log(f"\n  ═══ DURAÇÃO TOTAL: {elapsed / 60:.1f} min ═══")
-    log(f"      FASE 1 (M0+M1+M2 GPU): {phase1_time:.1f} min")
-    log(f"      FASE 2 (M3 CPU paralelo): {phase2_time:.1f} min")
+    log(f"      GPU (M0+M1+M2):  {phase1_time:.1f} min")
+    log(f"      CPU (M3 paralelo): {phase2_time:.1f} min")
 
 
 def step_collect(label):
