@@ -381,55 +381,51 @@ def step_run(batch, skip_quality):
 
     run_cmd('chmod +x run.sh', cwd=am, check=False)
 
+    # ══════════════════════════════════════════════════════════════
+    # FASE 1: M0 + M1 + M2 via run.sh --no_feature
+    #
+    # IMPORTANTE: Usar SOMENTE --no_feature. Combinar múltiplas
+    # flags (--no_quality, --no_segmentation) causa M0=0 imagens
+    # silenciosamente (bug no run.sh / except:pass no M0).
+    #
+    # Para skip_quality: deixamos run.sh rodar M0+M1+M2 normalmente,
+    # depois sobrescrevemos Good_quality com TODAS as M0 e re-rodamos
+    # APENAS M2 com --no_process --no_quality --no_feature.
+    # ══════════════════════════════════════════════════════════════
+    log("\n  ── FASE 1: M0→M1→M2 via run.sh --no_feature (GPU) ──")
+    t_phase1 = time.time()
+    run_cmd('bash run.sh --no_feature', cwd=am, check=False, stream=True)
+    log(f"  FASE 1 duração: {(time.time()-t_phase1)/60:.1f} min")
+
     if skip_quality:
-        # ══════════════════════════════════════════════════════════
-        # MODO SKIP QUALITY: 3 fases
-        #   1. run.sh --no_feature --no_quality --no_segmentation → só M0
-        #   2. Copiar TODAS as M0 → Good_quality (bypass M1)
-        #   3. run.sh --no_feature --no_process --no_quality → só M2
-        #
-        # NÃO podemos usar --no_quality com M2 junto, porque:
-        #   - --no_quality pula M1 → Good_quality/ não é criada
-        #   - M2 precisa de Good_quality/ → FileNotFoundError
-        # ══════════════════════════════════════════════════════════
-
-        # FASE 1a: Só M0 (preprocess)
-        log("\n  ── FASE 1a: M0 Preprocess (GPU) ──")
-        t_m0 = time.time()
-        run_cmd('bash run.sh --no_feature --no_quality --no_segmentation', cwd=am, check=False, stream=True)
-        log(f"  M0 duração: {(time.time()-t_m0)/60:.1f} min")
-
+        # Sobrescrever Good_quality com TODAS as imagens M0
         m0_out = am / 'Results' / 'M0'
+        good_dir = am / 'Results' / 'M1' / 'Good_quality'
+
         n_m0 = len(list(m0_out.glob('*.png'))) if m0_out.exists() else 0
-        log(f"  M0 output: {n_m0} imagens")
+        n_good_before = len(list(good_dir.glob('*.png'))) if good_dir.exists() else 0
+        log(f"\n  ── Skip Quality: sobrescrevendo Good_quality ──")
+        log(f"  M0 total: {n_m0} imagens")
+        log(f"  Good_quality antes (filtrado M1): {n_good_before} imagens")
 
         if n_m0 == 0:
-            log("  ✗ M0 não produziu imagens! Abortando.")
-            return
+            log("  ✗ M0 não produziu imagens! Não é possível skip quality.")
+            log("  Continuando com as {n_good_before} imagens filtradas por M1...")
+        else:
+            # Limpar Good_quality e copiar TODAS as M0
+            if good_dir.exists():
+                shutil.rmtree(good_dir)
+            good_dir.mkdir(parents=True, exist_ok=True)
+            for f in m0_out.glob('*.png'):
+                shutil.copy2(f, good_dir)
+            n_good_after = len(list(good_dir.glob('*.png')))
+            log(f"  Good_quality depois (ALL): {n_good_after} imagens")
 
-        # FASE 1b: Copiar TODAS M0 → Good_quality (skip M1 filtering)
-        log("\n  ── FASE 1b: Skip M1 — copiando todas M0 → Good_quality ──")
-        good_dir = am / 'Results' / 'M1' / 'Good_quality'
-        good_dir.mkdir(parents=True, exist_ok=True)
-        for f in m0_out.glob('*.png'):
-            shutil.copy2(f, good_dir)
-        n_good = len(list(good_dir.glob('*.png')))
-        log(f"  Good_quality: {n_good} imagens (TODAS, sem filtro M1)")
-
-        # FASE 1c: Só M2 (segmentação GPU)
-        log("\n  ── FASE 1c: M2 Segmentação (GPU) ──")
-        t_m2 = time.time()
-        run_cmd('bash run.sh --no_feature --no_process --no_quality', cwd=am, check=False, stream=True)
-        log(f"  M2 duração: {(time.time()-t_m2)/60:.1f} min")
-
-    else:
-        # ══════════════════════════════════════════════════════════
-        # MODO NORMAL: run.sh --no_feature faz M0+M1+M2 de uma vez
-        # ══════════════════════════════════════════════════════════
-        log("\n  ── FASE 1: M0→M1→M2 via run.sh --no_feature (GPU) ──")
-        t_phase1 = time.time()
-        run_cmd('bash run.sh --no_feature', cwd=am, check=False, stream=True)
-        log(f"  FASE 1 duração: {(time.time()-t_phase1)/60:.1f} min")
+            # Re-rodar APENAS M2 com todas as imagens
+            log(f"\n  ── Re-rodando M2 com {n_good_after} imagens (GPU) ──")
+            t_m2 = time.time()
+            run_cmd('bash run.sh --no_process --no_quality --no_feature', cwd=am, check=False, stream=True)
+            log(f"  M2 re-run duração: {(time.time()-t_m2)/60:.1f} min")
 
     phase1_time = (time.time() - start) / 60
 

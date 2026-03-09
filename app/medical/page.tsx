@@ -83,6 +83,24 @@ function MedicalContent() {
     oe: null
   });
   const [showCompleted, setShowCompleted] = useState(false);
+  const [selectedUnits, setSelectedUnits] = useState<Set<string>>(new Set());
+
+  const availableUnits = React.useMemo(() => {
+    const units = new Set<string>();
+    patients.forEach((p: any) => {
+      if (p.location) units.add(p.location.trim());
+    });
+    return Array.from(units).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  }, [patients]);
+
+  const toggleUnit = (unit: string) => {
+    setSelectedUnits(prev => {
+      const next = new Set(prev);
+      if (next.has(unit)) next.delete(unit);
+      else next.add(unit);
+      return next;
+    });
+  };
 
   useEffect(() => {
     loadPatients();
@@ -90,7 +108,7 @@ function MedicalContent() {
 
   useEffect(() => {
     filterPatients();
-  }, [searchTerm, patients]);
+  }, [searchTerm, patients, selectedUnits]);
 
   useEffect(() => {
     if (editId) {
@@ -273,21 +291,18 @@ function MedicalContent() {
   };
 
   const filterPatients = () => {
-    if (!searchTerm.trim()) {
-      setFilteredPatients(patients);
-      return;
-    }
-
-    const term = searchTerm.toLowerCase();
-    const filtered = patients.filter(
-      (p: any) =>
+    const term = searchTerm.toLowerCase().trim();
+    const filtered = patients.filter((p: any) => {
+      const matchesSearch = !term ||
         p.name?.toLowerCase().includes(term) ||
         (p.cpf && p.cpf.includes(term)) ||
-        (p.location && p.location.toLowerCase().includes(term))
-    );
-    // Already sorted from source, but ensure consistency
+        (p.location && p.location.toLowerCase().includes(term));
+      const matchesUnit = selectedUnits.size === 0 ||
+        (p.location && selectedUnits.has(p.location.trim()));
+      return matchesSearch && matchesUnit;
+    });
     filtered.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
-    setVisibleCount(10); // Reset pagination on search
+    setVisibleCount(10);
     setFilteredPatients(filtered);
   };
 
@@ -767,10 +782,48 @@ function MedicalContent() {
             </div>
             <div className="flex items-center justify-center p-4 bg-white rounded-xl border border-sandstone-100 shadow-sm">
               <p className="text-xs font-bold text-sandstone-500 uppercase tracking-widest">
-                {patients.length} Pacientes na Fila
+                {filteredPatients.length} Pacientes na Fila
               </p>
             </div>
           </div>
+
+          {/* Unit Filter */}
+          {availableUnits.length > 0 && (
+            <div className="bg-white rounded-xl border border-sandstone-100 shadow-sm px-6 py-4">
+              <div className="flex items-center gap-3 mb-3">
+                <MapPin className="w-4 h-4 text-cardinal-700 flex-shrink-0" />
+                <span className="text-xs font-bold text-sandstone-500 uppercase tracking-widest">Filtrar por Unidade</span>
+                {selectedUnits.size > 0 && (
+                  <button
+                    onClick={() => setSelectedUnits(new Set())}
+                    className="ml-auto text-[10px] font-bold text-cardinal-700 uppercase tracking-widest hover:text-cardinal-900 transition-colors"
+                  >
+                    Limpar filtro
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {availableUnits.map((unit) => (
+                  <label
+                    key={unit}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border cursor-pointer transition-all text-xs font-bold uppercase tracking-wide select-none ${
+                      selectedUnits.has(unit)
+                        ? 'bg-cardinal-700 text-white border-cardinal-800'
+                        : 'bg-sandstone-50 text-sandstone-600 border-sandstone-200 hover:border-cardinal-300 hover:text-cardinal-700'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={selectedUnits.has(unit)}
+                      onChange={() => toggleUnit(unit)}
+                    />
+                    {unit}
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Patient Grid */}
           {filteredPatients.length === 0 ? (
