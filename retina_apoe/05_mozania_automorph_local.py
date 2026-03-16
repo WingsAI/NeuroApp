@@ -124,6 +124,215 @@ def check_gpu():
         return False
 
 
+def step_diagnose():
+    """Diagnóstico completo do ambiente — roda antes do pipeline."""
+    log("=" * 60)
+    log("DIAGNÓSTICO DO AMBIENTE")
+    log("=" * 60)
+
+    # ── Sistema ──
+    import platform as pf
+    log(f"  OS: {pf.system()} {pf.release()} ({pf.machine()})")
+    log(f"  Python: {sys.version}")
+    log(f"  Executável: {sys.executable}")
+
+    # ── PyTorch & CUDA ──
+    try:
+        import torch
+        log(f"  PyTorch: {torch.__version__}")
+        log(f"  CUDA compilado: {torch.version.cuda}")
+        log(f"  CUDA disponível: {torch.cuda.is_available()}")
+        if torch.cuda.is_available():
+            log(f"  GPU: {torch.cuda.get_device_name(0)}")
+            props = torch.cuda.get_device_properties(0)
+            log(f"  SM: {props.major}.{props.minor}")
+            log(f"  VRAM: {props.total_memory / 1e9:.1f} GB")
+    except Exception as e:
+        log(f"  ⚠ PyTorch: {e}")
+
+    try:
+        import torchvision
+        log(f"  torchvision: {torchvision.__version__}")
+    except Exception as e:
+        log(f"  ⚠ torchvision: {e}")
+
+    # ── Dependências M0/M1/M2 ──
+    deps = {
+        'PIL (Pillow)': lambda: __import__('PIL').__version__,
+        'cv2 (OpenCV)': lambda: __import__('cv2').__version__,
+        'skimage': lambda: __import__('skimage').__version__,
+        'numpy': lambda: __import__('numpy').__version__,
+        'scipy': lambda: __import__('scipy').__version__,
+        'pandas': lambda: __import__('pandas').__version__,
+        'timm': lambda: __import__('timm').__version__,
+        'efficientnet_pytorch': lambda: __import__('efficientnet_pytorch').__version__,
+        'segmentation_models_pytorch': lambda: __import__('segmentation_models_pytorch').__version__,
+        'albumentations': lambda: __import__('albumentations').__version__,
+        'h5py': lambda: __import__('h5py').__version__,
+    }
+    for name, get_ver in deps.items():
+        try:
+            ver = get_ver()
+            log(f"  {name}: {ver}")
+        except Exception as e:
+            log(f"  ⚠ {name}: NÃO INSTALADO ({e})")
+
+    # ── Verificar arquivos AutoMorph ──
+    am = AUTOMORPH_DIR
+    if am.exists():
+        log(f"\n  AutoMorph dir: {am}")
+        for f in ['run.sh', 'automorph_data.py', 'csv_merge.py', 'resolution_information.csv']:
+            p = am / f
+            log(f"    {f}: {'✓' if p.exists() else '✗ NÃO EXISTE'}")
+
+        imgs_dir = am / 'images'
+        if imgs_dir.exists():
+            jpgs = list(imgs_dir.glob('*.jpg'))
+            pngs = list(imgs_dir.glob('*.png'))
+            all_f = list(imgs_dir.iterdir())
+            log(f"    images/: {len(jpgs)} .jpg, {len(pngs)} .png, {len(all_f)} total")
+            if jpgs:
+                log(f"    Exemplo: {jpgs[0].name} ({jpgs[0].stat().st_size / 1e3:.0f} KB)")
+        else:
+            log(f"    images/: NÃO EXISTE")
+
+        res_csv = am / 'resolution_information.csv'
+        if res_csv.exists():
+            with open(res_csv, 'r') as f:
+                lines = f.readlines()
+            log(f"    resolution_information.csv: {len(lines)-1} entries")
+            log(f"    Header: {lines[0].strip()}")
+            if len(lines) > 1:
+                log(f"    Primeira: {lines[1].strip()}")
+                log(f"    Última: {lines[-1].strip()}")
+
+        results_dir = am / 'Results'
+        if results_dir.exists():
+            log(f"    Results/: EXISTE (pode ter dados de execução anterior!)")
+            for sub in sorted(results_dir.iterdir()):
+                if sub.is_dir():
+                    n = len(list(sub.rglob('*')))
+                    log(f"      {sub.name}/: {n} arquivos")
+        else:
+            log(f"    Results/: não existe (limpo)")
+    else:
+        log(f"  AutoMorph dir: NÃO EXISTE (será clonado)")
+
+    log("")
+
+
+def step_test_m0_single():
+    """Testa M0 em 1 imagem SEM except:pass para ver o erro real."""
+    log("=" * 60)
+    log("TESTE M0: Processando 1 imagem (sem silenciar erros)")
+    log("=" * 60)
+
+    am = AUTOMORPH_DIR
+    imgs_dir = am / 'images'
+    jpgs = sorted(imgs_dir.glob('*.jpg'))
+    if not jpgs:
+        log("  ✗ Nenhuma imagem em AutoMorph/images/")
+        return False
+
+    test_img = jpgs[0]
+    log(f"  Imagem teste: {test_img.name} ({test_img.stat().st_size / 1e3:.0f} KB)")
+
+    # Testar se conseguimos ler a imagem
+    try:
+        from PIL import Image
+        img = Image.open(test_img)
+        log(f"  PIL.Image.open: OK ({img.size}, mode={img.mode})")
+    except Exception as e:
+        log(f"  ✗ PIL.Image.open falhou: {e}")
+        return False
+
+    try:
+        import cv2
+        cv_img = cv2.imread(str(test_img))
+        if cv_img is not None:
+            log(f"  cv2.imread: OK (shape={cv_img.shape})")
+        else:
+            log(f"  ✗ cv2.imread retornou None!")
+            return False
+    except Exception as e:
+        log(f"  ✗ cv2.imread falhou: {e}")
+        return False
+
+    # Testar resolução CSV lookup
+    try:
+        import pandas as pd
+        res_csv = am / 'resolution_information.csv'
+        res_df = pd.read_csv(res_csv)
+        log(f"  resolution CSV: {len(res_df)} rows, colunas={list(res_df.columns)}")
+
+        match = res_df[res_df['fundus'] == test_img.name]
+        if len(match) > 0:
+            log(f"  Lookup '{test_img.name}': res={match.iloc[0]['res']} ✓")
+        else:
+            log(f"  ✗ Lookup '{test_img.name}': NÃO ENCONTRADO no CSV!")
+            log(f"    CSV fundus exemplos: {list(res_df['fundus'].head(3))}")
+            log(f"    Image name: '{test_img.name}'")
+            return False
+    except Exception as e:
+        log(f"  ✗ Resolution CSV: {e}")
+        return False
+
+    # Testar M0 diretamente com output de erro
+    log(f"\n  Rodando M0 em 1 imagem com stderr visível...")
+    m0_script = am / 'M0_Preprocess' / 'EyeQ_process_main.py'
+    if not m0_script.exists():
+        log(f"  ✗ M0 script não encontrado: {m0_script}")
+        return False
+
+    # Criar Results/M0 caso não exista
+    (am / 'Results' / 'M0').mkdir(parents=True, exist_ok=True)
+
+    # Rodar M0 com APENAS 1 imagem em um dir temporário
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Setup: 1 imagem + resolution CSV
+        tmp_imgs = Path(tmpdir) / 'images'
+        tmp_imgs.mkdir()
+        shutil.copy2(test_img, tmp_imgs / test_img.name)
+
+        tmp_res = Path(tmpdir) / 'resolution_information.csv'
+        with open(tmp_res, 'w', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['fundus', 'res'])
+            w.writerow([test_img.name, '11.07'])
+
+        (Path(tmpdir) / 'Results' / 'M0').mkdir(parents=True)
+
+        # Rodar M0 com AUTOMORPH_DATA apontando pro tmpdir
+        env = {'AUTOMORPH_DATA': tmpdir}
+        r = run_cmd(
+            f'{sys.executable} {m0_script}',
+            cwd=str(am / 'M0_Preprocess'),
+            env=env, check=False, stream=True,
+            timeout=60
+        )
+
+        # Verificar output
+        m0_out = Path(tmpdir) / 'Results' / 'M0'
+        pngs = list(m0_out.rglob('*.png'))
+        csvs = list(m0_out.rglob('*.csv'))
+        all_files = list(m0_out.rglob('*'))
+        log(f"\n  Resultado M0 teste:")
+        log(f"    PNGs: {len(pngs)}")
+        log(f"    CSVs: {len(csvs)}")
+        log(f"    Total: {len(all_files)} arquivos")
+        for f in all_files[:10]:
+            log(f"      {f.relative_to(m0_out)}")
+
+        if pngs:
+            log(f"  ✓ M0 funciona! Produziu {len(pngs)} PNG(s)")
+            return True
+        else:
+            log(f"  ✗ M0 NÃO produziu PNGs mesmo com 1 imagem")
+            log(f"    Verifique o output acima para erros")
+            return False
+
+
 def step_extract_zip():
     log("=" * 60)
     log("STEP 1: Extrair ZIP")
@@ -595,6 +804,7 @@ def main():
     parser.add_argument('--batch', type=int, default=0, help='Batch size (0=todas)')
     parser.add_argument('--start', type=int, default=0, help='Batch start index')
     parser.add_argument('--merge', action='store_true', help='Merge resultados de batches anteriores')
+    parser.add_argument('--diagnose', action='store_true', help='Diagnóstico completo do ambiente + teste M0')
     args = parser.parse_args()
 
     # Init log
@@ -640,6 +850,17 @@ def main():
     if not step_install_deps():
         log("ABORT: Dependências faltando")
         return
+
+    # Diagnose mode: roda diagnóstico + teste M0 e para
+    if args.diagnose:
+        # Preparar 5 imagens para teste
+        batch_test, _ = step_prepare_batch(images, 0, 5)
+        step_diagnose()
+        step_test_m0_single()
+        return
+
+    # Diagnóstico rápido sempre (versões)
+    step_diagnose()
 
     # Batch processing
     if args.batch > 0:

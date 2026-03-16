@@ -108,7 +108,19 @@
       "Bash(pip install colab-cli)",
       "WebFetch(domain:pypi.org)",
       "Bash(colab-cli --help)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Read(//c/Users/jvict/Downloads/**)",
+      "Bash(find scripts/eyercloud_downloader/downloads_new_312/ -type f -name *.jpg -o -name *.png -o -name *.jpeg)",
+      "Bash(PYTHONIOENCODING=utf-8 python upload_new_312.py --dry-run)",
+      "Bash(PYTHONIOENCODING=utf-8 python upload_new_312.py)",
+      "Bash(PYTHONIOENCODING=utf-8 cat /c/Users/jvict/AppData/Local/Temp/claude/E--GitHub-NeuroApp/tasks/bvrbdyaj3.output)",
+      "Bash(wmic process:*)",
+      "Bash(ps -W)",
+      "Bash(PYTHONIOENCODING=utf-8 python scripts/eyercloud_downloader/upload_new_312.py --resume)",
+      "Bash(PYTHONIOENCODING=utf-8 python upload_new_312.py --resume)",
+      "Bash(git -C /e/GitHub/NeuroApp status --short)",
+      "Bash(git -C /e/GitHub/NeuroApp ls-files \"*.zip\" \"*.csv\")",
+      "Bash(git -C /e/GitHub/NeuroApp ls-files *.jpg *.jpeg *.png *.gif *.bmp *.tiff)"
     ]
   }
 }

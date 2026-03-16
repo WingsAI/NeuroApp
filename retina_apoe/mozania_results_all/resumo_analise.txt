@@ -1,0 +1,15 @@
+=== RESUMO DOS RESULTADOS AUTOMORPH — MOZANIA ===
+
+Imagens preprocessadas (M0): 20
+Qualidade M1: 20 imagens
+  Good:   10 (50%) → passam para M2/M3
+  Usable: 5 (25%)
+  Bad:    5 (25%)
+Metricas Maculares (M3): 5 imagens x 74 metricas
+Metricas Disc (M3):      6 imagens x 74 metricas
+
+--- Próximos passos ---
+1. Rodar com TODAS as 1773 imagens no Colab (batch de 500)
+2. Fazer link com genótipos APOE via matched_patients.csv
+3. Rodar 04_analyze.py com os resultados completos
+4. Comparar com métricas do médico via 06_compare_metrics.py

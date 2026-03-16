@@ -1,0 +1,6 @@
+batch_label: all
+batch_start: 0
+batch_size: 0
+images_processed: 20
+skip_quality: False
+csv_files: ['M1_results_ensemble.csv', 'M3_Disc_Features.csv', 'M3_Macular_Features.csv', 'M0_crop_info.csv']
