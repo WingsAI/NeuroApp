@@ -120,7 +120,8 @@
       "Bash(PYTHONIOENCODING=utf-8 python upload_new_312.py --resume)",
       "Bash(git -C /e/GitHub/NeuroApp status --short)",
       "Bash(git -C /e/GitHub/NeuroApp ls-files \"*.zip\" \"*.csv\")",
-      "Bash(git -C /e/GitHub/NeuroApp ls-files *.jpg *.jpeg *.png *.gif *.bmp *.tiff)"
+      "Bash(git -C /e/GitHub/NeuroApp ls-files *.jpg *.jpeg *.png *.gif *.bmp *.tiff)",
+      "Bash(find scripts/eyercloud_downloader -maxdepth 1 -name *new*312* -o -name *312*)"
     ]
   }
 }
