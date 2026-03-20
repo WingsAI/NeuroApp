@@ -53,7 +53,7 @@ export async function getStagingPatientsAction() {
                     .map((img) => ({
                         id: img.id,
                         url: img.url || '',
-                        data: '', // No signed URL yet - images not uploaded
+                        data: img.url || '', // Use Bytescale URL directly if available
                         fileName: img.fileName,
                         type: img.type || 'UNKNOWN',
                         uploadedAt: img.uploadedAt?.toISOString() || new Date().toISOString(),
