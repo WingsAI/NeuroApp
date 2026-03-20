@@ -49,7 +49,7 @@ export async function getStagingPatientsAction() {
             // Map exams to the same shape as main DB
             const examsWithImages = p.exams.map((exam) => {
                 const images = (exam.images || [])
-                    .filter((img) => img.type !== 'REDFREE') // Filter REDFREE
+                    .filter((img) => img.url && (img.type === 'COLOR' || img.type === 'ANTERIOR')) // Only COLOR + ANTERIOR with URLs
                     .map((img) => ({
                         id: img.id,
                         url: img.url || '',
