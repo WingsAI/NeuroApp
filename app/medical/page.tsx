@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck, Download, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction, getAllPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
+import { getPatientsAction, getAllPatientsAction, updatePatientAction, createPatient, getCloudMappingAction, migrateStagingPatientAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
@@ -74,6 +74,7 @@ function MedicalContent() {
     phone: '',
   });
   const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(10);
   const [isSyncing, setIsSyncing] = useState(false);
@@ -497,6 +498,7 @@ function MedicalContent() {
     if (!selectedPatient) return;
 
     setLoading(true);
+    setErrorMsg(null);
 
     try {
       const report = {
@@ -514,7 +516,41 @@ function MedicalContent() {
         completedAt: new Date().toISOString(),
       };
 
-      await updatePatientAction(selectedPatient.id, {
+      let targetId: string;
+
+      // Se o paciente é do staging DB, migrar para o main DB primeiro
+      if (selectedPatient._source === 'staging') {
+        console.log(`[STAGING] Migrando paciente staging para main DB: ${selectedPatient.name}`);
+        const pendingExam = selectedPatient.exams?.[0];
+        const result = await migrateStagingPatientAction({
+          id: selectedPatient.id,
+          name: selectedPatient.name,
+          cpf: patientEditableData.cpf || selectedPatient.cpf,
+          birthDate: selectedPatient.birthDate,
+          gender: selectedPatient.gender,
+          phone: patientEditableData.phone || selectedPatient.phone,
+          underlyingDiseases: selectedPatient.underlyingDiseases,
+          ophthalmicDiseases: selectedPatient.ophthalmicDiseases,
+          examDate: pendingExam?.examDate || selectedPatient.examDate,
+          location: pendingExam?.location || selectedPatient.location,
+          technicianName: pendingExam?.technicianName || selectedPatient.technicianName,
+          eyerCloudId: pendingExam?.eyerCloudId || pendingExam?.id,
+          images: (selectedPatient.allImages || selectedPatient.images || []).map((img: any) => ({
+            id: img.id,
+            url: img.url || img.data || '',
+            fileName: img.fileName,
+            type: img.type,
+          })),
+        });
+        targetId = result.examId;
+        console.log(`[STAGING] Migração concluída. Exam ID no main DB: ${targetId}`);
+      } else {
+        // Find the specific pending exam to update (avoid targeting already completed exams)
+        const pendingExam = selectedPatient.exams?.find((ex: any) => ex.status === 'pending' || !ex.report);
+        targetId = pendingExam?.id || selectedPatient.id;
+      }
+
+      await updatePatientAction(targetId, {
         status: 'completed',
         cpf: patientEditableData.cpf,
         phone: patientEditableData.phone,
@@ -531,8 +567,9 @@ function MedicalContent() {
         // Navegar para a tela de resultados após salvar o laudo
         router.push('/results');
       }, 1500);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Erro ao salvar laudo:', err);
+      setErrorMsg(err?.message || 'Erro ao salvar laudo. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -1361,11 +1398,18 @@ function MedicalContent() {
                       </div>
                     </div>
 
+                    {errorMsg && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm text-center">
+                        {errorMsg}
+                      </div>
+                    )}
+
                     <div className="flex justify-center pt-8">
                       <button
                         type="submit"
                         disabled={
                           success ||
+                          loading ||
                           (!selectedReportImages.od && reportForm.od.quality !== 'impossible') ||
                           (!selectedReportImages.oe && reportForm.oe.quality !== 'impossible')
                         }
@@ -1381,6 +1425,11 @@ function MedicalContent() {
                           <>
                             <CheckCircle2 className="w-6 h-6" />
                             <span>Laudo {selectedPatient.report ? 'Atualizado' : 'Validado'} com Sucesso</span>
+                          </>
+                        ) : loading ? (
+                          <>
+                            <Loader2 className="w-6 h-6 animate-spin" />
+                            <span>Salvando...</span>
                           </>
                         ) : (
                           <>

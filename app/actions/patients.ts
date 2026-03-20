@@ -456,6 +456,107 @@ export async function updateExamAction(examId: string, updates: any) {
     revalidatePath('/analytics');
 }
 
+/**
+ * Migra um paciente do staging DB para o main DB, criando Patient + Exam + ExamImages.
+ * Retorna o exam ID no main DB para que o laudo possa ser salvo via updatePatientAction.
+ */
+export async function migrateStagingPatientAction(stagingPatientData: {
+    id: string;
+    name: string;
+    cpf?: string;
+    birthDate?: string | null;
+    gender?: string;
+    phone?: string;
+    underlyingDiseases?: any;
+    ophthalmicDiseases?: any;
+    examDate?: string | null;
+    location?: string;
+    technicianName?: string;
+    eyerCloudId?: string;
+    images?: Array<{ id: string; url: string; data?: string; fileName?: string; type?: string }>;
+}) {
+    await checkAuth();
+
+    const data = stagingPatientData;
+    const birthDate = data.birthDate ? new Date(data.birthDate) : null;
+    const examDate = data.examDate ? new Date(data.examDate) : new Date();
+
+    // 1. Find or create patient by name
+    let patient = await prisma.patient.findFirst({
+        where: { name: data.name },
+    });
+
+    const patientId = data.id || `staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+    if (!patient) {
+        patient = await prisma.patient.create({
+            data: {
+                id: patientId,
+                name: data.name,
+                cpf: data.cpf || null,
+                birthDate,
+                gender: data.gender || null,
+                phone: data.phone || null,
+                underlyingDiseases: data.underlyingDiseases || undefined,
+                ophthalmicDiseases: data.ophthalmicDiseases || undefined,
+                updatedAt: new Date(),
+            },
+        });
+    }
+
+    // 2. Create exam
+    const examId = data.eyerCloudId || `exam-staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const exam = await prisma.exam.upsert({
+        where: { id: examId },
+        update: {
+            examDate,
+            location: data.location || 'Não informado',
+            technicianName: data.technicianName || '',
+            updatedAt: new Date(),
+        },
+        create: {
+            id: examId,
+            examDate,
+            location: data.location || 'Não informado',
+            technicianName: data.technicianName || '',
+            status: 'pending',
+            patientId: patient.id,
+            eyerCloudId: data.eyerCloudId || null,
+            updatedAt: new Date(),
+        },
+    });
+
+    // 3. Create images (only if they don't already exist)
+    if (data.images && data.images.length > 0) {
+        for (const img of data.images) {
+            const imageUrl = img.url || img.data || '';
+            if (!imageUrl) continue;
+
+            const existingImage = await prisma.examImage.findFirst({
+                where: { url: imageUrl, examId: exam.id },
+            });
+
+            if (!existingImage) {
+                await prisma.examImage.create({
+                    data: {
+                        id: img.id || `img-staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                        url: imageUrl,
+                        fileName: img.fileName || 'staging-image.jpg',
+                        type: img.type || 'COLOR',
+                        examId: exam.id,
+                    },
+                });
+            }
+        }
+    }
+
+    revalidatePath('/');
+    revalidatePath('/results');
+    revalidatePath('/medical');
+
+    return { success: true, examId: exam.id, patientId: patient.id };
+}
+
 // Mantém compatibilidade com código antigo - redireciona para updateExamAction
 export async function updatePatientAction(id: string, updates: any) {
     await checkAuth();

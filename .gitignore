@@ -92,3 +92,4 @@ backups/*.json
 # Keep app icons
 !public/favicon.png
 !public/logo.png
+scripts/eyercloud_downloader/credenciais.md
