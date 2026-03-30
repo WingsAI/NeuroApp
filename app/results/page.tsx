@@ -422,7 +422,10 @@ export default function Results() {
 
         const pdfBlob = doc.output('blob');
         const fileName = `${patient.name.replace(/\s+/g, '_')}_laudo.pdf`;
-        zip.file(fileName, pdfBlob);
+        const unitFolder = (patient.location || 'Sem_Unidade')
+          .replace(/[<>:"/\\|?*]/g, '_')
+          .trim();
+        zip.file(`${unitFolder}/${fileName}`, pdfBlob);
 
         count++;
         setExportProgress({ current: count, total: filteredPatients.length });

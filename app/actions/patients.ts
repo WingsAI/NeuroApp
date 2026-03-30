@@ -323,20 +323,28 @@ export async function getAllPatientsAction() {
     ]);
 
     // Combine: main patients first, then staging
-    // Deduplicate by normalized name (staging patient may already exist in main)
-    const mainNames = new Set(
+    // Deduplicate by normalized name + birthDate (homônimos com datas diferentes são pessoas distintas)
+    const normalizeName = (name: string) =>
+        (name || '').toUpperCase().trim()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/\s+/g, ' ');
+
+    const birthKey = (birthDate: any) => {
+        if (!birthDate) return 'no-birth';
+        const d = new Date(birthDate);
+        if (isNaN(d.getTime())) return 'no-birth';
+        return d.toISOString().split('T')[0]; // YYYY-MM-DD
+    };
+
+    const mainKeys = new Set(
         mainPatients.map((p: any) =>
-            (p.name || '').toUpperCase().trim()
-                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                .replace(/\s+/g, ' ')
+            `${normalizeName(p.name)}|${birthKey(p.birthDate)}`
         )
     );
 
     const uniqueStaging = stagingPatients.filter((sp: any) => {
-        const normName = (sp.name || '').toUpperCase().trim()
-            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/\s+/g, ' ');
-        return !mainNames.has(normName);
+        const key = `${normalizeName(sp.name)}|${birthKey(sp.birthDate)}`;
+        return !mainKeys.has(key);
     });
 
     return [...mainPatients, ...uniqueStaging];

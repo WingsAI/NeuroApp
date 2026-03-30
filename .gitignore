@@ -88,6 +88,8 @@ backups/*.json
 *.gif
 *.bmp
 *.tiff
+*.xlsx
+*.xls
 
 # Keep app icons
 !public/favicon.png
