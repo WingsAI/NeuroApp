@@ -1,0 +1,537 @@
+[
+  {
+    "dbName": "CARMEN MARIA SOUZA LIMA",
+    "eyerCloudId": "699fa6717dd15877d9096028",
+    "bytescaleFolder": "/neuroapp/patients/CARMEN_MARIA_SOUZA_LIMA_699fa671",
+    "images": [
+      {
+        "uuid": "7886c78f-a3ab-4704-9081-570b41ee9e7d",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CARMEN_MARIA_SOUZA_LIMA_699fa671/7886c78f-a3ab-4704-9081-570b41ee9e7d.jpg",
+        "fileName": "7886c78f-a3ab-4704-9081-570b41ee9e7d.jpg",
+        "imgId": "69c65b888bf8d7075c0a7eb0"
+      },
+      {
+        "uuid": "7f92fdf0-6544-4794-97fa-cc56f2aa8387",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CARMEN_MARIA_SOUZA_LIMA_699fa671/7f92fdf0-6544-4794-97fa-cc56f2aa8387.jpg",
+        "fileName": "7f92fdf0-6544-4794-97fa-cc56f2aa8387.jpg",
+        "imgId": "69c65b8a8bf8d7075c0a7eb4"
+      },
+      {
+        "uuid": "5f4d5a6a-56c2-496a-b238-fd9160ee5207",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CARMEN_MARIA_SOUZA_LIMA_699fa671/5f4d5a6a-56c2-496a-b238-fd9160ee5207.jpg",
+        "fileName": "5f4d5a6a-56c2-496a-b238-fd9160ee5207.jpg",
+        "imgId": "69c65b8e4fdf70b5e2163b64"
+      },
+      {
+        "uuid": "f922f090-c15b-4180-95f5-4efb96cbac56",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/CARMEN_MARIA_SOUZA_LIMA_699fa671/f922f090-c15b-4180-95f5-4efb96cbac56.jpg",
+        "fileName": "f922f090-c15b-4180-95f5-4efb96cbac56.jpg",
+        "imgId": "69c65b8c8bf8d7075c0a7eb5"
+      }
+    ]
+  },
+  {
+    "dbName": "DULCE NIEHUES DA SILVA",
+    "eyerCloudId": "699fa67195fe6b19f447bdf4",
+    "bytescaleFolder": "/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671",
+    "images": [
+      {
+        "uuid": "4e0c70dd-7239-4b36-b6c8-1c33ca44664a",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/4e0c70dd-7239-4b36-b6c8-1c33ca44664a.jpg",
+        "fileName": "4e0c70dd-7239-4b36-b6c8-1c33ca44664a.jpg",
+        "imgId": "69c65b952dd7fbd7536b5a47"
+      },
+      {
+        "uuid": "6cb8bd7f-574a-4c24-82b5-ac5fee6e55cc",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/6cb8bd7f-574a-4c24-82b5-ac5fee6e55cc.jpg",
+        "fileName": "6cb8bd7f-574a-4c24-82b5-ac5fee6e55cc.jpg",
+        "imgId": "69c65b962dd7fbd7536b5a48"
+      },
+      {
+        "uuid": "6ca21899-91b1-4176-b852-01a8c49b6d3f",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/6ca21899-91b1-4176-b852-01a8c49b6d3f.jpg",
+        "fileName": "6ca21899-91b1-4176-b852-01a8c49b6d3f.jpg",
+        "imgId": "69c65b9a93e2a5c728e46121"
+      },
+      {
+        "uuid": "b34cf4b8-1c05-4843-9b0b-dcb3deb1da77",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/b34cf4b8-1c05-4843-9b0b-dcb3deb1da77.jpg",
+        "fileName": "b34cf4b8-1c05-4843-9b0b-dcb3deb1da77.jpg",
+        "imgId": "69c65b9f8bf8d7075c0a7eb8"
+      },
+      {
+        "uuid": "d1016090-e605-447d-9b9d-87c11e450a37",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/d1016090-e605-447d-9b9d-87c11e450a37.jpg",
+        "fileName": "d1016090-e605-447d-9b9d-87c11e450a37.jpg",
+        "imgId": "69c65b9c2dd7fbd7536b5a4a"
+      },
+      {
+        "uuid": "38727f22-b614-43d2-aa53-dc471fd7aab1",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/DULCE_NIEHUES_DA_SILVA_699fa671/38727f22-b614-43d2-aa53-dc471fd7aab1.jpg",
+        "fileName": "38727f22-b614-43d2-aa53-dc471fd7aab1.jpg",
+        "imgId": "69c65b9b93e2a5c728e46122"
+      }
+    ]
+  },
+  {
+    "dbName": "JAIR VITORINO PEREIRA",
+    "eyerCloudId": "699fa6727dd15877d909602a",
+    "bytescaleFolder": "/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672",
+    "images": [
+      {
+        "uuid": "8a161105-8217-4042-9bb5-52dab9b01a2b",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/8a161105-8217-4042-9bb5-52dab9b01a2b.jpg",
+        "fileName": "8a161105-8217-4042-9bb5-52dab9b01a2b.jpg",
+        "imgId": "69c65be24fdf70b5e2163b75"
+      },
+      {
+        "uuid": "863cbc06-fa40-4f7c-a771-da1efd7e1629",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/863cbc06-fa40-4f7c-a771-da1efd7e1629.jpg",
+        "fileName": "863cbc06-fa40-4f7c-a771-da1efd7e1629.jpg",
+        "imgId": "69c65be493e2a5c728e4612e"
+      },
+      {
+        "uuid": "c3267281-2e49-40b6-8ca1-030e4b3dc615",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/c3267281-2e49-40b6-8ca1-030e4b3dc615.jpg",
+        "fileName": "c3267281-2e49-40b6-8ca1-030e4b3dc615.jpg",
+        "imgId": "69c65bec4fdf70b5e2163b78"
+      },
+      {
+        "uuid": "e0bca01f-0272-4fd8-9e75-26dc18083362",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/e0bca01f-0272-4fd8-9e75-26dc18083362.jpg",
+        "fileName": "e0bca01f-0272-4fd8-9e75-26dc18083362.jpg",
+        "imgId": "69c65be74fdf70b5e2163b76"
+      },
+      {
+        "uuid": "5916fb64-6684-415a-8f3f-b64c405d5d5d",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/5916fb64-6684-415a-8f3f-b64c405d5d5d.jpg",
+        "fileName": "5916fb64-6684-415a-8f3f-b64c405d5d5d.jpg",
+        "imgId": "69c65be94fdf70b5e2163b77"
+      },
+      {
+        "uuid": "12840655-c77b-4aec-8607-2561dd41e311",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/12840655-c77b-4aec-8607-2561dd41e311.jpg",
+        "fileName": "12840655-c77b-4aec-8607-2561dd41e311.jpg",
+        "imgId": "69c65bef93e2a5c728e4612f"
+      },
+      {
+        "uuid": "6a94bc1b-e9b1-4f40-a01c-f7f78adecb64",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/6a94bc1b-e9b1-4f40-a01c-f7f78adecb64.jpg",
+        "fileName": "6a94bc1b-e9b1-4f40-a01c-f7f78adecb64.jpg",
+        "imgId": "69c65bf32dd7fbd7536b5a58"
+      },
+      {
+        "uuid": "ed11a5b0-72b2-40e2-bd1e-5c552afd0828",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JAIR_VITORINO_PEREIRA_699fa672/ed11a5b0-72b2-40e2-bd1e-5c552afd0828.jpg",
+        "fileName": "ed11a5b0-72b2-40e2-bd1e-5c552afd0828.jpg",
+        "imgId": "69c65bf28bf8d7075c0a7ec9"
+      }
+    ]
+  },
+  {
+    "dbName": "JOELIA DOS SANTOS DA CONCEICAO",
+    "eyerCloudId": "699fa67095fe6b19f447bdf3",
+    "bytescaleFolder": "/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670",
+    "images": [
+      {
+        "uuid": "17c67253-c20c-4c4a-ab25-a4e1dfb8b509",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/17c67253-c20c-4c4a-ab25-a4e1dfb8b509.jpg",
+        "fileName": "17c67253-c20c-4c4a-ab25-a4e1dfb8b509.jpg",
+        "imgId": "69c65b688bf8d7075c0a7ea9"
+      },
+      {
+        "uuid": "f13a5ac7-1bdd-4182-bb13-d2b21d5849c6",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/f13a5ac7-1bdd-4182-bb13-d2b21d5849c6.jpg",
+        "fileName": "f13a5ac7-1bdd-4182-bb13-d2b21d5849c6.jpg",
+        "imgId": "69c65b5f2dd7fbd7536b5a42"
+      },
+      {
+        "uuid": "9ce68d4f-329e-4d91-b70e-2247106b7bb9",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/9ce68d4f-329e-4d91-b70e-2247106b7bb9.jpg",
+        "fileName": "9ce68d4f-329e-4d91-b70e-2247106b7bb9.jpg",
+        "imgId": "69c65b648bf8d7075c0a7ea8"
+      },
+      {
+        "uuid": "d67fd9a0-6176-495d-96da-7c087e56d129",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/d67fd9a0-6176-495d-96da-7c087e56d129.jpg",
+        "fileName": "d67fd9a0-6176-495d-96da-7c087e56d129.jpg",
+        "imgId": "69c65b6d93e2a5c728e4611c"
+      },
+      {
+        "uuid": "fa0051dd-77fe-42ee-806b-c37d3d12b3f5",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/fa0051dd-77fe-42ee-806b-c37d3d12b3f5.jpg",
+        "fileName": "fa0051dd-77fe-42ee-806b-c37d3d12b3f5.jpg",
+        "imgId": "69c65b714fdf70b5e2163b5e"
+      },
+      {
+        "uuid": "b0d09e42-daa6-49ba-ac31-9eff16eda693",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/b0d09e42-daa6-49ba-ac31-9eff16eda693.jpg",
+        "fileName": "b0d09e42-daa6-49ba-ac31-9eff16eda693.jpg",
+        "imgId": "69c65b6393e2a5c728e46117"
+      },
+      {
+        "uuid": "006a437f-3de1-4d28-aabc-9320edc0ed04",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/006a437f-3de1-4d28-aabc-9320edc0ed04.jpg",
+        "fileName": "006a437f-3de1-4d28-aabc-9320edc0ed04.jpg",
+        "imgId": "69c65b662dd7fbd7536b5a43"
+      },
+      {
+        "uuid": "78ff43d6-d29e-43cb-a178-9f21e9403a52",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/78ff43d6-d29e-43cb-a178-9f21e9403a52.jpg",
+        "fileName": "78ff43d6-d29e-43cb-a178-9f21e9403a52.jpg",
+        "imgId": "69c65b694fdf70b5e2163b5d"
+      },
+      {
+        "uuid": "4e59a757-d7ff-4e14-bd70-51ee883649cd",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/4e59a757-d7ff-4e14-bd70-51ee883649cd.jpg",
+        "fileName": "4e59a757-d7ff-4e14-bd70-51ee883649cd.jpg",
+        "imgId": "69c65b7c93e2a5c728e4611e"
+      },
+      {
+        "uuid": "8984eecb-8cef-46c8-8c16-2b66ed1bb01d",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/8984eecb-8cef-46c8-8c16-2b66ed1bb01d.jpg",
+        "fileName": "8984eecb-8cef-46c8-8c16-2b66ed1bb01d.jpg",
+        "imgId": "69c65b738bf8d7075c0a7eaa"
+      },
+      {
+        "uuid": "52348e31-ea17-4b9f-8ddf-38da15990c77",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOELIA_DOS_SANTOS_DA_CONCEICAO_699fa670/52348e31-ea17-4b9f-8ddf-38da15990c77.jpg",
+        "fileName": "52348e31-ea17-4b9f-8ddf-38da15990c77.jpg",
+        "imgId": "69c65b784fdf70b5e2163b60"
+      }
+    ]
+  },
+  {
+    "dbName": "JOSE TADEU DA SILVA",
+    "eyerCloudId": "699fa67195fe6b19f447bdf5",
+    "bytescaleFolder": "/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671",
+    "images": [
+      {
+        "uuid": "513d6a2d-da04-4ca2-9ff0-f252fd11dce6",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/513d6a2d-da04-4ca2-9ff0-f252fd11dce6.jpg",
+        "fileName": "513d6a2d-da04-4ca2-9ff0-f252fd11dce6.jpg",
+        "imgId": "69c65ba44fdf70b5e2163b66"
+      },
+      {
+        "uuid": "5f46e105-ee2b-4776-b780-d1a6df77d390",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/5f46e105-ee2b-4776-b780-d1a6df77d390.jpg",
+        "fileName": "5f46e105-ee2b-4776-b780-d1a6df77d390.jpg",
+        "imgId": "69c65bac93e2a5c728e46123"
+      },
+      {
+        "uuid": "01f0d69a-bfd8-4ce8-a09e-dda7758a5ec5",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/01f0d69a-bfd8-4ce8-a09e-dda7758a5ec5.jpg",
+        "fileName": "01f0d69a-bfd8-4ce8-a09e-dda7758a5ec5.jpg",
+        "imgId": "69c65ba94fdf70b5e2163b68"
+      },
+      {
+        "uuid": "d422e729-9a12-4caa-87d5-f80f5498e58e",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/d422e729-9a12-4caa-87d5-f80f5498e58e.jpg",
+        "fileName": "d422e729-9a12-4caa-87d5-f80f5498e58e.jpg",
+        "imgId": "69c65ba72dd7fbd7536b5a4c"
+      },
+      {
+        "uuid": "9104f658-4662-4bd3-9a0d-7ebe2327a316",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/9104f658-4662-4bd3-9a0d-7ebe2327a316.jpg",
+        "fileName": "9104f658-4662-4bd3-9a0d-7ebe2327a316.jpg",
+        "imgId": "69c65bae8bf8d7075c0a7ebd"
+      },
+      {
+        "uuid": "e50535dd-27f6-4c33-ab28-6a9401b870ac",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/e50535dd-27f6-4c33-ab28-6a9401b870ac.jpg",
+        "fileName": "e50535dd-27f6-4c33-ab28-6a9401b870ac.jpg",
+        "imgId": "69c65bb32dd7fbd7536b5a4e"
+      },
+      {
+        "uuid": "22009df1-826b-43bf-8c43-21ae738ecc78",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/JOSE_TADEU_DA_SILVA_699fa671/22009df1-826b-43bf-8c43-21ae738ecc78.jpg",
+        "fileName": "22009df1-826b-43bf-8c43-21ae738ecc78.jpg",
+        "imgId": "69c65bb12dd7fbd7536b5a4d"
+      }
+    ]
+  },
+  {
+    "dbName": "MARCIA CRISTINA GARUFFI RAMOS",
+    "eyerCloudId": "699fa6707dd15877d9096027",
+    "bytescaleFolder": "/neuroapp/patients/MARCIA_CRISTINA_GARUFFI_RAMOS_699fa670",
+    "images": [
+      {
+        "uuid": "4dcdf901-71fe-430f-b71e-43df6b26fd1f",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARCIA_CRISTINA_GARUFFI_RAMOS_699fa670/4dcdf901-71fe-430f-b71e-43df6b26fd1f.jpg",
+        "fileName": "4dcdf901-71fe-430f-b71e-43df6b26fd1f.jpg",
+        "imgId": "69c65b7e93e2a5c728e4611f"
+      },
+      {
+        "uuid": "efde3f31-c75e-4514-ba37-d30da3588c05",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARCIA_CRISTINA_GARUFFI_RAMOS_699fa670/efde3f31-c75e-4514-ba37-d30da3588c05.jpg",
+        "fileName": "efde3f31-c75e-4514-ba37-d30da3588c05.jpg",
+        "imgId": "69c65b7f8bf8d7075c0a7eaf"
+      },
+      {
+        "uuid": "17e867d2-801e-4295-820f-04c6bb31fec0",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARCIA_CRISTINA_GARUFFI_RAMOS_699fa670/17e867d2-801e-4295-820f-04c6bb31fec0.jpg",
+        "fileName": "17e867d2-801e-4295-820f-04c6bb31fec0.jpg",
+        "imgId": "69c65b814fdf70b5e2163b61"
+      },
+      {
+        "uuid": "9e981b9d-cf1c-4b57-9d06-2844df3b9fce",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARCIA_CRISTINA_GARUFFI_RAMOS_699fa670/9e981b9d-cf1c-4b57-9d06-2844df3b9fce.jpg",
+        "fileName": "9e981b9d-cf1c-4b57-9d06-2844df3b9fce.jpg",
+        "imgId": "69c65b854fdf70b5e2163b63"
+      }
+    ]
+  },
+  {
+    "dbName": "MARIA JOSE MARINHO PEREIRA",
+    "eyerCloudId": "699fa67295fe6b19f447bdf7",
+    "bytescaleFolder": "/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672",
+    "images": [
+      {
+        "uuid": "5b40d6d8-0bf2-4f4d-b04a-424a9b3044b3",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/5b40d6d8-0bf2-4f4d-b04a-424a9b3044b3.jpg",
+        "fileName": "5b40d6d8-0bf2-4f4d-b04a-424a9b3044b3.jpg",
+        "imgId": "69c65bf993e2a5c728e46132"
+      },
+      {
+        "uuid": "c3ee7a00-824d-43ca-9a2e-5fbb25a1e5a2",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/c3ee7a00-824d-43ca-9a2e-5fbb25a1e5a2.jpg",
+        "fileName": "c3ee7a00-824d-43ca-9a2e-5fbb25a1e5a2.jpg",
+        "imgId": "69c65bfd8bf8d7075c0a7eca"
+      },
+      {
+        "uuid": "3f64d512-4aed-4e34-9201-c2bafc04165f",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/3f64d512-4aed-4e34-9201-c2bafc04165f.jpg",
+        "fileName": "3f64d512-4aed-4e34-9201-c2bafc04165f.jpg",
+        "imgId": "69c65c014fdf70b5e2163b7a"
+      },
+      {
+        "uuid": "d4b92df4-6d17-4e08-b80f-a663189c3dde",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/d4b92df4-6d17-4e08-b80f-a663189c3dde.jpg",
+        "fileName": "d4b92df4-6d17-4e08-b80f-a663189c3dde.jpg",
+        "imgId": "69c65c0493e2a5c728e46134"
+      },
+      {
+        "uuid": "be86ebba-6d03-4baa-9790-1df0b40fb7fe",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/be86ebba-6d03-4baa-9790-1df0b40fb7fe.jpg",
+        "fileName": "be86ebba-6d03-4baa-9790-1df0b40fb7fe.jpg",
+        "imgId": "69c65c034fdf70b5e2163b7b"
+      },
+      {
+        "uuid": "7a8f5933-5650-4722-93e0-1c4cea7486c0",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/MARIA_JOSE_MARINHO_PEREIRA_699fa672/7a8f5933-5650-4722-93e0-1c4cea7486c0.jpg",
+        "fileName": "7a8f5933-5650-4722-93e0-1c4cea7486c0.jpg",
+        "imgId": "69c65c064fdf70b5e2163b7c"
+      }
+    ]
+  },
+  {
+    "dbName": "SIDNEIA BORGES OLIVEIRA DA COSTA",
+    "eyerCloudId": "699fa6717dd15877d9096029",
+    "bytescaleFolder": "/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671",
+    "images": [
+      {
+        "uuid": "569e3fd4-86c6-4f9e-a218-31787361d7f2",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/569e3fd4-86c6-4f9e-a218-31787361d7f2.jpg",
+        "fileName": "569e3fd4-86c6-4f9e-a218-31787361d7f2.jpg",
+        "imgId": "69c65bb94fdf70b5e2163b6b"
+      },
+      {
+        "uuid": "d8ed1a69-ea56-49ec-9cc2-37cd6d811387",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/d8ed1a69-ea56-49ec-9cc2-37cd6d811387.jpg",
+        "fileName": "d8ed1a69-ea56-49ec-9cc2-37cd6d811387.jpg",
+        "imgId": "69c65bbb4fdf70b5e2163b6c"
+      },
+      {
+        "uuid": "425be8ee-78cc-4ce8-8b09-a0ef5d278b0e",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/425be8ee-78cc-4ce8-8b09-a0ef5d278b0e.jpg",
+        "fileName": "425be8ee-78cc-4ce8-8b09-a0ef5d278b0e.jpg",
+        "imgId": "69c65bbe93e2a5c728e46125"
+      },
+      {
+        "uuid": "bdd93df2-6945-4caf-a0d3-3b5185cf81eb",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/bdd93df2-6945-4caf-a0d3-3b5185cf81eb.jpg",
+        "fileName": "bdd93df2-6945-4caf-a0d3-3b5185cf81eb.jpg",
+        "imgId": "69c65bc04fdf70b5e2163b6d"
+      },
+      {
+        "uuid": "fcd6bed5-ef3e-446c-ae89-2a4cee8a5969",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/fcd6bed5-ef3e-446c-ae89-2a4cee8a5969.jpg",
+        "fileName": "fcd6bed5-ef3e-446c-ae89-2a4cee8a5969.jpg",
+        "imgId": "69c65bc74fdf70b5e2163b70"
+      },
+      {
+        "uuid": "a79748d4-4984-440c-a4c3-61bfab6f3edc",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/SIDNEIA_BORGES_OLIVEIRA_DA_COSTA_699fa671/a79748d4-4984-440c-a4c3-61bfab6f3edc.jpg",
+        "fileName": "a79748d4-4984-440c-a4c3-61bfab6f3edc.jpg",
+        "imgId": "69c65bc42dd7fbd7536b5a51"
+      }
+    ]
+  },
+  {
+    "dbName": "VALDOMIRO FERREIRA PESSOA",
+    "eyerCloudId": "699fa67295fe6b19f447bdf6",
+    "bytescaleFolder": "/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672",
+    "images": [
+      {
+        "uuid": "e49dedce-2211-4978-99eb-915e7b6b89b8",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/e49dedce-2211-4978-99eb-915e7b6b89b8.jpg",
+        "fileName": "e49dedce-2211-4978-99eb-915e7b6b89b8.jpg",
+        "imgId": "69c65bc893e2a5c728e46126"
+      },
+      {
+        "uuid": "6f51a2e2-7776-44e4-b460-46511fc7ae4f",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/6f51a2e2-7776-44e4-b460-46511fc7ae4f.jpg",
+        "fileName": "6f51a2e2-7776-44e4-b460-46511fc7ae4f.jpg",
+        "imgId": "69c65bcc2dd7fbd7536b5a52"
+      },
+      {
+        "uuid": "eb8a18fa-ab62-458c-bff4-30bd42d57e10",
+        "type": "ANTERIOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/eb8a18fa-ab62-458c-bff4-30bd42d57e10.jpg",
+        "fileName": "eb8a18fa-ab62-458c-bff4-30bd42d57e10.jpg",
+        "imgId": "69c65bd193e2a5c728e46129"
+      },
+      {
+        "uuid": "bbefc160-c334-4ec8-bf7e-ee2fe7bd3215",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/bbefc160-c334-4ec8-bf7e-ee2fe7bd3215.jpg",
+        "fileName": "bbefc160-c334-4ec8-bf7e-ee2fe7bd3215.jpg",
+        "imgId": "69c65bda93e2a5c728e4612b"
+      },
+      {
+        "uuid": "a8e470b0-ef91-467e-89da-5be29127e3d9",
+        "type": "ANTERIOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/a8e470b0-ef91-467e-89da-5be29127e3d9.jpg",
+        "fileName": "a8e470b0-ef91-467e-89da-5be29127e3d9.jpg",
+        "imgId": "69c65bde4fdf70b5e2163b73"
+      },
+      {
+        "uuid": "1981dfc6-e35d-40eb-a912-3f794c7b61f6",
+        "type": "COLOR",
+        "laterality": "R",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/1981dfc6-e35d-40eb-a912-3f794c7b61f6.jpg",
+        "fileName": "1981dfc6-e35d-40eb-a912-3f794c7b61f6.jpg",
+        "imgId": "69c65bd78bf8d7075c0a7ec4"
+      },
+      {
+        "uuid": "d75c3ecd-4f24-4a9d-b792-d838f65603b7",
+        "type": "COLOR",
+        "laterality": "L",
+        "url": "https://upcdn.io/W142icY/raw/neuroapp/patients/VALDOMIRO_FERREIRA_PESSOA_699fa672/d75c3ecd-4f24-4a9d-b792-d838f65603b7.jpg",
+        "fileName": "d75c3ecd-4f24-4a9d-b792-d838f65603b7.jpg",
+        "imgId": "69c65bd98bf8d7075c0a7ec5"
+      }
+    ]
+  }
+]
