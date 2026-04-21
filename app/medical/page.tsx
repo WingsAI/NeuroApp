@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, User, Calendar, MapPin, Image as ImageIcon, FileText, CheckCircle2, X, Activity, Eye, ArrowRight, ShieldCheck, Download, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getPatientsAction, getAllPatientsAction, updatePatientAction, createPatient, getCloudMappingAction, migrateStagingPatientAction } from '@/app/actions/patients';
+import { getPatientsAction, updatePatientAction, createPatient, getCloudMappingAction } from '@/app/actions/patients';
 import { Patient, MedicalReport } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import * as XLSX from 'xlsx';
@@ -139,9 +139,9 @@ function MedicalContent() {
   const loadPatients = async () => {
     try {
       setIsSyncing(true);
-      // 1. Carregar pacientes do Banco de Dados principal + staging (novas unidades)
-      const dbPatients = await getAllPatientsAction();
-      console.log(`[DEBUG] DB Patients (main + staging): ${dbPatients.length}`);
+      // 1. Carregar pacientes do Banco de Dados principal
+      const dbPatients = await getPatientsAction();
+      console.log(`[DEBUG] DB Patients: ${dbPatients.length}`);
 
       // 2. Carregar pacientes do Arquivo de Mapeamento (Bytescale)
       let mappingData = null;
@@ -516,39 +516,9 @@ function MedicalContent() {
         completedAt: new Date().toISOString(),
       };
 
-      let targetId: string;
-
-      // Se o paciente é do staging DB, migrar para o main DB primeiro
-      if (selectedPatient._source === 'staging') {
-        console.log(`[STAGING] Migrando paciente staging para main DB: ${selectedPatient.name}`);
-        const pendingExam = selectedPatient.exams?.[0];
-        const result = await migrateStagingPatientAction({
-          id: selectedPatient.id,
-          name: selectedPatient.name,
-          cpf: patientEditableData.cpf || selectedPatient.cpf,
-          birthDate: selectedPatient.birthDate,
-          gender: selectedPatient.gender,
-          phone: patientEditableData.phone || selectedPatient.phone,
-          underlyingDiseases: selectedPatient.underlyingDiseases,
-          ophthalmicDiseases: selectedPatient.ophthalmicDiseases,
-          examDate: pendingExam?.examDate || selectedPatient.examDate,
-          location: pendingExam?.location || selectedPatient.location,
-          technicianName: pendingExam?.technicianName || selectedPatient.technicianName,
-          eyerCloudId: pendingExam?.eyerCloudId || pendingExam?.id,
-          images: (selectedPatient.allImages || selectedPatient.images || []).map((img: any) => ({
-            id: img.id,
-            url: img.url || img.data || '',
-            fileName: img.fileName,
-            type: img.type,
-          })),
-        });
-        targetId = result.examId;
-        console.log(`[STAGING] Migração concluída. Exam ID no main DB: ${targetId}`);
-      } else {
-        // Find the specific pending exam to update (avoid targeting already completed exams)
-        const pendingExam = selectedPatient.exams?.find((ex: any) => ex.status === 'pending' || !ex.report);
-        targetId = pendingExam?.id || selectedPatient.id;
-      }
+      // Find the specific pending exam to update (avoid targeting already completed exams)
+      const pendingExam = selectedPatient.exams?.find((ex: any) => ex.status === 'pending' || !ex.report);
+      const targetId: string = pendingExam?.id || selectedPatient.id;
 
       await updatePatientAction(targetId, {
         status: 'completed',

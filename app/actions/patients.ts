@@ -307,49 +307,6 @@ export async function getPatientsAction() {
     return mappedPatients;
 }
 
-/**
- * Get patients from BOTH main and staging databases.
- * Staging patients are marked with _source: 'staging' and status: 'pending'.
- * Main DB patients retain their original status.
- */
-export async function getAllPatientsAction() {
-    await checkAuth();
-
-    // Fetch from both databases in parallel
-    const { getStagingPatientsAction } = await import('./staging');
-    const [mainPatients, stagingPatients] = await Promise.all([
-        getPatientsAction(),
-        getStagingPatientsAction(),
-    ]);
-
-    // Combine: main patients first, then staging
-    // Deduplicate by normalized name + birthDate (homônimos com datas diferentes são pessoas distintas)
-    const normalizeName = (name: string) =>
-        (name || '').toUpperCase().trim()
-            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/\s+/g, ' ');
-
-    const birthKey = (birthDate: any) => {
-        if (!birthDate) return 'no-birth';
-        const d = new Date(birthDate);
-        if (isNaN(d.getTime())) return 'no-birth';
-        return d.toISOString().split('T')[0]; // YYYY-MM-DD
-    };
-
-    const mainKeys = new Set(
-        mainPatients.map((p: any) =>
-            `${normalizeName(p.name)}|${birthKey(p.birthDate)}`
-        )
-    );
-
-    const uniqueStaging = stagingPatients.filter((sp: any) => {
-        const key = `${normalizeName(sp.name)}|${birthKey(sp.birthDate)}`;
-        return !mainKeys.has(key);
-    });
-
-    return [...mainPatients, ...uniqueStaging];
-}
-
 // Atualiza um exame específico (por examId) - usado para laudos e encaminhamentos
 export async function updateExamAction(examId: string, updates: any) {
     await checkAuth();
@@ -464,107 +421,6 @@ export async function updateExamAction(examId: string, updates: any) {
     revalidatePath('/analytics');
 }
 
-/**
- * Migra um paciente do staging DB para o main DB, criando Patient + Exam + ExamImages.
- * Retorna o exam ID no main DB para que o laudo possa ser salvo via updatePatientAction.
- */
-export async function migrateStagingPatientAction(stagingPatientData: {
-    id: string;
-    name: string;
-    cpf?: string;
-    birthDate?: string | null;
-    gender?: string;
-    phone?: string;
-    underlyingDiseases?: any;
-    ophthalmicDiseases?: any;
-    examDate?: string | null;
-    location?: string;
-    technicianName?: string;
-    eyerCloudId?: string;
-    images?: Array<{ id: string; url: string; data?: string; fileName?: string; type?: string }>;
-}) {
-    await checkAuth();
-
-    const data = stagingPatientData;
-    const birthDate = data.birthDate ? new Date(data.birthDate) : null;
-    const examDate = data.examDate ? new Date(data.examDate) : new Date();
-
-    // 1. Find or create patient by name
-    let patient = await prisma.patient.findFirst({
-        where: { name: data.name },
-    });
-
-    const patientId = data.id || `staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-    if (!patient) {
-        patient = await prisma.patient.create({
-            data: {
-                id: patientId,
-                name: data.name,
-                cpf: data.cpf || null,
-                birthDate,
-                gender: data.gender || null,
-                phone: data.phone || null,
-                underlyingDiseases: data.underlyingDiseases || undefined,
-                ophthalmicDiseases: data.ophthalmicDiseases || undefined,
-                updatedAt: new Date(),
-            },
-        });
-    }
-
-    // 2. Create exam
-    const examId = data.eyerCloudId || `exam-staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const exam = await prisma.exam.upsert({
-        where: { id: examId },
-        update: {
-            examDate,
-            location: data.location || 'Não informado',
-            technicianName: data.technicianName || '',
-            updatedAt: new Date(),
-        },
-        create: {
-            id: examId,
-            examDate,
-            location: data.location || 'Não informado',
-            technicianName: data.technicianName || '',
-            status: 'pending',
-            patientId: patient.id,
-            eyerCloudId: data.eyerCloudId || null,
-            updatedAt: new Date(),
-        },
-    });
-
-    // 3. Create images (only if they don't already exist)
-    if (data.images && data.images.length > 0) {
-        for (const img of data.images) {
-            const imageUrl = img.url || img.data || '';
-            if (!imageUrl) continue;
-
-            const existingImage = await prisma.examImage.findFirst({
-                where: { url: imageUrl, examId: exam.id },
-            });
-
-            if (!existingImage) {
-                await prisma.examImage.create({
-                    data: {
-                        id: img.id || `img-staging-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-                        url: imageUrl,
-                        fileName: img.fileName || 'staging-image.jpg',
-                        type: img.type || 'COLOR',
-                        examId: exam.id,
-                    },
-                });
-            }
-        }
-    }
-
-    revalidatePath('/');
-    revalidatePath('/results');
-    revalidatePath('/medical');
-
-    return { success: true, examId: exam.id, patientId: patient.id };
-}
-
 // Mantém compatibilidade com código antigo - redireciona para updateExamAction
 export async function updatePatientAction(id: string, updates: any) {
     await checkAuth();
@@ -677,46 +533,11 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         return acc;
     }, {});
 
-    // ========== Staging DB data ==========
-    let stagingPatients = 0;
-    let stagingExams = 0;
-    let stagingImages = 0;
-    let stagingPendingReports = 0;
-    try {
-        const { getStagingStatsAction } = await import('./staging');
-        const stagingStats = await getStagingStatsAction();
-
-        // Count unique staging patients (not in main DB) by querying staging directly
-        const prismaStaging = (await import('@/lib/prisma-staging')).default;
-        const stagingPatientCount = await prismaStaging.stagingPatient.count({
-            where: { isDuplicate: false },
-        });
-        const stagingExamCount = await prismaStaging.stagingExam.count();
-        const stagingImageCount = await prismaStaging.stagingExamImage.count();
-
-        stagingPatients = stagingPatientCount;
-        stagingExams = stagingExamCount;
-        stagingImages = stagingImageCount;
-        stagingPendingReports = stagingExamCount; // All staging exams are pending
-
-        // Add staging region data
-        for (const source of stagingStats.sources) {
-            const regionName = source.clinicName || 'Staging';
-            productivityByRegion[regionName] = (productivityByRegion[regionName] || 0) + source.exams;
-        }
-    } catch (e) {
-        console.error('Error fetching staging analytics:', e);
-    }
-
-    const totalPatients = mainTotalPatients + stagingPatients;
-    const totalExams = mainTotalExams + stagingExams;
-    const totalImages = mainTotalImages + stagingImages;
-
     return {
-        totalPatients,
-        totalExams,
-        totalImages,
-        pendingReports: pendingReports + stagingPendingReports,
+        totalPatients: mainTotalPatients,
+        totalExams: mainTotalExams,
+        totalImages: mainTotalImages,
+        pendingReports,
         completedReports,
         patientsToday: 0,
         examsToday,

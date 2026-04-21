@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Users, Image as LucideImage, Clock, CheckCircle2, TrendingUp, AlertCircle, Activity, RefreshCw, FileText, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { getAnalyticsAction, getAllPatientsAction } from '@/app/actions/patients';
+import { getAnalyticsAction, getPatientsAction } from '@/app/actions/patients';
 import { AnalyticsData } from '@/types';
 
 export default function Analytics() {
@@ -30,7 +30,7 @@ export default function Analytics() {
     try {
       const [analyticsData, patients] = await Promise.all([
         getAnalyticsAction(),
-        getAllPatientsAction()
+        getPatientsAction()
       ]);
       setStats(analyticsData);
 
