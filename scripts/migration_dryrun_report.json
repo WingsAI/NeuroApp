@@ -1,0 +1,3517 @@
+{
+  "perLogin": {
+    "dramelinalannes.endocrino@gmail.com": {
+      "patients": 536,
+      "newPatients": 407,
+      "existingPatientCollisions": 129,
+      "patientIdCollisions": 129,
+      "exams": 556,
+      "examIdCollisions": 129,
+      "eyerIdCollisionsInMain": 129,
+      "zeroImageExams": 15,
+      "images": 6710,
+      "imagesKept": 5047,
+      "imagesFiltered": 1663,
+      "imagesByHost": {
+        "bytescale": 5047,
+        "eyercloud": 0,
+        "empty": 1663,
+        "other": 0
+      },
+      "imagesKeptByHost": {
+        "bytescale": 5047,
+        "eyercloud": 0,
+        "empty": 0,
+        "other": 0
+      },
+      "imagesByType": {
+        "COLOR": 4390,
+        "ANTERIOR": 657,
+        "REFLEX_REMOVED": 1663
+      }
+    },
+    "mozaniareis@usp.br": {
+      "patients": 1959,
+      "newPatients": 1957,
+      "existingPatientCollisions": 2,
+      "patientIdCollisions": 2,
+      "exams": 1991,
+      "examIdCollisions": 2,
+      "eyerIdCollisionsInMain": 2,
+      "zeroImageExams": 25,
+      "images": 15184,
+      "imagesKept": 12787,
+      "imagesFiltered": 2397,
+      "imagesByHost": {
+        "bytescale": 12787,
+        "eyercloud": 0,
+        "empty": 2397,
+        "other": 0
+      },
+      "imagesKeptByHost": {
+        "bytescale": 12787,
+        "eyercloud": 0,
+        "empty": 0,
+        "other": 0
+      },
+      "imagesByType": {
+        "RETINA_INFRA_RED": 173,
+        "COLOR": 8741,
+        "ANTERIOR": 4046,
+        "HEATMAP": 1267,
+        "REFLEX_REMOVED": 957
+      }
+    }
+  },
+  "overall": {
+    "patients": 2495,
+    "newPatients": 2364,
+    "existingPatientCollisions": 131,
+    "patientIdCollisions": 131,
+    "exams": 2547,
+    "examIdCollisions": 131,
+    "eyerIdCollisionsInMain": 131,
+    "zeroImageExams": 40,
+    "images": 21894,
+    "imagesKept": 17834,
+    "imagesFiltered": 4060,
+    "imagesByHost": {
+      "bytescale": 17834,
+      "eyercloud": 0,
+      "empty": 4060,
+      "other": 0
+    },
+    "imagesKeptByHost": {
+      "bytescale": 17834,
+      "eyercloud": 0,
+      "empty": 0,
+      "other": 0
+    },
+    "imagesByType": {
+      "COLOR": 13131,
+      "ANTERIOR": 4703,
+      "REFLEX_REMOVED": 2620,
+      "RETINA_INFRA_RED": 173,
+      "HEATMAP": 1267
+    }
+  },
+  "collidingPatients": [
+    {
+      "staging": {
+        "id": "69614e239f3e40afd167fc2d",
+        "name": "luiz fernando dias esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69614e239f3e40afd167fc2d",
+          "name": "luiz fernando dias esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "696135319f3e40afd167ecd8",
+        "name": "maria aparecida dos santos esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "696135319f3e40afd167ecd8",
+          "name": "maria aparecida dos santos esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6961045b9f3e40afd167d278",
+        "name": "eva barbara rodrigues esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6961045b9f3e40afd167d278",
+          "name": "eva barbara rodrigues esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6960f8a726260539c1673014",
+        "name": "angela aparecida rodrigues silva esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6960f8a726260539c1673014",
+          "name": "angela aparecida rodrigues silva esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6960f86d9f3e40afd167c888",
+        "name": "celso benedito de oliveira esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6960f86d9f3e40afd167c888",
+          "name": "celso benedito de oliveira esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c5dd2f11e3b861f19b5c4",
+        "name": "maria teresinha de oliveira esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c5dd2f11e3b861f19b5c4",
+          "name": "maria teresinha de oliveira esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c4f663bb75c80c0a8218e",
+        "name": "antenor rosa machado esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c4f663bb75c80c0a8218e",
+          "name": "antenor rosa machado esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c4f65d2c55c93cb6d3dc0",
+        "name": "ana maria faria esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c4f65d2c55c93cb6d3dc0",
+          "name": "ana maria faria esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c4f68d2c55c93cb6d3dc4",
+        "name": "maria isabel de sa floriano esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c4f68d2c55c93cb6d3dc4",
+          "name": "maria isabel de sa floriano esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c4f673bb75c80c0a82193",
+        "name": "joselina batista muniz esf monte carlo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c4f673bb75c80c0a82193",
+          "name": "joselina batista muniz esf monte carlo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "693c4f68f11e3b861f19aa40",
+        "name": "vera nanci dos santos reseda esf jd marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "693c4f68f11e3b861f19aa40",
+          "name": "vera nanci dos santos reseda esf jd marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6931c655e1f60cc50a251245",
+        "name": "benedita dulce da silva esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6931c655e1f60cc50a251245",
+          "name": "benedita dulce da silva esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6931c65506de816ac9003852",
+        "name": "joao carlos bicudo esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6931c65506de816ac9003852",
+          "name": "joao carlos bicudo esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6931c307e1f60cc50a250f22",
+        "name": "maria terezinha de oliveira esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6931c307e1f60cc50a250f22",
+          "name": "maria terezinha de oliveira esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6931c30e0e4fdfcbb52ab0ee",
+        "name": "vera lucia da silva esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6931c30e0e4fdfcbb52ab0ee",
+          "name": "vera lucia da silva esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69319c170e4fdfcbb52a977a",
+        "name": "Maria Aparecida Siqueira ESF JARDIM MARCIA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69319c170e4fdfcbb52a977a",
+          "name": "Maria Aparecida Siqueira ESF JARDIM MARCIA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69319c1706de816ac9001bd7",
+        "name": "Maria Helena Alves da Silva ESF JARDIM MARCIA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69319c1706de816ac9001bd7",
+          "name": "Maria Helena Alves da Silva ESF JARDIM MARCIA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69319c1706de816ac9001bd6",
+        "name": "Benedito Pereira da Silva ESF JARDIM MARCIA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69319c1706de816ac9001bd6",
+          "name": "Benedito Pereira da Silva ESF JARDIM MARCIA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69319c1806de816ac9001bd9",
+        "name": "Maria do Carmo Balsante ESF JARDIM MARCIA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69319c1806de816ac9001bd9",
+          "name": "Maria do Carmo Balsante ESF JARDIM MARCIA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6931791d7b4a44436cb7c577",
+        "name": "vera cruz ferraz pinto esf jardim marcia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6931791d7b4a44436cb7c577",
+          "name": "vera cruz ferraz pinto esf jardim marcia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb5424b0e754dac36a459",
+        "name": "Idalina Aparecida Ferreira de Carvalho ESF JARDIM MARCIA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb5424b0e754dac36a459",
+          "name": "Idalina Aparecida Ferreira de Carvalho ESF JARDIM MARCIA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb54128b781ee600120e5",
+        "name": "Edna Almeida Costa ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb54128b781ee600120e5",
+          "name": "Edna Almeida Costa ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb54326260539c166b32c",
+        "name": "Janete de oliveira neves esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb54326260539c166b32c",
+          "name": "Janete de oliveira neves esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb5414b0e754dac36a458",
+        "name": "Cleife Apolo Bezoto ESF VILA SUICA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb5414b0e754dac36a458",
+          "name": "Cleife Apolo Bezoto ESF VILA SUICA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb5434b0e754dac36a45b",
+        "name": "Jose Carlos de Lima ESF vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb5434b0e754dac36a45b",
+          "name": "Jose Carlos de Lima ESF vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "695eb54428b781ee600120e7",
+        "name": "Onofre Candido da silva esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "695eb54428b781ee600120e7",
+          "name": "Onofre Candido da silva esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "690df6f76f3b5091c1a22443",
+        "name": "Maria Aparecida Pinto ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "690df6f76f3b5091c1a22443",
+          "name": "Maria Aparecida Pinto ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "690dedd8716d94001392e74a",
+        "name": "Wanderleia Goncalves Ferraz ESF vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "690dedd8716d94001392e74a",
+          "name": "Wanderleia Goncalves Ferraz ESF vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "690de3c806de816ac9f80a16",
+        "name": "Cristina Cardoso da Silva ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "690de3c806de816ac9f80a16",
+          "name": "Cristina Cardoso da Silva ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "690ddb0a6f3b5091c1a20ca6",
+        "name": "Fernando Rodrigues Rhormes ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "690ddb0a6f3b5091c1a20ca6",
+          "name": "Fernando Rodrigues Rhormes ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904feb817f2af9a2b4b9e26",
+        "name": "Joao Altamiro Esf Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904feb817f2af9a2b4b9e26",
+          "name": "Joao Altamiro Esf Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904dd0c95a313e56412a4fa",
+        "name": "Maria Nilda dos Santos ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904dd0c95a313e56412a4fa",
+          "name": "Maria Nilda dos Santos ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904d18e17f2af9a2b4b878b",
+        "name": "Ezequiel de Souza Ferreira ESF vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904d18e17f2af9a2b4b878b",
+          "name": "Ezequiel de Souza Ferreira ESF vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904d0df95a313e564129fff",
+        "name": "Sandra Regina Rodrigues Peres ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904d0df95a313e564129fff",
+          "name": "Sandra Regina Rodrigues Peres ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904b5e26de543c32d8f8a26",
+        "name": "Maria Estela Lobo da Silva ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904b5e26de543c32d8f8a26",
+          "name": "Maria Estela Lobo da Silva ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe395a313e5641279f9",
+        "name": "emiliana queiroz de jesus esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe395a313e5641279f9",
+          "name": "emiliana queiroz de jesus esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe317f2af9a2b4b612d",
+        "name": "kyoko archanjo de siqueira esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe317f2af9a2b4b612d",
+          "name": "kyoko archanjo de siqueira esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe395a313e5641279fa",
+        "name": "maria do carmo montegutti esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe395a313e5641279fa",
+          "name": "maria do carmo montegutti esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe26de543c32d8f78e7",
+        "name": "anderson marcelo rosa esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe26de543c32d8f78e7",
+          "name": "anderson marcelo rosa esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe36de543c32d8f78e8",
+        "name": "luiz carlos de carvalho santos esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe36de543c32d8f78e8",
+          "name": "luiz carlos de carvalho santos esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe25c8a9dde74559766",
+        "name": "carlos augusto messinetti de oliveira esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe25c8a9dde74559766",
+          "name": "carlos augusto messinetti de oliveira esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe15c8a9dde74559765",
+        "name": "Sonia Candido Prestes ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe15c8a9dde74559765",
+          "name": "Sonia Candido Prestes ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fbf95a313e5641279e5",
+        "name": "Fernando Aparecido de Moraes Sampaio ESF VILA SUICA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fbf95a313e5641279e5",
+          "name": "Fernando Aparecido de Moraes Sampaio ESF VILA SUICA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fda5c8a9dde7455975f",
+        "name": "Jose de Souza Jesus Esf vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fda5c8a9dde7455975f",
+          "name": "Jose de Souza Jesus Esf vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fbe6de543c32d8f78cb",
+        "name": "Ely Souza Silva ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fbe6de543c32d8f78cb",
+          "name": "Ely Souza Silva ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fdb6de543c32d8f78e3",
+        "name": "Maria Nubia Ferreira de Souza ESF VILA SUICA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fdb6de543c32d8f78e3",
+          "name": "Maria Nubia Ferreira de Souza ESF VILA SUICA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fdb17f2af9a2b4b612a",
+        "name": "Marcos Luiz de Souza Melo ESF Vila suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fdb17f2af9a2b4b612a",
+          "name": "Marcos Luiz de Souza Melo ESF Vila suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fbe17f2af9a2b4b6124",
+        "name": "Edilson Barros Ferreira ESF VILA SUICA",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fbe17f2af9a2b4b6124",
+          "name": "Edilson Barros Ferreira ESF VILA SUICA"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fb85c8a9dde7455974d",
+        "name": "Camila de Oliveira Ribeiro Suarez ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fb85c8a9dde7455974d",
+          "name": "Camila de Oliveira Ribeiro Suarez ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe195a313e5641279f7",
+        "name": "Noemia Correa da Silva ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe195a313e5641279f7",
+          "name": "Noemia Correa da Silva ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fe217f2af9a2b4b612b",
+        "name": "Valdemar Ribeirode Faria ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fe217f2af9a2b4b612b",
+          "name": "Valdemar Ribeirode Faria ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fdc5c8a9dde74559761",
+        "name": "Mario Luiz Esteves ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fdc5c8a9dde74559761",
+          "name": "Mario Luiz Esteves ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6904b63017f2af9a2b4b72c6",
+        "name": "Benedito Luiz de Oliveira ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6904b63017f2af9a2b4b72c6",
+          "name": "Benedito Luiz de Oliveira ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "69049fb76de543c32d8f78c8",
+        "name": "Benedito Moreira Ramos ESF Vila Suica",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "69049fb76de543c32d8f78c8",
+          "name": "Benedito Moreira Ramos ESF Vila Suica"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6e65b86ec976d5d594250",
+        "name": "Simone Maria Alves Costa Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6e65b86ec976d5d594250",
+          "name": "Simone Maria Alves Costa Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6d83bcdf1b24d7058eb59",
+        "name": "Carlos Roberto de Oliveira Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6d83bcdf1b24d7058eb59",
+          "name": "Carlos Roberto de Oliveira Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6d56fcdf1b24d7058e982",
+        "name": "Samuel da Silva Rocha Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6d56fcdf1b24d7058e982",
+          "name": "Samuel da Silva Rocha Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6d08cd3b94a6d8ea21e54",
+        "name": "Dora Milda Prado Vila Britania",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6d08cd3b94a6d8ea21e54",
+          "name": "Dora Milda Prado Vila Britania"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6acbfd3b94a6d8ea20c49",
+        "name": "Odilon Dos Santos Reis Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6acbfd3b94a6d8ea20c49",
+          "name": "Odilon Dos Santos Reis Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6a3a886ec976d5d591c78",
+        "name": "Lucineia Aparecida Ribeiro da Costa Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6a3a886ec976d5d591c78",
+          "name": "Lucineia Aparecida Ribeiro da Costa Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6a0a0d3b94a6d8ea203f0",
+        "name": "Apparecida Ferreira da Silva Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6a0a0d3b94a6d8ea203f0",
+          "name": "Apparecida Ferreira da Silva Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d6946acdf1b24d7058c057",
+        "name": "Maria Eunice Al.eida da Silva Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d6946acdf1b24d7058c057",
+          "name": "Maria Eunice Al.eida da Silva Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d69169cdf1b24d7058bdc2",
+        "name": "Jose Onofre da Silva Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d69169cdf1b24d7058bdc2",
+          "name": "Jose Onofre da Silva Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68d687ddcdf1b24d7058b4b8",
+        "name": "Juliana Aparecida dos Santos Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68d687ddcdf1b24d7058b4b8",
+          "name": "Juliana Aparecida dos Santos Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cda41cd3b94a6d8e9ff516",
+        "name": "Mario Almeida pereira",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cda41cd3b94a6d8e9ff516",
+          "name": "Mario Almeida pereira"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd827bd3b94a6d8e9fe085",
+        "name": "Regina maria reno de azeredo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd827bd3b94a6d8e9fe085",
+          "name": "Regina maria reno de azeredo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd6db586ec976d5d56e97d",
+        "name": "wanderly maria dos santos",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd6db586ec976d5d56e97d",
+          "name": "wanderly maria dos santos"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd6a0886ec976d5d56e6c7",
+        "name": "silvia souza de lima moreira",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd6a0886ec976d5d56e6c7",
+          "name": "silvia souza de lima moreira"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd625d0bdca1be4d1efd03",
+        "name": "cecilia leite gonzales ramos",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd625d0bdca1be4d1efd03",
+          "name": "cecilia leite gonzales ramos"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd582286ec976d5d56d741",
+        "name": "Roseli chagas de souza",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd582286ec976d5d56d741",
+          "name": "Roseli chagas de souza"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd53640bdca1be4d1eee94",
+        "name": "eliana aparecida dias boeno esf vila britania",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd53640bdca1be4d1eee94",
+          "name": "eliana aparecida dias boeno esf vila britania"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd53600bdca1be4d1eee8a",
+        "name": "Jose Francisco Costa",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd53600bdca1be4d1eee8a",
+          "name": "Jose Francisco Costa"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536058cb2552f80377c8",
+        "name": "Luci Odila Cruz Dias",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536058cb2552f80377c8",
+          "name": "Luci Odila Cruz Dias"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536358cb2552f80377cd",
+        "name": "Sara Oliveira Nunes",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536358cb2552f80377cd",
+          "name": "Sara Oliveira Nunes"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536258cb2552f80377cb",
+        "name": "Nilson Batista do Nascimento Junior",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536258cb2552f80377cb",
+          "name": "Nilson Batista do Nascimento Junior"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd5364d3b94a6d8e9fc040",
+        "name": "Valdete fatima rodrigues",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd5364d3b94a6d8e9fc040",
+          "name": "Valdete fatima rodrigues"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535e58cb2552f80377c2",
+        "name": "Carmem Maria dos Santos",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535e58cb2552f80377c2",
+          "name": "Carmem Maria dos Santos"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536386ec976d5d56d281",
+        "name": "Regina Rosimeire Pereira da Rosa",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536386ec976d5d56d281",
+          "name": "Regina Rosimeire Pereira da Rosa"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535f86ec976d5d56d27a",
+        "name": "Jose Domingos de Faria",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535f86ec976d5d56d27a",
+          "name": "Jose Domingos de Faria"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535e0bdca1be4d1eee88",
+        "name": "Ana Maria Barbosa Ribeiro",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535e0bdca1be4d1eee88",
+          "name": "Ana Maria Barbosa Ribeiro"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd53620bdca1be4d1eee8d",
+        "name": "Misael Bento Dias",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd53620bdca1be4d1eee8d",
+          "name": "Misael Bento Dias"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535fd3b94a6d8e9fc039",
+        "name": "Gesiel Urbano Faria",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535fd3b94a6d8e9fc039",
+          "name": "Gesiel Urbano Faria"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536286ec976d5d56d27e",
+        "name": "Moises Silva Rosa",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536286ec976d5d56d27e",
+          "name": "Moises Silva Rosa"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536086ec976d5d56d27b",
+        "name": "João Jesus",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536086ec976d5d56d27b",
+          "name": "João Jesus"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535f0bdca1be4d1eee89",
+        "name": "Iraci Santos Silva de Jesus",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535f0bdca1be4d1eee89",
+          "name": "Iraci Santos Silva de Jesus"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536458cb2552f80377ce",
+        "name": "lucineide otaviano vila britania",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536458cb2552f80377ce",
+          "name": "lucineide otaviano vila britania"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536186ec976d5d56d27d",
+        "name": "Margarida Benjamim de Azevedo",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536186ec976d5d56d27d",
+          "name": "Margarida Benjamim de Azevedo"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd5363d3b94a6d8e9fc03f",
+        "name": "Silvia Regina Silva dos Reis",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd5363d3b94a6d8e9fc03f",
+          "name": "Silvia Regina Silva dos Reis"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535f58cb2552f80377c5",
+        "name": "Janete Rodrigues Barbosa Godoy",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535f58cb2552f80377c5",
+          "name": "Janete Rodrigues Barbosa Godoy"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd535e86ec976d5d56d277",
+        "name": "Claudio Silverio de Paula",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd535e86ec976d5d56d277",
+          "name": "Claudio Silverio de Paula"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536486ec976d5d56d282",
+        "name": "Terezinha Pra Frederico de Paula",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536486ec976d5d56d282",
+          "name": "Terezinha Pra Frederico de Paula"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536158cb2552f80377c9",
+        "name": "Maria Aparecida Pereira",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "697d03f5565494aed21c07e0",
+          "name": "MARIA APARECIDA PEREIRA"
+        },
+        {
+          "id": "68cd536158cb2552f80377c9",
+          "name": "Maria Aparecida Pereira"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536286ec976d5d56d27f",
+        "name": "Monique Aparecida Pinheiro",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536286ec976d5d56d27f",
+          "name": "Monique Aparecida Pinheiro"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd53610bdca1be4d1eee8c",
+        "name": "Maria Beatriz Santos",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd53610bdca1be4d1eee8c",
+          "name": "Maria Beatriz Santos"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd53600bdca1be4d1eee8b",
+        "name": "Marcia Regina Guerra",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd53600bdca1be4d1eee8b",
+          "name": "Marcia Regina Guerra"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68cd536258cb2552f80377cc",
+        "name": "Priscila Alves Barbosa Prudente Vila Britânia",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68cd536258cb2552f80377cc",
+          "name": "Priscila Alves Barbosa Prudente Vila Britânia"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68b19edbda6da34c435fecad",
+        "name": "Ana Paula Xavier ESF Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68b19edbda6da34c435fecad",
+          "name": "Ana Paula Xavier ESF Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a8c82def005b5eee23460b",
+        "name": "Vilma Maria Pinto de Oliveira Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a8c82def005b5eee23460b",
+          "name": "Vilma Maria Pinto de Oliveira Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a8c52ae4062b64162c63fb",
+        "name": "Ilma Alves da Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a8c52ae4062b64162c63fb",
+          "name": "Ilma Alves da Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a8b689ef005b5eee2337d4",
+        "name": "Edison Luiz Pinto de Oliveira Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a8b689ef005b5eee2337d4",
+          "name": "Edison Luiz Pinto de Oliveira Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a8ab09e4062b64162c4ca3",
+        "name": "Elisabete Mastrandeia Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a8ab09e4062b64162c4ca3",
+          "name": "Elisabete Mastrandeia Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a878daef005b5eee230616",
+        "name": "Adriana Cristina Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a878daef005b5eee230616",
+          "name": "Adriana Cristina Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a874e4ef005b5eee230083",
+        "name": "Sheila Maria Sampaio Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a874e4ef005b5eee230083",
+          "name": "Sheila Maria Sampaio Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a86f58e4062b64162c1896",
+        "name": "Carlos Braulio Souza Vila Sodipe",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a86f58e4062b64162c1896",
+          "name": "Carlos Braulio Souza Vila Sodipe"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a86be6ef005b5eee22f4e0",
+        "name": "Esmael Desiderio Alves Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a86be6ef005b5eee22f4e0",
+          "name": "Esmael Desiderio Alves Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68a85bdbef005b5eee22e1b7",
+        "name": "Claudia Gonçalves Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68a85bdbef005b5eee22e1b7",
+          "name": "Claudia Gonçalves Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f80bdef005b5eee204e37",
+        "name": "Aparecido Felix Vila Sodipe",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f80bdef005b5eee204e37",
+          "name": "Aparecido Felix Vila Sodipe"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f7be8ef005b5eee20497d",
+        "name": "Margarida Chagas Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f7be8ef005b5eee20497d",
+          "name": "Margarida Chagas Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f764fef005b5eee2045c1",
+        "name": "Jair Ribeiro da Rosa Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f764fef005b5eee2045c1",
+          "name": "Jair Ribeiro da Rosa Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f4637b71fd1a3618d5715",
+        "name": "Wilma Alves Pinto dos Santos Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f4637b71fd1a3618d5715",
+          "name": "Wilma Alves Pinto dos Santos Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f4456afafefd6ecdbdd8f",
+        "name": "Hilda Paulino Da Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f4456afafefd6ecdbdd8f",
+          "name": "Hilda Paulino Da Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f3c5fafafefd6ecdbd4e1",
+        "name": "Lilian dos Santos Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f3c5fafafefd6ecdbd4e1",
+          "name": "Lilian dos Santos Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f2f7eef005b5eee2010e4",
+        "name": "Cícero Souza Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f2f7eef005b5eee2010e4",
+          "name": "Cícero Souza Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "689f2b54b71fd1a3618d3a4c",
+        "name": "Marta da Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "689f2b54b71fd1a3618d3a4c",
+          "name": "Marta da Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68963e7b77c32abd0eaad70f",
+        "name": "Sara de Oliveira Nunes Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68963e7b77c32abd0eaad70f",
+          "name": "Sara de Oliveira Nunes Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68962ded33d145d9aa0d23da",
+        "name": "Humberto de Lima Salvador Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68962ded33d145d9aa0d23da",
+          "name": "Humberto de Lima Salvador Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6895fef97f3b999a12dd5d11",
+        "name": "Hilda Aparecida Maciel da Matta Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6895fef97f3b999a12dd5d11",
+          "name": "Hilda Aparecida Maciel da Matta Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6895ef1577c32abd0eaa8f40",
+        "name": "Mario Jose de Almeida Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6895ef1577c32abd0eaa8f40",
+          "name": "Mario Jose de Almeida Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6895e95533d145d9aa0ce480",
+        "name": "Cintia Carvalho Dinamarco Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6895e95533d145d9aa0ce480",
+          "name": "Cintia Carvalho Dinamarco Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6895e61133d145d9aa0ce164",
+        "name": "Joao Luiz Goncalves Dias Filho Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6895e61133d145d9aa0ce164",
+          "name": "Joao Luiz Goncalves Dias Filho Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6883d9beb40664f43a027c72",
+        "name": "Ana Maria Barbosa Pinto Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6883d9beb40664f43a027c72",
+          "name": "Ana Maria Barbosa Pinto Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6883ca7fb40664f43a02706e",
+        "name": "Jasmira Pereira Santos Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6883ca7fb40664f43a02706e",
+          "name": "Jasmira Pereira Santos Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6883be162ef960726a635fb4",
+        "name": "Alessandra Antonia De Faria da Silva Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6883be162ef960726a635fb4",
+          "name": "Alessandra Antonia De Faria da Silva Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68839ccc2ef960726a634b21",
+        "name": "benedita carolina da silva vila nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68839ccc2ef960726a634b21",
+          "name": "benedita carolina da silva vila nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6883988234a0287f40567ed2",
+        "name": "Maria Aparecida de Fatima Vila Nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6883988234a0287f40567ed2",
+          "name": "Maria Aparecida de Fatima Vila Nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "68838cda34a0287f40567216",
+        "name": "mario norberto da silva vila nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "68838cda34a0287f40567216",
+          "name": "mario norberto da silva vila nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "6883819eb40664f43a02329a",
+        "name": "silvia aparecida vila nadir",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "6883819eb40664f43a02329a",
+          "name": "silvia aparecida vila nadir"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "681e4ef79aac74da7b558dc7",
+        "name": "Luciana Braz ESF Vila Sodipe",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "681e4ef79aac74da7b558dc7",
+          "name": "Luciana Braz ESF Vila Sodipe"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "681e3fcb2cd811818256daa3",
+        "name": "Mauricio Ribeiro ESF Vila Sodipe",
+        "login": "dramelinalannes.endocrino@gmail.com"
+      },
+      "main": [
+        {
+          "id": "681e3fcb2cd811818256daa3",
+          "name": "Mauricio Ribeiro ESF Vila Sodipe"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "692850348945a179414fe61a",
+        "name": "MARIA APARECIDA PEREIRA BARRETO 003.17.73",
+        "login": "mozaniareis@usp.br"
+      },
+      "main": [
+        {
+          "id": "692850348945a179414fe61a",
+          "name": "MARIA APARECIDA PEREIRA BARRETO 003.17.73"
+        }
+      ]
+    },
+    {
+      "staging": {
+        "id": "67cf698fc686e4a82137e17b",
+        "name": "ADELIA PAIVA DE JESUS 001",
+        "login": "mozaniareis@usp.br"
+      },
+      "main": [
+        {
+          "id": "67cf698fc686e4a82137e17b",
+          "name": "ADELIA PAIVA DE JESUS 001"
+        }
+      ]
+    }
+  ],
+  "collidingPatientIds": [
+    {
+      "id": "69614e239f3e40afd167fc2d",
+      "stagingName": "luiz fernando dias esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "696135319f3e40afd167ecd8",
+      "stagingName": "maria aparecida dos santos esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6961045b9f3e40afd167d278",
+      "stagingName": "eva barbara rodrigues esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6960f8a726260539c1673014",
+      "stagingName": "angela aparecida rodrigues silva esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6960f86d9f3e40afd167c888",
+      "stagingName": "celso benedito de oliveira esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c5dd2f11e3b861f19b5c4",
+      "stagingName": "maria teresinha de oliveira esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f663bb75c80c0a8218e",
+      "stagingName": "antenor rosa machado esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f65d2c55c93cb6d3dc0",
+      "stagingName": "ana maria faria esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f68d2c55c93cb6d3dc4",
+      "stagingName": "maria isabel de sa floriano esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f673bb75c80c0a82193",
+      "stagingName": "joselina batista muniz esf monte carlo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f68f11e3b861f19aa40",
+      "stagingName": "vera nanci dos santos reseda esf jd marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c655e1f60cc50a251245",
+      "stagingName": "benedita dulce da silva esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c65506de816ac9003852",
+      "stagingName": "joao carlos bicudo esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c307e1f60cc50a250f22",
+      "stagingName": "maria terezinha de oliveira esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c30e0e4fdfcbb52ab0ee",
+      "stagingName": "vera lucia da silva esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c170e4fdfcbb52a977a",
+      "stagingName": "Maria Aparecida Siqueira ESF JARDIM MARCIA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c1706de816ac9001bd7",
+      "stagingName": "Maria Helena Alves da Silva ESF JARDIM MARCIA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c1706de816ac9001bd6",
+      "stagingName": "Benedito Pereira da Silva ESF JARDIM MARCIA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c1806de816ac9001bd9",
+      "stagingName": "Maria do Carmo Balsante ESF JARDIM MARCIA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931791d7b4a44436cb7c577",
+      "stagingName": "vera cruz ferraz pinto esf jardim marcia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb5424b0e754dac36a459",
+      "stagingName": "Idalina Aparecida Ferreira de Carvalho ESF JARDIM MARCIA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54128b781ee600120e5",
+      "stagingName": "Edna Almeida Costa ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54326260539c166b32c",
+      "stagingName": "Janete de oliveira neves esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb5414b0e754dac36a458",
+      "stagingName": "Cleife Apolo Bezoto ESF VILA SUICA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb5434b0e754dac36a45b",
+      "stagingName": "Jose Carlos de Lima ESF vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54428b781ee600120e7",
+      "stagingName": "Onofre Candido da silva esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690df6f76f3b5091c1a22443",
+      "stagingName": "Maria Aparecida Pinto ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690dedd8716d94001392e74a",
+      "stagingName": "Wanderleia Goncalves Ferraz ESF vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690de3c806de816ac9f80a16",
+      "stagingName": "Cristina Cardoso da Silva ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690ddb0a6f3b5091c1a20ca6",
+      "stagingName": "Fernando Rodrigues Rhormes ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904feb817f2af9a2b4b9e26",
+      "stagingName": "Joao Altamiro Esf Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904dd0c95a313e56412a4fa",
+      "stagingName": "Maria Nilda dos Santos ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904d18e17f2af9a2b4b878b",
+      "stagingName": "Ezequiel de Souza Ferreira ESF vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904d0df95a313e564129fff",
+      "stagingName": "Sandra Regina Rodrigues Peres ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904b5e26de543c32d8f8a26",
+      "stagingName": "Maria Estela Lobo da Silva ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe395a313e5641279f9",
+      "stagingName": "emiliana queiroz de jesus esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe317f2af9a2b4b612d",
+      "stagingName": "kyoko archanjo de siqueira esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe395a313e5641279fa",
+      "stagingName": "maria do carmo montegutti esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe26de543c32d8f78e7",
+      "stagingName": "anderson marcelo rosa esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe36de543c32d8f78e8",
+      "stagingName": "luiz carlos de carvalho santos esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe25c8a9dde74559766",
+      "stagingName": "carlos augusto messinetti de oliveira esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe15c8a9dde74559765",
+      "stagingName": "Sonia Candido Prestes ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fbf95a313e5641279e5",
+      "stagingName": "Fernando Aparecido de Moraes Sampaio ESF VILA SUICA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fda5c8a9dde7455975f",
+      "stagingName": "Jose de Souza Jesus Esf vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fbe6de543c32d8f78cb",
+      "stagingName": "Ely Souza Silva ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fdb6de543c32d8f78e3",
+      "stagingName": "Maria Nubia Ferreira de Souza ESF VILA SUICA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fdb17f2af9a2b4b612a",
+      "stagingName": "Marcos Luiz de Souza Melo ESF Vila suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fbe17f2af9a2b4b6124",
+      "stagingName": "Edilson Barros Ferreira ESF VILA SUICA",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fb85c8a9dde7455974d",
+      "stagingName": "Camila de Oliveira Ribeiro Suarez ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe195a313e5641279f7",
+      "stagingName": "Noemia Correa da Silva ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe217f2af9a2b4b612b",
+      "stagingName": "Valdemar Ribeirode Faria ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fdc5c8a9dde74559761",
+      "stagingName": "Mario Luiz Esteves ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904b63017f2af9a2b4b72c6",
+      "stagingName": "Benedito Luiz de Oliveira ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fb76de543c32d8f78c8",
+      "stagingName": "Benedito Moreira Ramos ESF Vila Suica",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6e65b86ec976d5d594250",
+      "stagingName": "Simone Maria Alves Costa Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d83bcdf1b24d7058eb59",
+      "stagingName": "Carlos Roberto de Oliveira Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d56fcdf1b24d7058e982",
+      "stagingName": "Samuel da Silva Rocha Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d08cd3b94a6d8ea21e54",
+      "stagingName": "Dora Milda Prado Vila Britania",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6acbfd3b94a6d8ea20c49",
+      "stagingName": "Odilon Dos Santos Reis Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6a3a886ec976d5d591c78",
+      "stagingName": "Lucineia Aparecida Ribeiro da Costa Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6a0a0d3b94a6d8ea203f0",
+      "stagingName": "Apparecida Ferreira da Silva Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6946acdf1b24d7058c057",
+      "stagingName": "Maria Eunice Al.eida da Silva Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d69169cdf1b24d7058bdc2",
+      "stagingName": "Jose Onofre da Silva Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d687ddcdf1b24d7058b4b8",
+      "stagingName": "Juliana Aparecida dos Santos Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cda41cd3b94a6d8e9ff516",
+      "stagingName": "Mario Almeida pereira",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd827bd3b94a6d8e9fe085",
+      "stagingName": "Regina maria reno de azeredo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd6db586ec976d5d56e97d",
+      "stagingName": "wanderly maria dos santos",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd6a0886ec976d5d56e6c7",
+      "stagingName": "silvia souza de lima moreira",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd625d0bdca1be4d1efd03",
+      "stagingName": "cecilia leite gonzales ramos",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd582286ec976d5d56d741",
+      "stagingName": "Roseli chagas de souza",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53640bdca1be4d1eee94",
+      "stagingName": "eliana aparecida dias boeno esf vila britania",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53600bdca1be4d1eee8a",
+      "stagingName": "Jose Francisco Costa",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536058cb2552f80377c8",
+      "stagingName": "Luci Odila Cruz Dias",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536358cb2552f80377cd",
+      "stagingName": "Sara Oliveira Nunes",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536258cb2552f80377cb",
+      "stagingName": "Nilson Batista do Nascimento Junior",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd5364d3b94a6d8e9fc040",
+      "stagingName": "Valdete fatima rodrigues",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535e58cb2552f80377c2",
+      "stagingName": "Carmem Maria dos Santos",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536386ec976d5d56d281",
+      "stagingName": "Regina Rosimeire Pereira da Rosa",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535f86ec976d5d56d27a",
+      "stagingName": "Jose Domingos de Faria",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535e0bdca1be4d1eee88",
+      "stagingName": "Ana Maria Barbosa Ribeiro",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53620bdca1be4d1eee8d",
+      "stagingName": "Misael Bento Dias",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535fd3b94a6d8e9fc039",
+      "stagingName": "Gesiel Urbano Faria",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536286ec976d5d56d27e",
+      "stagingName": "Moises Silva Rosa",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536086ec976d5d56d27b",
+      "stagingName": "João Jesus",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535f0bdca1be4d1eee89",
+      "stagingName": "Iraci Santos Silva de Jesus",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536458cb2552f80377ce",
+      "stagingName": "lucineide otaviano vila britania",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536186ec976d5d56d27d",
+      "stagingName": "Margarida Benjamim de Azevedo",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd5363d3b94a6d8e9fc03f",
+      "stagingName": "Silvia Regina Silva dos Reis",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535f58cb2552f80377c5",
+      "stagingName": "Janete Rodrigues Barbosa Godoy",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd535e86ec976d5d56d277",
+      "stagingName": "Claudio Silverio de Paula",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536486ec976d5d56d282",
+      "stagingName": "Terezinha Pra Frederico de Paula",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536158cb2552f80377c9",
+      "stagingName": "Maria Aparecida Pereira",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536286ec976d5d56d27f",
+      "stagingName": "Monique Aparecida Pinheiro",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53610bdca1be4d1eee8c",
+      "stagingName": "Maria Beatriz Santos",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53600bdca1be4d1eee8b",
+      "stagingName": "Marcia Regina Guerra",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536258cb2552f80377cc",
+      "stagingName": "Priscila Alves Barbosa Prudente Vila Britânia",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68b19edbda6da34c435fecad",
+      "stagingName": "Ana Paula Xavier ESF Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8c82def005b5eee23460b",
+      "stagingName": "Vilma Maria Pinto de Oliveira Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8c52ae4062b64162c63fb",
+      "stagingName": "Ilma Alves da Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8b689ef005b5eee2337d4",
+      "stagingName": "Edison Luiz Pinto de Oliveira Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8ab09e4062b64162c4ca3",
+      "stagingName": "Elisabete Mastrandeia Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a878daef005b5eee230616",
+      "stagingName": "Adriana Cristina Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a874e4ef005b5eee230083",
+      "stagingName": "Sheila Maria Sampaio Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a86f58e4062b64162c1896",
+      "stagingName": "Carlos Braulio Souza Vila Sodipe",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a86be6ef005b5eee22f4e0",
+      "stagingName": "Esmael Desiderio Alves Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a85bdbef005b5eee22e1b7",
+      "stagingName": "Claudia Gonçalves Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f80bdef005b5eee204e37",
+      "stagingName": "Aparecido Felix Vila Sodipe",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f7be8ef005b5eee20497d",
+      "stagingName": "Margarida Chagas Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f764fef005b5eee2045c1",
+      "stagingName": "Jair Ribeiro da Rosa Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f4637b71fd1a3618d5715",
+      "stagingName": "Wilma Alves Pinto dos Santos Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f4456afafefd6ecdbdd8f",
+      "stagingName": "Hilda Paulino Da Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f3c5fafafefd6ecdbd4e1",
+      "stagingName": "Lilian dos Santos Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f2f7eef005b5eee2010e4",
+      "stagingName": "Cícero Souza Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f2b54b71fd1a3618d3a4c",
+      "stagingName": "Marta da Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68963e7b77c32abd0eaad70f",
+      "stagingName": "Sara de Oliveira Nunes Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68962ded33d145d9aa0d23da",
+      "stagingName": "Humberto de Lima Salvador Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895fef97f3b999a12dd5d11",
+      "stagingName": "Hilda Aparecida Maciel da Matta Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895ef1577c32abd0eaa8f40",
+      "stagingName": "Mario Jose de Almeida Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895e95533d145d9aa0ce480",
+      "stagingName": "Cintia Carvalho Dinamarco Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895e61133d145d9aa0ce164",
+      "stagingName": "Joao Luiz Goncalves Dias Filho Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883d9beb40664f43a027c72",
+      "stagingName": "Ana Maria Barbosa Pinto Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883ca7fb40664f43a02706e",
+      "stagingName": "Jasmira Pereira Santos Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883be162ef960726a635fb4",
+      "stagingName": "Alessandra Antonia De Faria da Silva Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68839ccc2ef960726a634b21",
+      "stagingName": "benedita carolina da silva vila nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883988234a0287f40567ed2",
+      "stagingName": "Maria Aparecida de Fatima Vila Nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68838cda34a0287f40567216",
+      "stagingName": "mario norberto da silva vila nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883819eb40664f43a02329a",
+      "stagingName": "silvia aparecida vila nadir",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "681e4ef79aac74da7b558dc7",
+      "stagingName": "Luciana Braz ESF Vila Sodipe",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "681e3fcb2cd811818256daa3",
+      "stagingName": "Mauricio Ribeiro ESF Vila Sodipe",
+      "login": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "692850348945a179414fe61a",
+      "stagingName": "MARIA APARECIDA PEREIRA BARRETO 003.17.73",
+      "login": "mozaniareis@usp.br"
+    },
+    {
+      "id": "67cf698fc686e4a82137e17b",
+      "stagingName": "ADELIA PAIVA DE JESUS 001",
+      "login": "mozaniareis@usp.br"
+    }
+  ],
+  "collidingExamIds": [
+    {
+      "id": "69614e279f3e40afd167fc2e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69613536420f4491f574dd77",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "696104619f3e40afd167d27e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6960f8b99f3e40afd167c8cd",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6960f86d9f3e40afd167c889",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c5dd5da7c29d6c7baf958",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f6ad2c55c93cb6d3dca",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f6a3bb75c80c0a82199",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f6af11e3b861f19aa42",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f693bb75c80c0a82197",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "693c4f69d2c55c93cb6d3dc7",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c657e1f60cc50a251248",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c6560e4fdfcbb52ab3fc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c6560e4fdfcbb52ab3fa",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6931c6567b4a44436cb804e4",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c190e4fdfcbb52a977f",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c197b4a44436cb7e866",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c1906de816ac9001bdd",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69319c1906de816ac9001bdc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69317951e1f60cc50a24d2aa",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54b28b781ee600120f0",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54a4b0e754dac36a461",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54a4b0e754dac36a460",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54928b781ee600120eb",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb54826260539c166b330",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "695eb5484b0e754dac36a45e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690df767716d94001392efb8",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690dee9206de816ac9f8189a",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690de4217e33e208ad6b84b5",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "690ddb11716d94001392d777",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904fef05c8a9dde7455d45a",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904dd1d95a313e56412a501",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904d18e95a313e56412a051",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904d0e017f2af9a2b4b8734",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904b5e217f2af9a2b4b727e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fef5c8a9dde74559773",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe495a313e5641279fc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fef6de543c32d8f78f8",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fee95a313e564127a0d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fee5c8a9dde74559771",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fed95a313e564127a0b",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fed5c8a9dde74559770",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fec6de543c32d8f78f3",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fec17f2af9a2b4b6139",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049feb95a313e564127a07",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049feb5c8a9dde7455976e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fea6de543c32d8f78f1",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fea17f2af9a2b4b6137",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe995a313e564127a05",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe86de543c32d8f78ee",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe817f2af9a2b4b6134",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe795a313e564127a00",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6904b63195a313e564128ba6",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "69049fe517f2af9a2b4b612e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6e65f86ec976d5d594253",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d846cdf1b24d7058eb5e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d59ad3b94a6d8ea221c9",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6d0a0d3b94a6d8ea21e64",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6acf7991f8d0d5092834c",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6a3bbd3b94a6d8ea2066d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6a0a186ec976d5d591a11",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6947bd3b94a6d8ea1f929",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d6916dd3b94a6d8ea1f6a7",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68d68bb4cdf1b24d7058b83d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cda42258cb2552f803ad52",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd829c58cb2552f803984d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd6db986ec976d5d56e980",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd6a0e58cb2552f8038bfe",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd6278d3b94a6d8e9fce32",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd582486ec976d5d56d746",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd537158cb2552f80377e2",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd537086ec976d5d56d292",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd537086ec976d5d56d291",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536f58cb2552f80377e0",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536f0bdca1be4d1eeea3",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536fd3b94a6d8e9fc049",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536e86ec976d5d56d28f",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536e58cb2552f80377dc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536d0bdca1be4d1eee9f",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536dd3b94a6d8e9fc048",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536c86ec976d5d56d28d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536c58cb2552f80377da",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536b0bdca1be4d1eee9d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536a0bdca1be4d1eee9b",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd5369d3b94a6d8e9fc045",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536986ec976d5d56d28a",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd5369d3b94a6d8e9fc044",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536886ec976d5d56d289",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536858cb2552f80377d6",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53670bdca1be4d1eee99",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536786ec976d5d56d288",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536658cb2552f80377d3",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536686ec976d5d56d286",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd536658cb2552f80377d2",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd53650bdca1be4d1eee96",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68cd5365d3b94a6d8e9fc042",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68b19ef2f534a28e24f2cf59",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8c83bef005b5eee23461b",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8c629e4062b64162c64a3",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8bf9b5d49915d41ce6fd8",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a8ae25e4062b64162c4fd7",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a87fd45d49915d41ce3e69",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a876825d49915d41ce32a4",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a872df5d49915d41ce2dc6",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a86bf7ef005b5eee22f4f5",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68a865f2ef005b5eee22ec42",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f8806ef005b5eee205371",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f7ecdb71fd1a3618d7b01",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f7651afafefd6ecdbfce9",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f4ae3b71fd1a3618d5a3d",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f4467ef005b5eee2026d6",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f3d6dafafefd6ecdbd5fd",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f357bafafefd6ecdbcd9e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689f2b57b71fd1a3618d3a50",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689641e177c32abd0eaadabc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68962df233d145d9aa0d23de",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "689600337f3b999a12dd5ecc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895f4b577c32abd0eaa956c",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895ec507f3b999a12dd46e0",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6895e61a77c32abd0eaa8512",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883db012ef960726a63789f",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883ce01b40664f43a027327",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883bec1b40664f43a0264a6",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68839cd32ef960726a634b22",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6883989a2ef960726a63483e",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "68838cdfb40664f43a0240a8",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "688381ac34a0287f405663ff",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "681e4f089aac74da7b558dd7",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "681e46112cd811818256e1bc",
+      "stagingLogin": "dramelinalannes.endocrino@gmail.com"
+    },
+    {
+      "id": "6928503c6f3b5091c1a7e186",
+      "stagingLogin": "mozaniareis@usp.br"
+    },
+    {
+      "id": "67cf69ab40887c82b0b3cbd5",
+      "stagingLogin": "mozaniareis@usp.br"
+    }
+  ],
+  "collidingEyerIdsInMain": [
+    {
+      "eyerCloudId": "69614e279f3e40afd167fc2e",
+      "stagingExamId": "69614e279f3e40afd167fc2e"
+    },
+    {
+      "eyerCloudId": "69613536420f4491f574dd77",
+      "stagingExamId": "69613536420f4491f574dd77"
+    },
+    {
+      "eyerCloudId": "696104619f3e40afd167d27e",
+      "stagingExamId": "696104619f3e40afd167d27e"
+    },
+    {
+      "eyerCloudId": "6960f8b99f3e40afd167c8cd",
+      "stagingExamId": "6960f8b99f3e40afd167c8cd"
+    },
+    {
+      "eyerCloudId": "6960f86d9f3e40afd167c889",
+      "stagingExamId": "6960f86d9f3e40afd167c889"
+    },
+    {
+      "eyerCloudId": "693c5dd5da7c29d6c7baf958",
+      "stagingExamId": "693c5dd5da7c29d6c7baf958"
+    },
+    {
+      "eyerCloudId": "693c4f6ad2c55c93cb6d3dca",
+      "stagingExamId": "693c4f6ad2c55c93cb6d3dca"
+    },
+    {
+      "eyerCloudId": "693c4f6a3bb75c80c0a82199",
+      "stagingExamId": "693c4f6a3bb75c80c0a82199"
+    },
+    {
+      "eyerCloudId": "693c4f6af11e3b861f19aa42",
+      "stagingExamId": "693c4f6af11e3b861f19aa42"
+    },
+    {
+      "eyerCloudId": "693c4f693bb75c80c0a82197",
+      "stagingExamId": "693c4f693bb75c80c0a82197"
+    },
+    {
+      "eyerCloudId": "693c4f69d2c55c93cb6d3dc7",
+      "stagingExamId": "693c4f69d2c55c93cb6d3dc7"
+    },
+    {
+      "eyerCloudId": "6931c657e1f60cc50a251248",
+      "stagingExamId": "6931c657e1f60cc50a251248"
+    },
+    {
+      "eyerCloudId": "6931c6560e4fdfcbb52ab3fc",
+      "stagingExamId": "6931c6560e4fdfcbb52ab3fc"
+    },
+    {
+      "eyerCloudId": "6931c6560e4fdfcbb52ab3fa",
+      "stagingExamId": "6931c6560e4fdfcbb52ab3fa"
+    },
+    {
+      "eyerCloudId": "6931c6567b4a44436cb804e4",
+      "stagingExamId": "6931c6567b4a44436cb804e4"
+    },
+    {
+      "eyerCloudId": "69319c190e4fdfcbb52a977f",
+      "stagingExamId": "69319c190e4fdfcbb52a977f"
+    },
+    {
+      "eyerCloudId": "69319c197b4a44436cb7e866",
+      "stagingExamId": "69319c197b4a44436cb7e866"
+    },
+    {
+      "eyerCloudId": "69319c1906de816ac9001bdd",
+      "stagingExamId": "69319c1906de816ac9001bdd"
+    },
+    {
+      "eyerCloudId": "69319c1906de816ac9001bdc",
+      "stagingExamId": "69319c1906de816ac9001bdc"
+    },
+    {
+      "eyerCloudId": "69317951e1f60cc50a24d2aa",
+      "stagingExamId": "69317951e1f60cc50a24d2aa"
+    },
+    {
+      "eyerCloudId": "695eb54b28b781ee600120f0",
+      "stagingExamId": "695eb54b28b781ee600120f0"
+    },
+    {
+      "eyerCloudId": "695eb54a4b0e754dac36a461",
+      "stagingExamId": "695eb54a4b0e754dac36a461"
+    },
+    {
+      "eyerCloudId": "695eb54a4b0e754dac36a460",
+      "stagingExamId": "695eb54a4b0e754dac36a460"
+    },
+    {
+      "eyerCloudId": "695eb54928b781ee600120eb",
+      "stagingExamId": "695eb54928b781ee600120eb"
+    },
+    {
+      "eyerCloudId": "695eb54826260539c166b330",
+      "stagingExamId": "695eb54826260539c166b330"
+    },
+    {
+      "eyerCloudId": "695eb5484b0e754dac36a45e",
+      "stagingExamId": "695eb5484b0e754dac36a45e"
+    },
+    {
+      "eyerCloudId": "690df767716d94001392efb8",
+      "stagingExamId": "690df767716d94001392efb8"
+    },
+    {
+      "eyerCloudId": "690dee9206de816ac9f8189a",
+      "stagingExamId": "690dee9206de816ac9f8189a"
+    },
+    {
+      "eyerCloudId": "690de4217e33e208ad6b84b5",
+      "stagingExamId": "690de4217e33e208ad6b84b5"
+    },
+    {
+      "eyerCloudId": "690ddb11716d94001392d777",
+      "stagingExamId": "690ddb11716d94001392d777"
+    },
+    {
+      "eyerCloudId": "6904fef05c8a9dde7455d45a",
+      "stagingExamId": "6904fef05c8a9dde7455d45a"
+    },
+    {
+      "eyerCloudId": "6904dd1d95a313e56412a501",
+      "stagingExamId": "6904dd1d95a313e56412a501"
+    },
+    {
+      "eyerCloudId": "6904d18e95a313e56412a051",
+      "stagingExamId": "6904d18e95a313e56412a051"
+    },
+    {
+      "eyerCloudId": "6904d0e017f2af9a2b4b8734",
+      "stagingExamId": "6904d0e017f2af9a2b4b8734"
+    },
+    {
+      "eyerCloudId": "6904b5e217f2af9a2b4b727e",
+      "stagingExamId": "6904b5e217f2af9a2b4b727e"
+    },
+    {
+      "eyerCloudId": "69049fef5c8a9dde74559773",
+      "stagingExamId": "69049fef5c8a9dde74559773"
+    },
+    {
+      "eyerCloudId": "69049fe495a313e5641279fc",
+      "stagingExamId": "69049fe495a313e5641279fc"
+    },
+    {
+      "eyerCloudId": "69049fef6de543c32d8f78f8",
+      "stagingExamId": "69049fef6de543c32d8f78f8"
+    },
+    {
+      "eyerCloudId": "69049fee95a313e564127a0d",
+      "stagingExamId": "69049fee95a313e564127a0d"
+    },
+    {
+      "eyerCloudId": "69049fee5c8a9dde74559771",
+      "stagingExamId": "69049fee5c8a9dde74559771"
+    },
+    {
+      "eyerCloudId": "69049fed95a313e564127a0b",
+      "stagingExamId": "69049fed95a313e564127a0b"
+    },
+    {
+      "eyerCloudId": "69049fed5c8a9dde74559770",
+      "stagingExamId": "69049fed5c8a9dde74559770"
+    },
+    {
+      "eyerCloudId": "69049fec6de543c32d8f78f3",
+      "stagingExamId": "69049fec6de543c32d8f78f3"
+    },
+    {
+      "eyerCloudId": "69049fec17f2af9a2b4b6139",
+      "stagingExamId": "69049fec17f2af9a2b4b6139"
+    },
+    {
+      "eyerCloudId": "69049feb95a313e564127a07",
+      "stagingExamId": "69049feb95a313e564127a07"
+    },
+    {
+      "eyerCloudId": "69049feb5c8a9dde7455976e",
+      "stagingExamId": "69049feb5c8a9dde7455976e"
+    },
+    {
+      "eyerCloudId": "69049fea6de543c32d8f78f1",
+      "stagingExamId": "69049fea6de543c32d8f78f1"
+    },
+    {
+      "eyerCloudId": "69049fea17f2af9a2b4b6137",
+      "stagingExamId": "69049fea17f2af9a2b4b6137"
+    },
+    {
+      "eyerCloudId": "69049fe995a313e564127a05",
+      "stagingExamId": "69049fe995a313e564127a05"
+    },
+    {
+      "eyerCloudId": "69049fe86de543c32d8f78ee",
+      "stagingExamId": "69049fe86de543c32d8f78ee"
+    },
+    {
+      "eyerCloudId": "69049fe817f2af9a2b4b6134",
+      "stagingExamId": "69049fe817f2af9a2b4b6134"
+    },
+    {
+      "eyerCloudId": "69049fe795a313e564127a00",
+      "stagingExamId": "69049fe795a313e564127a00"
+    },
+    {
+      "eyerCloudId": "6904b63195a313e564128ba6",
+      "stagingExamId": "6904b63195a313e564128ba6"
+    },
+    {
+      "eyerCloudId": "69049fe517f2af9a2b4b612e",
+      "stagingExamId": "69049fe517f2af9a2b4b612e"
+    },
+    {
+      "eyerCloudId": "68d6e65f86ec976d5d594253",
+      "stagingExamId": "68d6e65f86ec976d5d594253"
+    },
+    {
+      "eyerCloudId": "68d6d846cdf1b24d7058eb5e",
+      "stagingExamId": "68d6d846cdf1b24d7058eb5e"
+    },
+    {
+      "eyerCloudId": "68d6d59ad3b94a6d8ea221c9",
+      "stagingExamId": "68d6d59ad3b94a6d8ea221c9"
+    },
+    {
+      "eyerCloudId": "68d6d0a0d3b94a6d8ea21e64",
+      "stagingExamId": "68d6d0a0d3b94a6d8ea21e64"
+    },
+    {
+      "eyerCloudId": "68d6acf7991f8d0d5092834c",
+      "stagingExamId": "68d6acf7991f8d0d5092834c"
+    },
+    {
+      "eyerCloudId": "68d6a3bbd3b94a6d8ea2066d",
+      "stagingExamId": "68d6a3bbd3b94a6d8ea2066d"
+    },
+    {
+      "eyerCloudId": "68d6a0a186ec976d5d591a11",
+      "stagingExamId": "68d6a0a186ec976d5d591a11"
+    },
+    {
+      "eyerCloudId": "68d6947bd3b94a6d8ea1f929",
+      "stagingExamId": "68d6947bd3b94a6d8ea1f929"
+    },
+    {
+      "eyerCloudId": "68d6916dd3b94a6d8ea1f6a7",
+      "stagingExamId": "68d6916dd3b94a6d8ea1f6a7"
+    },
+    {
+      "eyerCloudId": "68d68bb4cdf1b24d7058b83d",
+      "stagingExamId": "68d68bb4cdf1b24d7058b83d"
+    },
+    {
+      "eyerCloudId": "68cda42258cb2552f803ad52",
+      "stagingExamId": "68cda42258cb2552f803ad52"
+    },
+    {
+      "eyerCloudId": "68cd829c58cb2552f803984d",
+      "stagingExamId": "68cd829c58cb2552f803984d"
+    },
+    {
+      "eyerCloudId": "68cd6db986ec976d5d56e980",
+      "stagingExamId": "68cd6db986ec976d5d56e980"
+    },
+    {
+      "eyerCloudId": "68cd6a0e58cb2552f8038bfe",
+      "stagingExamId": "68cd6a0e58cb2552f8038bfe"
+    },
+    {
+      "eyerCloudId": "68cd6278d3b94a6d8e9fce32",
+      "stagingExamId": "68cd6278d3b94a6d8e9fce32"
+    },
+    {
+      "eyerCloudId": "68cd582486ec976d5d56d746",
+      "stagingExamId": "68cd582486ec976d5d56d746"
+    },
+    {
+      "eyerCloudId": "68cd537158cb2552f80377e2",
+      "stagingExamId": "68cd537158cb2552f80377e2"
+    },
+    {
+      "eyerCloudId": "68cd537086ec976d5d56d292",
+      "stagingExamId": "68cd537086ec976d5d56d292"
+    },
+    {
+      "eyerCloudId": "68cd537086ec976d5d56d291",
+      "stagingExamId": "68cd537086ec976d5d56d291"
+    },
+    {
+      "eyerCloudId": "68cd536f58cb2552f80377e0",
+      "stagingExamId": "68cd536f58cb2552f80377e0"
+    },
+    {
+      "eyerCloudId": "68cd536f0bdca1be4d1eeea3",
+      "stagingExamId": "68cd536f0bdca1be4d1eeea3"
+    },
+    {
+      "eyerCloudId": "68cd536fd3b94a6d8e9fc049",
+      "stagingExamId": "68cd536fd3b94a6d8e9fc049"
+    },
+    {
+      "eyerCloudId": "68cd536e86ec976d5d56d28f",
+      "stagingExamId": "68cd536e86ec976d5d56d28f"
+    },
+    {
+      "eyerCloudId": "68cd536e58cb2552f80377dc",
+      "stagingExamId": "68cd536e58cb2552f80377dc"
+    },
+    {
+      "eyerCloudId": "68cd536d0bdca1be4d1eee9f",
+      "stagingExamId": "68cd536d0bdca1be4d1eee9f"
+    },
+    {
+      "eyerCloudId": "68cd536dd3b94a6d8e9fc048",
+      "stagingExamId": "68cd536dd3b94a6d8e9fc048"
+    },
+    {
+      "eyerCloudId": "68cd536c86ec976d5d56d28d",
+      "stagingExamId": "68cd536c86ec976d5d56d28d"
+    },
+    {
+      "eyerCloudId": "68cd536c58cb2552f80377da",
+      "stagingExamId": "68cd536c58cb2552f80377da"
+    },
+    {
+      "eyerCloudId": "68cd536b0bdca1be4d1eee9d",
+      "stagingExamId": "68cd536b0bdca1be4d1eee9d"
+    },
+    {
+      "eyerCloudId": "68cd536a0bdca1be4d1eee9b",
+      "stagingExamId": "68cd536a0bdca1be4d1eee9b"
+    },
+    {
+      "eyerCloudId": "68cd5369d3b94a6d8e9fc045",
+      "stagingExamId": "68cd5369d3b94a6d8e9fc045"
+    },
+    {
+      "eyerCloudId": "68cd536986ec976d5d56d28a",
+      "stagingExamId": "68cd536986ec976d5d56d28a"
+    },
+    {
+      "eyerCloudId": "68cd5369d3b94a6d8e9fc044",
+      "stagingExamId": "68cd5369d3b94a6d8e9fc044"
+    },
+    {
+      "eyerCloudId": "68cd536886ec976d5d56d289",
+      "stagingExamId": "68cd536886ec976d5d56d289"
+    },
+    {
+      "eyerCloudId": "68cd536858cb2552f80377d6",
+      "stagingExamId": "68cd536858cb2552f80377d6"
+    },
+    {
+      "eyerCloudId": "68cd53670bdca1be4d1eee99",
+      "stagingExamId": "68cd53670bdca1be4d1eee99"
+    },
+    {
+      "eyerCloudId": "68cd536786ec976d5d56d288",
+      "stagingExamId": "68cd536786ec976d5d56d288"
+    },
+    {
+      "eyerCloudId": "68cd536658cb2552f80377d3",
+      "stagingExamId": "68cd536658cb2552f80377d3"
+    },
+    {
+      "eyerCloudId": "68cd536686ec976d5d56d286",
+      "stagingExamId": "68cd536686ec976d5d56d286"
+    },
+    {
+      "eyerCloudId": "68cd536658cb2552f80377d2",
+      "stagingExamId": "68cd536658cb2552f80377d2"
+    },
+    {
+      "eyerCloudId": "68cd53650bdca1be4d1eee96",
+      "stagingExamId": "68cd53650bdca1be4d1eee96"
+    },
+    {
+      "eyerCloudId": "68cd5365d3b94a6d8e9fc042",
+      "stagingExamId": "68cd5365d3b94a6d8e9fc042"
+    },
+    {
+      "eyerCloudId": "68b19ef2f534a28e24f2cf59",
+      "stagingExamId": "68b19ef2f534a28e24f2cf59"
+    },
+    {
+      "eyerCloudId": "68a8c83bef005b5eee23461b",
+      "stagingExamId": "68a8c83bef005b5eee23461b"
+    },
+    {
+      "eyerCloudId": "68a8c629e4062b64162c64a3",
+      "stagingExamId": "68a8c629e4062b64162c64a3"
+    },
+    {
+      "eyerCloudId": "68a8bf9b5d49915d41ce6fd8",
+      "stagingExamId": "68a8bf9b5d49915d41ce6fd8"
+    },
+    {
+      "eyerCloudId": "68a8ae25e4062b64162c4fd7",
+      "stagingExamId": "68a8ae25e4062b64162c4fd7"
+    },
+    {
+      "eyerCloudId": "68a87fd45d49915d41ce3e69",
+      "stagingExamId": "68a87fd45d49915d41ce3e69"
+    },
+    {
+      "eyerCloudId": "68a876825d49915d41ce32a4",
+      "stagingExamId": "68a876825d49915d41ce32a4"
+    },
+    {
+      "eyerCloudId": "68a872df5d49915d41ce2dc6",
+      "stagingExamId": "68a872df5d49915d41ce2dc6"
+    },
+    {
+      "eyerCloudId": "68a86bf7ef005b5eee22f4f5",
+      "stagingExamId": "68a86bf7ef005b5eee22f4f5"
+    },
+    {
+      "eyerCloudId": "68a865f2ef005b5eee22ec42",
+      "stagingExamId": "68a865f2ef005b5eee22ec42"
+    },
+    {
+      "eyerCloudId": "689f8806ef005b5eee205371",
+      "stagingExamId": "689f8806ef005b5eee205371"
+    },
+    {
+      "eyerCloudId": "689f7ecdb71fd1a3618d7b01",
+      "stagingExamId": "689f7ecdb71fd1a3618d7b01"
+    },
+    {
+      "eyerCloudId": "689f7651afafefd6ecdbfce9",
+      "stagingExamId": "689f7651afafefd6ecdbfce9"
+    },
+    {
+      "eyerCloudId": "689f4ae3b71fd1a3618d5a3d",
+      "stagingExamId": "689f4ae3b71fd1a3618d5a3d"
+    },
+    {
+      "eyerCloudId": "689f4467ef005b5eee2026d6",
+      "stagingExamId": "689f4467ef005b5eee2026d6"
+    },
+    {
+      "eyerCloudId": "689f3d6dafafefd6ecdbd5fd",
+      "stagingExamId": "689f3d6dafafefd6ecdbd5fd"
+    },
+    {
+      "eyerCloudId": "689f357bafafefd6ecdbcd9e",
+      "stagingExamId": "689f357bafafefd6ecdbcd9e"
+    },
+    {
+      "eyerCloudId": "689f2b57b71fd1a3618d3a50",
+      "stagingExamId": "689f2b57b71fd1a3618d3a50"
+    },
+    {
+      "eyerCloudId": "689641e177c32abd0eaadabc",
+      "stagingExamId": "689641e177c32abd0eaadabc"
+    },
+    {
+      "eyerCloudId": "68962df233d145d9aa0d23de",
+      "stagingExamId": "68962df233d145d9aa0d23de"
+    },
+    {
+      "eyerCloudId": "689600337f3b999a12dd5ecc",
+      "stagingExamId": "689600337f3b999a12dd5ecc"
+    },
+    {
+      "eyerCloudId": "6895f4b577c32abd0eaa956c",
+      "stagingExamId": "6895f4b577c32abd0eaa956c"
+    },
+    {
+      "eyerCloudId": "6895ec507f3b999a12dd46e0",
+      "stagingExamId": "6895ec507f3b999a12dd46e0"
+    },
+    {
+      "eyerCloudId": "6895e61a77c32abd0eaa8512",
+      "stagingExamId": "6895e61a77c32abd0eaa8512"
+    },
+    {
+      "eyerCloudId": "6883db012ef960726a63789f",
+      "stagingExamId": "6883db012ef960726a63789f"
+    },
+    {
+      "eyerCloudId": "6883ce01b40664f43a027327",
+      "stagingExamId": "6883ce01b40664f43a027327"
+    },
+    {
+      "eyerCloudId": "6883bec1b40664f43a0264a6",
+      "stagingExamId": "6883bec1b40664f43a0264a6"
+    },
+    {
+      "eyerCloudId": "68839cd32ef960726a634b22",
+      "stagingExamId": "68839cd32ef960726a634b22"
+    },
+    {
+      "eyerCloudId": "6883989a2ef960726a63483e",
+      "stagingExamId": "6883989a2ef960726a63483e"
+    },
+    {
+      "eyerCloudId": "68838cdfb40664f43a0240a8",
+      "stagingExamId": "68838cdfb40664f43a0240a8"
+    },
+    {
+      "eyerCloudId": "688381ac34a0287f405663ff",
+      "stagingExamId": "688381ac34a0287f405663ff"
+    },
+    {
+      "eyerCloudId": "681e4f089aac74da7b558dd7",
+      "stagingExamId": "681e4f089aac74da7b558dd7"
+    },
+    {
+      "eyerCloudId": "681e46112cd811818256e1bc",
+      "stagingExamId": "681e46112cd811818256e1bc"
+    },
+    {
+      "eyerCloudId": "6928503c6f3b5091c1a7e186",
+      "stagingExamId": "6928503c6f3b5091c1a7e186"
+    },
+    {
+      "eyerCloudId": "67cf69ab40887c82b0b3cbd5",
+      "stagingExamId": "67cf69ab40887c82b0b3cbd5"
+    }
+  ],
+  "otherHostUrlSamples": []
+}
