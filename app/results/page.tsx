@@ -308,6 +308,9 @@ export default function Results() {
   const [syncStatus, setSyncStatus] = useState<{ count?: number, message?: string } | null>(null);
   const [renderPatient, setRenderPatient] = useState<any | null>(null);
   const [exportProgress, setExportProgress] = useState<{ current: number, total: number } | null>(null);
+  const [uploadedFilter, setUploadedFilter] = useState<Set<string> | null>(null);
+  const [uploadedFilterMeta, setUploadedFilterMeta] = useState<{ fileName: string; count: number } | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -316,7 +319,7 @@ export default function Results() {
 
   useEffect(() => {
     filterPatients();
-  }, [searchTerm, patients, filterTab]);
+  }, [searchTerm, patients, filterTab, uploadedFilter]);
 
   const [isExporting, setIsExporting] = useState(false);
 
@@ -470,8 +473,73 @@ export default function Results() {
     setPatients(completedResults);
   };
 
+  // --- Upload-filter helpers ---
+  const normalizeName = (s: string): string =>
+    (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/\s+/g, ' ').trim();
+
+  const birthKey = (d: any): string => {
+    if (!d) return '';
+    if (d instanceof Date) return d.toISOString().slice(0, 10);
+    const s = String(d);
+    const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (iso) return `${iso[1]}-${iso[2]}-${iso[3]}`;
+    const br = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (br) return `${br[3]}-${br[2].padStart(2, '0')}-${br[1].padStart(2, '0')}`;
+    return '';
+  };
+
+  const handleUploadFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    setUploadError(null);
+    try {
+      const XLSX = await import('xlsx');
+      const buf = await file.arrayBuffer();
+      const wb = XLSX.read(buf, { type: 'array', cellDates: true });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+      if (rows.length === 0) throw new Error('Planilha vazia.');
+      const keys = new Set<string>();
+      const uniqueNames = new Set<string>();
+      for (const r of rows) {
+        const rawName = r['Nome do Paciente'] ?? r['Nome'] ?? r['nome'] ?? r['name'] ?? '';
+        const rawBirth = r['Data de Nascimento'] ?? r['Nascimento'] ?? r['birthDate'] ?? r['Birth'] ?? '';
+        const n = normalizeName(rawName);
+        if (!n) continue;
+        const b = birthKey(rawBirth);
+        keys.add(`${n}|${b}`);
+        if (b) keys.add(`${n}|`); // fallback: match even if DB has no birth
+        uniqueNames.add(n);
+      }
+      if (uniqueNames.size === 0) {
+        throw new Error('Nenhum paciente válido encontrado. Verifique se há uma coluna "Nome do Paciente".');
+      }
+      setUploadedFilter(keys);
+      setUploadedFilterMeta({ fileName: file.name, count: uniqueNames.size });
+    } catch (err: any) {
+      console.error(err);
+      setUploadError(err?.message || 'Erro ao ler o arquivo. Use .xlsx ou .csv com coluna "Nome do Paciente".');
+    }
+  };
+
+  const clearUploadedFilter = () => {
+    setUploadedFilter(null);
+    setUploadedFilterMeta(null);
+    setUploadError(null);
+  };
+
   const filterPatients = () => {
     let filtered = patients;
+
+    // Filter by uploaded list (name + optional birth date)
+    if (uploadedFilter) {
+      filtered = filtered.filter((p: any) => {
+        const n = normalizeName(p.name);
+        const b = birthKey(p.birthDate);
+        return uploadedFilter.has(`${n}|${b}`) || uploadedFilter.has(`${n}|`);
+      });
+    }
 
     // Filter by Tab
     if (filterTab === 'completed') {
@@ -602,6 +670,40 @@ export default function Results() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                 className="input-premium pl-12 h-14 text-lg shadow-sm w-full"
               />
+
+              {/* Upload list filter */}
+              <div className="flex flex-wrap items-center gap-3 mt-3">
+                <label className="cursor-pointer inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sandstone-600 hover:text-cardinal-700 border border-sandstone-300 hover:border-cardinal-300 rounded-xl px-3 py-2 bg-white transition-colors">
+                  <UploadCloud className="w-4 h-4" />
+                  <span>Filtrar por planilha (XLSX/CSV)</span>
+                  <input
+                    type="file"
+                    accept=".xlsx,.xls,.csv"
+                    onChange={handleUploadFilter}
+                    className="hidden"
+                  />
+                </label>
+                {uploadedFilterMeta && (
+                  <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-cardinal-50 border border-cardinal-200 text-cardinal-700 text-xs font-medium">
+                    <FileText className="w-4 h-4" />
+                    <span className="truncate max-w-[220px]" title={uploadedFilterMeta.fileName}>{uploadedFilterMeta.fileName}</span>
+                    <span className="text-cardinal-500">· {uploadedFilterMeta.count} nomes</span>
+                    <button
+                      onClick={clearUploadedFilter}
+                      className="ml-1 p-0.5 rounded-full hover:bg-cardinal-100"
+                      title="Limpar filtro"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+                {uploadError && (
+                  <span className="text-xs text-red-600 font-medium">{uploadError}</span>
+                )}
+                {uploadedFilterMeta && (
+                  <span className="text-xs text-sandstone-500">Mostrando {filteredPatients.length} pacientes da planilha</span>
+                )}
+              </div>
             </div>
 
             {/* Filter Tabs */}
