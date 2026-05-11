@@ -49,13 +49,19 @@ export async function syncReportsToDriveAction() {
         const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
         // 3. Setup Puppeteer for PDF generation
+        // chromium-min ships without the binary; in serverless we download it from
+        // the official Sparticuz release matching the installed version (143.0.4).
         const isLocal = process.env.NODE_ENV === 'development';
+        const CHROMIUM_PACK_URL =
+            process.env.CHROMIUM_PACK_URL ||
+            'https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.x64.tar';
+
         const browser = await puppeteer.launch({
             args: isLocal ? [] : chromium.args,
             defaultViewport: { width: 1200, height: 1600 },
             executablePath: isLocal
-                ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' // Ajuste conforme seu SO local
-                : await chromium.executablePath(),
+                ? process.env.LOCAL_CHROME_PATH || undefined
+                : await chromium.executablePath(CHROMIUM_PACK_URL),
             headless: true,
         });
 
