@@ -97,7 +97,8 @@ export default function Referrals() {
     if (selectedIds.length === filteredPatients.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(filteredPatients.map(p => p.examId));
+      // Consistente com toggleSelect/render, que usam patient.id
+      setSelectedIds(filteredPatients.map(p => p.id));
     }
   };
 
@@ -173,24 +174,28 @@ export default function Referrals() {
     setLoading(true);
     const techName = prompt("Nome do Técnico Responsável:", referralForm.referredBy) || "Técnico";
 
-    for (const id of selectedIds) {
-      const patient = patients.find(p => p.id === id);
-      if (!patient) continue;
+    const { updateExamAction } = await import('@/app/actions/patients');
+    const scheduledDate = new Date(date).toISOString();
 
-      const referralData = {
-        referredBy: techName,
-        specialty: patient.referral?.specialty || 'Oftalmologia Geral',
-        urgency: patient.referral?.urgency || 'routine',
-        notes: patient.referral?.notes || 'Agendamento em lote',
-        specializedService: patient.referral?.specializedService || '',
-        referralDate: patient.referral?.referralDate || new Date().toISOString(),
-        scheduledDate: new Date(date).toISOString(),
-        status: 'scheduled',
-      };
+    await Promise.all(
+      selectedIds.map(id => {
+        const patient = patients.find(p => p.id === id);
+        if (!patient) return Promise.resolve();
 
-      const { updateExamAction } = await import('@/app/actions/patients');
-      await updateExamAction(patient.examId, { referral: referralData });
-    }
+        const referralData = {
+          referredBy: techName,
+          specialty: patient.referral?.specialty || 'Oftalmologia Geral',
+          urgency: patient.referral?.urgency || 'routine',
+          notes: patient.referral?.notes || 'Agendamento em lote',
+          specializedService: patient.referral?.specializedService || '',
+          referralDate: patient.referral?.referralDate || new Date().toISOString(),
+          scheduledDate,
+          status: 'scheduled',
+        };
+
+        return updateExamAction(patient.examId, { referral: referralData });
+      })
+    );
 
     setSuccess(true);
     setSelectedIds([]);

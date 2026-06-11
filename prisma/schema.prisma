@@ -21,6 +21,10 @@ model Exam {
   images         ExamImage[]
   report         MedicalReport?
   referral       PatientReferral?
+
+  @@index([patientId])
+  @@index([status])
+  @@index([eyerCloudId])
 }
 
 model ExamImage {
@@ -31,6 +35,8 @@ model ExamImage {
   uploadedAt DateTime @default(now())
   examId     String
   Exam       Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@index([examId])
 }
 
 model HealthUnit {

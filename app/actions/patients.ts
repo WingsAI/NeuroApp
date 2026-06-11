@@ -35,8 +35,16 @@ export async function createPatient(formData: FormData) {
     const occupation = formData.get('occupation') as string;
     const phone = formData.get('phone') as string;
 
-    const underlyingDiseases = formData.get('underlyingDiseases') ? JSON.parse(formData.get('underlyingDiseases') as string) : undefined;
-    const ophthalmicDiseases = formData.get('ophthalmicDiseases') ? JSON.parse(formData.get('ophthalmicDiseases') as string) : undefined;
+    const safeJsonParse = (value: FormDataEntryValue | null) => {
+        if (!value) return undefined;
+        try {
+            return JSON.parse(value as string);
+        } catch {
+            return undefined;
+        }
+    };
+    const underlyingDiseases = safeJsonParse(formData.get('underlyingDiseases'));
+    const ophthalmicDiseases = safeJsonParse(formData.get('ophthalmicDiseases'));
 
     // 1. Primeiro, tenta encontrar ou criar o Patient (pessoa física)
     // Busca por nome + data nascimento ou cria novo
@@ -83,25 +91,38 @@ export async function createPatient(formData: FormData) {
         });
     }
 
-    // 2. Cria o Exam (visita/exame)
-    const exam = await prisma.exam.upsert({
-        where: { id: id || 'new-exam-placeholder' },
-        update: {
-            examDate,
-            location,
-            technicianName,
-            updatedAt: new Date(),
-        },
-        create: {
-            id: id || `exam-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-            examDate,
-            location,
-            technicianName,
-            status: 'pending',
-            patientId: patient.id,
-            updatedAt: new Date(),
-        },
-    });
+    // 2. Cria o Exam (visita/exame).
+    // Sem id fornecido, sempre cria um novo exame (evita corrida no placeholder).
+    const exam = id
+        ? await prisma.exam.upsert({
+            where: { id },
+            update: {
+                examDate,
+                location,
+                technicianName,
+                updatedAt: new Date(),
+            },
+            create: {
+                id,
+                examDate,
+                location,
+                technicianName,
+                status: 'pending',
+                patientId: patient.id,
+                updatedAt: new Date(),
+            },
+        })
+        : await prisma.exam.create({
+            data: {
+                id: `exam-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
+                examDate,
+                location,
+                technicianName,
+                status: 'pending',
+                patientId: patient.id,
+                updatedAt: new Date(),
+            },
+        });
 
     const isAwsConfigured = process.env.AWS_ACCESS_KEY_ID &&
         process.env.AWS_ACCESS_KEY_ID !== 'your-access-key-id' &&
@@ -517,12 +538,53 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         }, 0) / completedExams.length
         : 0;
 
-    // Productivity by region (location) - main DB
-    const productivityByRegion: Record<string, number> = exams.reduce((acc: any, e: any) => {
-        const region = e.location || 'Não Informado';
-        acc[region] = (acc[region] || 0) + 1;
-        return acc;
-    }, {});
+    const normalizeUnitName = (location?: string | null) => {
+        const raw = (location || 'Não Informado').trim();
+        const normalized = raw
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toUpperCase()
+            .replace(/\s+/g, ' ');
+
+        if (!normalized || normalized === 'NAO INFORMADO' || normalized === 'SEM CIDADE') return 'Não Informado';
+        if (normalized.includes('TAUA')) return 'Tauá';
+        if (normalized.includes('JACI')) return 'Jaci';
+        if (normalized.includes('ATIBAIA')) return 'Atibaia';
+        if (normalized.includes('CAMPOS DO JORDAO') || normalized.includes('CAMPOS JORDAO')) return 'Campos do Jordão';
+        if (normalized.includes('SAO PAULO')) return 'São Paulo';
+
+        return raw;
+    };
+
+    const unitAccumulator: Record<string, { patientIds: Set<string>; exams: number; images: number }> = {};
+    for (const exam of exams as any[]) {
+        const unit = normalizeUnitName(exam.location);
+        if (!unitAccumulator[unit]) {
+            unitAccumulator[unit] = {
+                patientIds: new Set<string>(),
+                exams: 0,
+                images: 0,
+            };
+        }
+        unitAccumulator[unit].patientIds.add(exam.patientId);
+        unitAccumulator[unit].exams += 1;
+        unitAccumulator[unit].images += exam.images.length;
+    }
+
+    const unitCounts = Object.fromEntries(
+        Object.entries(unitAccumulator).map(([unit, data]) => [
+            unit,
+            {
+                patients: data.patientIds.size,
+                exams: data.exams,
+                images: data.images,
+            },
+        ])
+    );
+
+    const productivityByRegion = Object.fromEntries(
+        Object.entries(unitAccumulator).map(([unit, data]) => [unit, data.patientIds.size])
+    );
 
     // Productivity by professional (doctor who completed the report)
     const productivityByProfessional = exams.reduce((acc: any, e: any) => {
@@ -545,6 +607,7 @@ export async function getAnalyticsAction(): Promise<AnalyticsData> {
         averageProcessingTime: Math.round(averageProcessingTime * 10) / 10,
         productivityByRegion,
         productivityByProfessional,
+        unitCounts,
     } as any;
 }
 

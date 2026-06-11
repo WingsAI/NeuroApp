@@ -3,9 +3,11 @@
 import prisma from '@/lib/prisma';
 import { HealthUnit } from '@/types';
 import { revalidatePath } from 'next/cache';
+import { requireAuth } from '@/lib/auth';
 
 export async function getHealthUnitsAction(): Promise<HealthUnit[]> {
     try {
+        await requireAuth();
         const units = await prisma.healthUnit.findMany({
             orderBy: { name: 'asc' },
         });
@@ -23,10 +25,11 @@ export async function getHealthUnitsAction(): Promise<HealthUnit[]> {
 
 export async function createHealthUnitAction(data: Omit<HealthUnit, 'id' | 'createdAt' | 'updatedAt'>) {
     try {
+        await requireAuth();
         const unit = await prisma.healthUnit.create({
             data: {
                 ...data,
-                id: Math.random().toString(36).substr(2, 9),
+                id: `unit-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
                 updatedAt: new Date(),
             },
         });
@@ -41,6 +44,7 @@ export async function createHealthUnitAction(data: Omit<HealthUnit, 'id' | 'crea
 
 export async function updateHealthUnitAction(id: string, data: Partial<Omit<HealthUnit, 'id' | 'createdAt' | 'updatedAt'>>) {
     try {
+        await requireAuth();
         await prisma.healthUnit.update({
             where: { id },
             data: {
@@ -59,6 +63,7 @@ export async function updateHealthUnitAction(id: string, data: Partial<Omit<Heal
 
 export async function deleteHealthUnitAction(id: string) {
     try {
+        await requireAuth();
         await prisma.healthUnit.delete({
             where: { id },
         });

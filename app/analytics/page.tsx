@@ -49,6 +49,24 @@ export default function Analytics() {
     return new Date(dateString).toLocaleString('pt-BR');
   };
 
+  const formatUnitName = (location?: string) => {
+    const raw = (location || 'Não Informado').trim();
+    const normalized = raw
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toUpperCase()
+      .replace(/\s+/g, ' ');
+
+    if (!normalized || normalized === 'NAO INFORMADO' || normalized === 'SEM CIDADE') return 'Não Informado';
+    if (normalized.includes('TAUA')) return 'Tauá';
+    if (normalized.includes('JACI')) return 'Jaci';
+    if (normalized.includes('ATIBAIA')) return 'Atibaia';
+    if (normalized.includes('CAMPOS DO JORDAO') || normalized.includes('CAMPOS JORDAO')) return 'Campos do Jordão';
+    if (normalized.includes('SAO PAULO')) return 'São Paulo';
+
+    return raw;
+  };
+
   // Calculate completion rate
   const completionRate = stats.totalExams > 0
     ? Math.round((stats.completedReports / stats.totalExams) * 100)
@@ -63,6 +81,10 @@ export default function Analytics() {
   const avgImagesPerExam = stats.totalExams > 0
     ? (stats.totalImages / stats.totalExams).toFixed(1)
     : '0';
+
+  const unitCounts = stats.unitCounts
+    ? Object.entries(stats.unitCounts).sort(([, a], [, b]) => b.exams - a.exams)
+    : [];
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-sandstone-50/30">
@@ -210,6 +232,59 @@ export default function Analytics() {
                   </p>
                 </div>
               </div>
+
+              <div className="premium-card p-8 bg-white">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-charcoal mb-1 italic">Exames por Unidade</h3>
+                    <p className="text-sm font-medium text-sandstone-400">Distribuição operacional por local de coleta</p>
+                  </div>
+                  <div className="flex items-center text-[10px] font-bold uppercase tracking-widest text-cardinal-700 bg-cardinal-50 px-3 py-2 rounded-full">
+                    <MapPin className="w-3.5 h-3.5 mr-2" />
+                    {unitCounts.length} unidades
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {unitCounts.length > 0 ? (
+                    unitCounts.map(([unit, counts]) => {
+                      const label = formatUnitName(unit);
+                      const width = Math.min((counts.exams / (stats.totalExams || 1)) * 100, 100);
+
+                      return (
+                        <div key={unit} className="rounded-lg border border-sandstone-100 bg-sandstone-50/40 px-4 py-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                            <div className="min-w-0">
+                              <p className="text-sm font-bold text-charcoal uppercase tracking-tight truncate">{label}</p>
+                              <p className="text-[10px] font-bold uppercase tracking-widest text-sandstone-400">
+                                {counts.patients} pacientes
+                              </p>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 text-right shrink-0">
+                              <div>
+                                <p className="text-xl font-serif font-bold text-cardinal-700">{counts.exams}</p>
+                                <p className="text-[9px] font-bold uppercase tracking-widest text-sandstone-400">Exames</p>
+                              </div>
+                              <div>
+                                <p className="text-xl font-serif font-bold text-charcoal">{counts.images}</p>
+                                <p className="text-[9px] font-bold uppercase tracking-widest text-sandstone-400">Imagens</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="h-2 bg-sandstone-200 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-cardinal-700 rounded-full"
+                              style={{ width: `${width}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <p className="text-sm text-sandstone-400 italic">Sem dados de unidade.</p>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Recent Activity Sidenav */}
@@ -227,7 +302,7 @@ export default function Analytics() {
                       <div>
                         <p className="text-sm font-bold text-charcoal group-hover:text-cardinal-700 transition-colors uppercase tracking-tight">{patient.name}</p>
                         <p className="text-[10px] font-medium text-sandstone-400 uppercase tracking-widest mb-1">
-                          {patient._clinicName || (patient.location?.trim().startsWith('Tauá') ? 'Tauá-Ceará' : patient.location)}
+                          {formatUnitName(patient._clinicName || patient.location)}
                         </p>
                         <div className="flex items-center text-[10px] font-bold text-sandstone-300">
                           <Clock className="w-3 h-3 mr-1" />
@@ -251,7 +326,7 @@ export default function Analytics() {
                       .map(([region, count], i) => (
                         <div key={i} className="space-y-1">
                           <div className="flex justify-between text-[10px] font-bold uppercase text-sandstone-500">
-                            <span>{region.trim().startsWith('Tauá') ? 'Tauá-Ceará' : region}</span>
+                            <span>{formatUnitName(region)}</span>
                             <span>{count} pacientes</span>
                           </div>
                           <div className="h-1.5 bg-sandstone-200 rounded-full overflow-hidden">
@@ -327,4 +402,3 @@ function StatCard({ title, value, icon: Icon, subtitle, color }: any) {
     </div>
   );
 }
-

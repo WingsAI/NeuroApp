@@ -5,6 +5,8 @@ import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import chromium from '@sparticuz/chromium-min';
 import puppeteer from 'puppeteer-core';
+import { requireAuth } from '@/lib/auth';
+import { buildReportHtml } from '@/lib/report-html';
 
 const DRIVE_FOLDER_ID = '1JvBzyuBRnY_VAXeYZ_IX3cMsjBQ8x5jI';
 
@@ -13,6 +15,7 @@ const DRIVE_FOLDER_ID = '1JvBzyuBRnY_VAXeYZ_IX3cMsjBQ8x5jI';
  */
 export async function syncReportsToDriveAction() {
     try {
+        await requireAuth();
         console.log('[DRIVE] Iniciando sincronização...');
 
         // 1. Fetch reports that are completed but not yet synced
@@ -74,13 +77,17 @@ export async function syncReportsToDriveAction() {
 
                 console.log(`[DRIVE] Processando PDF para: ${patientName}`);
 
+                const html = await buildReportHtml(examId);
+                if (!html) {
+                    console.warn(`[DRIVE] Laudo não encontrado para exame ${examId}, pulando.`);
+                    continue;
+                }
+
                 const page = await browser.newPage();
 
-                // Use a URL base do app (precisa estar configurada no env)
-                const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-                await page.goto(`${baseUrl}/api/print/${examId}`, {
-                    waitUntil: 'networkidle0',
-                });
+                // Renderiza o HTML diretamente (sem HTTP), assim a proteção de
+                // auth da rota /api/print não bloqueia a geração do PDF.
+                await page.setContent(html, { waitUntil: 'networkidle0' });
 
                 // Gerar Buffer do PDF
                 const pdfBuffer = await page.pdf({

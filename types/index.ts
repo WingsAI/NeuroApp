@@ -128,6 +128,11 @@ export interface AnalyticsData {
   averageProcessingTime: number;
   productivityByRegion?: Record<string, number>;
   productivityByProfessional?: Record<string, number>;
+  unitCounts?: Record<string, {
+    patients: number;
+    exams: number;
+    images: number;
+  }>;
 }
 
 export interface HealthUnit {

@@ -88,7 +88,12 @@ function ReportPrintTemplate({ patient }: { patient: any }) {
             <div className="flex flex-col border-b border-sandstone-200 pb-2">
               <span className="uppercase font-bold text-sandstone-400 mb-1">Nascimento / Idade</span>
               <span className="text-xs font-bold text-charcoal">
-                {patient.birthDate ? `${formatDate(patient.birthDate)} (${new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} anos)` : 'Não-Informado'}
+                {(() => {
+                  if (!patient.birthDate) return 'Não-Informado';
+                  const bd = new Date(patient.birthDate);
+                  if (isNaN(bd.getTime())) return 'Não-Informado';
+                  return `${formatDate(patient.birthDate)} (${new Date().getFullYear() - bd.getFullYear()} anos)`;
+                })()}
               </span>
             </div>
             <div className="flex flex-col border-b border-sandstone-200 pb-2">
@@ -322,6 +327,17 @@ export default function Results() {
   }, [searchTerm, patients, filterTab, uploadedFilter]);
 
   const [isExporting, setIsExporting] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 50;
+
+  // Reseta para a primeira página quando os filtros mudam
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterTab, uploadedFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPatients.length / PAGE_SIZE));
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const paginatedPatients = filteredPatients.slice(pageStart, pageStart + PAGE_SIZE);
 
   const counts = {
     all: patients.length,
@@ -361,6 +377,30 @@ export default function Results() {
     }
   };
 
+  // Aguarda todas as <img> dos containers carregarem, com teto de timeout.
+  // Substitui o delay fixo: rápido quando as imagens já estão em cache,
+  // seguro quando a rede está lenta.
+  const waitForImages = async (ids: string[], timeoutMs: number) => {
+    const imgs = ids.flatMap(id => {
+      const el = document.getElementById(id);
+      return el ? Array.from(el.querySelectorAll('img')) : [];
+    });
+    if (imgs.length === 0) return;
+    await Promise.race([
+      Promise.all(
+        imgs.map(img =>
+          img.complete && img.naturalWidth > 0
+            ? Promise.resolve()
+            : new Promise<void>(res => {
+                img.onload = () => res();
+                img.onerror = () => res();
+              })
+        )
+      ),
+      new Promise<void>(res => setTimeout(res, timeoutMs)),
+    ]);
+  };
+
   const exportAllFilteredPDFs = async () => {
     if (filteredPatients.length === 0) return;
     setIsExporting(true);
@@ -384,8 +424,12 @@ export default function Results() {
         // Set patient to be rendered in the hidden capture area
         setRenderPatient(patient);
 
-        // Wait for rendering and images to load
-        await new Promise(resolve => setTimeout(resolve, 1200));
+        // Deixa o React pintar o novo paciente (2 frames), depois aguarda as
+        // imagens do laudo carregarem (teto de 1500ms em vez de delay fixo).
+        await new Promise<void>(resolve =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+        );
+        await waitForImages(['report-page-1', 'report-page-2'], 1500);
 
         const page1 = document.getElementById('report-page-1');
         const page2 = document.getElementById('report-page-2');
@@ -852,7 +896,7 @@ export default function Results() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-sandstone-100">
-                    {filteredPatients.map((patient) => (
+                    {paginatedPatients.map((patient) => (
                       <tr key={patient.id} className="group hover:bg-cardinal-50/20 transition-all duration-300">
                         <td className="px-8 py-6 text-sm font-bold text-cardinal-700">
                           #{patient.id.slice(-6).toUpperCase()}
@@ -925,6 +969,34 @@ export default function Results() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Paginação */}
+              {filteredPatients.length > PAGE_SIZE && (
+                <div className="flex items-center justify-between px-8 py-5 border-t border-sandstone-100 bg-sandstone-50/40">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-sandstone-400">
+                    {pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, filteredPatients.length)} de {filteredPatients.length}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-lg border border-sandstone-200 text-charcoal hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                    >
+                      Anterior
+                    </button>
+                    <span className="text-xs font-bold text-charcoal px-2">
+                      {currentPage} / {totalPages}
+                    </span>
+                    <button
+                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-lg border border-sandstone-200 text-charcoal hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                    >
+                      Próxima
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

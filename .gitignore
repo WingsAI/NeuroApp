@@ -76,8 +76,14 @@ staging_state_*.json
 # Prisma staging env
 prisma-staging/.env
 
-# Database backups / snapshots
+# Database backups / snapshots (PII de pacientes - NUNCA commitar)
 backups/*.json
+scripts/db_snapshots/
+/exports/
+
+# Supabase CLI local state
+supabase/.temp/
+supabase/.branches/
 
 # Binary/data files - never version
 *.zip

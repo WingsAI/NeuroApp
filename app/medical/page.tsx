@@ -534,8 +534,7 @@ function MedicalContent() {
         setSelectedPatient(null);
         resetForm();
         setSuccess(false);
-        // Navegar para a tela de resultados após salvar o laudo
-        router.push('/results');
+        loadPatients();
       }, 1500);
     } catch (err: any) {
       console.error('Erro ao salvar laudo:', err);
@@ -887,7 +886,7 @@ function MedicalContent() {
                         </div>
                         <div className="flex items-center text-sm font-medium text-sandstone-600">
                           <ImageIcon className="h-4 w-4 mr-3 text-sandstone-400" />
-                          {(patient.allImages || patient.images).length} capturas integradas
+                          {(patient.allImages || patient.images || []).length} capturas integradas
                         </div>
                         {patient.phone && (
                           <div className="flex items-center text-sm font-medium text-cardinal-700">
@@ -978,7 +977,12 @@ function MedicalContent() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Sexo</p>
-                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{['female', 'f', 'Feminino', 'feminino'].includes(selectedPatient.gender) ? 'Feminino' : ['male', 'm', 'Masculino', 'masculino'].includes(selectedPatient.gender) ? 'Masculino' : selectedPatient.gender || 'Não informado'}</p>
+                      <p className="text-sm font-serif font-bold text-charcoal leading-tight">{(() => {
+                        const g = (selectedPatient.gender || '').toString().trim().toLowerCase();
+                        if (['female', 'f', 'feminino'].includes(g)) return 'Feminino';
+                        if (['male', 'm', 'masculino'].includes(g)) return 'Masculino';
+                        return selectedPatient.gender || 'Não informado';
+                      })()}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase text-sandstone-400 tracking-wider">Data Exame</p>
