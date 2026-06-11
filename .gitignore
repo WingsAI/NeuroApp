@@ -52,6 +52,12 @@ scripts/eyercloud_downloader/staging_state_*.json
 scripts/eyercloud_downloader/staging_download_state_*.json
 scripts/eyercloud_downloader/*.xlsx
 scripts/eyercloud_downloader/*.csv
+# Exports de dados do EyerCloud com PII (nomes/exames) - NUNCA commitar
+scripts/eyercloud_downloader/*_eyercloud_control_*.json
+scripts/eyercloud_downloader/*_eyercloud_check_*.json
+scripts/eyercloud_downloader/city_date_counts_*.json
+scripts/eyercloud_downloader/taua_*.json
+scripts/eyercloud_downloader/atibaia_new_images_*.json
 
 # Staging upload/download state and logs
 staging_download_state_*.json
